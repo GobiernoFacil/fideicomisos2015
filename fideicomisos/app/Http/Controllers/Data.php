@@ -9,79 +9,61 @@ use App\Fideicomisos;
 
 class Data extends Controller {
 
+	private $default_year;
+	function __construct(){
+		$this->default_year = date('Y') - 1;
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function getIndex()
+	public function getIndex($id)
 	{
-		$test = Fideicomisos::find(2);
-		return response()->json($test);
+
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
+	 * Muestra un compromiso por ID
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		//
+	public function getId($id){
+		$response = Fideicomisos::find($id);
+		return response()->json($response);
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
+	 * Muestra los compromisos por AÑO
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
-		//
+	public function getYear($year){
+		$response = Fideicomisos::where('year', '=', $year)->get();
+		return response()->json($response);
 	}
 
 	/**
-	 * Update the specified resource in storage.
-	 *
+	 * Muestra los compromisos por CLAVE
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
-		//
+	public function getRegistry($registry){
+		$response = Fideicomisos::where('registry', '=', $registry)->get();
+		return response()->json($response);
 	}
 
 	/**
-	 * Remove the specified resource from storage.
-	 *
+	 * Muestra los compromisos por RAMO
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
-		//
+	public function getBranch($branch, $year = false){
+		$response = Fideicomisos::where(function($query) use($branch, $year){
+			$query->where('branch_id', '=', $branch)
+			      ->where('year', '=', $year ? $year : $this->default_year);
+		})->get();
+		return response()->json($response);
 	}
 
 }
