@@ -55,6 +55,7 @@ return [
 		'mysql' => [
 			'driver'    => 'mysql',
 			'host'      => env('DB_HOST', 'localhost'),
+			'unix_socket' =>env('USE_MAMP', 0) ? '/Applications/MAMP/tmp/mysql/mysql.sock' : '/tmp/mysql.sock',
 			'database'  => env('DB_DATABASE', 'forge'),
 			'username'  => env('DB_USERNAME', 'forge'),
 			'password'  => env('DB_PASSWORD', ''),
