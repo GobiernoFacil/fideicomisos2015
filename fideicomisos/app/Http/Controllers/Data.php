@@ -66,4 +66,29 @@ class Data extends Controller {
 		return response()->json($response);
 	}
 
+	/**
+	 * Muestra los compromisos por RAMO
+	 * @return Response
+	 */
+	public function getAll(){
+		// year, branch_id, type_id, scope_id, designation, registry
+		$response = Fideicomisos::select('year', 'branch_id', 'type_id', 'scope_id', 'designation', 'registry')
+		                          ->orderBy('year', 'desc')
+		                          ->groupBy('registry')
+		                          ->get();
+		return response()->json($response);
+	}
+
+	/**
+	 * Muestra los compromisos por RAMO
+	 * @return Response
+	 */
+	public function getStats(){
+		$response = Fideicomisos::selectRaw('COUNT(*) AS total, registry,year, designation')
+		                          ->orderBy('year', 'desc')
+		                          ->groupBy('registry')
+		                          ->get();
+		return response()->json($response);
+	}
+
 }
