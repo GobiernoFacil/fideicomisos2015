@@ -18,8 +18,8 @@ class Data extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getIndex($id){
-		return View::make('');
+	public function getIndex(){
+		return view('query', []);
 	}
 
 	/**
