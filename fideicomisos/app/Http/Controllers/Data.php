@@ -79,7 +79,7 @@ class Data extends Controller {
 	}
 
 	/**
-	 * Muestra los compromisos por RAMO
+	 * Muestra los compromisos por estadística
 	 * @return Response
 	 */
 	public function getStats(){
