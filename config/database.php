@@ -62,6 +62,7 @@ return [
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 			'strict'    => false,
+			'unix_socket' => env('USE_MAMP', 0) ? '/Applications/MAMP/tmp/mysql/mysql.sock' : '/tmp/mysql.sock',
 		],
 
 		'pgsql' => [
