@@ -11,4 +11,7 @@
 |
 */
 
+// [ EL NAVEGADOR DE FIDEICOMISOS ]
+Route::get('navegador-de-fideicomisos', 'Watson@index');
+
 Route::get('/', 'WelcomeController@index');

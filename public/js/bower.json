@@ -1,0 +1,28 @@
+{
+  "name": "fideicomisos",
+  "version": "1.0.0",
+  "homepage": "https://github.com/GobiernoFacil/fideicomisos2015",
+  "authors": [
+    "el coruco <el.coruco@gmail.com>"
+  ],
+  "description": "app para localizar fideicomisos",
+  "main": "main.js",
+  "keywords": [
+    "fideicomisos"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.2.0",
+    "requirejs": "~2.1.18",
+    "d3": "~3.5.5",
+    "velocity": "~1.2.2",
+    "requirejs-text": "~2.0.14"
+  }
+}
