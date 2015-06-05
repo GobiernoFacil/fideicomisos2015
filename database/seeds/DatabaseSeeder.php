@@ -21,26 +21,39 @@ class DatabaseSeeder extends Seeder {
 
 }
 
-class DefinitionsTableSeeder extends Seeder{
-	public function run(){
-		// recomendación de la librería de CSV para mac OSX
-	  if (! ini_get("auto_detect_line_endings")){
+trait LoadCSV{
+  public function save_csv($file_path, $table){
+    // recomendación de la librería de CSV para mac OSX
+    if (! ini_get("auto_detect_line_endings")){
       ini_set("auto_detect_line_endings", '1');
     }
     // elimina todo lo que hay en la tabla
-    DB::table('definitions')->delete();
-
-    // define la ruta para cargar el CSV con los datos
-    $path = base_path() . "/csv/definitions.csv";
+    DB::table($table)->delete();
 
     // genera y configura el lector de CSV
-    $reader = Reader::createFromPath($path);
-    $reader->setDelimiter(';');
+    $reader = Reader::createFromPath($file_path);
 
     // guarda los datos del CSV en la tabla
     $data = $reader->fetchAssoc();
     foreach($data as $row){
-    	DB::table('definitions')->insert($row);
+      DB::table($table)->insert($row);
     }
+  }
+}
+
+class DefinitionsTableSeeder extends Seeder{
+  use LoadCSV;
+
+  static $table = "definitions";
+  static $file  = "definitions.csv";
+  static $path;
+
+  public function __construct(){
+    parent::__construct();
+    $this->path = base_path() . "/csv/{$this->file}";
+  }
+
+  public function run(){
+    $this->save_csv($this->path, $this->table);
 	}
 }
