@@ -61,6 +61,7 @@
   </table>
 </div>
 
-<?php echo app_path(); ?>
+<!-- LA APP -->
+<script data-main="/js/apps/watson/main" src="/js/bower_components/requirejs/require.js"></script>
 </body>
 </html>
