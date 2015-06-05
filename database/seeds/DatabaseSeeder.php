@@ -16,11 +16,24 @@ class DatabaseSeeder extends Seeder {
 		Model::unguard();
 
 		$this->call('DefinitionsTableSeeder');
-		$this->command->info('User table seeded!');
+		$this->command->info('Definitions table seeded!');
+
+    $this->call('ScopesTableSeeder');
+    $this->command->info('Scopes table seeded!');
+
+    $this->call('TypesTableSeeder');
+    $this->command->info('Types table seeded!');
+
+    $this->call('TrustsTableSeeder');
+    $this->command->info('Trusts table seeded!');
 	}
 
 }
 
+/**
+* Define the method to load the CSV for each table
+* 
+*/
 trait LoadCSV{
   public function save_csv($file_path, $table){
     // recomendación de la librería de CSV para mac OSX
@@ -41,19 +54,46 @@ trait LoadCSV{
   }
 }
 
+/**
+* The definitions table
+*
+*/
 class DefinitionsTableSeeder extends Seeder{
   use LoadCSV;
-
-  static $table = "definitions";
-  static $file  = "definitions.csv";
-  static $path;
-
-  public function __construct(){
-    parent::__construct();
-    $this->path = base_path() . "/csv/{$this->file}";
-  }
-
   public function run(){
-    $this->save_csv($this->path, $this->table);
+    $this->save_csv(base_path() . "/csv/definitions.csv", "definitions");
 	}
+}
+
+/**
+* The scopes table
+*
+*/
+class ScopesTableSeeder extends Seeder{
+  use LoadCSV;
+  public function run(){
+    $this->save_csv(base_path() . "/csv/scopes.csv", "scopes");
+  }
+}
+
+/**
+* The types table
+*
+*/
+class TypesTableSeeder extends Seeder{
+  use LoadCSV;
+  public function run(){
+    $this->save_csv(base_path() . "/csv/types.csv", "types");
+  }
+}
+
+/**
+* The trusts table
+*
+*/
+class TrustsTableSeeder extends Seeder{
+  use LoadCSV;
+  public function run(){
+    $this->save_csv(base_path() . "/csv/trusts.csv", "trusts");
+  }
 }
