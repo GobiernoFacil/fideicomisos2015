@@ -61,7 +61,14 @@
   </table>
 </div>
 
+<?php var_dump($years); ?>
 <!-- LA APP -->
+<script>
+  var TRUSTS_DATA = {
+    years : <?php echo json_encode($years); ?>,
+    total : <?php echo json_encode($total); ?>
+  };
+</script>
 <script data-main="/js/apps/watson/main" src="/js/bower_components/requirejs/require.js"></script>
 </body>
 </html>

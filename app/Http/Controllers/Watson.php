@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Trusts;
 
 use Illuminate\Http\Request;
 
@@ -15,6 +16,8 @@ class Watson extends Controller {
 	public function index()
 	{
 		//
-		return view('watson');
+		$total_trusts = Trusts::count();
+		$years = Trusts::select('year')->groupBy('year')->lists('year');
+		return view('watson', ['total' => $total_trusts, 'years' => $years]);
 	}
 }
