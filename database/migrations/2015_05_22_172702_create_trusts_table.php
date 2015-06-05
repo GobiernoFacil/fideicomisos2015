@@ -17,37 +17,37 @@ class CreateTrustsTable extends Migration {
 			$table->increments('id');
 
 			$table->integer('year');
-			$table->text('branch');
+			$table->string('branch');
 			$table->integer('branch_id');
-			$table->text('type');
+			$table->string('type');
 			$table->integer('type_id');
 
-			$table->text('scope');
+			$table->string('scope');
 			$table->integer('scope_id');
-			$table->text('unit');
-			$table->text('settlor');
-			$table->text('registry');
+			$table->string('unit');
+			$table->string('settlor');
+			$table->string('registry');
 
 			$table->text('designation');
 			$table->text('objective');
-			$table->text('fiduciary');
-			$table->text('theme');
-			$table->text('income');
+			$table->string('fiduciary');
+			$table->string('theme');
+			$table->string('income');
 
 			$table->double('income_num');
-			$table->text('yield');
+			$table->string('yield');
 			$table->double('yield_num');
-			$table->text('expenses');
+			$table->string('expenses');
 			$table->double('expenses_num');
 
 			$table->text('report');
-			$table->text('availability');
+			$table->string('availability');
 			$table->double('availability_num');
-			$table->text('availability_type');
+			$table->string('availability_type');
 			
-			$table->text('initial_amount');
+			$table->string('initial_amount');
 			$table->double('initial_amount_num');
-			$table->text('initial_date');
+			$table->string('initial_date');
 			$table->text('comments');
 			$table->text('initial_amount_comments');
 

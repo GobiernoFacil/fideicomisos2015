@@ -54,11 +54,13 @@
   </form>
 
   <!-- [ LOS RESULTADOS ] -->
-  
+
   <table id="results">
     <thead></thead>
     <tbody></tbody>
   </table>
 </div>
+
+<?php echo app_path(); ?>
 </body>
 </html>
