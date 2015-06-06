@@ -18,8 +18,9 @@
     <section id="search-by-year">
       <h3>Selecciona fideicomisos por año</h3>
       <ul>
-        <li><input type="checkbox" name="y2014" value="2014">2014</li>
-        <li><input type="checkbox" name="y2013" value="2013">2013</li>
+        @foreach($years as $year)
+        <li><input type="checkbox" name="y{{$year}}" value="{{$year}}">{{$year}}</li>
+        @endforeach
         <li><a id="all-years" href="#">Todos</a></li>
       </ul>
     </section>
