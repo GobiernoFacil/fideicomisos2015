@@ -28,7 +28,7 @@ define(function(require){
   total     = TRUSTS_DATA.total,
   controller_el = 'body',
   model_obj = {
-    years        : years
+    years        : years,
     by_years     : [],
     by_fields    : [],
     by_keywords  : [],
