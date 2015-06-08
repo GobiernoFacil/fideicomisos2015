@@ -12,13 +12,16 @@
 
   <!-- [ EL BUSCADOR ] -->
   <form id="the-search-app">
+  <!-- the CSRF stuff -->
+  <input id="_token" type="hidden" name="_token" value="{{ csrf_token() }}">
     <!-- [A] busca por año -->
     <section id="search-by-year">
       <h3>Selecciona fideicomisos por año</h3>
       <ul>
-        <li><input type="checkbox" name="y2014" value="2014">2014</li>
-        <li><input type="checkbox" name="y2013" value="2013">2013</li>
-        <li><input type="checkbox" name="y0000" value="0000">Todos</li>
+        @foreach($years as $year)
+        <li><input type="checkbox" name="y{{$year}}" value="{{$year}}">{{$year}}</li>
+        @endforeach
+        <li><a id="all-years" href="#">Todos</a></li>
       </ul>
     </section>
 
@@ -61,7 +64,6 @@
   </table>
 </div>
 
-<?php var_dump($years); ?>
 <!-- LA APP -->
 <script>
   var TRUSTS_DATA = {

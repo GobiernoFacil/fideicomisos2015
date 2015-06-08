@@ -26,6 +26,7 @@ define(function(require){
               'initial_amount','initial_date','comments','initial_amount_comments'],
   years     = TRUSTS_DATA.years,
   total     = TRUSTS_DATA.total,
+  token     = document.getElementById("_token").value,
   controller_el = 'body',
   model_obj = {
     years        : years,
@@ -35,7 +36,8 @@ define(function(require){
     by_filters   : [],
     current_page : 0,
     page_size    : 50,
-    trusts_total : total
+    trusts_total : total,
+    _token       : token
   },
 
   Model = Backbone.Model.extend({urlRoot  : endpoint}),
