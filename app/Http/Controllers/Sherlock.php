@@ -10,7 +10,7 @@ class Sherlock extends Controller {
 
 	const PAGE_SIZE = 50;
 	/**
-	 * Display a listing of the resource.
+	 * Regresa una lista de fideicomisos
 	 *
 	 * @return Response
 	 */
@@ -19,17 +19,28 @@ class Sherlock extends Controller {
 		$years    = $request->input("by_years", NULL);
 		$fields   = $request->input("by_fields", NULL);
 		$keywords = $request->input("by_keywords", NULL);
-		$filters  = $request->input("by_filters", NULL);
 		$page     = $request->input("current_page", 0);
 		$total    = $request->input("page_size", self::PAGE_SIZE);
+		
+		$query = Trusts::whereIn('year', $years);
+		
+		if(!empty($fields)){
+			foreach($fields as $field){
+				$query = $query->orderBy($field['field'], $field['order']);
+			}
+		}
 
-		$trusts = Trusts::whereIn('year', $years)->skip($page*$total)->take($total)->get();
+		if(!empty($keywords)){
+			foreach($keywords as $keyword){
+				$query = $query->where($keyword['field'], 'like', "%" . $keyword['search'] . "%");
+			}
+		}
 
-		$response = $request->all();
+		$query = $query->skip($page*$total)->take($total);
 
-		$response['trusts'] = $trusts;
-
-		// var_dump($response);
+		$query = $query->get();
+		$response['trusts'] = $query;
+		
 		return response()->json($response);
 	}
 }
