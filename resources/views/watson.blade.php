@@ -18,8 +18,16 @@
     <section id="search-by-year">
       <h3>Selecciona fideicomisos por año</h3>
       <ul>
+        <!-- la lista de años. Esta viene del servidor -->
         @foreach($years as $year)
-        <li><input type="checkbox" name="y{{$year}}" value="{{$year}}">{{$year}}</li>
+        <li>
+          <label>
+            <input checked="checked" 
+            type="checkbox" 
+            name="y{{$year}}" 
+            value="{{$year}}">{{$year}}
+          </label>
+        </li>
         @endforeach
         <li><a id="all-years" href="#">Todos</a></li>
       </ul>
@@ -53,6 +61,11 @@
         </select>
         <a id="add-sort-field" href="#">Agregar</a>
       </p>
+    </section>
+
+    <!-- [D] ejecuta la búsqueda -->
+    <section>
+      <p><input type="submit" value="Buscar"></p>
     </section>
   </form>
 

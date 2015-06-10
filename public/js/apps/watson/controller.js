@@ -30,10 +30,10 @@ define(function(require){
   controller_el = 'body',
   model_obj = {
     years        : years,
-    by_years     : [],
-    by_fields    : [],
-    by_keywords  : [],
-    by_filters   : [],
+    by_years     : years.slice(0),
+    by_fields    : new Backbone.Collection,
+    by_keywords  : new Backbone.Collection,
+    by_filters   : new Backbone.Collection,
     current_page : 0,
     page_size    : 50,
     trusts_total : total,
@@ -48,6 +48,14 @@ define(function(require){
   //
   controller = Backbone.View.extend({
     
+    //
+    // [ DEFINE THE EVENTS ]
+    //
+    events :{
+      'change #search-by-year input' : 'updte_years_array',
+      'click #all-years' : 'select_all_years'
+    },
+
     // 
     // [ SET THE CONTAINER ]
     //
