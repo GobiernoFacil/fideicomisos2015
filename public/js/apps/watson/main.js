@@ -9,17 +9,21 @@
 require.config({
   baseUrl : "/js/apps/watson",
   paths : {
-    jquery     : "../../bower_components/jquery/dist/jquery.min",
-    backbone   : "../../bower_components/backbone/backbone",
-    underscore : "../../bower_components/underscore/underscore-min",
-    text       : "../../bower_components/requirejs-text/text",
-    velocity   : "../../bower_components/velocity/velocity.min",
-    d3         : "../../bower_components/d3/d3.min",
+    jquery        : "../../bower_components/jquery/dist/jquery.min",
+    backbone      : "../../bower_components/backbone/backbone",
+    underscore    : "../../bower_components/underscore/underscore-min",
+    text          : "../../bower_components/requirejs-text/text",
+    velocity      : "../../bower_components/velocity/velocity.min",
+    "velocity-ui" : "../../bower_components/velocity/velocity.ui.min",
+    d3            : "../../bower_components/d3/d3.min",
   },
   shim : {
     backbone : {
       deps    : ["jquery", "underscore"],
       exports : "Backbone"
+    },
+    "velocity-ui": {
+      deps: [ "velocity" ]
     }
   }
 });

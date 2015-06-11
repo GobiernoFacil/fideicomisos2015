@@ -1,7 +1,7 @@
 // Watson - fideicomisos
 // @package  : fideicomisos
 // @location : /js/apps/watson
-// @file     : controller.admin.js
+// @file     : controller.js
 // @author  : Gobierno fácil <howdy@gobiernofacil.com>
 // @url     : http://gobiernofacil.com
 
@@ -12,6 +12,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   var Backbone = require('backbone'),
+      DOM_manager = require('dom_manager'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -84,6 +85,7 @@ define(function(require){
     //
     initialize : function(){
       this.model = new Model(model_obj);
+      this.listenTo(this.model.get('by_fields'), 'add', this.fields_add_listener);
     },
 
     //
@@ -120,6 +122,7 @@ define(function(require){
       e.preventDefault();
       // [1] agrega todos los años al array de by_year
       this.model.set({by_years : years.slice(0)});
+      DOM_manager.check_years(year_inputs);
     },
 
     //
@@ -146,8 +149,11 @@ define(function(require){
     //
     add_search_field : function(e){
       e.preventDefault();
+      // [1] obtiene el valor del search
       var _search = search_field_input.value.trim();
 
+      // [2] si no existe el mismo valor, lo agrega a la 
+      //     colección de búsquedas
       if(this.model.get("by_keywords").indexOf(_search) !== -1){
         this.model.get("by_keywords").push(_search);
       }
@@ -164,7 +170,17 @@ define(function(require){
 
     call_sherlock_next : function(e){
 
+    },
+
+    //
+    // L I S T E N E R S
+    // ------------------------------------------------------------------------------
+    //
+
+    fields_add_listener : function(model, collection, options){
+      var view = DOM_manager.add_sort_item(order_list, model);
     }
+
 
   });
 
