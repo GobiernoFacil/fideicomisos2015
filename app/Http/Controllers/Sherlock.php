@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class Sherlock extends Controller {
 
 	const PAGE_SIZE = 50;
+	const MAX_PAGE_SIZE = 500;
 	/**
 	 * Regresa una lista de fideicomisos
 	 *
@@ -23,17 +24,13 @@ class Sherlock extends Controller {
 		$page     = $request->input("current_page", 0);
 		$total    = $request->input("page_size", self::PAGE_SIZE);
 		
+		$settings = ['years' => $years, 'fields' => $fields, 'keywords' => $keywords];
+		
 		$query = Trusts::whereIn('year', $years);
 		
 		if(!empty($fields)){
 			foreach($fields as $field){
 				$query = $query->orderBy($field['field'], $field['order']);
-			}
-		}
-
-		if(!empty($keywords)){
-			foreach($keywords as $keyword){
-				$query = $query->where($keyword['field'], 'like', "%" . $keyword['search'] . "%");
 			}
 		}
 
@@ -43,5 +40,13 @@ class Sherlock extends Controller {
 		$response['trusts'] = $query;
 		
 		return response()->json($response);
+	}
+
+	private function _count_result($settings){
+		$query = Trusts::whereIn('year', $years);
+	}
+
+	private function _get_result($settings, $page, $total){
+		$query = Trusts::whereIn('year', $years);
 	}
 }

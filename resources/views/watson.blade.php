@@ -38,7 +38,7 @@
       <h3>Ordenar por campo</h3>
       <p>
         <select name="order-field">
-          <option value="total">total</option>
+          <option value="initial_amount">monto inicial</option>
           <option value="year">año</option>
         </select>
         <select name="order-sort">
@@ -55,10 +55,6 @@
       <h3>Buscar palabra clave</h3>
       <p>
         <input type="text" name="search-string">
-        <select name="search-field">
-          <option value="total">total</option>
-          <option value="year">año</option>
-        </select>
         <a id="add-search-field" href="#">Agregar</a>
       </p>
     </section>

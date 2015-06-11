@@ -32,7 +32,7 @@ define(function(require){
     years        : years,
     by_years     : years.slice(0),
     by_fields    : new Backbone.Collection,
-    by_keywords  : new Backbone.Collection,
+    by_keywords  : [],
     by_filters   : new Backbone.Collection,
     current_page : 0,
     page_size    : 50,
@@ -146,6 +146,11 @@ define(function(require){
     //
     add_search_field : function(e){
       e.preventDefault();
+      var _search = search_field_input.value.trim();
+
+      if(this.model.get("by_keywords").indexOf(_search) !== -1){
+        this.model.get("by_keywords").push(_search);
+      }
     },
 
     call_sherlock : function(e){
