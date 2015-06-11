@@ -59,7 +59,7 @@
           <option value="total">total</option>
           <option value="year">año</option>
         </select>
-        <a id="add-sort-field" href="#">Agregar</a>
+        <a id="add-search-field" href="#">Agregar</a>
       </p>
     </section>
 
