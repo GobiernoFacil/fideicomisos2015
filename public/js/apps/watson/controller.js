@@ -67,6 +67,8 @@ define(function(require){
       'click #all-years'             : 'select_all_years',
       'click #add-sort-field'        : 'add_sort_field',
       'click #add-search-field'      : 'add_search_field',
+      'click .results-control-prev'  : 'call_sherlock_prev',
+      'click .results-control-next'  : 'call_sherlock_next',
       'submit #the-search-app'       : 'call_sherlock'
     },
 
@@ -94,8 +96,20 @@ define(function(require){
     //
     //
     update_years_array : function(e){
-      console.log(e);
-      console.log("update_years_array");
+      // [1] obtiene el año, revisa si se seleccionó o deseleccionó
+      //     y busca si el año está en el array de años o no
+      var _year  = +e.target.value,
+          _add   = e.target.checked,
+          _index = this.model.get("by_years").indexOf(_year);
+
+      // [2.1] si se seleccionó y el año no está en el array, lo agrega
+      if(_add && _index === -1){
+        this.model.get("by_years").push(_year);
+      }
+      // [2.2]si se deseleccionó y el año está en el array, lo remueve
+      else if(! _add && _index !== -1){
+        this.model.get("by_years").splice(_index, 1);
+      }
     },
 
     //
@@ -104,8 +118,8 @@ define(function(require){
     //
     select_all_years : function(e){
       e.preventDefault();
+      // [1] agrega todos los años al array de by_year
       this.model.set({by_years : years.slice(0)});
-      console.log("select_all_years");
     },
 
     //
@@ -113,7 +127,17 @@ define(function(require){
     //
     //
     add_sort_field : function(e){
-      console.log("add_sort_field");
+      e.preventDefault();
+      // [1] obtiene el orden, el campo, y genera el objeto de búsqueda
+      var _field = order_field_select.value,
+          _order = order_sort_select.value,
+          _obj   = {field : _field, order : _order};
+
+      // [2] si no existe el campo en la lista de elementos por
+      //     ordenar, lo agrega.
+      if(!this.model.get("by_fields").findWhere({field : _field})){
+        this.model.get("by_fields").add(_obj);
+      }
     },
 
     //
@@ -122,14 +146,21 @@ define(function(require){
     //
     add_search_field : function(e){
       e.preventDefault();
-      console.log("add_search_field");
     },
 
     call_sherlock : function(e){
       e.preventDefault();
       this.model.save();
-      console.log("call_sherlock");
+    },
+
+    call_sherlock_prev : function(e){
+
+    },
+
+    call_sherlock_next : function(e){
+
     }
+
   });
 
   //

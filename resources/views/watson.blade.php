@@ -70,7 +70,10 @@
   </form>
 
   <!-- [ LOS RESULTADOS ] -->
-
+  <p>
+    <a href="#" class="results-control-prev">anterior</a>
+    <a href="#" class="results-control-next">siguiente</a>
+  </p>
   <table id="results">
     <thead></thead>
     <tbody></tbody>
