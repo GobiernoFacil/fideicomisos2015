@@ -25,14 +25,16 @@ define(function(require){
   token     = document.getElementById("_token").value,
   controller_el = 'body',
   model_obj = {
-    fields       : new Backbone.Collection(fields),
-    years        : years.slice(0),
     by_fields    : new Backbone.Collection,
-    keywords     : [],
     by_filters   : [],
     current_page : 0,
+    fields       : new Backbone.Collection(fields),
     page_size    : 50,
+    query        : "",
+    query_total  : 0,
+    trusts       : [],
     trusts_total : total,
+    years        : years.slice(0),
     _token       : token
   },
 
@@ -47,7 +49,6 @@ define(function(require){
   order_field_select  = document.querySelector("select[name='order-field']"),
   order_sort_select   = document.querySelector("select[name='order-sort']"),
   order_list          = document.querySelector("#order-by-field ul"),
-  search_field_select = document.querySelector("select[name='search-field']"),
   search_field_input  = document.querySelector("input[name='search-string']");
 
   //
@@ -63,10 +64,10 @@ define(function(require){
       'change #search-by-year input'  : 'update_years_array',
       'click #all-years'              : 'select_all_years',
       'click #add-sort-field'         : 'add_sort_field',
+      'click #order-by-field .delete' : 'remove_sort_field',
       'click .results-control-prev'   : 'call_sherlock_prev',
       'click .results-control-next'   : 'call_sherlock_next',
-      'submit #the-search-app'        : 'call_sherlock',
-      'click #order-by-field .delete' : 'remove_sort_field'
+      'submit #the-search-app'        : 'call_sherlock'
     },
 
     // 
@@ -80,8 +81,11 @@ define(function(require){
     //
     //
     initialize : function(){
-      this.model = new Model(model_obj);
+      this.model      = new Model(model_obj);
+      this.collection = new Backbone.Collection;
       DOM_manager.render_fields_list(order_field_select, fields);
+
+      this.listenTo(this.model, 'sync', this.on_model_update);
     },
 
     //
@@ -169,6 +173,7 @@ define(function(require){
     //
     call_sherlock : function(e){
       e.preventDefault();
+      this.model.set({query : search_field_input.value.trim()});
       this.model.save();
     },
 
@@ -192,6 +197,19 @@ define(function(require){
     // L I S T E N E R S
     // ------------------------------------------------------------------------------
     //
+
+    //
+    // M O D E L   M E T H O D S
+    // ------------------------------------------------------------------------------
+    //
+
+    //
+    // [ SET THE TRUSTS IN THE COLLECTION ]
+    //
+    //
+    on_model_update : function(model, response, options){
+      this.collection.reset(response.trusts);
+    }
 
   });
 
