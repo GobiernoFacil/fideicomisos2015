@@ -27,7 +27,7 @@ define(function(require){
   model_obj = {
     by_fields    : new Backbone.Collection,
     by_filters   : [],
-    current_fields : ['year', 'branch'],
+    current_fields : ['id','year', 'branch','initial_amount'],
     current_page : 0,
     fields       : new Backbone.Collection(fields),
     page_size    : 50,
@@ -187,7 +187,17 @@ define(function(require){
     //
     //
     call_sherlock_prev : function(e){
+      e.preventDefault();
+      var _current_page = this.model.get('current_page'),
+          _page_size    = this.model.get('page_size'),
+          _query_total  = this.model.get('query_total'),
+          _total_pages  = _query_total ? Math.ceil(_query_total/_page_size): 1;
 
+      if(!_current_page || !_query_total) return;
+
+      this.model.set({current_page : _current_page - 1});
+      this.model.set({query : search_field_input.value.trim()});
+      this.model.save();
     },
 
     //
@@ -195,7 +205,17 @@ define(function(require){
     //
     //
     call_sherlock_next : function(e){
+      e.preventDefault();
+      var _current_page = this.model.get('current_page'),
+          _page_size    = this.model.get('page_size'),
+          _query_total  = this.model.get('query_total'),
+          _total_pages  = _query_total ? Math.ceil(_query_total/_page_size): 1;
 
+      if(_current_page == _total_pages - 1 || !_query_total) return;
+
+      this.model.set({current_page : 1 + _current_page});
+      this.model.set({query : search_field_input.value.trim()});
+      this.model.save();
     },
 
     //
@@ -216,6 +236,9 @@ define(function(require){
       this.collection.reset(response.trusts);
       fields_to_render = this._get_current_fields();
       DOM_manager.render_trusts(trusts_table, this.collection, fields_to_render);
+
+      var _page_num_el = this.$(".results-control-page")[0];
+      DOM_manager.render_page_num(1 + this.model.get('current_page'), _page_num_el);
     },
 
     //

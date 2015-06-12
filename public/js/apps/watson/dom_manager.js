@@ -64,6 +64,10 @@ define(function(require){
       return _row;
     },
 
+    render_page_num : function(page_num, page_container){
+      page_container.innerHTML = page_num;
+    },
+
     //
     // D I R E C T   I N T E R A C T I O N   ( H T M L )
     // ------------------------------------------------------------------------------

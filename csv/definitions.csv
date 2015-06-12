@@ -20,3 +20,4 @@
 "19","initial date","fecha de aportación inicial",NULL
 "20","comments","observaciones",NULL
 "21","initial_amount_comments","aportación inicial / observaciones",NULL
+"22","id","id",NULL

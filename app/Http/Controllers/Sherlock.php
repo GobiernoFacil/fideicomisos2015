@@ -56,6 +56,13 @@ class Sherlock extends Controller {
 	 */
 	private function _get_result($settings, $page, $total){
 		$query = Trusts::whereIn('year', $settings['years']);
+
+		$fields = array_merge($this->string_fields, $this->text_fields);
+		$query = $query->where(array_shift($fields), 'like', '%'.$settings['query'].'%');
+		foreach($fields as $field){
+			$query = $query->orWhere($field, 'like', '%'.$settings['query'].'%');
+		}
+
 		$query = $query->skip($page*$total)->take($total);
 		$query = $query->get();
 		return $query;
@@ -68,6 +75,13 @@ class Sherlock extends Controller {
 	 */
 	private function _count_result($settings){
 		$query = Trusts::whereIn('year', $settings['years']);
+
+		$fields = array_merge($this->string_fields, $this->text_fields);
+		$query = $query->where(array_shift($fields), 'like', '%'.$settings['query'].'%');
+		foreach($fields as $field){
+			$query = $query->orWhere($field, 'like', '%'.$settings['query'].'%');
+		}
+
 		return $query->count();
 	}
 }

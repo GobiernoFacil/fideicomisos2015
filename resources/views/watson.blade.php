@@ -64,6 +64,7 @@
   <!-- [ LOS RESULTADOS ] -->
   <p>
     <a href="#" class="results-control-prev">anterior</a>
+    <span class="results-control-page"></span>
     <a href="#" class="results-control-next">siguiente</a>
   </p>
   <table id="results">
