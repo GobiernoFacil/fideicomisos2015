@@ -37,10 +37,7 @@
     <section id="order-by-field">
       <h3>Ordenar por campo</h3>
       <p>
-        <select name="order-field">
-          <option value="initial_amount">monto inicial</option>
-          <option value="year">año</option>
-        </select>
+        <select name="order-field"></select>
         <select name="order-sort">
           <option value="asc">Ascendente</option>
           <option value="desc">Descendente</option>
@@ -55,7 +52,6 @@
       <h3>Buscar palabra clave</h3>
       <p>
         <input type="text" name="search-string">
-        <a id="add-search-field" href="#">Agregar</a>
       </p>
     </section>
 
@@ -79,8 +75,9 @@
 <!-- LA APP -->
 <script>
   var TRUSTS_DATA = {
-    years : <?php echo json_encode($years); ?>,
-    total : <?php echo json_encode($total); ?>
+    years  : <?php echo json_encode($years); ?>,
+    total  : <?php echo json_encode($total); ?>,
+    fields : <?php echo json_encode($definitions); ?>
   };
 </script>
 <script data-main="/js/apps/watson/main" src="/js/bower_components/requirejs/require.js"></script>

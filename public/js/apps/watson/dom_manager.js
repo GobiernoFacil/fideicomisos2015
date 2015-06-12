@@ -22,6 +22,16 @@ define(function(require){
     sort_item_template : _.template(Sort_item),
 
     //
+    // R E N D E R   F U N C T I O N S
+    // ------------------------------------------------------------------------------
+    //
+    render_fields_list : function(ul, fields){
+      fields.forEach(function(f){
+        $(ul).append("<option value='" + f.name +"'>" + f.full_name + "</option>");
+      });
+    },
+
+    //
     // D I R E C T   I N T E R A C T I O N   ( H T M L )
     // ------------------------------------------------------------------------------
     //
@@ -30,11 +40,12 @@ define(function(require){
     // [SELECT ALL YEARS ]
     //
     //
-    check_years : function(inputs){
-      for(var i = 0; i < inputs.length; i++){
-        inputs[i].checked = true;
+    check_years : function(checkbox_array){
+      for(var i = 0; i < checkbox_array.length; i++){
+        checkbox_array[i].checked = true;
       }
     },
+
     //
     // [ ADD ORDER ITEM ]
     //
@@ -44,6 +55,14 @@ define(function(require){
       _data.cid = model.cid;
 
       $(ul_node).append(this.sort_item_template(_data));
+    },
+
+    //
+    // [ REMOVE ORDER ITEM ]
+    //
+    //
+    remove_sort_item : function(li_item){
+      $(li_item).remove();
     }
   };
 

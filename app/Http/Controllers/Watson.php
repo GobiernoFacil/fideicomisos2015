@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Trusts;
+use App\Models\Definitions;
 
 use Illuminate\Http\Request;
 
@@ -17,7 +18,12 @@ class Watson extends Controller {
 	{
 		//
 		$total_trusts = Trusts::count();
+		$definitions = Definitions::all();
 		$years = Trusts::select('year')->groupBy('year')->lists('year');
-		return view('watson', ['total' => $total_trusts, 'years' => $years]);
+		return view('watson', [
+			'total'       => $total_trusts, 
+			'years'       => $years,
+			'definitions' => $definitions
+			]);
 	}
 }

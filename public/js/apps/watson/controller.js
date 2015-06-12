@@ -19,29 +19,25 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
 
-  // [ CONTROLLER DATA ]
-  endpoint  = "/sherlock/search",
-  fields    = ['year','branch','type','scope','unit','settlor','registry',
-              'designation', 'objective','fiduciary','theme','income',
-              'yield','expenses','report','availability','availability_type',
-              'initial_amount','initial_date','comments','initial_amount_comments'],
+  fields    = TRUSTS_DATA.fields,
   years     = TRUSTS_DATA.years,
   total     = TRUSTS_DATA.total,
   token     = document.getElementById("_token").value,
   controller_el = 'body',
   model_obj = {
-    years        : years,
-    by_years     : years.slice(0),
+    fields       : new Backbone.Collection(fields),
+    years        : years.slice(0),
     by_fields    : new Backbone.Collection,
-    by_keywords  : [],
-    by_filters   : new Backbone.Collection,
+    keywords     : [],
+    by_filters   : [],
     current_page : 0,
     page_size    : 50,
     trusts_total : total,
     _token       : token
   },
 
-  Model = Backbone.Model.extend({urlRoot  : endpoint}),
+  endpoint  = "/sherlock/search",
+  Model     = Backbone.Model.extend({urlRoot  : endpoint}),
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -64,13 +60,13 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'change #search-by-year input' : 'update_years_array',
-      'click #all-years'             : 'select_all_years',
-      'click #add-sort-field'        : 'add_sort_field',
-      'click #add-search-field'      : 'add_search_field',
-      'click .results-control-prev'  : 'call_sherlock_prev',
-      'click .results-control-next'  : 'call_sherlock_next',
-      'submit #the-search-app'       : 'call_sherlock'
+      'change #search-by-year input'  : 'update_years_array',
+      'click #all-years'              : 'select_all_years',
+      'click #add-sort-field'         : 'add_sort_field',
+      'click .results-control-prev'   : 'call_sherlock_prev',
+      'click .results-control-next'   : 'call_sherlock_next',
+      'submit #the-search-app'        : 'call_sherlock',
+      'click #order-by-field .delete' : 'remove_sort_field'
     },
 
     // 
@@ -85,7 +81,7 @@ define(function(require){
     //
     initialize : function(){
       this.model = new Model(model_obj);
-      this.listenTo(this.model.get('by_fields'), 'add', this.fields_add_listener);
+      DOM_manager.render_fields_list(order_field_select, fields);
     },
 
     //
@@ -102,15 +98,15 @@ define(function(require){
       //     y busca si el año está en el array de años o no
       var _year  = +e.target.value,
           _add   = e.target.checked,
-          _index = this.model.get("by_years").indexOf(_year);
+          _index = this.model.get("years").indexOf(_year);
 
       // [2.1] si se seleccionó y el año no está en el array, lo agrega
       if(_add && _index === -1){
-        this.model.get("by_years").push(_year);
+        this.model.get("years").push(_year);
       }
       // [2.2]si se deseleccionó y el año está en el array, lo remueve
       else if(! _add && _index !== -1){
-        this.model.get("by_years").splice(_index, 1);
+        this.model.get("years").splice(_index, 1);
       }
     },
 
@@ -120,8 +116,8 @@ define(function(require){
     //
     select_all_years : function(e){
       e.preventDefault();
-      // [1] agrega todos los años al array de by_year
-      this.model.set({by_years : years.slice(0)});
+      // [1] agrega todos los años al array de years
+      this.model.set({years : years.slice(0)});
       DOM_manager.check_years(year_inputs);
     },
 
@@ -131,43 +127,63 @@ define(function(require){
     //
     add_sort_field : function(e){
       e.preventDefault();
-      // [1] obtiene el orden, el campo, y genera el objeto de búsqueda
-      var _field = order_field_select.value,
-          _order = order_sort_select.value,
-          _obj   = {field : _field, order : _order};
+      // [1] obtiene el orden, campo y nombre para generar el objeto de búsqueda
+      var _field  = order_field_select.value,
+          _order  = order_sort_select.value,
+          _f_list = this.model.get('fields'),
+          _model  = _f_list.findWhere({name : _field}),
+          _name   = _model.get('full_name'),
+          _obj    = {field : _field, order : _order, name : _name},
+          _new_model;
 
       // [2] si no existe el campo en la lista de elementos por
       //     ordenar, lo agrega.
+      //     Hay un listener para la colección; cuando se agrega un modelo,
+      //     se llama a la función DOM_manager.add_sort_item
       if(!this.model.get("by_fields").findWhere({field : _field})){
-        this.model.get("by_fields").add(_obj);
+        _new_model = this.model.get("by_fields").add(_obj);
+        DOM_manager.add_sort_item(order_list, _new_model);
       }
     },
 
     //
-    // [ ADD A SEARCH FIELD ]
+    // [ REMOVE A FIELD FROM THE SORT LIST ]
     //
     //
-    add_search_field : function(e){
+    remove_sort_field : function(e){
       e.preventDefault();
-      // [1] obtiene el valor del search
-      var _search = search_field_input.value.trim();
+      // [1] obtiene el model y el html por eliminar
+      var _el    = e.currentTarget.parentNode,
+          _cid   = _el.getAttribute("data-cid"),
+          _coll  = this.model.get('by_fields'),
+          _model = _coll.get(_cid);
 
-      // [2] si no existe el mismo valor, lo agrega a la 
-      //     colección de búsquedas
-      if(this.model.get("by_keywords").indexOf(_search) !== -1){
-        this.model.get("by_keywords").push(_search);
-      }
+      // [2] elimina el modelo de la colección y elimina el li
+      _coll.remove(_model);
+      DOM_manager.remove_sort_item(_el);
     },
 
+    //
+    // [ MAKE A QUERY TO SHERLOCK ]
+    //
+    //
     call_sherlock : function(e){
       e.preventDefault();
       this.model.save();
     },
 
+    //
+    // [ MAKE A QUERY TO SHERLOCK (PREV) ]
+    //
+    //
     call_sherlock_prev : function(e){
 
     },
 
+    //
+    // [ MAKE A QUERY TO SHERLOCK (NEXT) ]
+    //
+    //
     call_sherlock_next : function(e){
 
     },
@@ -176,11 +192,6 @@ define(function(require){
     // L I S T E N E R S
     // ------------------------------------------------------------------------------
     //
-
-    fields_add_listener : function(model, collection, options){
-      var view = DOM_manager.add_sort_item(order_list, model);
-    }
-
 
   });
 
