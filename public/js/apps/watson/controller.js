@@ -27,6 +27,7 @@ define(function(require){
   model_obj = {
     by_fields    : new Backbone.Collection,
     by_filters   : [],
+    current_fields : ['year', 'branch'],
     current_page : 0,
     fields       : new Backbone.Collection(fields),
     page_size    : 50,
@@ -49,7 +50,8 @@ define(function(require){
   order_field_select  = document.querySelector("select[name='order-field']"),
   order_sort_select   = document.querySelector("select[name='order-sort']"),
   order_list          = document.querySelector("#order-by-field ul"),
-  search_field_input  = document.querySelector("input[name='search-string']");
+  search_field_input  = document.querySelector("input[name='search-string']"),
+  trusts_table        = document.getElementById("results");
 
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
@@ -86,6 +88,9 @@ define(function(require){
       DOM_manager.render_fields_list(order_field_select, fields);
 
       this.listenTo(this.model, 'sync', this.on_model_update);
+
+      // just for testing
+      this.dom_manager = DOM_manager;
     },
 
     //
@@ -204,11 +209,29 @@ define(function(require){
     //
 
     //
-    // [ SET THE TRUSTS IN THE COLLECTION ]
+    // [ R E N D E R   T H E   R E S P O N S E ]
     //
     //
     on_model_update : function(model, response, options){
       this.collection.reset(response.trusts);
+      fields_to_render = this._get_current_fields();
+      DOM_manager.render_trusts(trusts_table, this.collection, fields_to_render);
+    },
+
+    //
+    // H E L P E R S
+    // ------------------------------------------------------------------------------
+    //
+    _get_current_fields : function(){
+      var _current_fields = this.model.get('current_fields'),
+          _fields         = this.model.get('fields'),
+          _response       = [];
+
+      _current_fields.forEach(function(field){
+        _response.push(_fields.findWhere({name : field}));
+      });
+
+      return _response;
     }
 
   });

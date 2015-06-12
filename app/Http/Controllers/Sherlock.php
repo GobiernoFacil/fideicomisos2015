@@ -10,12 +10,16 @@ class Sherlock extends Controller {
 
 	const PAGE_SIZE        = 50;
 	const MAX_PAGE_SIZE    = 500;
-	private $text_fields   = [];
-	private $string_fields = [];
-	private $num_fields    = [];
+	private $text_fields   = ['designation', 'objective', 'report', 'comments',
+	                          'initial_amount_comments'];
+	private $string_fields = ['branch', 'type', 'scope', 'unit', 'settlor', 
+	                          'registry', 'fiduciary', 'theme', 'availability_type', 
+	                          'initial_date'];
+	private $num_fields    = ['income', 'yield', 'expenses', 'availability',
+	                          'initial_amount'];
 
 	/**
-	 * Regresa una lista de fideicomisos
+	 * Regresa una lista de fideicomisos en JSON
 	 *
 	 * @return Response
 	 */
@@ -25,6 +29,7 @@ class Sherlock extends Controller {
 		$years  = filter_var_array($years, FILTER_VALIDATE_INT);
 		$fields = $request->input("by_fields", NULL);
 		$query  = $request->input("query", NULL);
+		$query  = filter_var($query, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 		$page   = $request->input("current_page", 0);
 		$total  = $request->input("page_size", self::PAGE_SIZE);
 		
@@ -45,16 +50,6 @@ class Sherlock extends Controller {
 	}
 
 	/**
-	 * Regresa el número de fideicomosos en la búsqueda
-	 *
-	 * @return Number
-	 */
-	private function _count_result($settings){
-		$query = Trusts::whereIn('year', $settings['years']);
-		return $query->count();
-	}
-
-	/**
 	 * Regresa una lista de fideicomisos
 	 *
 	 * @return List
@@ -64,5 +59,15 @@ class Sherlock extends Controller {
 		$query = $query->skip($page*$total)->take($total);
 		$query = $query->get();
 		return $query;
+	}
+
+	/**
+	 * Regresa el número de fideicomosos en la búsqueda
+	 *
+	 * @return Number
+	 */
+	private function _count_result($settings){
+		$query = Trusts::whereIn('year', $settings['years']);
+		return $query->count();
 	}
 }

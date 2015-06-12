@@ -11,6 +11,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   var Backbone  = require('backbone'),
+      d3        = require('d3'),
       Velocity  = require('velocity'),
       Sort_item = require('text!templates/sort-field.html');
 
@@ -29,6 +30,38 @@ define(function(require){
       fields.forEach(function(f){
         $(ul).append("<option value='" + f.name +"'>" + f.full_name + "</option>");
       });
+    },
+
+    render_trusts : function(table, trusts_collection, fields_models_to_render){
+      var _headers = this._render_trust_header(fields_models_to_render);
+      var _rows = "";
+
+      trusts_collection.each(function(trust){
+        _rows += this._render_trust_row(fields_models_to_render, trust);
+      }, this);
+
+      table.querySelector('thead').innerHTML = _headers;
+      table.querySelector('tbody').innerHTML = _rows;
+    },
+
+    _render_trust_header : function(fields_models_to_render){
+      var _header = "<tr>";
+      fields_models_to_render.forEach(function(model){
+          _header += "<th>" + model.get('full_name') + "</th>";
+      });
+      _header += "</tr>";
+
+      return _header;
+    },
+
+    _render_trust_row(fields_models_to_render, trust){
+      var _row = "<tr>";
+      fields_models_to_render.forEach(function(model){
+        _row += "<td>" + trust.get(model.get('name')) + "</td>";
+      });
+      _row += "</tr>";
+
+      return _row;
     },
 
     //
