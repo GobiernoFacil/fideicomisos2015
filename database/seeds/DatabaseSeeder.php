@@ -16,31 +16,84 @@ class DatabaseSeeder extends Seeder {
 		Model::unguard();
 
 		$this->call('DefinitionsTableSeeder');
-		$this->command->info('User table seeded!');
+		$this->command->info('Definitions table seeded!');
+
+    $this->call('ScopesTableSeeder');
+    $this->command->info('Scopes table seeded!');
+
+    $this->call('TypesTableSeeder');
+    $this->command->info('Types table seeded!');
+
+    $this->call('TrustsTableSeeder');
+    $this->command->info('Trusts table seeded!');
 	}
 
 }
 
-class DefinitionsTableSeeder extends Seeder{
-	public function run(){
-		// recomendación de la librería de CSV para mac OSX
-	  if (! ini_get("auto_detect_line_endings")){
+/**
+* Define the method to load the CSV for each table
+* 
+*/
+trait LoadCSV{
+  public function save_csv($file_path, $table){
+    // recomendación de la librería de CSV para mac OSX
+    if (! ini_get("auto_detect_line_endings")){
       ini_set("auto_detect_line_endings", '1');
     }
     // elimina todo lo que hay en la tabla
-    DB::table('definitions')->delete();
-
-    // define la ruta para cargar el CSV con los datos
-    $path = base_path() . "/csv/definitions.csv";
+    DB::table($table)->delete();
 
     // genera y configura el lector de CSV
-    $reader = Reader::createFromPath($path);
-    $reader->setDelimiter(';');
+    $reader = Reader::createFromPath($file_path);
 
     // guarda los datos del CSV en la tabla
     $data = $reader->fetchAssoc();
     foreach($data as $row){
-    	DB::table('definitions')->insert($row);
+      DB::table($table)->insert($row);
     }
+  }
+}
+
+/**
+* The definitions table
+*
+*/
+class DefinitionsTableSeeder extends Seeder{
+  use LoadCSV;
+  public function run(){
+    $this->save_csv(base_path() . "/csv/definitions.csv", "definitions");
 	}
+}
+
+/**
+* The scopes table
+*
+*/
+class ScopesTableSeeder extends Seeder{
+  use LoadCSV;
+  public function run(){
+    $this->save_csv(base_path() . "/csv/scopes.csv", "scopes");
+  }
+}
+
+/**
+* The types table
+*
+*/
+class TypesTableSeeder extends Seeder{
+  use LoadCSV;
+  public function run(){
+    $this->save_csv(base_path() . "/csv/types.csv", "types");
+  }
+}
+
+/**
+* The trusts table
+*
+*/
+class TrustsTableSeeder extends Seeder{
+  use LoadCSV;
+  public function run(){
+    $this->save_csv(base_path() . "/csv/trusts.csv", "trusts");
+  }
 }

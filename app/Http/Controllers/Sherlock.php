@@ -2,83 +2,86 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Trusts;
 
 use Illuminate\Http\Request;
 
 class Sherlock extends Controller {
 
+	const PAGE_SIZE        = 50;
+	const MAX_PAGE_SIZE    = 500;
+	private $text_fields   = ['designation', 'objective', 'report', 'comments',
+	                          'initial_amount_comments'];
+	private $string_fields = ['branch', 'type', 'scope', 'unit', 'settlor', 
+	                          'registry', 'fiduciary', 'theme', 'availability_type', 
+	                          'initial_date'];
+	private $num_fields    = ['income', 'yield', 'expenses', 'availability',
+	                          'initial_amount'];
+
 	/**
-	 * Display a listing of the resource.
+	 * Regresa una lista de fideicomisos en JSON
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		//
+		$years  = $request->input("years", NULL);
+		$years  = filter_var_array($years, FILTER_VALIDATE_INT);
+		$fields = $request->input("by_fields", NULL);
+		$query  = $request->input("query", NULL);
+		$query  = filter_var($query, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$page   = $request->input("current_page", 0);
+		$total  = $request->input("page_size", self::PAGE_SIZE);
+		
+		$settings = ['years' => $years, 'fields' => $fields, 'query' => $query];
+		
+		$response = [];
+		$response['query_total'] = $this->_count_result($settings); 
+		$response['trusts']      = $this->_get_result($settings, $page, $total);
+		/*
+		if(!empty($fields)){
+			foreach($fields as $field){
+				$query = $query->orderBy($field['field'], $field['order']);
+			}
+		}
+		*/
+		
+		return response()->json($response);
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Regresa una lista de fideicomisos
 	 *
-	 * @return Response
+	 * @return List
 	 */
-	public function create()
-	{
-		//
+	private function _get_result($settings, $page, $total){
+		$query = Trusts::whereIn('year', $settings['years']);
+
+		$fields = array_merge($this->string_fields, $this->text_fields);
+		$query = $query->where(array_shift($fields), 'like', '%'.$settings['query'].'%');
+		foreach($fields as $field){
+			$query = $query->orWhere($field, 'like', '%'.$settings['query'].'%');
+		}
+
+		$query = $query->skip($page*$total)->take($total);
+		$query = $query->get();
+		return $query;
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Regresa el número de fideicomosos en la búsqueda
 	 *
-	 * @return Response
+	 * @return Number
 	 */
-	public function store()
-	{
-		//
-	}
+	private function _count_result($settings){
+		$query = Trusts::whereIn('year', $settings['years']);
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+		$fields = array_merge($this->string_fields, $this->text_fields);
+		$query = $query->where(array_shift($fields), 'like', '%'.$settings['query'].'%');
+		foreach($fields as $field){
+			$query = $query->orWhere($field, 'like', '%'.$settings['query'].'%');
+		}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+		return $query->count();
 	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }

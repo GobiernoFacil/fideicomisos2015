@@ -1,22 +1,23 @@
-"id";"name";"full_name";"description"
-"1";"year";"año";NULL
-"2";"branch";"ramo";NULL
-"3";"type";"tipo";NULL
-"4";"scope";"ambito";NULL
-"5";"unit";"unidad responsable coordinadora";NULL
-"6";"settlor";"fideicomitente o mandante";NULL
-"7";"registry";"clave de registro";NULL
-"8";"designation";"denominación";NULL
-"9";"objective";"objeto";NULL
-"10";"fiduciary";"fiduciario o mandatario";NULL
-"11";"theme";"grupo temático";NULL
-"12";"income";"ingresos (pesos)";NULL
-"13";"yield";"rendimientos (pesos)";NULL
-"14";"expenses";"egresos (pesos)";NULL
-"15";"report";"reporte del cumplimiento de la misión y fines";NULL
-"16";"availability";"disponibilidad (pesos)";NULL
-"17";"availability_type";"tipo de disponibilidad";NULL
-"18";"initial_amount";"monto aportación inicial";NULL
-"19";"initial date";"fecha de aportación inicial";NULL
-"20";"comments";"observaciones";NULL
-"21";"initial_amount_comments";"aportación inicial / observaciones";NULL
+"id","name","full_name","description"
+"1","year","año",NULL
+"2","branch","ramo",NULL
+"3","type","tipo",NULL
+"4","scope","ambito",NULL
+"5","unit","unidad responsable coordinadora",NULL
+"6","settlor","fideicomitente o mandante",NULL
+"7","registry","clave de registro",NULL
+"8","designation","denominación",NULL
+"9","objective","objeto",NULL
+"10","fiduciary","fiduciario o mandatario",NULL
+"11","theme","grupo temático",NULL
+"12","income","ingresos (pesos)",NULL
+"13","yield","rendimientos (pesos)",NULL
+"14","expenses","egresos (pesos)",NULL
+"15","report","reporte del cumplimiento de la misión y fines",NULL
+"16","availability","disponibilidad (pesos)",NULL
+"17","availability_type","tipo de disponibilidad",NULL
+"18","initial_amount","monto aportación inicial",NULL
+"19","initial date","fecha de aportación inicial",NULL
+"20","comments","observaciones",NULL
+"21","initial_amount_comments","aportación inicial / observaciones",NULL
+"22","id","id",NULL

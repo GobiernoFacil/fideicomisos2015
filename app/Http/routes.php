@@ -14,4 +14,7 @@
 // [ EL NAVEGADOR DE FIDEICOMISOS ]
 Route::get('navegador-de-fideicomisos', 'Watson@index');
 
+// [ EL API DE BÚSQUEDA ]
+Route::post('sherlock/search', 'Sherlock@index');
+
 Route::get('/', 'WelcomeController@index');
