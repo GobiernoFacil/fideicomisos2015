@@ -179,6 +179,11 @@ input[type="search"]::-webkit-search-decoration {
   color: #000;
   padding: 0.2em 0; }
 
+nav.main .search input[type="search"] {
+  text-align: center;
+  width: 100%;
+  padding: 5px 0; }
+
 .wrapper, .wrap {
   width: 90%;
   margin: 0 auto; }
@@ -745,6 +750,90 @@ input:focus, select:focus, textarea:focus {
 
 /* =Main content and comment content
 -------------------------------------------------------------- */
+.top-header {
+  padding: 10px 0 0;
+  border-bottom: 2px solid #555; }
+  .top-header ul {
+    padding: 15px 0 0;
+    text-align: right; }
+    .top-header ul li {
+      font-size: 13px;
+      list-style: none;
+      display: inline-block;
+      margin: 0 0 0 10px; }
+
+.top_logo {
+  display: inline-block;
+  height: 50px;
+  padding: 10px 15px;
+  font-size: 18px;
+  line-height: 20px; }
+  .top_logo b {
+    background: #015383;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin: 4px 0 0 5px;
+    vertical-align: top; }
+
+.eluniversal {
+  background: url(img/eluniversallogo_0.png) no-repeat 50%;
+  background-size: 172px auto;
+  display: block;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+  width: 172px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 10px; }
+
+nav.main {
+  padding: 23px 0; }
+  nav.main h1 {
+    font-size: 81px;
+    text-align: center; }
+  nav.main .menu-icon {
+    background: transparent;
+    border: 0;
+    color: #015383;
+    font-size: 30px; }
+
+/* =Home
+-------------------------------------------------------------- */
+.home section {
+  padding: 100px 0 166px; }
+.home .news {
+  padding: 0; }
+  .home .news div {
+    padding: 0; }
+  .home .news a {
+    background: #ccc;
+    display: block;
+    min-height: 254px; }
+    .home .news a.featured {
+      min-height: 508px; }
+    .home .news a:hover {
+      background: red; }
+.home .fideicomiso {
+  text-align: center; }
+  .home .fideicomiso h1 {
+    padding: 30px; }
+.home .data {
+  background: #F5F6FA; }
+  .home .data .descarga {
+    background: #444;
+    color: white;
+    padding: 20px 15px; }
+
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
 div.brand {
