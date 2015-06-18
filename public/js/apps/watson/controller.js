@@ -27,7 +27,7 @@ define(function(require){
   model_obj = {
     by_fields    : new Backbone.Collection,
     by_filters   : [],
-    current_fields : ['id','year', 'branch','initial_amount'],
+    // current_fields : ['id','year', 'branch','initial_amount'],
     current_page : 0,
     fields       : new Backbone.Collection(fields),
     page_size    : 50,
@@ -46,12 +46,13 @@ define(function(require){
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
-  year_inputs         = document.querySelectorAll("#search-by-year input"),
-  order_field_select  = document.querySelector("select[name='order-field']"),
-  order_sort_select   = document.querySelector("select[name='order-sort']"),
-  order_list          = document.querySelector("#order-by-field ul"),
-  search_field_input  = document.querySelector("input[name='search-string']"),
-  trusts_table        = document.getElementById("results");
+  year_inputs        = document.querySelectorAll("#search-by-year input"),
+  field_inputs       = document.querySelectorAll("#select-visible-fields input"),
+  order_field_select = document.querySelector("select[name='order-field']"),
+  order_sort_select  = document.querySelector("select[name='order-sort']"),
+  order_list         = document.querySelector("#order-by-field ul"),
+  search_field_input = document.querySelector("input[name='search-string']"),
+  trusts_table       = document.getElementById("results");
 
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
@@ -64,7 +65,9 @@ define(function(require){
     //
     events :{
       'change #search-by-year input'  : 'update_years_array',
+      'change #select-visible-fields input' : 'update_fields_array',
       'click #all-years'              : 'select_all_years',
+      'click #all-fields'             : 'select_all_fields',
       'click #add-sort-field'         : 'add_sort_field',
       'click #order-by-field .delete' : 'remove_sort_field',
       'click .results-control-prev'   : 'call_sherlock_prev',
@@ -83,6 +86,7 @@ define(function(require){
     //
     //
     initialize : function(){
+      model_obj.current_fields = model_obj.fields.pluck('name');
       this.model      = new Model(model_obj);
       this.collection = new Backbone.Collection;
       DOM_manager.render_fields_list(order_field_select, fields);
@@ -128,6 +132,29 @@ define(function(require){
       // [1] agrega todos los años al array de years
       this.model.set({years : years.slice(0)});
       DOM_manager.check_years(year_inputs);
+    },
+
+    //
+    // [ ADD OR REMOVE A FIELD FROM RESULT TABLE ]
+    //
+    //
+    update_fields_array : function(e){
+      // [1] obtiene el campo; revisa si se seleccionó o deseleccionó;
+      //     y busca si el campo está en el array de fields o no
+      var _field  = e.target.value,
+          _add    = e.target.checked,
+          _index = this.model.get("current_fields").indexOf(_field);
+          console.log(_field, _add, _index);
+      // [2.1] si se seleccionó y el campo no está en el array, lo agrega
+      if(_add && _index === -1){
+        this.model.get("current_fields").push(_field);
+      }
+      // [2.2]si se deseleccionó y el campo está en el array, lo remueve
+      else if(! _add && _index !== -1){
+        this.model.get("current_fields").splice(_index, 1);
+      }
+
+      this.render_response();
     },
 
     //
@@ -234,6 +261,10 @@ define(function(require){
     //
     on_model_update : function(model, response, options){
       this.collection.reset(response.trusts);
+      this.render_response();
+    },
+
+    render_response : function(){
       fields_to_render = this._get_current_fields();
       DOM_manager.render_trusts(trusts_table, this.collection, fields_to_render);
 
