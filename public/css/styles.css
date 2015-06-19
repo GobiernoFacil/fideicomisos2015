@@ -812,17 +812,56 @@ nav.main {
 .home section {
   padding: 100px 0 166px; }
 .home .news {
-  padding: 0; }
-  .home .news div {
-    padding: 0; }
-  .home .news a {
-    background: #ccc;
+  padding: 0;
+  margin-top: 176px; }
+  .home .news li {
+    padding: 0;
+    list-style: none; }
+    .home .news li h2, .home .news li h2 a {
+      color: white;
+      font: 500 70px/1.5 "Roboto", Helvetica, Arial, sans-serif; }
+    .home .news li .category {
+      color: white;
+      background: #015383;
+      display: inline-block;
+      font-size: 11px;
+      min-height: 10px;
+      padding: 3px 5px; }
+    .home .news li .author {
+      color: #C9C8B7; }
+    .home .news li .more {
+      background: #FFED48;
+      color: #404040;
+      font-size: 32px;
+      font-weight: 700;
+      padding: 30px 0;
+      min-height: 94px;
+      text-align: center;
+      display: block; }
+  .home .news article {
+    background: transparent;
     display: block;
-    min-height: 254px; }
-    .home .news a.featured {
-      min-height: 508px; }
-    .home .news a:hover {
-      background: red; }
+    min-height: 353px;
+    z-index: 1; }
+    .home .news article.featured {
+      background: transparent;
+      min-height: 286px; }
+    .home .news article figure {
+      background: #000;
+      position: absolute;
+      width: 100%;
+      height: 353px;
+      overflow: hidden;
+      z-index: -1; }
+      .home .news article figure img {
+        -webkit-opacity: 0.6;
+        -moz-opacity: 0.6;
+        opacity: 0.6;
+        min-width: 100%;
+        height: auto;
+        display: block;
+        min-height: 706px;
+        max-width: 800px; }
 .home .fideicomiso {
   text-align: center; }
   .home .fideicomiso h1 {
@@ -833,6 +872,35 @@ nav.main {
     background: #444;
     color: white;
     padding: 20px 15px; }
+
+.likeaboss {
+  min-height: 160px;
+  z-index: -2;
+  overflow: hidden;
+  padding: 0;
+  background-color: #141414;
+  /*
+  background-image: -webkit-gradient(radial, center center, 0, center center, 460, from($blue), to(#141414));
+  background-image: -webkit-radial-gradient(circle, $blue, #141414);
+  background-image: -moz-radial-gradient(circle, $blue, #141414);
+  background-image: -o-radial-gradient(circle, $blue, #141414);
+  background-repeat: no-repeat;
+  */
+  width: 100%;
+  position: absolute;
+  top: 208px;
+  left: 0; }
+  .likeaboss figure {
+    display: block;
+    height: 800px;
+    max-width: 100%;
+    overflow: hidden; }
+    .likeaboss figure img {
+      width: 100%;
+      display: block;
+      -webkit-opacity: 0.6;
+      -moz-opacity: 0.6;
+      opacity: 0.6; }
 
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
