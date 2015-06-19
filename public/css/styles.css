@@ -824,6 +824,12 @@ input:focus, select:focus, textarea:focus {
     border: 0;
     color: #015383;
     font-size: 30px; }
+    .top-header .menu-icon.active {
+      background: #015383;
+      color: white; }
+    .top-header .menu-icon:focus {
+      border: 0;
+      outline-color: white; }
 
 .top_logo {
   display: inline-block;
@@ -1012,6 +1018,8 @@ a.btn_link {
   margin-top: 10px;
   padding: 7px 20px;
   text-transform: uppercase; }
+  a.btn_link:hover {
+    background: #FFD502; }
 
 .right {
   text-align: right; }
@@ -1062,6 +1070,62 @@ footer {
     margin: 0 auto;
     height: 114px;
     width: 140px; }
+
+/* General styles for menu */
+.fide-menu {
+  background: #f3f3f3;
+  position: fixed;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); }
+  .fide-menu h3 {
+    color: #ccc;
+    font: 300 1.9em "Roboto", Helvetica, Arial, sans-serif;
+    padding: 20px;
+    margin: 0; }
+  .fide-menu a {
+    display: block;
+    color: #4d4d4d;
+    font-size: 1.1em;
+    font-weight: 300; }
+  .fide-menu.fide-menu-vertical {
+    width: 340px;
+    height: 100%;
+    top: 0;
+    z-index: 1000; }
+    .fide-menu.fide-menu-vertical a {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      padding: 1em; }
+      .fide-menu.fide-menu-vertical a:hover {
+        background: #015383;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        color: white; }
+      .fide-menu.fide-menu-vertical a:active {
+        background: #8ba7c0;
+        color: #47a3da; }
+      .fide-menu.fide-menu-vertical a.current {
+        background: #8ba7c0;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        color: white; }
+
+/* Push classes applied to the body */
+.fide-menu-push {
+  overflow-x: hidden;
+  position: relative;
+  left: 0; }
+
+.fide-menu-push-toleft {
+  left: -340px; }
+
+.fide-menu-right {
+  right: -340px; }
+
+.fide-menu-right.fide-menu-open {
+  right: 0px; }
+
+/* Transitions */
+.fide-menu, .fide-menu-push {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
 
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
