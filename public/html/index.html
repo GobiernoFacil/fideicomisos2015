@@ -36,10 +36,13 @@
 <header class="top-header">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-3">
 				<a href="http://www.eluniversal.com.mx/periodismo-datos/" class="top_logo"><span class="eluniversal">El Universal</span> | <b></b> DATA</a>  
 			</div>
-			<div class="col-sm-1 col-sm-offset-5">
+			<div class="col-sm-6">
+				<h1>Quién Fondeó</h1> 
+			</div>
+			<div class="col-sm-1 col-sm-offset-2">
 				<button id="showRightPush" class="menu-icon">☰</button>
 			</div>
 		</div>
@@ -49,7 +52,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h1>Quién Fondeó</h1>
+				
 			</div>
 		</div>
 	</div>
@@ -190,7 +193,32 @@
 			$(body).toggleClass( 'fide-menu-push-toleft' );
 			$(menuRight).toggleClass( 'fide-menu-open' );
 		});
+var cbpAnimatedHeader=(function(){
+	var b=document.documentElement,
+		g=$(".top-header"),
+		e=false,
+		a=300;
+	
+	function f(){
+		window.addEventListener("scroll",function(h){
+			if(!e){e=true;setTimeout(d,250)}},false)
+		}
+	function d(){
+		var h=c();
+		if(h>=a){
+			g.addClass("header-shrink");
+		}
+		else{
+			g.removeClass("header-shrink")
+		}
+		
+		e=false }
+		
+	function c(){
+		return window.pageYOffset||b.scrollTop}
+	
+	f()})();
 
-		</script>
+</script>
 </body>
 </html>
