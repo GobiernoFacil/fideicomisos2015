@@ -55,7 +55,26 @@
       </p>
     </section>
 
-    <!-- [D] ejecuta la búsqueda -->
+    <!-- [D] Selecciona los campos por mostrar -->
+    <section id="select-visible-fields">
+      <h3>Selecciona los campos visibles</h3>
+      <ul>
+        <!-- la lista de años. Esta viene del servidor -->
+        @foreach($definitions as $field)
+        <li>
+          <label>
+            <input checked="checked" 
+            type="checkbox" 
+            name="f-{{$field->name}}" 
+            value="{{$field->name}}">{{$field->full_name}}
+          </label>
+        </li>
+        @endforeach
+        <li><a id="all-fields" href="#">Todos</a></li>
+      </ul>
+    </section>
+
+    <!-- [E] ejecuta la búsqueda -->
     <section>
       <p><input type="submit" value="Buscar"></p>
     </section>
