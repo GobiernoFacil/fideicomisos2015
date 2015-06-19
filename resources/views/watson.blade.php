@@ -70,7 +70,7 @@
           </label>
         </li>
         @endforeach
-        <li><a id="all-years" href="#">Todos</a></li>
+        <li><a id="all-fields" href="#">Todos</a></li>
       </ul>
     </section>
 

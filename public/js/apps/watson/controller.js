@@ -27,12 +27,12 @@ define(function(require){
   model_obj = {
     by_fields    : new Backbone.Collection,
     by_filters   : [],
-    // current_fields : ['id','year', 'branch','initial_amount'],
     current_page : 0,
     fields       : new Backbone.Collection(fields),
     page_size    : 50,
     query        : "",
     query_total  : 0,
+    query_pages  : 1,
     trusts       : [],
     trusts_total : total,
     years        : years.slice(0),
@@ -131,7 +131,22 @@ define(function(require){
       e.preventDefault();
       // [1] agrega todos los años al array de years
       this.model.set({years : years.slice(0)});
+      // [2] selecciona todos los checkbox de año
       DOM_manager.check_years(year_inputs);
+    },
+
+    //
+    // [ ADD ALL FIELDS TO THE RESULT ]
+    //
+    //
+    select_all_fields : function(e){
+       e.preventDefault();
+      // [1] agrega todos los años al array de fields
+      this.model.set({current_fields : this.model.get('fields').pluck('name')});
+      // [2] selecciona todos los checkbox de campos
+      DOM_manager.check_fields(field_inputs);
+      // [3] actualiza la tabla de resultados
+      this.render_response();
     },
 
     //
@@ -261,6 +276,12 @@ define(function(require){
     //
     on_model_update : function(model, response, options){
       this.collection.reset(response.trusts);
+
+      this.model.set({
+        current_page : 0,
+        query_pages : Math.ceil(this.model.get('query_total') / this.model.get('page_size'))
+      });
+
       this.render_response();
     },
 
@@ -269,7 +290,12 @@ define(function(require){
       DOM_manager.render_trusts(trusts_table, this.collection, fields_to_render);
 
       var _page_num_el = this.$(".results-control-page")[0];
-      DOM_manager.render_page_num(1 + this.model.get('current_page'), _page_num_el);
+      var _pagination = {
+        page_num : 1 + this.model.get('current_page'),
+        pages    : this.model.get('query_pages'),
+        results  : this.model.get('query_total')
+      };
+      DOM_manager.render_page_num(_pagination, _page_num_el);
     },
 
     //

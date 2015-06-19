@@ -64,8 +64,11 @@ define(function(require){
       return _row;
     },
 
-    render_page_num : function(page_num, page_container){
-      page_container.innerHTML = page_num;
+    render_page_num : function(pagination_obj, page_container){
+      var _pagination_text = pagination_obj.page_num +
+                             '/' + pagination_obj.pages +
+                             '(' + pagination_obj.results + ')';
+      page_container.innerHTML = _pagination_text;
     },
 
     //
@@ -78,6 +81,12 @@ define(function(require){
     //
     //
     check_years : function(checkbox_array){
+      for(var i = 0; i < checkbox_array.length; i++){
+        checkbox_array[i].checked = true;
+      }
+    },
+
+    check_fields : function(checkbox_array){
       for(var i = 0; i < checkbox_array.length; i++){
         checkbox_array[i].checked = true;
       }
