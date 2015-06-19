@@ -813,7 +813,7 @@ nav.main {
   padding: 100px 0 166px; }
 .home .news {
   padding: 0;
-  margin-top: 176px; }
+  margin-top: 276px; }
   .home .news li {
     padding: 0;
     list-style: none; }
@@ -824,11 +824,16 @@ nav.main {
       color: white;
       background: #015383;
       display: inline-block;
-      font-size: 11px;
+      font-size: 12px;
       min-height: 10px;
-      padding: 3px 5px; }
+      padding: 5px 10px;
+      vertical-align: top; }
     .home .news li .author {
-      color: #C9C8B7; }
+      border-top: 1px solid white;
+      color: #C9C8B7;
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 0 0; }
     .home .news li .more {
       background: #FFED48;
       color: #404040;
@@ -843,9 +848,34 @@ nav.main {
     display: block;
     min-height: 353px;
     z-index: 1; }
+    .home .news article:hover img {
+      -webkit-opacity: 0.3;
+      -moz-opacity: 0.3;
+      opacity: 0.3; }
+    .home .news article div {
+      padding: 65px 40px 10px; }
     .home .news article.featured {
       background: transparent;
       min-height: 286px; }
+      .home .news article.featured div {
+        padding-top: 0; }
+    .home .news article.half .front, .home .news article.quarter .front {
+      border-top: 5px solid #015383;
+      padding: 0; }
+    .home .news article.half h2, .home .news article.half h2 a, .home .news article.quarter h2, .home .news article.quarter h2 a {
+      line-height: 1.5;
+      font-size: 36px; }
+    .home .news article.half .author, .home .news article.quarter .author {
+      font-size: 15px; }
+    .home .news article.quarter div {
+      padding-top: 82px; }
+    .home .news article.quarter h2, .home .news article.quarter h2 a {
+      line-height: 1;
+      font-size: 28px; }
+    .home .news article.quarter img {
+      min-width: 700px; }
+    .home .news article.quarter .author {
+      font-size: 13px; }
     .home .news article figure {
       background: #000;
       position: absolute;
@@ -854,14 +884,15 @@ nav.main {
       overflow: hidden;
       z-index: -1; }
       .home .news article figure img {
-        -webkit-opacity: 0.6;
-        -moz-opacity: 0.6;
-        opacity: 0.6;
-        min-width: 100%;
-        height: auto;
-        display: block;
-        min-height: 706px;
-        max-width: 800px; }
+        -webkit-opacity: 0.5;
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        /* Set rules to fill background */
+        min-height: 100%;
+        min-width: 1024px;
+        /* Set up proportionate scaling */
+        width: 100%;
+        height: auto; }
 .home .fideicomiso {
   text-align: center; }
   .home .fideicomiso h1 {
@@ -875,32 +906,34 @@ nav.main {
 
 .likeaboss {
   min-height: 160px;
-  z-index: -2;
   overflow: hidden;
   padding: 0;
-  background-color: #141414;
-  /*
-  background-image: -webkit-gradient(radial, center center, 0, center center, 460, from($blue), to(#141414));
-  background-image: -webkit-radial-gradient(circle, $blue, #141414);
-  background-image: -moz-radial-gradient(circle, $blue, #141414);
-  background-image: -o-radial-gradient(circle, $blue, #141414);
-  background-repeat: no-repeat;
-  */
+  background-color: #000;
   width: 100%;
   position: absolute;
   top: 208px;
-  left: 0; }
+  left: 0;
+  z-index: -2; }
   .likeaboss figure {
     display: block;
     height: 800px;
     max-width: 100%;
     overflow: hidden; }
     .likeaboss figure img {
+      /* Set rules to fill background */
+      min-height: 100%;
+      min-width: 1024px;
+      /* Set up proportionate scaling */
       width: 100%;
+      height: auto;
       display: block;
-      -webkit-opacity: 0.6;
-      -moz-opacity: 0.6;
-      opacity: 0.6; }
+      -webkit-opacity: 0.5;
+      -moz-opacity: 0.5;
+      opacity: 0.5; }
+  .likeaboss:hover img {
+    -webkit-opacity: 0.1;
+    -moz-opacity: 0.1;
+    opacity: 0.1; }
 
 /* =Gobierno Fácil brand
 -------------------------------------------------------------- */
