@@ -238,6 +238,20 @@ input[type="search"]::-webkit-search-decoration {
   font-weight: 700;
   font-style: italic; }
 
+@font-face {
+  font-family: 'Giorgio';
+  src: url('fonts/Giorgio_Sans-Bold.eot');
+  src: url('fonts/Giorgio_Sans-Bold.eot?#iefix') format('embedded-opentype'), url('fonts/Giorgio_Sans-Bold.woff') format('woff'), url('fonts/Giorgio_Sans-Bold.ttf') format('truetype'), url('fonts/Giorgio_Sans-Bold.svg#giorgiobold') format('svg');
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Ionic';
+  src: url('fonts/Duplicate_Ionic-Bold.eot');
+  src: url('fonts/Duplicate_Ionic-Bold.eot?#iefix') format('embedded-opentype'), url('fonts/Duplicate_Ionic-Bold.woff') format('woff'), url('fonts/Duplicate_Ionic-Bold.ttf') format('truetype'), url('fonts/Duplicate_Ionic-Bold.svg#giorgiobold') format('svg');
+  font-weight: 700;
+  font-style: normal; }
+
 nav.main .search input[type="search"] {
   text-align: center;
   width: 100%;
@@ -823,17 +837,58 @@ input:focus, select:focus, textarea:focus {
   width: 100%;
   z-index: 5; }
   .top-header h1 {
-    font: 700 81px "Roboto", Helvetica, Arial, sans-serif;
+    font: 700 110px 'Giorgio', "Roboto", Helvetica, Arial, sans-serif;
     text-align: center;
-    padding: 28px 0 0;
+    padding: 20px 0 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s; }
+  .top-header .menu-icon {
+    background: transparent;
+    border: 0;
+    color: #015383;
+    font-size: 50px;
+    margin-top: 30px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s; }
+    .top-header .menu-icon.active {
+      background: #015383;
+      color: white; }
+    .top-header .menu-icon:focus {
+      border: 0;
+      outline-color: white; }
+  .top-header .eluniversal {
+    background: url(img/universal-data.png) no-repeat 0;
+    background-size: 100%;
+    display: block;
+    border: 0;
+    text-indent: -999em;
+    overflow: hidden;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    text-align: left;
+    direction: ltr;
+    height: 41px;
+    width: 166px;
+    display: inline-block;
+    margin-top: 40px;
+    margin-right: 10px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s; }
   .top-header.header-shrink {
     height: 70px; }
     .top-header.header-shrink h1 {
-      font-size: 24px;
-      padding: 8px 0 0; }
+      font-size: 40px;
+      padding: 0; }
+    .top-header.header-shrink .menu-icon {
+      font-size: 30px;
+      margin-top: 0; }
+    .top-header.header-shrink .eluniversal {
+      margin: 5px;
+      height: 31px;
+      width: 123px; }
   .top-header ul {
     padding: 15px 0 0;
     text-align: right; }
@@ -842,51 +897,6 @@ input:focus, select:focus, textarea:focus {
       list-style: none;
       display: inline-block;
       margin: 0 0 0 10px; }
-  .top-header .menu-icon {
-    background: transparent;
-    border: 0;
-    color: #015383;
-    font-size: 30px; }
-    .top-header .menu-icon.active {
-      background: #015383;
-      color: white; }
-    .top-header .menu-icon:focus {
-      border: 0;
-      outline-color: white; }
-
-.top_logo {
-  display: inline-block;
-  height: 50px;
-  padding: 10px 15px;
-  font-size: 18px;
-  line-height: 20px; }
-  .top_logo b {
-    background: #015383;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    display: inline-block;
-    margin: 4px 0 0 5px;
-    vertical-align: top; }
-
-.eluniversal {
-  background: url(img/eluniversallogo_0.png) no-repeat 0 50%;
-  background-size: 218px auto;
-  display: block;
-  border: 0;
-  text-indent: -999em;
-  overflow: hidden;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  text-align: left;
-  direction: ltr;
-  width: 29px;
-  display: inline-block;
-  vertical-align: bottom;
-  margin-right: 10px; }
 
 /* =Home
 -------------------------------------------------------------- */
@@ -903,7 +913,7 @@ input:focus, select:focus, textarea:focus {
     list-style: none; }
     .home .news li h2, .home .news li h2 a {
       color: white;
-      font: 500 70px/1.5 "Roboto", Helvetica, Arial, sans-serif; }
+      font: 700 70px/1.5 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
     .home .news li .category {
       color: white;
       background: #015383;
@@ -911,7 +921,8 @@ input:focus, select:focus, textarea:focus {
       font-size: 12px;
       min-height: 10px;
       padding: 5px 10px;
-      vertical-align: top; }
+      vertical-align: top;
+      text-transform: uppercase; }
     .home .news li .author {
       border-top: 1px dotted #C9C8B7;
       color: #C9C8B7;
@@ -948,10 +959,9 @@ input:focus, select:focus, textarea:focus {
       border-top: 5px solid #015383;
       padding: 0; }
     .home .news article.half h2, .home .news article.half h2 a, .home .news article.quarter h2, .home .news article.quarter h2 a {
-      line-height: 1.5;
-      font-size: 36px; }
+      font: 700 36px/1.2 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
     .home .news article.quarter div {
-      padding-top: 82px; }
+      padding-top: 73px; }
     .home .news article.quarter h2, .home .news article.quarter h2 a {
       line-height: 1;
       font-size: 28px; }
