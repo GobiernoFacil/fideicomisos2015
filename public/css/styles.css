@@ -906,8 +906,7 @@ input:focus, select:focus, textarea:focus {
     padding: 30px;
     font-size: 48px; }
 .home .news {
-  padding: 0;
-  margin-top: 368px; }
+  padding: 368px 0 0; }
   .home .news li {
     padding: 0;
     list-style: none; }
@@ -1052,7 +1051,7 @@ a.btn_link {
   text-align: right; }
 
 section.partners {
-  border-bottom: 3px solid #8ba7c0;
+  border-top: 3px solid #8ba7c0;
   background: #015383;
   padding: 40px 0 10px;
   text-align: center; }
