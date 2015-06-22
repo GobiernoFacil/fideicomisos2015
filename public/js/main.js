@@ -21,7 +21,7 @@ var cbpAnimatedHeader=(function(){
 		g=$(".top-header"),
 		e=false,
 		a=header_a;
-	console.log(a);
+
 	function f(){
 		window.addEventListener("scroll",function(h){
 			if(!e){e=true;setTimeout(d,250)}},false)

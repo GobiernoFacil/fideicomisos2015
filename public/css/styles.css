@@ -1187,7 +1187,7 @@ a.category, a.category:visited {
     text-align: center; }
     .post article header h1 {
       color: white;
-      font: 700 4em/1.2 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
+      font: 700 80px/1.2 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
     .post article header h2 {
       font: 300 24px "Roboto", Helvetica, Arial, sans-serif;
       padding: 10px 0 0; }
@@ -1213,9 +1213,9 @@ a.category, a.category:visited {
       color: #015383; }
       .post article p a:hover {
         color: #8ba7c0; }
-.post h2 {
-  font: 300 21px 'Ionic', "Roboto", Helvetica, Arial, sans-serif;
-  padding: 33px 0 35px; }
+  .post article h2 {
+    font: 300 21px 'Ionic', "Roboto", Helvetica, Arial, sans-serif;
+    padding: 33px 0 35px; }
 .post .likeaboss {
   height: 700px;
   top: -60px; }
