@@ -823,6 +823,17 @@ input:focus, select:focus, textarea:focus {
 
 /* =Main content and comment content
 -------------------------------------------------------------- */
+.home .top-header {
+  height: 214px; }
+  .home .top-header h1, .home .top-header h1 a {
+    font-size: 110px;
+    padding: 20px 0 0; }
+  .home .top-header .menu-icon {
+    font-size: 50px;
+    margin-top: 30px; }
+  .home .top-header .eluniversal {
+    margin-top: 40px; }
+
 .top-header {
   background: white;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
@@ -833,14 +844,14 @@ input:focus, select:focus, textarea:focus {
   -webkit-transition: height 0.3s;
   -moz-transition: height 0.3s;
   transition: height 0.3s;
-  height: 214px;
+  height: 114px;
   width: 100%;
   z-index: 5; }
   .top-header h1, .top-header h1 a {
     color: #333;
-    font: 700 110px 'Giorgio', "Roboto", Helvetica, Arial, sans-serif;
+    font: 700 60px 'Giorgio', "Roboto", Helvetica, Arial, sans-serif;
     text-align: center;
-    padding: 20px 0 0;
+    padding: 5px 0 0;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s; }
@@ -848,8 +859,8 @@ input:focus, select:focus, textarea:focus {
     background: transparent;
     border: 0;
     color: #015383;
-    font-size: 50px;
-    margin-top: 30px;
+    font-size: 40px;
+    margin-top: 10px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s; }
@@ -873,7 +884,7 @@ input:focus, select:focus, textarea:focus {
     height: 41px;
     width: 166px;
     display: inline-block;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-right: 10px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
@@ -999,7 +1010,7 @@ input:focus, select:focus, textarea:focus {
 /* =Generales
 -------------------------------------------------------------- */
 .main {
-  padding: 215px 0 0; }
+  padding: 116px 0 0; }
 
 section {
   padding: 100px 0 166px; }
@@ -1171,12 +1182,12 @@ a.category, a.category:visited {
   .post article header {
     padding-top: 150px;
     color: white;
-    height: 600px;
+    height: 700px;
     position: relative;
     text-align: center; }
     .post article header h1 {
       color: white;
-      font: 700 70px/1.2 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
+      font: 700 4em/1.2 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
     .post article header h2 {
       font: 300 24px "Roboto", Helvetica, Arial, sans-serif;
       padding: 10px 0 0; }
@@ -1191,6 +1202,13 @@ a.category, a.category:visited {
       vertical-align: middle; }
   .post article p {
     font: 500 19px "Roboto", Helvetica, Arial, sans-serif; }
+    .post article p.lead {
+      font: 300 1.5em "Roboto", Helvetica, Arial, sans-serif; }
+      .post article p.lead:first-letter {
+        color: #015383;
+        font: 700 4em/0.5 'Ionic', "Roboto", Helvetica, Arial, sans-serif;
+        float: left;
+        padding: 0 10px 0 0; }
     .post article p a {
       color: #015383; }
       .post article p a:hover {
@@ -1199,7 +1217,7 @@ a.category, a.category:visited {
   font: 300 21px 'Ionic', "Roboto", Helvetica, Arial, sans-serif;
   padding: 33px 0 35px; }
 .post .likeaboss {
-  height: 600px;
+  height: 700px;
   top: -60px; }
 
 .columna_frase {
@@ -1217,7 +1235,7 @@ a.category, a.category:visited {
     padding: 0 0 0 15px;
     text-align: left; }
   .columna_frase .lafrase {
-    font: 600 26px "Roboto", Helvetica, Arial, sans-serif; }
+    font: 300 26px "Roboto", Helvetica, Arial, sans-serif; }
 
 /* =BTN
 -------------------------------------------------------------- */
