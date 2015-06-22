@@ -20,10 +20,16 @@ class Lestrade extends Controller {
     $categories = ['branch', 'type', 'scope', 'theme'];
     if(!in_array($category, $categories)) die(":D");
     
-    return view('Gregson', [
-      'trusts'      => $trusts,
-      'selected'    => $trust,
-      'definitions' => $definitions
+    $categories = Trusts::groupBy($category)->lists($category);
+    $trusts = Trusts::select('registry', $category, 'designation', 'initial_amount')
+            ->groupBy('registry')
+            ->orderBy($category, 'ASC')
+            ->orderBy('designation', 'ASC')
+            ->get()->toArray();
+    return view('Lestrade', [
+      'trusts'     => $trusts,
+      'categories' => $categories,
+      'category'   => $category
     ]);
   }
 }
