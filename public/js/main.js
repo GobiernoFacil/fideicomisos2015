@@ -10,11 +10,18 @@ var
 			$(menuRight).toggleClass( 'fide-menu-open' );
 		});
 var cbpAnimatedHeader=(function(){
+	var bodyclass = $("body").attr("class"),
+		header_a  = 30;
+	
+	if (bodyclass == "home fide-menu-push") {
+		header_a = 170
+	}
+	
 	var b=document.documentElement,
 		g=$(".top-header"),
 		e=false,
-		a=170;
-	
+		a=header_a;
+	console.log(a);
 	function f(){
 		window.addEventListener("scroll",function(h){
 			if(!e){e=true;setTimeout(d,250)}},false)
