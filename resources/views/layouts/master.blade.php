@@ -25,7 +25,7 @@
     </head>
     <body class="@yield('body_class') fide-menu-push">
 	     <!--nav-->
-	     @include('layouts.navigation')	     
+	     @include('layouts.nav')	     
          <!--content-->
          @yield('content')
 			
