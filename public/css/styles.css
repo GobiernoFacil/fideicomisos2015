@@ -257,6 +257,9 @@ nav.main .search input[type="search"] {
   width: 100%;
   padding: 5px 0; }
 
+.watson section {
+  padding: 0; }
+
 .wrapper, .wrap {
   width: 90%;
   margin: 0 auto; }
