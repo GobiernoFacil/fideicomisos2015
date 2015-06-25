@@ -111,10 +111,9 @@
 					</div>
 				</article>
 			</li>
-			<li class="col-sm-10 col-sm-offset-1">
-				<a href="#" class="more">Más reportajes >></a>
-			</li>
-		<ul>
+		</ul>
+		<div class="clearfix"></div>
+		<a href="#" class="col-sm-10 col-sm-offset-1 more">Más reportajes sobre Fideicomisos en México >></a>
 	</div>
 </section>  
 
@@ -174,44 +173,6 @@
 	</div>
 </footer>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
- <script>
-	var 
-		menuRight = $('#fide-menu-s2'),
-		showRightPush = $( '#showRightPush' ),
-		body = document.body;
-			
-		showRightPush.on('click', function() {
-			console.log("hola");
-			$(this).toggleClass( 'active' );
-			$(body).toggleClass( 'fide-menu-push-toleft' );
-			$(menuRight).toggleClass( 'fide-menu-open' );
-		});
-var cbpAnimatedHeader=(function(){
-	var b=document.documentElement,
-		g=$(".top-header"),
-		e=false,
-		a=170;
-	
-	function f(){
-		window.addEventListener("scroll",function(h){
-			if(!e){e=true;setTimeout(d,250)}},false)
-		}
-	function d(){
-		var h=c();
-		if(h>=a){
-			g.addClass("header-shrink");
-		}
-		else{
-			g.removeClass("header-shrink")
-		}
-		
-		e=false }
-		
-	function c(){
-		return window.pageYOffset||b.scrollTop}
-	
-	f()})();
-
-</script>
+<script src="/js/main.js"></script>
 </body>
 </html>

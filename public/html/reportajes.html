@@ -77,7 +77,7 @@
 					<li  class=" featured">
 						<article>
 							<a href="#" class="category">Bicentenario</a>
-							<a href="#" class="link_post">
+							<a href="post.html" class="link_post">
 								<figure>
 									<img src="/images/mexico-bicentenario.jpg">
 								</figure>
@@ -192,44 +192,7 @@
 	</div>
 </footer>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
- <script>
-	var 
-		menuRight = $('#fide-menu-s2'),
-		showRightPush = $( '#showRightPush' ),
-		body = document.body;
-			
-		showRightPush.on('click', function() {
-			console.log("hola");
-			$(this).toggleClass( 'active' );
-			$(body).toggleClass( 'fide-menu-push-toleft' );
-			$(menuRight).toggleClass( 'fide-menu-open' );
-		});
-var cbpAnimatedHeader=(function(){
-	var b=document.documentElement,
-		g=$(".top-header"),
-		e=false,
-		a=170;
-	
-	function f(){
-		window.addEventListener("scroll",function(h){
-			if(!e){e=true;setTimeout(d,250)}},false)
-		}
-	function d(){
-		var h=c();
-		if(h>=a){
-			g.addClass("header-shrink");
-		}
-		else{
-			g.removeClass("header-shrink")
-		}
-		
-		e=false }
-		
-	function c(){
-		return window.pageYOffset||b.scrollTop}
-	
-	f()})();
+<script src="/js/main.js"></script>
 
-</script>
 </body>
 </html>

@@ -1,9 +1,28 @@
-<!doctype html>
-<html>
-<head>
-  <title>Estudia los fideicomisos</title>
-</head>
-<body>
+@extends('layouts.master')
+@section('body_class', 'watson')
+
+@section('title', 'Estudia los fideicomisos')
+@section('description', "Estudia los fideicomisos")
+
+@section('content')
+<div class="main">
+	<nav class="breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<ul>
+						<li><a href="/">Inicio</a>
+						<li>VizData</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+</div>
+<!-- ends breadcrumb-->
+
+
+<div class="container">
 <!-- Esta aplicación se llama Watson, y obtiene
      información de un endpoint llamado Sherlock. -->
 <div id="im-watson" class="main">
@@ -91,7 +110,7 @@
     <tbody></tbody>
   </table>
 </div>
-
+</div>
 <!-- LA APP -->
 <script>
   var TRUSTS_DATA = {
@@ -101,5 +120,5 @@
   };
 </script>
 <script data-main="/js/apps/watson/main" src="/js/bower_components/requirejs/require.js"></script>
-</body>
-</html>
+
+@endsection
