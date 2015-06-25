@@ -20,6 +20,7 @@
         <meta name="viewport" content="width=device-width">
         <link rel="canonical" href="">	
         
+        <link rel="shortcut icon" href="/icon_universal.png">
 		<link rel="stylesheet" type="text/css"  href="/css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" />
     </head>
