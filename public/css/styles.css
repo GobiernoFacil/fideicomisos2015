@@ -259,6 +259,10 @@ nav.main .search input[type="search"] {
 
 .watson section {
   padding: 0; }
+.watson table {
+  display: block;
+  width: 100%;
+  overflow: scroll; }
 
 .wrapper, .wrap {
   width: 90%;
