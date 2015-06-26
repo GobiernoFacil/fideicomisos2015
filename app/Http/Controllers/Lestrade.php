@@ -17,11 +17,14 @@ class Lestrade extends Controller {
   public function index($category)
   {
     //
-    $categories = ['branch', 'type', 'scope', 'theme'];
+    $categories = ['branch', 'type', 'scope', 'theme', 
+                   'unit', 'settlor', 'fiduciary'];
     if(!in_array($category, $categories)) die(":D");
     
     $categories = Trusts::groupBy($category)->lists($category);
-    $trusts = Trusts::select('registry', $category, 'designation', 'initial_amount')
+    //$trusts = Trusts::select('registry', $category, 'designation', 'initial_amount')
+    $trusts = Trusts::select('registry', 'branch', 'type', 'scope', 'theme', 
+                   'unit', 'settlor', 'fiduciary', 'designation', 'initial_amount')
             ->groupBy('registry')
             ->orderBy($category, 'ASC')
             ->orderBy('designation', 'ASC')

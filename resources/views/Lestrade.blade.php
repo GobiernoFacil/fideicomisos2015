@@ -12,11 +12,13 @@
 </div>
 
 <script>
-  var TRUSTS_ARRAY = <?php echo json_encode($trusts); ?>;
-  var CATEGORIES   = <?php echo json_encode($categories); ?>;
-  var CATEGORY = "{{$category}}";
+var TRUSTS_DATA = {
+  trust_array : <?php echo json_encode($trusts); ?>,
+  categories  : <?php echo json_encode($categories); ?>,
+  category    : "{{$category}}"
+};
 </script>
-<!-- LA APP
-<script data-main="/js/apps/lestrade/main" src="/js/bower_components/requirejs/require.js"></script> -->
+<!-- LA APP -->
+<script data-main="/js/apps/lestrade/main" src="/js/bower_components/requirejs/require.js"></script> 
 </body>
 </html>
