@@ -54,7 +54,7 @@ define(function(require){
       return _header;
     },
 
-    _render_trust_row(fields_models_to_render, trust){
+    _render_trust_row : function(fields_models_to_render, trust){
       var _row = "<tr>";
       fields_models_to_render.forEach(function(model){
         _row += "<td>" + trust.get(model.get('name')) + "</td>";
