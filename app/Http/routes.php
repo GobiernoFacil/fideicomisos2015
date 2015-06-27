@@ -18,7 +18,7 @@ Route::get('navegador-de-fideicomisos', 'Watson@index');
 Route::get('fideicomiso/{registry}/{id?}', 'Gregson@index');
 
 // [ EXPLORA UNA CATEGORÍA ]
-Route::get('segmento/{category}', 'Lestrade@index');
+Route::get('categorias', 'Lestrade@index');
 
 // [ EL API DE BÚSQUEDA ]
 Route::post('sherlock/search', 'Sherlock@index');

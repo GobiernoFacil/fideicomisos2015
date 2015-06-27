@@ -1,6 +1,6 @@
 // Lestrade - fideicomisos
 // @package  : fideicomisos
-// @location : /js/apps/watson
+// @location : /js/apps/lestrade
 // @file     : controller.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com
@@ -11,7 +11,8 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone = require('backbone'),
+  var Backbone    = require('backbone'),
+      Dom_manager = require('dom_manager'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -19,9 +20,9 @@ define(function(require){
   //
       controller_el = "body",
       categories    = TRUSTS_DATA.categories,
-      trusts        = TRUSTS_DATA.trust_array,
-      category      = TRUSTS_DATA.category,
-      collection    = new Backbone.Collection(trusts);
+      definitions   = new Backbone.Collection(TRUSTS_DATA.definitions),
+      collection    = new Backbone.Collection(TRUSTS_DATA.trust_array),
+      No_definido   = "DESCONOCIDO";
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
@@ -38,7 +39,7 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
- 
+      'click #category-selector a' : 'generate_basic_data'
     },
 
     // 
@@ -52,15 +53,42 @@ define(function(require){
     //
     //
     initialize : function(){
-      this.collection = collection;
-      this.categories = categories;
-      this.category   = category;
+      this.collection    = collection;
+      this.categories    = categories;
+      this.definitions   = definitions;
+      this.current_order = new Backbone.Collection;
+
+      this._make_collections();
+
     },
 
     //
     // D I R E C T   I N T E R A C T I O N   ( D A T A )
     // ------------------------------------------------------------------------------
     //
+    generate_basic_data : function(e){
+      e.preventDefault();
+
+      var data     = [],
+          search   = {},
+          category = e.currentTarget.getAttribute('data-trigger'),
+          labels   = this.titles.findWhere({category : category}).get('items');
+
+      labels.forEach(function(lb){
+        search[category] = lb;
+        data.push({
+          category : category,
+          title    : lb ? lb : No_definido,
+          trusts   : this.collection.where(search)
+        });
+      }, this);
+
+      this.current_order.set(data);
+
+      this.current_order.forEach(function(m){
+        Dom_manager.render_container(m);
+      });
+    },
 
   
 
@@ -88,13 +116,14 @@ define(function(require){
       var collections = []
 
       this.categories.forEach(function(cat){
-        console.log(cat);
-        var search = {};
-        search[this.category] = cat;
-        collections.push(this.collection.where(search));
+        var el = {
+          category : cat,
+          items    : _.uniq(this.collection.pluck(cat))
+        }
+        collections.push(el);
       }, this);
 
-      this.collections = collections;
+      this.titles = new Backbone.Collection(collections);
     }
    
   });

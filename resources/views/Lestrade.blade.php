@@ -9,13 +9,24 @@
 <div id="im-lestrade" class="main">
   <!-- [ EL TÍTULO ] -->
   <h1>Lestrade</h1>
+  <nav id="category-selector">
+  @foreach($definitions as $definition)
+    @if(in_array($definition->name, $categories))
+     <a href="#" data-trigger="{{$definition->name}}">
+     {{$definition->full_name}}</a>
+    @endif
+  @endforeach 
+  </nav>
+
+  <!-- Las categorías -->
+  <section id="the-stuff"></section>
 </div>
 
 <script>
 var TRUSTS_DATA = {
   trust_array : <?php echo json_encode($trusts); ?>,
   categories  : <?php echo json_encode($categories); ?>,
-  category    : "{{$category}}"
+  definitions : <?php echo json_encode($definitions); ?>
 };
 </script>
 <!-- LA APP -->
