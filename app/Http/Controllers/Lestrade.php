@@ -21,8 +21,9 @@ class Lestrade extends Controller {
                    'unit', 'settlor', 'fiduciary'];
 
     $definitions = Definitions::all();
-    $trusts = Trusts::select('year','registry', 'branch', 'branch_id', 'type', 'scope', 'theme', 
-                   'unit', 'settlor', 'fiduciary', 'designation', 'initial_amount')
+    $trusts = Trusts::select('id', 'year','registry', 'branch', 'branch_id', 
+                            'type', 'scope', 'theme', 'unit', 'settlor', 
+                            'fiduciary', 'designation', 'initial_amount')
             ->groupBy('registry')
             ->orderBy('year', 'ASC')
             ->orderBy('designation', 'ASC')

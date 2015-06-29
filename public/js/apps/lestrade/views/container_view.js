@@ -15,6 +15,7 @@ define(function(require){
       Velocity  = require('velocity'),
       Template  = require('text!templates/container_template.html'),
       TagName   = "div",
+      Base_url  = "/fideicomiso/",
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -27,6 +28,13 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   var container = Backbone.View.extend({
+
+    //
+    // [ DEFINE THE EVENTS ]
+    //
+    events :{
+      'click a.list-toggle' : 'toggle_list'
+    },
 
     // 
     // [ SET THE CONTAINER ]
@@ -61,8 +69,12 @@ define(function(require){
           this.$el.append(this.template(data));
 
           trusts.forEach(function(m){
-            var designation = m.get('designation') || No_definido;
-            this.$('ul').append('<li>' + designation + '</li>');
+            var designation = m.get('designation') || No_definido,
+                registry    = m.get('registry'),
+                html        = '<li>' + designation + '<a target="_blank" href="' +
+                Base_url + registry + '">ver</a></li>';
+
+            this.$('ul').append(html);
           }, this);
 
           return this;
@@ -76,6 +88,16 @@ define(function(require){
     // D I R E C T   I N T E R A C T I O N   ( H T M L )
     // ------------------------------------------------------------------------------
     //
+    toggle_list : function(e){
+      e.preventDefault();
+      this.$('ul').toggle();
+      if(this.$('ul:visible').length){
+        e.currentTarget.innerHTML = "ocultar";
+      }
+      else{
+        e.currentTarget.innerHTML = "mostar";
+      }
+    }
   });
 
   return container;

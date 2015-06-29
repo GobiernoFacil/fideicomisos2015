@@ -83,6 +83,7 @@ define(function(require){
         });
       }, this);
 
+      data.sort(this._sort_basic_data);
       this.current_order.set(data);
 
       this.current_order.forEach(function(m){
@@ -124,6 +125,10 @@ define(function(require){
       }, this);
 
       this.titles = new Backbone.Collection(collections);
+    },
+
+    _sort_basic_data : function(a,b){
+      return b.trusts.length - a.trusts.length;
     }
    
   });
