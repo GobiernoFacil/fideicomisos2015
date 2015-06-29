@@ -12,6 +12,7 @@
   <nav id="category-selector">
   @foreach($definitions as $definition)
     @if(in_array($definition->name, $categories))
+     <span class="active-order"></span>
      <a href="#" data-trigger="{{$definition->name}}">
      {{$definition->full_name}}</a>
     @endif

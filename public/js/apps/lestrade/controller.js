@@ -53,12 +53,22 @@ define(function(require){
     //
     //
     initialize : function(){
+      // [ COLLECTIONS ]
+      // la lista de fideicomisos
       this.collection    = collection;
-      this.categories    = categories;
+      // la información de cada categoría
       this.definitions   = definitions;
+      // los fideicomisos organizador por categoría
       this.current_order = new Backbone.Collection;
-
-      this._make_collections();
+      // el menú para ordenar los fideicomisos
+      this.titles = new Backbone.Collection;
+      // [ ARRAYS ]
+      // la lista de categorías disponible
+      this.categories    = categories;
+      // el orden para organizar los contenidos
+      this.sort_order = [];
+      // llena la colección de títulos para el menú
+      this._set_titles();
 
     },
 
@@ -69,11 +79,14 @@ define(function(require){
     generate_basic_data : function(e){
       e.preventDefault();
 
+      // console.log(e.currentTarget.previousElementSibling);
       var data     = [],
           search   = {},
           category = e.currentTarget.getAttribute('data-trigger'),
           labels   = this.titles.findWhere({category : category}).get('items');
 
+      this._set_sort_category(category);
+      
       labels.forEach(function(lb){
         search[category] = lb;
         data.push({
@@ -113,9 +126,15 @@ define(function(require){
     // H E L P E R S
     // ------------------------------------------------------------------------------
     //
-    _make_collections : function(){
-      var collections = []
 
+    //
+    // [ SET TITLES ]
+    //
+    _set_titles : function(){
+      // usando las definiciones de cada campo y las categorías disponibles,
+      // llena la colección de títulos para el menú:
+      // ramo | tipo | ambito | unidad | responsable | ...
+      var collections = []
       this.categories.forEach(function(cat){
         var el = {
           category : cat,
@@ -124,9 +143,29 @@ define(function(require){
         collections.push(el);
       }, this);
 
-      this.titles = new Backbone.Collection(collections);
+      this.titles.set(collections);
     },
 
+    //
+    // [ MANAGE SORT ORDER ]
+    //
+    _set_sort_category : function(category){
+      // agrega o elimina de la lista de filtros la categoría seleccionada
+      var _index = this.sort_order.indexOf(category);
+
+      if(_index === -1){
+        this.sort_order.push(category);
+        return 1;
+      }
+      else{
+        this.sort_order.splice(_index, 1);
+        return 0;
+      }
+    },
+
+    //
+    // [ DESC SORT HELPER ]
+    //
     _sort_basic_data : function(a,b){
       return b.trusts.length - a.trusts.length;
     }
