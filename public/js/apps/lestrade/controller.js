@@ -104,6 +104,36 @@ define(function(require){
       });
     },
 
+    //
+    //
+    //
+    _get_childrens : function(parent, categories, pointer){
+      var _category   = categories[pointer],
+          _collection = parent.collection,
+          _list       = _.uniq(_collection.pluck(_category)),
+          _childrens  = [],
+          _search     = {};
+
+      _list.forEach(function(el){
+        _search[_category] = el;
+        var _child = {
+          title : el,
+          collection : new Backbone.Collection(_collection.where(_search))
+        };
+        _child.total = _child.collection.length;
+
+        _childrens.push(_child);
+      }, this);
+
+      if(pointer < categories.length){
+        _childrens.forEach(function(ch){
+          ch.children = this._get_childrens(ch, categories, pointer+1);
+        }, this);
+      }
+
+      return _childrens;
+    },
+
   
 
     //
@@ -164,7 +194,7 @@ define(function(require){
     },
 
     //
-    // [ DESC SORT HELPER ]
+    // [ SORT HELPER ]
     //
     _sort_basic_data : function(a,b){
       return b.trusts.length - a.trusts.length;
