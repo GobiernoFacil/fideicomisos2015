@@ -105,7 +105,7 @@ define(function(require){
     },
 
     //
-    //
+    // [ TREE GENERATOR ]
     //
     _get_childrens : function(parent, categories, pointer){
       var _category   = categories[pointer],
