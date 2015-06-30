@@ -12,6 +12,7 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   var Backbone    = require('backbone'),
+      d3          = require('d3'),
       Dom_manager = require('dom_manager'),
 
   //
@@ -69,6 +70,11 @@ define(function(require){
       this.sort_order = [];
       // llena la colección de títulos para el menú
       this._set_titles();
+
+      // [ DEV ]
+      // access to the dom_manager
+      this.dom_manager = Dom_manager;
+
 
     },
 
@@ -134,7 +140,27 @@ define(function(require){
       return _childrens;
     },
 
-  
+    //
+    // D 3   D A T A
+    // ------------------------------------------------------------------------------
+    //
+    render_category_bars : function(){
+      var _d3_data  = [],
+          _extent   = null,
+          _distinct = null;
+      this.current_order.each(function(m){
+        _d3_data.push({
+          label : m.get('title'),
+          total : m.get('trusts').length
+        });
+      });
+      _distinct = _d3_data.map(function(d){return d.total});
+
+      console.log(_distinct.sort());
+      //_distinct = _.uniq();
+      //_extent = d3.extent(_distinct);
+      // this.dom_manager.render_d3_bars(_d3_data, _extent, _distinct);
+    },
 
     //
     // L I S T E N E R S
@@ -144,11 +170,6 @@ define(function(require){
     //
     // M O D E L   M E T H O D S
     // ------------------------------------------------------------------------------
-    //
-
-    //
-    // [ R E N D E R   T H E   R E S P O N S E ]
-    //
     //
    
 
