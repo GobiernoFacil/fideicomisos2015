@@ -23,6 +23,7 @@ define(function(require){
       categories    = TRUSTS_DATA.categories,
       definitions   = new Backbone.Collection(TRUSTS_DATA.definitions),
       collection    = new Backbone.Collection(TRUSTS_DATA.trust_array),
+      current_bars  = [],
       No_definido   = "DESCONOCIDO";
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -98,10 +99,19 @@ define(function(require){
       var category = e.currentTarget.getAttribute('data-trigger'),
           data     = this._get_data_for_bars(category);
 
+      current_bars.forEach(function(view){
+        view.remove();
+      });
+
       data.each(function(m){
-        this.dom_manager.render_container(m);
+        current_bars.push(this.dom_manager.render_container(m));
       }, this);
     },
+
+    //
+    // D 3   D A T A
+    // ------------------------------------------------------------------------------
+    //
 
     //
     // [ PREPARE THE DATA FOR THE BAR CHART ]
@@ -127,18 +137,18 @@ define(function(require){
 
       // con la colección de secciones, genera una nueva colección
       // que está dividida por número de fideicomisos por sección
-      var distinct = _.uniq(data.pluck('total')),
-          response = new Backbone.Collection;
-      
+      var distinct  = _.uniq(data.pluck('total')),
+          response  = new Backbone.Collection,
+          d3_extent = d3.extent(distinct);
       distinct.sort(d3.descending);
-      
+
       distinct.forEach(function(num){
         var group = {
           trusts_num : num,
-          categories : data.where({total : num})
+          categories : data.where({total : num}),
+          extent : d3_extent
         }
         group.categories_num = group.categories.length;
-
         response.add(group);
       });
 
@@ -173,28 +183,6 @@ define(function(require){
       }
 
       return _childrens;
-    },
-
-    //
-    // D 3   D A T A
-    // ------------------------------------------------------------------------------
-    //
-    render_category_bars : function(){
-      var _d3_data  = [],
-          _extent   = null,
-          _distinct = null;
-      this.current_order.each(function(m){
-        _d3_data.push({
-          label : m.get('title'),
-          total : m.get('trusts').length
-        });
-      });
-      _distinct = _d3_data.map(function(d){return d.total});
-
-      console.log(_distinct.sort());
-      //_distinct = _.uniq();
-      //_extent = d3.extent(_distinct);
-      // this.dom_manager.render_d3_bars(_d3_data, _extent, _distinct);
     },
 
     //

@@ -16,13 +16,20 @@ define(function(require){
       Container     = require('views/container_view'),
       D3_manager    = require('d3_manager'),
       d3_data_cache = null,
-      svg_settings  = {
+      graph_settings  = {
+        // SVG container settings
         top    : 20,
         right  : 30,
         bottom : 100,
         left   : 150,
         width  : 800,
-        height : 800
+        height : 800,
+        // barchart settings
+        bar_container_width : 100,
+        bar_min_width       : 5,
+        bar_max_width       : 80,
+        bar_height          : "2em",
+        bar_width_unit      : "%"
       },
 
   //
@@ -61,8 +68,10 @@ define(function(require){
     //     - branch, branch_id, designation, fiduciary, initial_amount, 
     //       registry, scope, settlor, theme, type, unit, year
     render_container : function(model){
-      var _container = new Container({model : model});
+      var _container = new Container({model : model, settings : graph_settings});
       $(the_stuff).append(_container.render().el);
+
+      return _container;
     },
 
     //

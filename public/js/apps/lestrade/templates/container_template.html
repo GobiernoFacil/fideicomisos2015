@@ -1,5 +1,13 @@
-<p><%= title %></p>
-<div><%= total %></div>
+<!-- aquí va la colección de barras -->
+<div class="bars-collection"></div>
+
+<!-- si hay varios elementos con el mismo número
+     de fideicomisos, los oculta -->
 <% if(trusts > 1){ %>
-<p>mostrar más [<%= trusts %>]</p>
+<p>
+  <a href="#" class="show-more">
+    <span>mostrar más</span>
+    [<%= trusts - 1 %>]
+  </a>
+</p>
 <% } %>

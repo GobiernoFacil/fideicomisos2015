@@ -1,7 +1,7 @@
 // Lestrade - fideicomisos
 // @package  : fideicomisos
 // @location : /js/apps/lestrade/views
-// @file     : container_view.js
+// @file     : bar_view.js
 // @author  : Gobierno fácil <howdy@gobiernofacil.com>
 // @url     : http://gobiernofacil.com
 
@@ -11,14 +11,14 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   var Backbone  = require('backbone'),
-      Template  = require('text!templates/container_template.html'),
-      Bar       = require('views/bar_view'),
       d3        = require('d3'),
       Velocity  = require('velocity'),
+      Template  = require('text!templates/simple_bars.html'),
+      Trust     = require('text!templates/category-trust.html'),
       TagName   = "div",
       ClassName = "bar-container",
+      Base_url  = "/fideicomiso/",
       d3_scale  = null,
-      bar_array = [],
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -50,31 +50,33 @@ define(function(require){
     // ------------------------------------------------------------------------------
     //
     template : _.template(Template),
+    trust    : _.template(Trust),
 
     //
     // [ THE INITIALIZE FUNCTION ]
     //
     //
     initialize : function(data){
-      //console.log(this.model.attributes);
-      //console.log(this.model.get('categories')[0].attributes);
-      this.settings = data.settings;
+      /*
+      var _bar = new Bar({
+          model    : category,
+          scale    : d3_scale,
+          settings : this.settings
+        });
+      */
 
-      d3_scale = d3.scale.linear()
-        .domain(this.model.get('extent'))
-        .range([this.settings.bar_min_width, this.settings.bar_max_width]);
-
-      
-      this._data = {
-        trusts : this.model.get('categories_num'),
-        /*
+      /*
         total  : this.model.get('categories')[0].get('total'),
         title  : this.model.get('categories')[0].get('title'),
         width  : d3_scale(this.model.get('trusts_num')) + this.settings.bar_width_unit,
         height : this.settings.bar_height
         */
-      };
-      
+      this._data = {
+        title  : this.model.get('title'),
+        width  : data.scale(this.model.get('total')) + data.settings.bar_width_unit,
+        height : data.settings.bar_height,
+        total  : this.model.get('total')
+      }
     },
 
     //
@@ -82,26 +84,7 @@ define(function(require){
     // ------------------------------------------------------------------------------
     //
     render : function(){
-      // genera el contenedor inicial
       this.$el.append(this.template(this._data));
-
-      // agrega las barras a cada contenedor
-      this.model.get('categories').forEach(function(category, index, array){
-        var _bar = new Bar({
-          model    : category,
-          scale    : d3_scale,
-          settings : this.settings
-        });
-
-        var _bar_html = _bar.render().el;
-        if(index){
-          $(_bar_html).hide();
-        }
-        this.$(".bars-collection").append(_bar_html);
-        bar_array.push(_bar);
-      }, this);
-
-      
       return this;
     },
 
