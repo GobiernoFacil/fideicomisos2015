@@ -63,12 +63,12 @@ define(function(require){
       this.current_order = new Backbone.Collection;
       // el menú para ordenar los fideicomisos
       this.titles = new Backbone.Collection;
+      
       // [ ARRAYS ]
       // la lista de categorías disponible
       this.categories    = categories;
-      // el orden para organizar los contenidos
-      this.sort_order = [];
-      // llena la colección de títulos para el menú
+      
+      // genera el menú
       this._set_titles();
 
       // [ DEV ]

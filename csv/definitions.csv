@@ -1,23 +1,23 @@
-"id","name","full_name","description"
-"1","year","año",NULL
-"2","branch","ramo",NULL
-"3","type","tipo",NULL
-"4","scope","ambito",NULL
-"5","unit","unidad responsable coordinadora",NULL
-"6","settlor","fideicomitente o mandante",NULL
-"7","registry","clave de registro",NULL
-"8","designation","denominación",NULL
-"9","objective","objeto",NULL
-"10","fiduciary","fiduciario o mandatario",NULL
-"11","theme","grupo temático",NULL
-"12","income","ingresos (pesos)",NULL
-"13","yield","rendimientos (pesos)",NULL
-"14","expenses","egresos (pesos)",NULL
-"15","report","reporte del cumplimiento de la misión y fines",NULL
-"16","availability","disponibilidad (pesos)",NULL
-"17","availability_type","tipo de disponibilidad",NULL
-"18","initial_amount","monto aportación inicial",NULL
-"19","initial date","fecha de aportación inicial",NULL
-"20","comments","observaciones",NULL
-"21","initial_amount_comments","aportación inicial / observaciones",NULL
-"22","id","id",NULL
+"id","name","full_name","short_name","description","created_at","updated_at"
+"1","year","año","año","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"2","branch","ramo","ramo","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"3","type","tipo","tipo","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"4","scope","ámbito","ámbito","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"5","unit","unidad responsable coordinadora","unidad responsable","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"6","settlor","fideicomitente o mandante","mandante","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"7","registry","clave de registro","clave","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"8","designation","denominación","denominación","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"9","objective","objeto","objeto","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"10","fiduciary","fiduciario o mandatario","fiduciario","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"11","theme","grupo temático","tema","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"12","income","ingresos (pesos)","ingresos","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"13","yield","rendimientos (pesos)","rendimientos","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"14","expenses","egresos (pesos)","egresos","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"15","report","reporte del cumplimiento de la misión y fines","reporte","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"16","availability","disponibilidad (pesos)","disponibilidad","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"17","availability_type","tipo de disponibilidad","tipo de disponibilidad","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"18","initial_amount","monto aportación inicial","aportación inicial","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"19","initial_date","fecha de aportación inicial","fecha inicial","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"20","comments","observaciones","observaciones","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"21","initial_amount_comments","aportación inicial / observaciones","aportación inicial / observaciones","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"
+"22","id","id","id","NULL","0000-00-00 00:00:00","0000-00-00 00:00:00"

@@ -48,6 +48,7 @@ class CreateTrustsTable extends Migration {
 			$table->string('initial_amount');
 			$table->double('initial_amount_num');
 			$table->string('initial_date');
+			$table->date('initial_date_date');
 			$table->text('comments');
 			$table->text('initial_amount_comments');
 
