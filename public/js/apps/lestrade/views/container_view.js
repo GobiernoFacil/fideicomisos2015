@@ -15,6 +15,7 @@ define(function(require){
       Velocity  = require('velocity'),
       Template  = require('text!templates/container_template.html'),
       TagName   = "div",
+      ClassName = "bar-container",
       Base_url  = "/fideicomiso/",
 
   //
@@ -33,14 +34,14 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'click a.list-toggle' : 'toggle_list'
     },
 
     // 
     // [ SET THE CONTAINER ]
     //
     //
-    tagName : TagName,
+    tagName   : TagName,
+    className : ClassName, 
 
     //
     // T E M P L A T E S
@@ -53,7 +54,12 @@ define(function(require){
     //
     //
     initialize : function(){
-      this.listenTo(this.model, 'remove', this.remove);
+      this._data = {
+        trusts : this.model.get('categories_num'),
+        total  : this.model.get('categories')[0].get('total'),
+        title  : this.model.get('categories')[0].get('title')
+      };
+      console.log(this._data);
     },
 
     //
@@ -61,43 +67,14 @@ define(function(require){
     // ------------------------------------------------------------------------------
     //
     render : function(){
-      var title  = this.model.get('title'),
-          trusts = this.model.get('trusts'),
-          total  = trusts.length,
-          data   = {title : title, total : total};
-
-          this.$el.append(this.template(data));
-
-          trusts.forEach(function(m){
-            var designation = m.get('designation') || No_definido,
-                registry    = m.get('registry'),
-                html        = '<li>' + designation + '<a target="_blank" href="' +
-                Base_url + registry + '">ver</a></li>';
-
-            this.$('ul').append(html);
-          }, this);
-
-          return this;
+      this.$el.append(this.template(this._data));
+      return this;
     },
-
-    render_trust : function(trust_model){
-    },
-   
 
     //
     // D I R E C T   I N T E R A C T I O N   ( H T M L )
     // ------------------------------------------------------------------------------
     //
-    toggle_list : function(e){
-      e.preventDefault();
-      this.$('ul').toggle();
-      if(this.$('ul:visible').length){
-        e.currentTarget.innerHTML = "ocultar";
-      }
-      else{
-        e.currentTarget.innerHTML = "mostar";
-      }
-    }
   });
 
   return container;

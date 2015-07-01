@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Estudia los fideicomisos</title>
+  <link rel="stylesheet" type="text/css" href="/css/dev.css">
 </head>
 <body>
 <!-- Esta aplicación se llama Gregson, y no carga ningún
@@ -18,6 +19,8 @@
     @endif
   @endforeach 
   </nav>
+
+  <div id="the-basic-graphics"></div>
 
   <!-- Las categorías -->
   <section id="the-stuff"></section>

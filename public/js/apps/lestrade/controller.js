@@ -40,7 +40,7 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'click #category-selector a' : 'generate_basic_data'
+      'click #category-selector a' : 'generate_bars'
     },
 
     // 
@@ -67,14 +67,20 @@ define(function(require){
       // [ ARRAYS ]
       // la lista de categorías disponible
       this.categories    = categories;
-      
-      // genera el menú
-      this._set_titles();
 
       // [ DEV ]
       // access to the dom_manager
       this.dom_manager = Dom_manager;
 
+      // genera la colección de títutlos para las gráficas
+      this._set_titles();
+    },
+
+    //
+    // I N I T I A L I Z E   R E N D E R
+    // ------------------------------------------------------------------------------
+    //
+    render : function(){
 
     },
 
@@ -82,32 +88,61 @@ define(function(require){
     // D I R E C T   I N T E R A C T I O N   ( D A T A )
     // ------------------------------------------------------------------------------
     //
-    generate_basic_data : function(e){
+
+    //
+    // [ RENDER THE GRAPHIC BARS ]
+    //
+    generate_bars : function(e){
       e.preventDefault();
-
       // console.log(e.currentTarget.previousElementSibling);
-      var data     = [],
-          search   = {},
-          category = e.currentTarget.getAttribute('data-trigger'),
-          labels   = this.titles.findWhere({category : category}).get('items');
+      var category = e.currentTarget.getAttribute('data-trigger'),
+          data     = this._get_data_for_bars(category);
 
-      this._set_sort_category(category);
-      
-      labels.forEach(function(lb){
-        search[category] = lb;
-        data.push({
+      data.each(function(m){
+        this.dom_manager.render_container(m);
+      }, this);
+    },
+
+    //
+    // [ PREPARE THE DATA FOR THE BAR CHART ]
+    //
+    _get_data_for_bars : function(category){
+      // Genera una colección de secciones según la categoría
+      var data   = new Backbone.Collection,
+          search = {},
+          labels = this.titles.findWhere({category : category}).get('items');
+
+      labels.forEach(function(label){
+        search[category] = label;
+        
+        var new_item = {
           category : category,
-          title    : lb ? lb : No_definido,
-          trusts   : this.collection.where(search)
-        });
+          title : label ? label : No_definido,
+          trusts : this.collection.where(search)
+        };
+        new_item.total = new_item.trusts.length;
+        
+        data.add(new_item);
       }, this);
 
-      data.sort(this._sort_basic_data);
-      this.current_order.set(data);
+      // con la colección de secciones, genera una nueva colección
+      // que está dividida por número de fideicomisos por sección
+      var distinct = _.uniq(data.pluck('total')),
+          response = new Backbone.Collection;
+      
+      distinct.sort(d3.descending);
+      
+      distinct.forEach(function(num){
+        var group = {
+          trusts_num : num,
+          categories : data.where({total : num})
+        }
+        group.categories_num = group.categories.length;
 
-      this.current_order.forEach(function(m){
-        Dom_manager.render_container(m);
+        response.add(group);
       });
+
+      return response;
     },
 
     //

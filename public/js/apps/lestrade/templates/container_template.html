@@ -1,3 +1,5 @@
-<h3><em>(<%=total%>)</em> <%=title%> <a href="#" class="list-toggle">Mostrar</a></h3>
-<nav></nav>
-<ul style="display:none;"></ul>
+<p><%= title %></p>
+<div><%= total %></div>
+<% if(trusts > 1){ %>
+<p>mostrar más [<%= trusts %>]</p>
+<% } %>
