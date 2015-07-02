@@ -88,6 +88,14 @@ define(function(require){
     },
 
     //
+    // [ RENDER TREE MAP ]
+    //
+    render_tree_map : function(nodes){
+      var _svg = this.render_svg();
+      // this.d3_manager.tree(svg, nodes, graph_settings);
+    },
+
+    //
     // R E N D E R   H E L P E R S
     // ------------------------------------------------------------------------------
     //

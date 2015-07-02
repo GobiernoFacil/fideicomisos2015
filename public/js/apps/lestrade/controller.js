@@ -109,6 +109,23 @@ define(function(require){
     },
 
     //
+    // [ RENDER THE TREE MAP ]
+    //
+    generate_tree : function(){
+
+      var _categories = ['branch', 'theme', 'unit'],
+          _parent = {
+            title      : "fideicomisos",
+            collection : this.collection,
+            children   : null
+          },
+
+      _parent.children = this._get_tree_childrens(_parent, _categories, 0);
+
+
+    },
+
+    //
     // D 3   D A T A
     // ------------------------------------------------------------------------------
     //
@@ -158,7 +175,7 @@ define(function(require){
     //
     // [ TREE GENERATOR ]
     //
-    _get_childrens : function(parent, categories, pointer){
+    _get_tree_childrens : function(parent, categories, pointer){
       var _category   = categories[pointer],
           _collection = parent.collection,
           _list       = _.uniq(_collection.pluck(_category)),
@@ -178,7 +195,7 @@ define(function(require){
 
       if(pointer < categories.length){
         _childrens.forEach(function(ch){
-          ch.children = this._get_childrens(ch, categories, pointer+1);
+          ch.children = this._get_tree_childrens(ch, categories, pointer+1);
         }, this);
       }
 
@@ -187,11 +204,6 @@ define(function(require){
 
     //
     // L I S T E N E R S
-    // ------------------------------------------------------------------------------
-    //
-
-    //
-    // M O D E L   M E T H O D S
     // ------------------------------------------------------------------------------
     //
    
