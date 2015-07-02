@@ -16,7 +16,7 @@ define(function(require){
       Template  = require('text!templates/simple_bars.html'),
       Trust     = require('text!templates/category-trust.html'),
       TagName   = "div",
-      ClassName = "bar-container",
+      ClassName = "trust-container",
       Base_url  = "/fideicomiso/",
       d3_scale  = null,
 
@@ -24,7 +24,9 @@ define(function(require){
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
   // --------------------------------------------------------------------------------
   //
-      No_definido   = "DESCONOCIDO";
+      Base_path   = "/fideicomiso/", 
+      Hide_trusts_btn = "<li><a href='#' class='hide-trusts'>ocultar fideicomisos</a></li>", 
+      No_definido = "DESCONOCIDO";
 
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   V I E W
@@ -36,6 +38,8 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
+      'click a.show-trusts' : 'show_trusts',
+      'click a.hide-trusts' : 'hide_trusts'
     },
 
     // 
@@ -57,20 +61,6 @@ define(function(require){
     //
     //
     initialize : function(data){
-      /*
-      var _bar = new Bar({
-          model    : category,
-          scale    : d3_scale,
-          settings : this.settings
-        });
-      */
-
-      /*
-        total  : this.model.get('categories')[0].get('total'),
-        title  : this.model.get('categories')[0].get('title'),
-        width  : d3_scale(this.model.get('trusts_num')) + this.settings.bar_width_unit,
-        height : this.settings.bar_height
-        */
       this._data = {
         title  : this.model.get('title'),
         width  : data.scale(this.model.get('total')) + data.settings.bar_width_unit,
@@ -88,10 +78,38 @@ define(function(require){
       return this;
     },
 
+    render_trusts : function(){
+      this.model.get('trusts').forEach(function(trust){
+        var t    = trust.attributes,
+            data = {
+              designation : t.designation,
+              base_path   : Base_path,
+              registry    : t.registry ? t.registry : t.id
+            },
+            html = "<li>" + this.trust(data)+ "</li>";
+        this.$(".category-trusts").append(html);
+      }, this);
+      this.$(".category-trusts").append(Hide_trusts_btn);
+    },
+
     //
     // D I R E C T   I N T E R A C T I O N   ( H T M L )
     // ------------------------------------------------------------------------------
     //
+    show_trusts : function(e){
+      e.preventDefault();
+      var link = e.currentTarget;
+      link.className = "hide-trusts";
+
+      this.render_trusts();
+    },
+
+    hide_trusts : function(e){
+      e.preventDefault();
+      var link = e.currentTarget;
+      link.className = "show-trusts";
+      this.$(".category-trusts").html("");
+    }
   });
 
   return container;

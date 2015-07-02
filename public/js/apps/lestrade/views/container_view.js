@@ -36,6 +36,8 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
+      'click a.show-more'  : 'show_all',
+      'click a.show-less'  : 'hide_some'
     },
 
     // 
@@ -67,12 +69,6 @@ define(function(require){
       
       this._data = {
         trusts : this.model.get('categories_num'),
-        /*
-        total  : this.model.get('categories')[0].get('total'),
-        title  : this.model.get('categories')[0].get('title'),
-        width  : d3_scale(this.model.get('trusts_num')) + this.settings.bar_width_unit,
-        height : this.settings.bar_height
-        */
       };
       
     },
@@ -109,6 +105,34 @@ define(function(require){
     // D I R E C T   I N T E R A C T I O N   ( H T M L )
     // ------------------------------------------------------------------------------
     //
+
+    //
+    //
+    //
+    show_all : function(e){
+      e.preventDefault();
+      var link = e.currentTarget,
+          span = link.querySelector('span');
+
+      link.className = "show-less";
+      span.innerHTML = "ocultar";
+
+      this.$('.trust-container').show();
+    },
+
+    //
+    //
+    //
+    hide_some : function(e){
+      e.preventDefault();
+      var link = e.currentTarget,
+          span = link.querySelector('span');
+
+      link.className = "show-more";
+      span.innerHTML = "mostrar más";
+
+      this.$('.trust-container:not(:first)').hide();
+    }
   });
 
   return container;
