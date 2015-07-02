@@ -15,15 +15,20 @@ define(function(require){
       Velocity      = require('velocity'),
       Container     = require('views/container_view'),
       D3_manager    = require('d3_manager'),
+
+  //
+  // D E F I N E   T H E   S E T U P   V A R I A B L E S
+  // --------------------------------------------------------------------------------
+  //
       d3_data_cache = null,
       graph_settings  = {
         // SVG container settings
         top    : 20,
-        right  : 30,
+        right  : 200,
         bottom : 100,
         left   : 150,
-        width  : 800,
-        height : 800,
+        width  : 1200,
+        height : 2000,
         // barchart settings
         bar_container_width : 100,
         bar_min_width       : 5,
@@ -36,10 +41,13 @@ define(function(require){
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
-      the_stuff         = document.getElementById('the-stuff'),
-      the_svg_container = document.getElementById('the-basic-graphics');
+      the_bars_container = document.getElementById('the-stuff'),
+      the_svg_container  = document.getElementById('the-basic-graphics');
 
-
+  //
+  // I N I T I A L I Z E   T H E   D O M   M A N A G E R
+  // --------------------------------------------------------------------------------
+  //
   var dom_manager = {
     //
     // R E F E R E N C E S
@@ -61,30 +69,11 @@ define(function(require){
     // [ RENDER CONTAINER ]
     //
     // Esta función agrega una categoría al contenedor de resultados.
-    // El Modelo de Backbone que recibe contiene: 
-    // - category : el identificador de la categoría
-    // - title    : el nombre de la categoría
-    // - trusts   : array(Backbone Models)
-    //     - branch, branch_id, designation, fiduciary, initial_amount, 
-    //       registry, scope, settlor, theme, type, unit, year
     render_container : function(model){
-      var _container = new Container({model : model, settings : graph_settings});
-      $(the_stuff).append(_container.render().el);
+      var _bar_category = new Container({model : model, settings : graph_settings});
+      $(the_bars_container).append(_bar_category.render().el);
 
-      return _container;
-    },
-
-    //
-    // [ RENDER D3 BARS ]
-    //
-    // Recibe los datos ya listos para graficar del controller.js,
-    // y agrega el contenedor y las características gráficas.
-    // Se supone que el d3_manager no contenga ningún tipo de configuración,
-    // solo que reciba la información lista para usarse
-    render_d3_bars : function(data, extent, distinct){
-      d3_data_cache = data;
-     console.log(data, extent, distinct.length);
-      // this.d3_manager.bars(data);
+      return _bar_category;
     },
 
     //
@@ -92,7 +81,7 @@ define(function(require){
     //
     render_tree_map : function(nodes){
       var _svg = this.render_svg();
-      // this.d3_manager.tree(svg, nodes, graph_settings);
+      this.d3_manager.tree(_svg, nodes, graph_settings);
     },
 
     //
@@ -100,7 +89,14 @@ define(function(require){
     // ------------------------------------------------------------------------------
     //
     render_svg : function(){
-
+      if(the_svg_container.querySelector('svg')){
+        return d3.select(the_svg_container).select("svg");
+      }
+      else{
+        return d3.select(the_svg_container).append("svg:svg")
+               .attr("width", graph_settings.width)
+               .attr("height", graph_settings.height);
+      }
     },
    
 

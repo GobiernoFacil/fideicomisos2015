@@ -118,11 +118,11 @@ define(function(require){
             title      : "fideicomisos",
             collection : this.collection,
             children   : null
-          },
+          };
 
       _parent.children = this._get_tree_childrens(_parent, _categories, 0);
 
-
+      this.dom_manager.render_tree_map(_parent);
     },
 
     //
@@ -193,7 +193,7 @@ define(function(require){
         _childrens.push(_child);
       }, this);
 
-      if(pointer < categories.length){
+      if(pointer+1 < categories.length){
         _childrens.forEach(function(ch){
           ch.children = this._get_tree_childrens(ch, categories, pointer+1);
         }, this);
