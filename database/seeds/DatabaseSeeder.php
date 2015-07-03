@@ -49,6 +49,11 @@ trait LoadCSV{
     // guarda los datos del CSV en la tabla
     $data = $reader->fetchAssoc();
     foreach($data as $row){
+      /* small fix for the trusts table */
+      if(isset($row['initial_date_date']) && $row['initial_date_date'] =="NULL"){
+        $row['initial_date_date'] = "0000-00-00";
+      }
+      /***/
       DB::table($table)->insert($row);
     }
   }
