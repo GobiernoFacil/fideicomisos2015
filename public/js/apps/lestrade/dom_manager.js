@@ -27,7 +27,7 @@ define(function(require){
         right  : 200,
         bottom : 100,
         left   : 150,
-        width  : 1200,
+        width  : 2400,
         height : 2000,
         // barchart settings
         bar_container_width : 100,

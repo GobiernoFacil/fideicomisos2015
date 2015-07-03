@@ -113,7 +113,7 @@ define(function(require){
     //
     generate_tree : function(type){
 
-      var _categories = ['branch', 'theme'/*, 'unit'*/],
+      var _categories = ['branch', 'theme', 'unit'],
           _parent = {
             title      : "fideicomisos",
             collection : this.collection,
@@ -199,12 +199,18 @@ define(function(require){
         _childrens.push(_child);
       }, this);
 
+      _childrens.forEach(function(ch){
+        ch.children = ch.collection.map(function(m){
+          return {title : m.get("designation")};
+        });
+      }, this);
+
       if(pointer+1 < categories.length){
         _childrens.forEach(function(ch){
           ch.children = this._get_tree_childrens(ch, categories, pointer+1);
         }, this);
       }
-
+      
       return _childrens;
     },
 
