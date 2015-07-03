@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('body_class', 'home')
 
-@section('title', 'Fideicomisos')
+@section('title', 'Fideicomisos | Las cajas negras del Gobierno')
 @section('description', "Los fideicomisos")
 
 @section('content')
