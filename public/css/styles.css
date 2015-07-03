@@ -264,6 +264,28 @@ nav.main .search input[type="search"] {
   width: 100%;
   overflow: scroll; }
 
+#im-watson li {
+  list-style: none;
+  display: inline-block;
+  margin: 5px 10px 5px 0; }
+#im-watson label {
+  font-size: 13px;
+  color: white;
+  padding: 3px 10px; }
+#im-watson input[type="checkbox"] {
+  display: none; }
+  #im-watson input[type="checkbox"] + label {
+    display: inline-block;
+    background: #f2f2f2;
+    color: #ccc;
+    cursor: pointer; }
+  #im-watson input[type="checkbox"]:checked + label {
+    background: #015383;
+    color: white; }
+    #im-watson input[type="checkbox"]:checked + label:hover {
+      background: #8ba7c0;
+      color: white; }
+
 .wrapper, .wrap {
   width: 90%;
   margin: 0 auto; }
@@ -1093,6 +1115,9 @@ a.category, a.category:visited {
   a.category:hover, a.category:visited:hover {
     background: #FFED48;
     color: #015383; }
+
+/* =Reportajes
+-------------------------------------------------------------- */
 
 /* =Reportajes
 -------------------------------------------------------------- */

@@ -25,10 +25,11 @@
 <div class="container">
 <!-- Esta aplicación se llama Watson, y obtiene
      información de un endpoint llamado Sherlock. -->
-<div id="im-watson" class="main">
+<div id="im-watson" class="row">
+<div class="col-sm-10 col-sm-offset-1">
   <!-- [ EL TÍTULO ] -->
-  <h1>Watson</h1>
-
+  <h1>Navegador de Fideicomisos</h1>
+<p>Explora los datos de los fideicomisos públicos en México, utiliza los filtros para mejorar tu búsqueda</p>
   <!-- [ EL BUSCADOR ] -->
   <form id="the-search-app">
   <!-- the CSRF stuff -->
@@ -36,16 +37,16 @@
     <!-- [A] busca por año -->
     <section id="search-by-year">
       <h3>Selecciona fideicomisos por año</h3>
-      <ul>
+      <ul class="year">
         <!-- la lista de años. Esta viene del servidor -->
         @foreach($years as $year)
         <li>
-          <label>
             <input checked="checked" 
             type="checkbox" 
             name="y{{$year}}" 
-            value="{{$year}}">{{$year}}
-          </label>
+            id="y{{$year}}"
+            value="{{$year}}">
+            <label for="y{{$year}}"><span></span>{{$year}}</label>
         </li>
         @endforeach
         <li><a id="all-years" href="#">Todos</a></li>
@@ -81,11 +82,13 @@
         <!-- la lista de años. Esta viene del servidor -->
         @foreach($definitions as $field)
         <li>
-          <label>
+         
             <input checked="checked" 
             type="checkbox" 
+            id="f-{{$field->name}}"
             name="f-{{$field->name}}" 
-            value="{{$field->name}}">{{$field->full_name}}
+            value="{{$field->name}}">
+             <label for="f-{{$field->name}}">{{$field->full_name}}
           </label>
         </li>
         @endforeach
@@ -109,6 +112,7 @@
     <thead></thead>
     <tbody></tbody>
   </table>
+</div>
 </div>
 </div>
 <!-- LA APP -->
