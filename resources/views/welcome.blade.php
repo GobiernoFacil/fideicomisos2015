@@ -93,7 +93,7 @@
 		<div class="col-sm-3 descarga ">
 			<h2><strong>Consulta</strong> y <strong>descarga gratis</strong> los datos que publicamos.</h2>
 			<p>Integer dapibus nunc ex, vitae interdum metus consequat eu. Ut sagittis magna purus, at sagittis mauris pretium sagittis. Pellentesque metus elit, ornare ut lorem a, aliquet tempor lacus</p>
-			<p><a href="#" class="btn_link">EXPLORAR DATOS</a></p>
+			<p><a href="<?= url();?>/navegador-de-fideicomisos" class="btn_link">EXPLORAR DATOS</a></p>
 			<p><a href="#" class="btn_link">Datos abiertos</a></p>
 		</div>
 	</div>
