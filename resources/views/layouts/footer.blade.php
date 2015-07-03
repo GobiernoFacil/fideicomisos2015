@@ -2,7 +2,7 @@
 <section class="partners">
 	<div class="container">
 			<div class="col-sm-8 col-sm-offset-2">
-				<h2><strong>Quién Fondeó</strong> es posible gracias al apoyo de</h2>
+				<h2><strong>Las cajas negras del Gobierno</strong> es posible gracias al apoyo de</h2>
 				<ul>
 					<li><span class="hivos">Hivos</span></li>
 					<li><span class="hacks">HacksLabs</span></li>
