@@ -14,7 +14,7 @@
 				<a href="http://www.eluniversal.com.mx/periodismo-datos/" class="eluniversal">El Universal | DATA</a>  
 			</div>
 			<div class="col-sm-6">
-				<h1><a href="<?= url();?>">Quién Fondeó</a></h1> 
+				<h1><a href="<?= url();?>">Las cajas negras del Gobierno</a></h1> 
 			</div>
 			<div class="col-sm-1 col-sm-offset-2">
 				<button id="showRightPush" class="menu-icon">☰</button>

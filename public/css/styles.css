@@ -861,9 +861,9 @@ input:focus, select:focus, textarea:focus {
   z-index: 5; }
   .top-header h1, .top-header h1 a {
     color: #333;
-    font: 700 60px 'Giorgio', "Roboto", Helvetica, Arial, sans-serif;
+    font: 700 40px "Roboto", Helvetica, Arial, sans-serif;
     text-align: center;
-    padding: 5px 0 0;
+    padding: 16px 0 0;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s; }
@@ -904,8 +904,8 @@ input:focus, select:focus, textarea:focus {
   .top-header.header-shrink {
     height: 70px; }
     .top-header.header-shrink h1, .top-header.header-shrink h1 a {
-      font-size: 40px;
-      padding: 0; }
+      font-size: 30px;
+      padding: 5px 0 0; }
     .top-header.header-shrink .menu-icon {
       font-size: 30px;
       margin-top: 0; }
@@ -934,7 +934,7 @@ input:focus, select:focus, textarea:focus {
     list-style: none; }
     .home .news li h2, .home .news li h2 a {
       color: white;
-      font: 700 70px/1.2 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
+      font: 700 70px/1.2 "Roboto", Helvetica, Arial, sans-serif; }
     .home .news li .author {
       border-top: 1px dotted #C9C8B7;
       color: #C9C8B7;
@@ -964,7 +964,7 @@ input:focus, select:focus, textarea:focus {
       border-top: 5px solid #015383;
       padding: 0; }
     .home .news article.half h2, .home .news article.half h2 a, .home .news article.quarter h2, .home .news article.quarter h2 a {
-      font: 700 28px/1.2 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
+      font: 700 28px/1.2 "Roboto", Helvetica, Arial, sans-serif; }
     .home .news article.quarter div {
       padding-top: 73px; }
     .home .news article.quarter h2, .home .news article.quarter h2 a {
@@ -1069,7 +1069,7 @@ section {
     opacity: 0.1; }
 
 .title {
-  font: 700 2em 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
+  font: 700 2em "Roboto", Helvetica, Arial, sans-serif; }
 
 a.more {
   background: #FFED48;
@@ -1200,7 +1200,7 @@ a.category, a.category:visited {
     text-align: center; }
     .post article header h1 {
       color: white;
-      font: 700 80px/1.2 'Ionic', "Roboto", Helvetica, Arial, sans-serif; }
+      font: 700 80px/1.2 "Roboto", Helvetica, Arial, sans-serif; }
     .post article header h2 {
       font: 300 24px "Roboto", Helvetica, Arial, sans-serif;
       padding: 10px 0 0; }
@@ -1219,7 +1219,7 @@ a.category, a.category:visited {
       font: 300 1.5em "Roboto", Helvetica, Arial, sans-serif; }
       .post article p.lead:first-letter {
         color: #015383;
-        font: 700 4em/0.5 'Ionic', "Roboto", Helvetica, Arial, sans-serif;
+        font: 700 4em/0.5 "Roboto", Helvetica, Arial, sans-serif;
         float: left;
         padding: 0 10px 0 0; }
     .post article p a {
@@ -1227,7 +1227,7 @@ a.category, a.category:visited {
       .post article p a:hover {
         color: #8ba7c0; }
   .post article h2 {
-    font: 300 21px 'Ionic', "Roboto", Helvetica, Arial, sans-serif;
+    font: 300 21px "Roboto", Helvetica, Arial, sans-serif;
     padding: 33px 0 35px; }
 .post .likeaboss {
   height: 700px;
@@ -1274,7 +1274,7 @@ section.partners {
     color: #8ba7c0;
     font-size: 19px; }
     section.partners h2 strong {
-      font: 700 21px 'Giorgio', "Roboto", Helvetica, Arial, sans-serif; }
+      font: 700 21px "Roboto", Helvetica, Arial, sans-serif; }
   section.partners li {
     list-style: none;
     display: inline-block;
