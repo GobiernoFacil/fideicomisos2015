@@ -34,7 +34,9 @@ define(function(require){
         bar_min_width       : 5,
         bar_max_width       : 80,
         bar_height          : "2em",
-        bar_width_unit      : "%"
+        bar_width_unit      : "%",
+        // animation settings
+        duration : 500
       },
 
   //
@@ -81,7 +83,15 @@ define(function(require){
     //
     render_tree_map : function(nodes){
       var _svg = this.render_svg();
-      this.d3_manager.tree(_svg, nodes, graph_settings);
+      this.d3_manager.static_tree(_svg, nodes, graph_settings);
+    },
+
+    //
+    // [ RENDER LIVE TREE MAP ]
+    //
+    render_live_tree_map : function(nodes){
+      var _svg = this.render_svg();
+      this.d3_manager.live_tree(_svg, nodes, graph_settings);
     },
 
     //

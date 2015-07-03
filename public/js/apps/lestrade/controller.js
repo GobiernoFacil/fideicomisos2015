@@ -111,9 +111,9 @@ define(function(require){
     //
     // [ RENDER THE TREE MAP ]
     //
-    generate_tree : function(){
+    generate_tree : function(type){
 
-      var _categories = ['branch', 'theme', 'unit'],
+      var _categories = ['branch', 'theme'/*, 'unit'*/],
           _parent = {
             title      : "fideicomisos",
             collection : this.collection,
@@ -122,7 +122,13 @@ define(function(require){
 
       _parent.children = this._get_tree_childrens(_parent, _categories, 0);
 
-      this.dom_manager.render_tree_map(_parent);
+      if(!type || type == "static"){
+        console.log(type);
+        this.dom_manager.render_tree_map(_parent);
+      }
+      else{
+        this.dom_manager.render_live_tree_map(_parent);
+      }
     },
 
     //
