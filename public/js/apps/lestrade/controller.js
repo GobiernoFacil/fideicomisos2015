@@ -24,6 +24,7 @@ define(function(require){
       definitions   = new Backbone.Collection(TRUSTS_DATA.definitions),
       collection    = new Backbone.Collection(TRUSTS_DATA.trust_array),
       current_bars  = [],
+      tree_order    = ['branch', 'theme', 'unit'],
       No_definido   = "DESCONOCIDO";
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -41,7 +42,8 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'click #category-selector a' : 'generate_bars'
+      'click #category-selector a' : 'generate_bars',
+      'click #show-static-tree' : 'show_static_tree'
     },
 
     // 
@@ -111,24 +113,18 @@ define(function(require){
     //
     // [ RENDER THE TREE MAP ]
     //
-    generate_tree : function(type){
+    generate_tree : function(add_trusts){
 
-      var _categories = ['branch', 'theme', 'unit'],
+      var _categories = tree_order,
           _parent = {
             title      : "fideicomisos",
             collection : this.collection,
             children   : null
           };
 
-      _parent.children = this._get_tree_childrens(_parent, _categories, 0);
+      _parent.children = this._get_tree_childrens(_parent, _categories, 0, add_trusts);
 
-      if(!type || type == "static"){
-        console.log(type);
-        this.dom_manager.render_tree_map(_parent);
-      }
-      else{
-        this.dom_manager.render_live_tree_map(_parent);
-      }
+      this.dom_manager.render_live_tree_map(_parent);
     },
 
     //
@@ -181,7 +177,7 @@ define(function(require){
     //
     // [ TREE GENERATOR ]
     //
-    _get_tree_childrens : function(parent, categories, pointer){
+    _get_tree_childrens : function(parent, categories, pointer, add_trusts){
       var _category   = categories[pointer],
           _collection = parent.collection,
           _list       = _.uniq(_collection.pluck(_category)),
@@ -199,11 +195,13 @@ define(function(require){
         _childrens.push(_child);
       }, this);
 
-      _childrens.forEach(function(ch){
-        ch.children = ch.collection.map(function(m){
-          return {title : m.get("designation")};
-        });
-      }, this);
+      if(add_trusts){
+        _childrens.forEach(function(ch){
+          ch.children = ch.collection.map(function(m){
+            return {title : m.get("designation")};
+          });
+        }, this);
+      }
 
       if(pointer+1 < categories.length){
         _childrens.forEach(function(ch){
@@ -224,6 +222,10 @@ define(function(require){
     // H E L P E R S
     // ------------------------------------------------------------------------------
     //
+    _set_tree_order : function(new_order){
+      tree_order = new_order;
+      return tree_order;
+    },
 
     //
     // [ SET TITLES ]

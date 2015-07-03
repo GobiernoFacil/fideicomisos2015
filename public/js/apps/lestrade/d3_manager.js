@@ -20,6 +20,7 @@ define(function(require){
   tree     = null,
   svg      = null,
   data     = null, 
+  Nodes    = null,
   _i       = 0,
   diagonal = d3.svg.diagonal().projection(function(d){return [d.y, d.x]});
 
@@ -130,7 +131,7 @@ define(function(require){
             .attr("transform", function(d){
               return "translate(" + d.y + "," + d.x + ")";
             });
-
+      
       nodeUpdate.select("circle")
         .attr("r", 5)
         .style("fill", function (d){
@@ -188,6 +189,13 @@ define(function(require){
       else{
         d.children = d._children;
         d._children = null;
+      }
+    },
+
+    _toogle_all_live_tree_nodes : function(d){
+      if(d.children){
+        d.children.forEach(this._toogle_all_live_tree_nodes(d));
+        this._toogle_live_tree_nodes(d);
       }
     },
 

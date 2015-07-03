@@ -10,12 +10,6 @@
 <div id="im-lestrade" class="main">
   <!-- [ EL TÍTULO ] -->
   <h1>Lestrade</h1>
-  <nav>
-    <ul>
-      <li><a id="make-bars" href="#" class="selected">gráfica de barras</a></li>
-      <li><a id="make-tree" href="#">diagrama de árbol</a></li>
-    </ul>
-  </nav>
   <nav id="category-selector">
   @foreach($definitions as $definition)
     @if(in_array($definition->name, $categories))
