@@ -68,6 +68,14 @@ define(function(require){
     live_tree : function(_svg, _data, settings){
       this._initialize_tree(_svg, _data, settings);
       this._render_live_tree(data);
+
+      var drag = d3.behavior.drag();
+      
+      svg.call(drag);
+
+      drag.on("drag", function(d){
+        console.log(d, d3.mouse(this));
+      });
     },
 
     //
@@ -85,7 +93,17 @@ define(function(require){
     _render_live_tree_nodes : function(nodes, source){
       var that = this;
       nodes.forEach(function(d){
-        d.y = d.depth * 200;
+        var x_width;
+        if(d.depth == 4){
+          x_width = 0;
+        }
+        else if(d.depth == 3){
+          x_width = -250;
+        }
+        else{
+          x_width = 0;
+        }
+        d.y = d.depth * 300 - x_width;
       });
 
       var node = svg.selectAll("g.node").data(nodes, function(d){
@@ -138,8 +156,25 @@ define(function(require){
     //
     //
     //
-    _render_live_tree_links : function(nodes, soruce){
-      //
+    _render_live_tree_links : function(nodes, source){
+      var link = svg.selectAll("path.link")
+                .data(tree.links(nodes), function (d) {
+                    return d.target.id;
+                });
+        link.enter().insert("svg:path", "g")
+                .attr("class", "link")
+                .attr("d", function (d) {
+                    var o = {x: source.x0, y: source.y0};
+                    return diagonal({source: o, target: o});
+                });
+        link.transition()
+                .attr("d", diagonal);
+        link.exit().transition()
+                .attr("d", function (d) {
+                    var o = {x: source.x, y: source.y};
+                    return diagonal({source: o, target: o});
+                })
+                .remove();
     },
 
     //
@@ -216,8 +251,16 @@ define(function(require){
     //
     //
     _generate_svg_container : function(svg, settings){
-      return svg.append("g")
+      var container =  svg.append("g")
+        .attr("class", "tree-container")
         .attr("transform", "translate(" + settings.left + ", " + settings.top + ")");
+
+      container.append("rect")
+      .attr("width",settings.width)
+      .attr("height", settings.height)
+      .attr("fill", "#ddd")
+      .attr("transform", "translate(-" + settings.left + ", -" + settings.top + ")");
+      return container;
     }
   };
 
