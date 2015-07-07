@@ -195,13 +195,11 @@ define(function(require){
         _childrens.push(_child);
       }, this);
 
-      if(add_trusts){
         _childrens.forEach(function(ch){
           ch.children = ch.collection.map(function(m){
             return {title : m.get("designation")};
           });
         }, this);
-      }
 
       if(pointer+1 < categories.length){
         _childrens.forEach(function(ch){
