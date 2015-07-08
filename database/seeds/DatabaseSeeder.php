@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder {
 
     $this->call('TrustsTableSeeder');
     $this->command->info('Trusts table seeded!');
+
+    $this->call('UserTableSeeder');
+    $this->command->info('Arturo is Ready! (pass: MiroslavaSternova)');
 	}
 
 }
@@ -100,5 +103,21 @@ class TrustsTableSeeder extends Seeder{
   use LoadCSV;
   public function run(){
     $this->save_csv(base_path() . "/csv/trusts.csv", "trusts");
+  }
+}
+
+/**
+* The users table
+*
+*/
+class UserTableSeeder extends Seeder{
+  public function run(){
+    DB::table('users')->delete();
+    $row = [
+      'name'       => 'Arturo Córdoba',
+      'email'      => 'howdy@gobiernofacil.com',
+      'password'   => Hash::make("MiroslavaSternova"),
+    ];
+    DB::table('users')->insert($row);
   }
 }

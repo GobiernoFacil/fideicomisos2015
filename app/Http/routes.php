@@ -23,4 +23,8 @@ Route::get('categorias', 'Lestrade@index');
 // [ EL API DE BÚSQUEDA ]
 Route::post('sherlock/search', 'Sherlock@index');
 
+// [ EL HOME ]
 Route::get('/', 'WelcomeController@index');
+
+// [ EL LOGIN ]
+Route::get('auth/login', 'Auth\AuthController@getLogin');
