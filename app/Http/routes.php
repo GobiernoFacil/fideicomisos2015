@@ -28,3 +28,19 @@ Route::get('/', 'WelcomeController@index');
 
 // [ EL LOGIN ]
 Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// [ EL ADMIN ] 
+Route::group(['middleware' => 'auth'], function(){
+  // [ DASHBOARD ]
+  Route::get('home', 'Admin@index');
+  // [ TRUSTS ]
+  Route::get('trusts/{page?}', 'Admin@trusts')->where('page', '[0-9]+');;
+  Route::get('trusts/add', 'Admin@saveTrustForm');
+  Route::post('trusts/add', 'Admin@saveTrust');
+  Route::get('trusts/update/{id}', 'Admin@updateTrustForm')->where('id', '[0-9]+');;
+  Route::post('trusts/update/{id}', 'Admin@updateTrust')->where('id', '[0-9]+');;
+  Route::get('trusts/delete/{id}', 'Admin@deleteTrust')->where('id', '[0-9]+');;
+  // [ ARTICLES ]
+});
