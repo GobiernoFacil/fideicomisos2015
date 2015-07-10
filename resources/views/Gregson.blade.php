@@ -9,8 +9,21 @@
 <div id="im-gregson" class="main">
   <!-- [ EL TÍTULO ] -->
   <h1>Gregson</h1>
+  @if(Auth::check())
+  <!-- Si es admin, aparece el navegador de admin, porque #Yodo -->
+  <nav>
+    <ul>
+      <li><a href="{{url('admin/dashboard')}}">dashboard</a></li>
+      <li><a href="{{url('navegador-de-fideicomisos')}}">fideicomisos</a></li>
+    </ul>
+  </nav>
+  @endif
+
   <section id="trust-description">
     <h2>Descripción</h2>
+    @if(Auth::check())
+    <a href="{{url('trusts/update/' . $selected['id'])}}">editar</a>
+    @endif
     <ul>
       <li>
         <strong>año:</strong><br>
@@ -77,11 +90,13 @@
         @foreach($trusts as $trust)
         <tr>
           <td>{{$trust['year']}}</td>
-          <td>{{'$' . number_format($trust['initial_amount'])}}</td>
-          <td>{{'$' . number_format($trust['income'])}}</td>
-          <td>{{'$' . number_format($trust['yield'])}}</td>
-          <td>{{'$' . number_format($trust['expenses'])}}</td>
-          <td>{{'$' . number_format($trust['availability'])}}</td>
+          <td>
+            {{'$' . number_format($trust['initial_amount']!=''?$trust['initial_amount'] : 0)}}
+          </td>
+          <td>{{'$' . number_format($trust['income']!=''?$trust['income'] : 0)}}</td>
+          <td>{{'$' . number_format($trust['yield']!=''?$trust['yield'] : 0)}}</td>
+          <td>{{'$' . number_format($trust['expenses']!=''?$trust['expenses'] : 0)}}</td>
+          <td>{{'$' . number_format($trust['availability']!=''?$trust['availability'] : 0)}}</td>
         </tr>
         @endforeach
       </tbody>

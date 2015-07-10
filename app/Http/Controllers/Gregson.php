@@ -14,19 +14,19 @@ class Gregson extends Controller {
    *
    * @return Response
    */
-  public function index($registry, $id = false)
-  {
+  public function index($registry){
     //
     $trusts = Trusts::where('registry', $registry)
               ->orderBy('year', 'asc')->get()->toArray();
 
-    if($id){
-      $key   = array_search($id, array_column($trusts, 'id'));
-      $trust = $key ? $trusts[$key] : $trusts[0];
+    if(empty($trusts)){
+      $trust = Trusts::find($registry)->toArray();
+      $trusts = [$trust];
     }
     else{
       $trust = $trusts[0];
     }
+
 
     $definitions = Definitions::all();
 

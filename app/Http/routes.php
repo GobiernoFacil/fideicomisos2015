@@ -15,7 +15,7 @@
 Route::get('navegador-de-fideicomisos', 'Watson@index');
 
 // [ EXPLORA UN FIDEICOMISO ]
-Route::get('fideicomiso/{registry}/{id?}', 'Gregson@index');
+Route::get('fideicomiso/{registry}', 'Gregson@index');
 
 // [ EXPLORA UNA CATEGORÍA ]
 Route::get('categorias', 'Lestrade@index');
@@ -36,7 +36,6 @@ Route::group(['middleware' => 'auth'], function(){
   // [ DASHBOARD ]
   Route::get('home', 'Admin@index');
   // [ TRUSTS ]
-  Route::get('trusts/{page?}', 'Admin@trusts')->where('page', '[0-9]+');;
   Route::get('trusts/add', 'Admin@saveTrustForm');
   Route::post('trusts/add', 'Admin@saveTrust');
   Route::get('trusts/update/{id}', 'Admin@updateTrustForm')->where('id', '[0-9]+');;

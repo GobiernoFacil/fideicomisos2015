@@ -16,41 +16,41 @@ class CreateTrustsTable extends Migration {
 		{
 			$table->increments('id');
 
-			$table->integer('year');
-			$table->string('branch');
-			$table->integer('branch_id');
-			$table->string('type');
-			$table->integer('type_id');
+			$table->integer('year')->nullable();
+			$table->string('branch')->nullable();
+			$table->integer('branch_id')->nullable();
+			$table->string('type')->nullable();
+			$table->integer('type_id')->nullable();
 
-			$table->string('scope');
-			$table->integer('scope_id');
-			$table->string('unit');
-			$table->string('settlor');
-			$table->string('registry');
+			$table->string('scope')->nullable();
+			$table->integer('scope_id')->nullable();
+			$table->string('unit')->nullable();
+			$table->string('settlor')->nullable();
+			$table->string('registry')->nullable();
 
-			$table->text('designation');
-			$table->text('objective');
-			$table->string('fiduciary');
-			$table->string('theme');
-			$table->string('income');
+			$table->text('designation')->nullable();
+			$table->text('objective')->nullable();
+			$table->string('fiduciary')->nullable();
+			$table->string('theme')->nullable();
+			$table->string('income')->nullable();
 
-			$table->double('income_num');
-			$table->string('yield');
-			$table->double('yield_num');
-			$table->string('expenses');
-			$table->double('expenses_num');
+			$table->double('income_num')->nullable();
+			$table->string('yield')->nullable();
+			$table->double('yield_num')->nullable();
+			$table->string('expenses')->nullable();
+			$table->double('expenses_num')->nullable();
 
-			$table->text('report');
-			$table->string('availability');
-			$table->double('availability_num');
-			$table->string('availability_type');
+			$table->text('report')->nullable();
+			$table->string('availability')->nullable();
+			$table->double('availability_num')->nullable();
+			$table->string('availability_type')->nullable();
 			
-			$table->string('initial_amount');
-			$table->double('initial_amount_num');
-			$table->string('initial_date');
-			$table->date('initial_date_date');
-			$table->text('comments');
-			$table->text('initial_amount_comments');
+			$table->string('initial_amount')->nullable();
+			$table->double('initial_amount_num')->nullable();
+			$table->string('initial_date')->nullable();
+			$table->date('initial_date_date')->nullable();
+			$table->text('comments')->nullable();
+			$table->text('initial_amount_comments')->nullable();
 
 			$table->timestamps();
 		});

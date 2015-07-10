@@ -8,7 +8,7 @@
   <nav>
     <ul>
       <li><a href="{{url('admin/dashboard')}}">dashboard</a></li>
-      <li><a href="{{url('trusts')}}">fideicomisos</a></li>
+      <li><a href="{{url('navegador-de-fideicomisos')}}">fideicomisos</a></li>
     </ul>
   </nav>
 </body>

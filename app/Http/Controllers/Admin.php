@@ -18,12 +18,6 @@ class Admin extends Controller{
     return view('admin/dashboard');
   }
 
-  // [ TRUSTS ]
-  public function trusts($page = 1){
-    $trusts = Trusts::skip(($page-1)*self::PAGE_SIZE)->take(self::PAGE_SIZE)->get();
-    return view('admin/trusts')->with('trusts', $trusts);
-  }
-
   // [ ADD TRUST FORM ]
   public function saveTrustForm(){
     return view('admin/add-trust');

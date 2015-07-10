@@ -9,6 +9,8 @@
     {!! csrf_field() !!}
     <p>id: {{$trust->id}}</p>
 
+    <p><label><input type="checkbox" name="all" value="1" checked="checked">Actualizar todos los campos similares en todos los años de este fideicomiso</label></p>
+
     <p><label>año:</label>
       <input type="text" name="year" value="{{$trust->year}}">
     </p>
@@ -56,7 +58,7 @@
       <input type="text" name="expenses" value="{{$trust->expenses}}">
     </p>
     <p><label>reporte del cumplimiento de la misión y fines:</label>
-      <input type="text" name="report" value="{{$trust->report}}">
+      <textarea name="report">{{$trust->report}}</textarea>
     </p>
 
     <p><label>disponibilidad (pesos):</label>
@@ -73,16 +75,11 @@
       <input placeholder="dd/mm/yyyy" type="text" name="initial_date" value="{{$trust->initial_date}}">
     </p>
     <p><label>observaciones:</label>
-      <input type="text" name="comments" value="{{$trust->comments}}">
+      <textarea name="comments">{{$trust->comments}}</textarea>
     </p>
     <p><label>aportación inicial / observaciones:</label>
-      <input type="text" name="initial_amount_comments" value="{{$trust->initial_amount_comments}}">
+      <textarea name="initial_amount_comments">{{$trust->initial_amount_comments}}</textarea>
     </p>
-
-    <p><label>Actualizar todos los campos similares en todos 
-    los años de este fideicomiso
-      <input type="checkbox" name="all" value="1" checked="checked">
-    </label></p>
 
     <p><input type="submit" value="Actualizar"> </p>
   </form>
