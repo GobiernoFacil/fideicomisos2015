@@ -28,6 +28,38 @@ Route::get('/', function(){
   return view('home');
 });
 
+// [ LOS REPORTAJES ]
+Route::get('reportajes', function(){
+  return view('reports');
+});
+
+// [ El POST --- TEST ]
+Route::get('reportajes/post', function(){
+  return view('post');
+});
+
+// [ FIDEICOMISO ES ]
+Route::get('que-es-un-fideicomiso', function(){
+  return view('fideicomisos_es');
+});
+
+// [ DATAVIZ ]
+Route::get('vizdata', function(){
+  return view('vizdata');
+});
+
+// [ LOS WHO ]
+Route::get('quienes-somos', function(){
+  return view('who');
+});
+
+// [ DATOS ABIERTOS ]
+Route::get('datos-abiertos', function(){
+  return view('opendata');
+});
+
+
+
 // [ EL LOGIN ]
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

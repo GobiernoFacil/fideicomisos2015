@@ -941,8 +941,8 @@ input:focus, select:focus, textarea:focus {
   .top-header.header-shrink {
     height: 70px; }
     .top-header.header-shrink h1, .top-header.header-shrink h1 a {
-      font-size: 30px;
-      padding: 5px 0 0; }
+      font-size: 26px;
+      padding: 9px 0 0; }
     .top-header.header-shrink .menu-icon {
       font-size: 30px;
       margin-top: 0; }
@@ -1242,6 +1242,7 @@ a.category, a.category:visited {
       color: white;
       font: 700 80px/1.2 "Roboto", Helvetica, Arial, sans-serif; }
     .post article header h2 {
+      color: white;
       font: 300 24px "Roboto", Helvetica, Arial, sans-serif;
       padding: 10px 0 0; }
     .post article header p {
@@ -1254,7 +1255,8 @@ a.category, a.category:visited {
     .post article header .category {
       vertical-align: middle; }
   .post article p {
-    font: 500 19px "Roboto", Helvetica, Arial, sans-serif; }
+    color: rgba(0, 0, 0, 0.6);
+    font: 500 17px/1.5 "Roboto", Helvetica, Arial, sans-serif; }
     .post article p.lead {
       font: 300 1.5em "Roboto", Helvetica, Arial, sans-serif; }
       .post article p.lead:first-letter {
@@ -1267,7 +1269,8 @@ a.category, a.category:visited {
       .post article p a:hover {
         color: #8ba7c0; }
   .post article h2 {
-    font: 300 21px "Roboto", Helvetica, Arial, sans-serif;
+    color: #015383;
+    font: 700 21px "Roboto", Helvetica, Arial, sans-serif;
     padding: 33px 0 35px; }
 .post .likeaboss {
   height: 700px;
@@ -1288,7 +1291,8 @@ a.category, a.category:visited {
     padding: 0 0 0 15px;
     text-align: left; }
   .columna_frase .lafrase {
-    font: 300 26px "Roboto", Helvetica, Arial, sans-serif; }
+    font: 300 26px "Roboto", Helvetica, Arial, sans-serif;
+    margin-bottom: 0; }
 
 /* =BTN
 -------------------------------------------------------------- */
