@@ -118,9 +118,10 @@
 <!-- LA APP -->
 <script>
   var TRUSTS_DATA = {
-    years  : <?php echo json_encode($years); ?>,
-    total  : <?php echo json_encode($total); ?>,
-    fields : <?php echo json_encode($definitions); ?>
+    years  : {{ json_encode($years) }},
+    total  : {{ json_encode($total) }},
+    fields : <?php echo json_encode($definitions); ?>,
+    admin  : {{Auth::check()}}
   };
 </script>
 <script data-main="/js/apps/watson/main" src="/js/bower_components/requirejs/require.js"></script>
