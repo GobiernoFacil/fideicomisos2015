@@ -13,7 +13,8 @@ define(function(require){
   var Backbone  = require('backbone'),
       d3        = require('d3'),
       Velocity  = require('velocity'),
-      Sort_item = require('text!templates/sort-field.html');
+      Sort_item = require('text!templates/sort-field.html'),
+      Is_admin  = TRUSTS_DATA.admin;
 
   var dom_manager = {
     //
@@ -55,7 +56,16 @@ define(function(require){
     },
 
     _render_trust_row : function(fields_models_to_render, trust){
-      var _row = "<tr>";
+      var _row  = "<tr>",
+          _id   = trust.get('registry') ? trust.get('registry') : trust.id,
+          _view = '/fideicomiso/' + _id,
+          _updt = '/trusts/update/' + trust.id,
+          _view_a = "<a href='" + _view + "' target='_bank'>ver</a>",
+          _updt_a = "<a href='" + _updt + "' target='_bank'>editar</a>",
+          _option = Is_admin ? _updt_a + ' ' + _view_a : _view_a;
+
+      trust.set({link : _option});
+
       fields_models_to_render.forEach(function(model){
         _row += "<td>" + trust.get(model.get('name')) + "</td>";
       });

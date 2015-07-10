@@ -22,6 +22,7 @@ define(function(require){
   fields    = TRUSTS_DATA.fields,
   years     = TRUSTS_DATA.years,
   total     = TRUSTS_DATA.total,
+  Is_admin  = TRUSTS_DATA.admin;
   token     = document.getElementById("_token").value,
   controller_el = 'body',
   model_obj = {
@@ -306,6 +307,8 @@ define(function(require){
       var _current_fields = this.model.get('current_fields'),
           _fields         = this.model.get('fields'),
           _response       = [];
+
+      _response.push(new Backbone.Model({full_name : " ", name : 'link'}));
 
       _current_fields.forEach(function(field){
         _response.push(_fields.findWhere({name : field}));
