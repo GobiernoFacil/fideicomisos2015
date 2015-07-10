@@ -33,7 +33,7 @@
       <input type="text" name="registry" value="{{$trust->registry}}">
     </p>
     <p><label>denominación:</label>
-      <input type="text" name="designation" value="{{$trust->designation}}">
+      <textarea name="designation">{{$trust->designation}}</textarea>
     </p>
     <p><label>objeto:</label>
       <input type="text" name="objective" value="{{$trust->objective}}">

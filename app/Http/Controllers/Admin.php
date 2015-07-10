@@ -42,12 +42,21 @@ class Admin extends Controller{
 
   // [ UPDATE TRUST ]
   public function updateTrust(Request $request, $id){
-    return redirect('admin/update-trust');
+    $trust = Trusts::find($id);
+    $trust->update($request->all());
+    return redirect('trusts/update/' . $trust->id);
   }
 
   // [ DELETE TRUST ]
   public function deleteTrust($id){
     return redirect('home');
+  }
+
+  // [ TRUSTS HELPERS ]
+  private function get_common_fields($fields){
+    $common = [
+      'initial_date' => $fields['initial_date']
+    ];
   }
 
   // [ ARTICLES ]

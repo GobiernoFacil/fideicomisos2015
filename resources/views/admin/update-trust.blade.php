@@ -5,7 +5,6 @@
 </head>
 <body>
   <h1>Actualizar fideicomiso</h1>
-
   <form method="POST" action="/trusts/update/{{$trust->id}}">
     {!! csrf_field() !!}
     <p>id: {{$trust->id}}</p>
@@ -34,10 +33,10 @@
       <input type="text" name="registry" value="{{$trust->registry}}">
     </p>
     <p><label>denominación:</label>
-      <input type="text" name="designation" value="{{$trust->designation}}">
+      <textarea name="designation">{{$trust->designation}}</textarea>
     </p>
     <p><label>objeto:</label>
-      <input type="text" name="objective" value="{{$trust->objective}}">
+    <textarea name="objective">{{$trust->objective}}</textarea>
     </p>
 
     <p><label>fiduciario o mandatario:</label>
@@ -71,7 +70,7 @@
     </p>
 
     <p><label>fecha de aportación inicial:</label>
-      <input type="text" name="initial_date" value="{{$trust->initial_date}}">
+      <input placeholder="dd/mm/yyyy" type="text" name="initial_date" value="{{$trust->initial_date}}">
     </p>
     <p><label>observaciones:</label>
       <input type="text" name="comments" value="{{$trust->comments}}">
@@ -79,6 +78,11 @@
     <p><label>aportación inicial / observaciones:</label>
       <input type="text" name="initial_amount_comments" value="{{$trust->initial_amount_comments}}">
     </p>
+
+    <p><label>Actualizar todos los campos similares en todos 
+    los años de este fideicomiso
+      <input type="checkbox" name="all" value="1" checked="checked">
+    </label></p>
 
     <p><input type="submit" value="Actualizar"> </p>
   </form>
