@@ -17,7 +17,7 @@
 				<h1><a href="<?= url();?>">Las cajas negras del Gobierno</a></h1> 
 			</div>
 			<div class="col-sm-1 col-sm-offset-2">
-				<a href="<?= url();?>auth/logout" class="btn_logout">Cerrar Sesión</a>
+				<a href="<?= url();?>/auth/logout" class="btn_logout">Cerrar Sesión</a>
 			</div>
 		</div>
 	</div>
