@@ -18,7 +18,7 @@
 				<article class="featured">
 					<div>
 						<a href="#" class="category">Bicentenario</a>
-						<h2><a href="#">Festejos del Bicentenario</a></h2>
+						<h2><a href="/reportajes/post">Festejos del Bicentenario</a></h2>
 							<p class="author"><span >Lilia Saúl</span> • 17/abril/2015</p>
 					</div>
 				</article>
@@ -33,7 +33,7 @@
 					<div class="front">
 						<a href="#" class="category">Bicentenario</a>
 						<div>
-							<h2><a href="#">El Presidente del Bicentenario</a></h2>
+							<h2><a href="/reportajes/post">El Presidente del Bicentenario</a></h2>
 							<p class="author"><span >Lilia Saúl</span> • 17/abril/2015</p>
 						</div>
 					</div>
@@ -45,9 +45,9 @@
 						<img src="/images/abc.jpg">
 					</figure>
 					<div class="front">
-						<a href="#" class="category">ABC</a>
+						<a href="" class="category">ABC</a>
 						<div>
-							<h2><a href="#">Guardería ABC</a></h2>
+							<h2><a href="/reportajes/post">Guardería ABC</a></h2>
 							<p class="author"><span >Lilia Saúl</span> • 17/abril/2015</p>
 						</div>
 					</div>
@@ -61,7 +61,7 @@
 					<div class="front">
 					<a href="#" class="category">Bicentenario</a>
 						<div>
-							<h2><a href="#">Festejos del Bicentenario</a></h2>
+							<h2><a href="/reportajes/post">Festejos del Bicentenario</a></h2>
 							<p class="author"><span >Lilia Saúl</span> • 17/abril/2015</p>
 						</div>
 					</div>
@@ -69,7 +69,7 @@
 			</li>
 		</ul>
 		<div class="clearfix"></div>
-		<a href="#" class="col-sm-10 col-sm-offset-1 more">Más reportajes sobre Fideicomisos en México >></a>
+		<a href="/reportajes" class="col-sm-10 col-sm-offset-1 more">Más reportajes sobre Fideicomisos en México >></a>
 	</div>
 </section>  
 
@@ -94,7 +94,7 @@
 			<h2><strong>Consulta</strong> y <strong>descarga gratis</strong> los datos que publicamos.</h2>
 			<p>Integer dapibus nunc ex, vitae interdum metus consequat eu. Ut sagittis magna purus, at sagittis mauris pretium sagittis. Pellentesque metus elit, ornare ut lorem a, aliquet tempor lacus</p>
 			<p><a href="<?= url();?>/navegador-de-fideicomisos" class="btn_link">EXPLORAR DATOS</a></p>
-			<p><a href="#" class="btn_link">Datos abiertos</a></p>
+			<p><a href="/datos-abiertos" class="btn_link">Datos abiertos</a></p>
 		</div>
 	</div>
 </section>

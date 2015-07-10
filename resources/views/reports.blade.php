@@ -29,7 +29,7 @@
 					<li  class=" featured">
 						<article>
 							<a href="#" class="category">Bicentenario</a>
-							<a href="post.html" class="link_post">
+							<a href="/reportajes/post" class="link_post">
 								<figure>
 									<img src="/images/mexico-bicentenario.jpg">
 								</figure>
@@ -44,7 +44,7 @@
 					<li>
 						<article>	
 							<a href="#" class="category">Bicentenario</a>
-							<a href="#" class="link_post">
+							<a href="/reportajes/post" class="link_post">
 								<figure>
 									<img src="/images/1280px-bruxelles.jpg">
 								</figure>
@@ -56,7 +56,7 @@
 					<li>
 						<article>
 							<a href="#" class="category">ABC</a>
-							<a href="#" class="link_post">
+							<a href="/reportajes/post" class="link_post">
 								<figure>
 									<img src="/images/abc.jpg">
 								</figure>
@@ -68,7 +68,7 @@
 					<li>
 						<article>
 							<a href="#" class="category">Bicentenario</a>
-							<a href="#" class="link_post">
+							<a href="/reportajes/post" class="link_post">
 								<figure>
 									<img src="/images/bicentenario2.jpg">
 								</figure>
@@ -80,7 +80,7 @@
 					<li>
 						<article>
 							<a href="#" class="category">Bicentenario</a>
-							<a href="#" class="link_post">
+							<a href="/reportajes/post" class="link_post">
 								<figure>
 									<img src="/images/mexico-bicentenario.jpg">
 								</figure>

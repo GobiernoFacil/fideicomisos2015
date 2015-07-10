@@ -1269,7 +1269,7 @@ a.category, a.category:visited {
       .post article p a:hover {
         color: #8ba7c0; }
   .post article h2 {
-    color: #015383;
+    color: black;
     font: 700 21px "Roboto", Helvetica, Arial, sans-serif;
     padding: 33px 0 35px; }
 .post .likeaboss {
