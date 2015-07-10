@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-</head>
-<body>
+@extends('layouts.adminmaster')
+@section('body_class', 'admin')
+
+@section('title', 'Dashboard')
+@section('description', "Dashboard")
+
+@section('content')
+<section>
+ <div class="container">
   <h1>Dashboard</h1>
   <nav>
     <ul>
@@ -11,5 +14,6 @@
       <li><a href="{{url('navegador-de-fideicomisos')}}">fideicomisos</a></li>
     </ul>
   </nav>
-</body>
-</html>
+ </div>
+</section>
+@endsection
