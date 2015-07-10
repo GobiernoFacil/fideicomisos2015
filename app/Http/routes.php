@@ -24,7 +24,9 @@ Route::get('categorias', 'Lestrade@index');
 Route::post('sherlock/search', 'Sherlock@index');
 
 // [ EL HOME ]
-Route::get('/', 'WelcomeController@index');
+Route::get('/', function(){
+  return view('home');
+});
 
 // [ EL LOGIN ]
 Route::get('auth/login', 'Auth\AuthController@getLogin');
