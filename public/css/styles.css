@@ -300,6 +300,18 @@ nav.main .search input[type="search"] {
       background: #8ba7c0;
       color: white; }
 
+.login input {
+  display: block;
+  line-height: 35px;
+  width: 100%; }
+.login button, .login input[type="submit"] {
+  background: #FFED48;
+  border: 0;
+  color: black;
+  padding: 10px 25px; }
+  .login button:hover, .login input[type="submit"]:hover {
+    background: #FFD502; }
+
 .wrapper, .wrap {
   width: 90%;
   margin: 0 auto; }
@@ -1293,6 +1305,13 @@ a.category, a.category:visited {
   .columna_frase .lafrase {
     font: 300 26px "Roboto", Helvetica, Arial, sans-serif;
     margin-bottom: 0; }
+
+/* =login
+-------------------------------------------------------------- */
+.box_login {
+  background: #015383; }
+  .box_login p {
+    color: white; }
 
 /* =BTN
 -------------------------------------------------------------- */
