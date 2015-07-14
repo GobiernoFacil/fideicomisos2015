@@ -76,4 +76,7 @@ Route::group(['middleware' => 'auth'], function(){
   Route::post('trusts/update/{id}', 'Admin@updateTrust')->where('id', '[0-9]+');;
   Route::get('trusts/delete/{id}', 'Admin@deleteTrust')->where('id', '[0-9]+');;
   // [ ARTICLES ]
+  Route::get('articles', 'AdminArticles@index');
+  Route::get('articles/add', 'AdminArticles@create');
+  Route::get('articles/update/{id}', 'AdminArticles@edit');
 });
