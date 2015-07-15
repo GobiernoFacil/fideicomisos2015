@@ -12,6 +12,8 @@
     <ul>
       <li><a href="{{url('admin/dashboard')}}">dashboard</a></li>
       <li><a href="{{url('navegador-de-fideicomisos')}}">fideicomisos</a></li>
+      <li><a href="{{url('articles')}}">Artículos</a></li>
+      <li><a href="{{url('writers')}}">Escritores</a></li>
     </ul>
   </nav>
  </div>
