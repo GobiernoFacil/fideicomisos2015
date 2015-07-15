@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    protected $fillable = ['title', 'subtitle','autor','autor_name'];
+    protected $fillable = ['title', 'subtitle','author','author_name', 'image'];
 
     public function content(){
       return $this->hasMany('App\Models\ArticlesContent');

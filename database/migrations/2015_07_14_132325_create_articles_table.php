@@ -18,7 +18,8 @@ class CreateArticlesTable extends Migration
             $table->string('subtitle')->nullable();
             $table->string('image')->nullable();
             $table->integer('author')->nullable();
-            $table->string('author_name')->nullable();;
+            $table->string('author_name')->nullable();
+            $table->boolean('public')->default(0);
             $table->timestamps();
         });
     }

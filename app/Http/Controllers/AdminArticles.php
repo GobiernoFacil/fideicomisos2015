@@ -38,27 +38,10 @@ class AdminArticles extends Controller{
     return redirect('articles');
   }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+  public function edit($id){
+    $article = Article::find($id);
+    return view('admin.update-article')->with('article', $article);
+  }
 
     /**
      * Update the specified resource in storage.
