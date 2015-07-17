@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App|Models\Article;
+use App\Models\Article;
 
 class Irene extends Controller{
 
   public function index(Request $request, $id){
     $article = Article::find($id);
+    $article->update($request->all());
 
-    //$article
+    return response()->json($request->all());
   }
 }

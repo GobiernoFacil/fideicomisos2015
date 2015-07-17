@@ -9,7 +9,6 @@
 
   <form enctype="multipart/form-data" method="POST" action="{{url('articles/add')}}">
     {!! csrf_field() !!}
-    <p>{{csrf_token()}}</p>
     <p>título    : <input name="title"></p>
     <p>subtítulo : <input name="subtitle"></p>
     <p>Autor     : <input name="author_name"></p>

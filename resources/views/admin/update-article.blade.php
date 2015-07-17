@@ -9,8 +9,8 @@
 </head>
 <body class="post">
 
-
-<div class="publicar-articulo">Publicar</div>
+<!-- EL HEADER CON LA INFO PRINCIPAL -->
+<div class="publicar-articulo">{{$article->public ? 'Ocultar' : 'Publicar'}}</div>
 <article>
   <header>
     <div class="likeaboss">
@@ -19,19 +19,43 @@
       </figure>
     </div>
     <div class="container">
-      <div class="row">
+      <div class="row main-fields">
         <div class="col-sm-10 col-sm-offset-1">
           <a href="#" class="category">Bicentenario</a>
-          <h1>{{$article->title}}</h1>
-          <h2>{{$article->subtitle}}</h2>
-          <p> <span>17/abril/2015</span> | {{$article->author_name}} </p>
+          <h1><span data-field="title" class="input">{{$article->title}}</span></h1>
+          <h2><span data-field="subtitle" class="input">{{$article->subtitle}}</span></h2>
+          <p> 
+            <span>17/abril/2015</span> | 
+            <span data-field="author_name" class="input">{{$article->author_name}}</span>
+          </p>
           <div><a href="#" class="category">Cambiar imagen</a></div>
         </div>
       </div>
     </div>
   </header>
-</article>
 
+<!-- EL CONTENIDO DEL CHISME ESTE -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <p class="lead">Más de 5 mil millones de pesos trasladados a diversas dependencias del gobierno federal terminaron por ser ejercidos por empresas con poca o nula transparencia.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create the toolbar container -->
+<div id="toolbar">
+  <button class="ql-bold">Bold</button>
+  <button class="ql-italic">Italic</button>
+  <span title="Link" class="ql-format-button ql-link">anchor</span>
+</div>
+
+<!-- Create the editor container -->
+<div id="editor">
+  <div>Hello World!</div>
+</div>
+
+</article>
 <!-- LA APP -->
 <script>
   var CONFIG_DATA = {

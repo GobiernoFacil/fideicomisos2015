@@ -80,4 +80,5 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('articles/add', 'AdminArticles@create');
     Route::post('articles/add', 'AdminArticles@store');
     Route::get('articles/update/{id}', 'AdminArticles@edit')->where('id', '[0-9]+');
+    Route::post('articles/update/{id}', 'Irene@index');
 });

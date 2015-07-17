@@ -38,3 +38,7 @@
   text-align: center;
   width: 100%;
 }
+
+.input{
+  cursor: pointer;
+}
