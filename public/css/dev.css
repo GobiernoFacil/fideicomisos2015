@@ -42,3 +42,7 @@
 .input{
   cursor: pointer;
 }
+
+#add-more-content{
+  border: 1px solid red;
+}

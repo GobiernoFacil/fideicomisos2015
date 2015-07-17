@@ -20,6 +20,7 @@ class CreateArticlesTable extends Migration
             $table->integer('author')->nullable();
             $table->string('author_name')->nullable();
             $table->boolean('public')->default(0);
+            $table->text('lead')->nullable();
             $table->timestamps();
         });
     }

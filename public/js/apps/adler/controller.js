@@ -13,6 +13,7 @@ define(function(require){
   //
   var Backbone = require('backbone'),
       Quill    = require('quill'),
+      Content  = require('views/content_view'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -23,13 +24,16 @@ define(function(require){
   Upload_path   = CONFIG_DATA.uploads,
   Controller_el = "body",
   Update_url    = '/articles/update/' + Article.id,
+  Empty_field   = "Editar",
 
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
-  Publish_bar = document.querySelector('.publicar-articulo');
+  Publish_bar  = document.querySelector('.publicar-articulo'),
+  Add_content  = document.getElementById('add-more-content'),
+  Content_type = document.querySelector('#add-more-content select');
  
 
   //
@@ -43,7 +47,8 @@ define(function(require){
     //
     events :{
       'click .publicar-articulo' : 'publish',
-      'click .input'             : 'make_input'
+      'click .input'             : 'make_input',
+      'submit #add-more-content' : 'add_content'
     },
 
     // 
@@ -82,6 +87,9 @@ define(function(require){
       }
     },
 
+    // [click .input]
+    // cambian un span por un input
+    //
     make_input : function(e){
       // [ CLOSE OTHER FIELDS ]
       this.close_fields();
@@ -89,21 +97,64 @@ define(function(require){
       // [ GENERATE THE INPUT ]
       var old    = e.currentTarget,
           parent = old.parentNode,
-          input  = document.createElement('input'),
           field  = old.getAttribute('data-field'),
-          value  = this.model.get(field);
+          input  = field == "lead" ? document.createElement('textarea') : document.createElement('input'),
+          value  = this.model.get(field) ? this.model.get(field) : Empty_field;
       parent.replaceChild(input, old);
       input.name = field;
       input.value = value;
+      input.classList.add("editable");
 
       // [ ADD A LISTENER TO THE ENTER ]
       window.onkeyup = null;
       window.onkeyup = this.keyboard_listener.bind(this, input);
     },
 
+    // [submit #add-more-content]
+    // agrega un nuevo campo de edición
+    //
+    add_content : function(e){
+      e.preventDefault();
+      var tagname, content, className;
+      switch(Content_type.value){
+        case "h2":
+          tagName = "h2";
+          className = "";
+          break;
+        case "h3":
+          tagName = "h3";
+          className = "";
+          break;
+        case "p":
+          tagName = "p";
+          className = "";
+          break;
+        case "l-quote":
+          tagName = "div";
+          className = "columna_frase left";
+          break;
+        default:
+          tagName = "p";
+          className = "";
+          break;
+      }
+
+      content = new Content({
+        tagName   : tagName,
+        className : className,
+        type      : Content_type.value
+      });
+
+      $(Add_content).before(content.render().el);
+    },
+
     //
     // H E L P E R S
     // ------------------------------------------------------------------------------
+    //
+
+    //
+    //
     //
     save_field : function(_input){
       var _field = _input.name,
@@ -116,6 +167,9 @@ define(function(require){
 
     },
 
+    //
+    //
+    //
     updater : function(field, value, callback){
       var that   = this,
           msg    = {};
@@ -128,14 +182,14 @@ define(function(require){
     },
 
     close_fields : function(inputs){
-      var _fields = inputs || document.querySelectorAll('.main-fields input');
+      var _fields = inputs || document.querySelectorAll('input.editable');
       if(_fields.length){
         _.each(_fields, function(_field){
           var old    = _field,
               parent = old.parentNode,
               span   = document.createElement('span'),
               field  = old.name,
-              value  = this.model.get(field);
+              value  = this.model.get(field) ? this.model.get(field) : Empty_field;
           parent.replaceChild(span, old);
           span.setAttribute("data-field", field);
           span.classList.add("input");

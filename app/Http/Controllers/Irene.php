@@ -16,4 +16,12 @@ class Irene extends Controller{
 
     return response()->json($request->all());
   }
+
+  public function addContent(Request $request, $id){
+    $article = Article::find($id);
+  }
+
+  public function updateContent(Request $request, $id){
+    $article = Article::find($id);
+  }
 }

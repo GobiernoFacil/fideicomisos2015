@@ -37,24 +37,49 @@
 <!-- EL CONTENIDO DEL CHISME ESTE -->
   <div class="container">
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
-        <p class="lead">Más de 5 mil millones de pesos trasladados a diversas dependencias del gobierno federal terminaron por ser ejercidos por empresas con poca o nula transparencia.</p>
+      <div class="col-sm-8 col-sm-offset-2" id="content-container">
+        <!-- LEAD -->
+        <p class="lead">
+        <span data-field="lead" class="input">
+          {{empty($article->lead)? "Editar" : $article->lead}}
+        </span>
+        </p>
+
+        <!-- ADD MORE CONTENT -->
+        <form id="add-more-content">
+        <p>
+        <select name="type">
+          <option value="h2">título lv.2</option>
+          <option value="h3">título lv.3</option>
+          <option value="p">texto</option>
+          <option value="l-quote">cita izquierda</option>
+          <option value="r-quote">cita derecha</option>
+          <!--<option value="img">foto</option>
+          <option value="carousell">Carrusel</option>
+          <option value="graph">Gráfica</option>
+          <option value="youtube">Youtube</option>
+          -->
+        </select>
+        </p>
+        <p><input type="submit" value="agregar"></p>
+        </form>
+
       </div>
     </div>
   </div>
 
-  <!-- Create the toolbar container -->
+  <!-- Create the toolbar container
 <div id="toolbar">
   <button class="ql-bold">Bold</button>
   <button class="ql-italic">Italic</button>
   <span title="Link" class="ql-format-button ql-link">anchor</span>
 </div>
-
-<!-- Create the editor container -->
+ -->
+<!-- Create the editor container
 <div id="editor">
   <div>Hello World!</div>
 </div>
-
+ -->
 </article>
 <!-- LA APP -->
 <script>
