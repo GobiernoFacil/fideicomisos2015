@@ -67,13 +67,21 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // [ EL ADMIN ] 
 Route::group(['middleware' => 'auth'], function(){
-  // [ DASHBOARD ]
-  Route::get('home', 'Admin@index');
-  // [ TRUSTS ]
-  Route::get('trusts/add', 'Admin@saveTrustForm');
-  Route::post('trusts/add', 'Admin@saveTrust');
-  Route::get('trusts/update/{id}', 'Admin@updateTrustForm')->where('id', '[0-9]+');;
-  Route::post('trusts/update/{id}', 'Admin@updateTrust')->where('id', '[0-9]+');;
-  Route::get('trusts/delete/{id}', 'Admin@deleteTrust')->where('id', '[0-9]+');;
-  // [ ARTICLES ]
+    // [ DASHBOARD ]
+    Route::get('home', 'Admin@index');
+    // [ TRUSTS ]
+    Route::get('trusts/add', 'Admin@saveTrustForm');
+    Route::post('trusts/add', 'Admin@saveTrust');
+    Route::get('trusts/update/{id}', 'Admin@updateTrustForm')->where('id', '[0-9]+');
+    Route::post('trusts/update/{id}', 'Admin@updateTrust')->where('id', '[0-9]+');
+    Route::get('trusts/delete/{id}', 'Admin@deleteTrust')->where('id', '[0-9]+');
+    // [ ARTICLES ]
+    Route::get('articles', 'AdminArticles@index');
+    Route::get('articles/add', 'AdminArticles@create');
+    Route::post('articles/add', 'AdminArticles@store');
+    Route::get('articles/update/{id}', 'AdminArticles@edit')->where('id', '[0-9]+');
+    Route::post('articles/update/{id}', 'Irene@index');
+    // [ ARTICLES CONTENT ]
+    Route::post('articles/content/save/{id}', 'Irene@addContent');
+    Route::post('articles/content/update/{id}', 'Irene@updateContent');
 });

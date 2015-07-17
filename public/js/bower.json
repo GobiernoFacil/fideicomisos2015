@@ -24,6 +24,7 @@
     "d3": "~3.5.5",
     "velocity": "~1.2.2",
     "requirejs-text": "~2.0.14",
-    "squire-rte": "~1.2.0"
+    "squire-rte": "~1.2.0",
+    "quill": "~0.19.14"
   }
 }

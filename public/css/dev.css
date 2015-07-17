@@ -1,3 +1,8 @@
+
+/*
+* LA gráfica pitera
+*
+*/
 .bar-container .bar{
   background:grey;
 }
@@ -17,4 +22,27 @@
   fill: none;
   stroke: #ccc;
   stroke-width: 1.5px;
+}
+
+/*
+* EL EDITOR DE ARTÍCULOS
+* 
+*/
+
+.publicar-articulo{
+  background: black;
+  color:white;
+  cursor: pointer;
+  height: 3em;
+  pading: 5em auto;
+  text-align: center;
+  width: 100%;
+}
+
+.input{
+  cursor: pointer;
+}
+
+#add-more-content{
+  border: 1px solid red;
 }
