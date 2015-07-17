@@ -59,6 +59,7 @@ define(function(require){
     initialize : function(){
       this.model = new Backbone.Model(Article);
       this.Quill = Quill;
+      // editor = new app.Quill("#editor", {theme: "snow", modules : {"toolbar" : { container : "#toolbar"}, 'link-tooltip': true}});
     },
 
     //
