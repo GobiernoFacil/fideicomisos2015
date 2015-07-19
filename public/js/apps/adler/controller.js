@@ -12,7 +12,6 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   var Backbone = require('backbone'),
-      Quill    = require('quill'),
       Content  = require('views/content_view'),
 
   //
@@ -63,7 +62,7 @@ define(function(require){
     //
     initialize : function(){
       this.model = new Backbone.Model(Article);
-      this.Quill = Quill;
+      // this.Quill = Quill;
       // editor = new app.Quill("#editor", {theme: "snow", modules : {"toolbar" : { container : "#toolbar"}, 'link-tooltip': true}});
     },
 
@@ -115,34 +114,10 @@ define(function(require){
     //
     add_content : function(e){
       e.preventDefault();
-      var tagname, content, className;
-      switch(Content_type.value){
-        case "h2":
-          tagName = "h2";
-          className = "";
-          break;
-        case "h3":
-          tagName = "h3";
-          className = "";
-          break;
-        case "p":
-          tagName = "p";
-          className = "";
-          break;
-        case "l-quote":
-          tagName = "div";
-          className = "columna_frase left";
-          break;
-        default:
-          tagName = "p";
-          className = "";
-          break;
-      }
 
-      content = new Content({
-        tagName   : tagName,
-        className : className,
-        type      : Content_type.value
+      var content = new Content({
+        type       : Content_type.value,
+        controller : this
       });
 
       $(Add_content).before(content.render().el);

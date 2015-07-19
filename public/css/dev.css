@@ -46,3 +46,7 @@
 #add-more-content{
   border: 1px solid red;
 }
+
+.editable{
+  padding : 0;
+}

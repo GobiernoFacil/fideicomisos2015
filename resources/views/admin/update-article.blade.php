@@ -52,16 +52,16 @@
           <option value="h2">título lv.2</option>
           <option value="h3">título lv.3</option>
           <option value="p">texto</option>
-          <option value="l-quote">cita izquierda</option>
-          <option value="r-quote">cita derecha</option>
+          <option value="lq">cita izquierda</option>
+          <option value="rq">cita derecha</option>
           <!--<option value="img">foto</option>
           <option value="carousell">Carrusel</option>
           <option value="graph">Gráfica</option>
           <option value="youtube">Youtube</option>
           -->
         </select>
+        <input type="submit" value="agregar">
         </p>
-        <p><input type="submit" value="agregar"></p>
         </form>
 
       </div>

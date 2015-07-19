@@ -11,8 +11,9 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone = require('backbone'),
-      Quill    = require('quill'),
+  var Backbone   = require('backbone'),
+      Quill      = require('quill'),
+      Title_form = require('text!templates/title_form.html'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -23,9 +24,9 @@ define(function(require){
   Upload_path = CONFIG_DATA.uploads,
   Save_url    = '/articles/content/save/' + Article.id,
   Update_url  = '/articles/content/update/' + Article.id,
-  Small_field = "El Coloso, creación de Juan Carlos Canfield, compartió el espacio de una enorme explanada con un estacionamiento, propiedad de la SEP.";
-  Big_field   = "El gobierno federal encabezado por el entonces presidente Felipe Calderón Hinojosa decidió “transparentar” el uso de los recursos del Fideicomiso Bicentenario y al desmenuzar cada una de las facturas otorgadas a EL UNIVERSAL, éste encontró no sólo irregularidades en la forma en cómo se gastaron los recursos. Se observaron sobrecostos, ejercicio del gasto por parte de empresas inexpertas e incluso fondos no reportados.";
-  Title_field = "Título";  
+  ClassName   = "editable",
+  TagName     = "section",
+  Empty_field = "Edit the stuff";
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -43,6 +44,24 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
+      'click h2' : 'title_form'
+    },
+
+    //
+    // [ DEFINE THE ELEMENT ]
+    //
+    tagName   : TagName,
+    className : ClassName,
+
+    //
+    // [ DEFINE THE TEMPLATES ]
+    //
+    templates : {
+      h2 : _.template("<h2><%=content%></h2>"),
+      h3 : _.template("<h3><%=content%></h3>"),
+      p  : _.template("<div><%=content%></div>"),
+      lq : _.template("<div class='columna_frase left'><p><%=content%></p></div>"),
+      hxf : _.template(Title_form),
     },
 
     //
@@ -50,30 +69,13 @@ define(function(require){
     //
     //
     initialize : function(settings){
-      var content;
-      switch(settings.type){
-        case "h2":
-          content = Title_field;
-          break;
-        case "h3":
-          content = Title_field;
-          break;
-        case "p":
-          content = Big_field;
-          break;
-        case "l-quote":
-          content = Small_field;
-          break;
-        default:
-          content = Title_field;
-          break;
-      }
 
       this.model = new Backbone.Model({
         article_id : Article.id,
-        type       : settings.type,
-        content    : content,
-        order      : 0
+        content    : Empty_field,
+        controller : settings.controller,
+        order      : 0,
+        type       : settings.type
       });
     },
 
@@ -81,27 +83,28 @@ define(function(require){
     // R E N D E R   F U N C T I O N S
     // ------------------------------------------------------------------------------
     //
+    // [ submit / ESC / call from controller ]
     render : function(){
-      if(this.model.get('type') == "l-quote"){
-        this.el.innerHTML = '<p class="lafrase">' + this.model.get('content') + '</p>';
-      }
-      else{
-        this.el.innerHTML = this.model.get('content');
-      }
+      var m = this.model.attributes;
+
+      this.el.innerHTML = this.templates[m.type](m);
       return this;
-    }
+    },
 
-
-    //
-    // D I R E C T   I N T E R A C T I O N
-    // ------------------------------------------------------------------------------
-    //
+    // [click h2, h3]
+    title_form : function(e){
+      e.preventDefault();
+      this.el.innerHTML = this.templates.hxf(this.model.attributes);
+      if(this.model.get("content") === Empty_field){
+        this.el.querySelector("input").value = "";
+      }
+      this.el.querySelector("input").focus();
+    },
 
     //
     // H E L P E R S
     // ------------------------------------------------------------------------------
     //
-
   });
 
   //
