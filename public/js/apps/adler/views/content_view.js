@@ -22,8 +22,7 @@ define(function(require){
   Token       = CONFIG_DATA.token,
   Article     = CONFIG_DATA.article,
   Upload_path = CONFIG_DATA.uploads,
-  Save_url    = '/articles/content/save/' + Article.id,
-  Update_url  = '/articles/content/update/' + Article.id,
+  Save_url    = '/articles/content/' + Article.id,
   ClassName   = "editable",
   TagName     = "section",
   Empty_field = "Edit the stuff";
@@ -44,7 +43,9 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'click h2' : 'title_form'
+      'click h2'      : 'title_form',
+      'submit .title' : 'save_title',
+      'click .kill'   : 'remove_title'
     },
 
     //
@@ -75,8 +76,11 @@ define(function(require){
         content    : Empty_field,
         controller : settings.controller,
         order      : 0,
-        type       : settings.type
+        type       : settings.type,
+        _token     : Token
       });
+      this.model.urlRoot = Save_url;
+      this.listenTo(this.model, 'destroy', this.remove);
     },
 
     //
@@ -100,6 +104,20 @@ define(function(require){
       }
       this.el.querySelector("input").focus();
     },
+
+    // [ submit .title ]
+    save_title : function(e){
+      e.preventDefault();
+      var content = this.el.querySelector('input[name="content"]').value;
+      content = content ? content : this.model.get('content');
+      this.model.set({content: content});
+      this.model.save(null, {success : this.render.bind(this)});
+    },
+
+    remove_title : function(e){
+      e.preventDefault();
+      this.model.destroy({data : "_token=" + Token, wait : true});
+    }
 
     //
     // H E L P E R S
