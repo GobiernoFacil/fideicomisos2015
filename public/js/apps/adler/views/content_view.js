@@ -16,6 +16,7 @@ define(function(require){
       Title_form = require('text!templates/title_form.html'),
       YT_video   = require('text!templates/youtube_video.html'),
       YT_form    = require('text!templates/youtube_form.html'),
+      Area_form  = require('text!templates/textarea_form.html'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -48,6 +49,9 @@ define(function(require){
       'click h2'            : 'title_form',
       'click h3'            : 'title_form',
       'click .editar-video' : 'youtube_form',
+      'click .content'      : 'content_form',
+      'click .left'         : 'content_form',
+      'click .right'        : 'content_form',
       'submit .title' : 'save_title',
       'click .kill'   : 'remove_title'
     },
@@ -64,8 +68,10 @@ define(function(require){
     templates : {
       h2  : _.template("<h2><%=content%></h2>"),
       h3  : _.template("<h3><%=content%></h3>"),
-      p   : _.template("<div><%=content%></div>"),
+      p   : _.template("<p class='content'><%=content%></p>"),
       lq  : _.template("<div class='columna_frase left'><p><%=content%></p></div>"),
+      rq  : _.template("<div class='columna_frase right'><p><%=content%></p></div>"),
+      af  : _.template(Area_form),
       hxf : _.template(Title_form),
       yt  : _.template(YT_video),
       ytf : _.template(YT_form)
@@ -121,6 +127,16 @@ define(function(require){
     youtube_form : function(e){
       e.preventDefault();
       this.el.innerHTML = this.templates.ytf(this.model.attributes);
+      if(this.model.get("content") === Empty_field){
+        this.el.querySelector("textarea").value = "";
+      }
+      this.el.querySelector("textarea").focus();
+    },
+
+    // [ click .content | .left | .right ]
+    content_form : function(e){
+      e.preventDefault();
+      this.el.innerHTML = this.templates.af(this.model.attributes);
       if(this.model.get("content") === Empty_field){
         this.el.querySelector("textarea").value = "";
       }
