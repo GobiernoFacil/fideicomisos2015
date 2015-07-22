@@ -54,6 +54,8 @@
           <option value="p">texto</option>
           <option value="lq">cita izquierda</option>
           <option value="rq">cita derecha</option>
+          <option value="yt">Youtube</option>
+          <option value="img">foto</option>
           <!--<option value="img">foto</option>
           <option value="carousell">Carrusel</option>
           <option value="graph">Gráfica</option>
@@ -86,7 +88,8 @@
   var CONFIG_DATA = {
     token   : "{{csrf_token()}}",
     article : <?php echo json_encode($article); ?>,
-    uploads : "/images/articles/" 
+    uploads : "/images/articles/",
+    content : <?php echo json_encode($content->toArray()); ?>
   };
 </script>
 <script data-main="/js/apps/adler/main" src="/js/bower_components/requirejs/require.js"></script>

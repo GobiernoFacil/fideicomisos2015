@@ -14,6 +14,8 @@ define(function(require){
   var Backbone   = require('backbone'),
       Quill      = require('quill'),
       Title_form = require('text!templates/title_form.html'),
+      YT_video   = require('text!templates/youtube_video.html'),
+      YT_form    = require('text!templates/youtube_form.html'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -25,7 +27,7 @@ define(function(require){
   Save_url    = '/articles/content/' + Article.id,
   ClassName   = "editable",
   TagName     = "section",
-  Empty_field = "Edit the stuff";
+  Empty_field = "Editar";
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -43,7 +45,9 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'click h2'      : 'title_form',
+      'click h2'            : 'title_form',
+      'click h3'            : 'title_form',
+      'click .editar-video' : 'youtube_form',
       'submit .title' : 'save_title',
       'click .kill'   : 'remove_title'
     },
@@ -58,11 +62,13 @@ define(function(require){
     // [ DEFINE THE TEMPLATES ]
     //
     templates : {
-      h2 : _.template("<h2><%=content%></h2>"),
-      h3 : _.template("<h3><%=content%></h3>"),
-      p  : _.template("<div><%=content%></div>"),
-      lq : _.template("<div class='columna_frase left'><p><%=content%></p></div>"),
+      h2  : _.template("<h2><%=content%></h2>"),
+      h3  : _.template("<h3><%=content%></h3>"),
+      p   : _.template("<div><%=content%></div>"),
+      lq  : _.template("<div class='columna_frase left'><p><%=content%></p></div>"),
       hxf : _.template(Title_form),
+      yt  : _.template(YT_video),
+      ytf : _.template(YT_form)
     },
 
     //
@@ -70,17 +76,9 @@ define(function(require){
     //
     //
     initialize : function(settings){
-
-      this.model = new Backbone.Model({
-        article_id : Article.id,
-        content    : Empty_field,
-        controller : settings.controller,
-        order      : 0,
-        type       : settings.type,
-        _token     : Token
-      });
       this.model.urlRoot = Save_url;
       this.listenTo(this.model, 'destroy', this.remove);
+      this.controller = settings.controller;
     },
 
     //
@@ -108,7 +106,7 @@ define(function(require){
     // [ submit .title ]
     save_title : function(e){
       e.preventDefault();
-      var content = this.el.querySelector('input[name="content"]').value;
+      var content = this.el.querySelector('textarea').value;
       content = content ? content : this.model.get('content');
       this.model.set({content: content});
       this.model.save(null, {success : this.render.bind(this)});
@@ -117,6 +115,16 @@ define(function(require){
     remove_title : function(e){
       e.preventDefault();
       this.model.destroy({data : "_token=" + Token, wait : true});
+    },
+
+    // [ click .editar-video ]
+    youtube_form : function(e){
+      e.preventDefault();
+      this.el.innerHTML = this.templates.ytf(this.model.attributes);
+      if(this.model.get("content") === Empty_field){
+        this.el.querySelector("textarea").value = "";
+      }
+      this.el.querySelector("textarea").focus();
     }
 
     //

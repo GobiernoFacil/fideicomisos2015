@@ -21,6 +21,7 @@ define(function(require){
   Token         = CONFIG_DATA.token,
   Article       = CONFIG_DATA.article,
   Upload_path   = CONFIG_DATA.uploads,
+  Contentents   = CONFIG_DATA.content,
   Controller_el = "body",
   Update_url    = '/articles/update/' + Article.id,
   Empty_field   = "Editar",
@@ -61,7 +62,9 @@ define(function(require){
     //
     //
     initialize : function(){
-      this.model = new Backbone.Model(Article);
+      this.model      = new Backbone.Model(Article);
+      this.collection = new Backbone.Collection(Contentents);
+      this.render_all_content();
       // this.Quill = Quill;
       // editor = new app.Quill("#editor", {theme: "snow", modules : {"toolbar" : { container : "#toolbar"}, 'link-tooltip': true}});
     },
@@ -115,18 +118,39 @@ define(function(require){
     add_content : function(e){
       e.preventDefault();
 
-      var content = new Content({
-        type       : Content_type.value,
-        controller : this
+      var m = new Backbone.Model({
+        article_id : this.model.id,
+        content    : Empty_field,
+        order      : 0,
+        type       : Content_type.value
       });
 
-      $(Add_content).before(content.render().el);
+      this.render_content(m);
     },
 
     //
     // H E L P E R S
     // ------------------------------------------------------------------------------
     //
+
+    //
+    //
+    //
+    render_content : function(m){
+      m.set({_token : Token});
+
+      var content = new Content({model : m, controller : this});
+      $(Add_content).before(content.render().el);
+    },
+
+    //
+    //
+    //
+    render_all_content : function(){
+      this.collection.each(function(m){
+        this.render_content(m);
+      }, this);
+    },
 
     //
     //
@@ -156,6 +180,9 @@ define(function(require){
       }, 'json');
     },
 
+    //
+    //
+    //
     close_fields : function(inputs){
       var _fields = inputs || document.querySelectorAll('input.editable');
       if(_fields.length){
@@ -173,6 +200,9 @@ define(function(require){
       }
     },
 
+    //
+    //
+    //
     keyboard_listener : function(_input, e){
       if(e.keyCode === 13 && e.target == _input){
         this.save_field(_input);

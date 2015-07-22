@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\ArticlesContent;
 
 use Storage;
 use File;
@@ -40,7 +41,11 @@ class AdminArticles extends Controller{
 
   public function edit($id){
     $article = Article::find($id);
-    return view('admin.update-article')->with('article', $article);
+    $content = ArticlesContent::where(['article_id' => $article->id])->get();
+    return view('admin.update-article')->with([
+      'article' => $article,
+      'content' => $content
+    ]);
   }
 
     /**
