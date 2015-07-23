@@ -1,10 +1,5 @@
 <form>
- <p>
-   <textarea name="content" type="text" placeholder="texto">
-     <%=content%>
-   </textarea>
- </p>
- <p>
+  <p><input name="content" type="text" value="<%=_.escape(content)%>">
    <a class="kill" href="#">eliminar</a> | 
    <a class="cancel" href="#">cancelar</a> | 
    <a class="save" href="#">guardar</a>

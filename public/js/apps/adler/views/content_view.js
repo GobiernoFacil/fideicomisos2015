@@ -11,12 +11,15 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
+  //  [ libraries ]
   var Backbone   = require('backbone'),
       Quill      = require('quill'),
       Dropzone   = require('dropzone'),
+  //  [ templates ]
       Title_form = require('text!templates/title_form.html'),
       YT_video   = require('text!templates/youtube_video.html'),
       YT_form    = require('text!templates/youtube_form.html'),
+      Input_form = require('text!templates/input_form.html'),
       Area_form  = require('text!templates/textarea_form.html'),
       Img_form   = require('text!templates/img_form.html'),
 
@@ -48,15 +51,20 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'click h2'            : 'title_form',
-      'click h3'            : 'title_form',
-      'click .editar-video' : 'youtube_form',
-      'click .content'      : 'content_form',
-      'click .left'         : 'content_form',
-      'click .right'        : 'content_form',
-      'click img.ed'  : 'img_form',
-      'submit .title' : 'save_title',
-      'click .kill'   : 'remove_title'
+      'click h2'            : 'input_form',
+      'click h3'            : 'input_form',
+      'click .editar-video' : 'input_form',
+
+      'click .content' : 'content_form',
+      'click .left'    : 'content_form',
+      'click .right'   : 'content_form',
+
+      'click .kill'   : 'delete',
+      'click .cancel' : 'render',
+      'click .save'   : 'save',
+      'submit form'   : 'save',
+
+      'click img.ed'  : 'img_form'
     },
 
     //
@@ -74,7 +82,9 @@ define(function(require){
       p    : _.template("<p class='content'><%=content%></p>"),
       lq   : _.template("<div class='columna_frase left'><p><%=content%></p></div>"),
       rq   : _.template("<div class='columna_frase right'><p><%=content%></p></div>"),
+      inf  : _.template(Input_form),
       af   : _.template(Area_form),
+      
       hxf  : _.template(Title_form),
       yt   : _.template(YT_video),
       ytf  : _.template(YT_form),
@@ -96,49 +106,30 @@ define(function(require){
     // R E N D E R   F U N C T I O N S
     // ------------------------------------------------------------------------------
     //
+    
     // [ submit / ESC / call from controller ]
-    render : function(){
+    // Genera el HTML del elemento seleccionado
+    //
+    render : function(e){
+      if(e !== void 0) e.preventDefault();
       var m = this.model.attributes;
 
-      this.el.innerHTML = this.templates[m.type](m);
+      this.el.innerHTML = _.unescape(this.templates[m.type](m));
       return this;
     },
 
-    // [click h2, h3]
-    title_form : function(e){
+    // [ click h2, h3 ]
+    // Genera un input para editar el contenido
+    //
+    input_form : function(e){
       e.preventDefault();
-      this.el.innerHTML = this.templates.hxf(this.model.attributes);
-      if(this.model.get("content") === Empty_field){
-        this.el.querySelector("input").value = "";
-      }
+      this.el.innerHTML = this.templates.inf(this.model.attributes);
       this.el.querySelector("input").focus();
     },
 
-    // [ submit .title ]
-    save_title : function(e){
-      e.preventDefault();
-      var content = this.el.querySelector('textarea').value;
-      content = content ? content : this.model.get('content');
-      this.model.set({content: content});
-      this.model.save(null, {success : this.render.bind(this)});
-    },
-
-    remove_title : function(e){
-      e.preventDefault();
-      this.model.destroy({data : "_token=" + Token, wait : true});
-    },
-
-    // [ click .editar-video ]
-    youtube_form : function(e){
-      e.preventDefault();
-      this.el.innerHTML = this.templates.ytf(this.model.attributes);
-      if(this.model.get("content") === Empty_field){
-        this.el.querySelector("textarea").value = "";
-      }
-      this.el.querySelector("textarea").focus();
-    },
-
     // [ click .content | .left | .right ]
+    // Genera un textarea para editar el contenido
+    //
     content_form : function(e){
       e.preventDefault();
       this.el.innerHTML = this.templates.af(this.model.attributes);
@@ -148,16 +139,45 @@ define(function(require){
       this.el.querySelector("textarea").focus();
     },
 
+    // [ click .save | submit form ]
+    // Guarda el contenido en el servidor
+    //
+    save : function(e){
+      e.preventDefault();
+      // [1] obtiene el valor del campo. Si este está vacío, deja el que 
+      //     tenía el modelo.
+      var input   = this.el.querySelector('input[type="text"]') || this.el.querySelector('textarea'),
+          content = _.unescape(input.value);
+      content = content ? content : this.model.get('content');
+      // [2] actualiza el modelo y lo salva. Al salvarlo, genera el HTML del contenido
+      this.model.set({content: content});
+      this.model.save(null, {success : this.render.bind(this, void 0)});
+    },
+
+    // [ click .kill ]
+    // Elimina el contenido
+    //
+    delete : function(e){
+      console.log(e);
+      e.preventDefault();
+      // [1] elimina el modelo. Al ser eliminado, el view también desaparece
+      this.model.destroy({data : "_token=" + Token, wait : true});
+    },
+
     // []
     img_form : function(e){
       e.preventDefault();
       this.el.innerHTML = this.templates.imgf(this.model.attributes);
-      var el = this.el.querySelector('.dropzone');
-      var myDropzone = new Dropzone(el, {
-        url     : "/articles/image/" + this.model.get('article_id'),
+      var el         = this.el.querySelector('.dropzone'),
+          that       = this,
+          myDropzone = new Dropzone(el, {
+        url     : function(){
+          return "/articles/image/" + that.model.get('article_id');
+        },
         headers : {
           'X-CSRF-TOKEN' : Token
-        }
+        },
+        autoProcessQueue : false
       });
     }
     //

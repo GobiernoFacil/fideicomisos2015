@@ -58,12 +58,8 @@
           <option value="lq">cita izquierda</option>
           <option value="rq">cita derecha</option>
           <option value="yt">Youtube</option>
-          <option value="img">foto</option>
-          <!--<option value="img">foto</option>
-          <option value="carousell">Carrusel</option>
-          <option value="graph">Gráfica</option>
-          <option value="youtube">Youtube</option>
-          -->
+          <option value="img">imágenes</option>
+          <!--<option value="graph">Gráfica</option>-->
         </select>
         <input type="submit" value="agregar">
         </p>
@@ -86,6 +82,8 @@
 </div>
  -->
 </article>
+
+
 <!-- LA APP -->
 <script>
   var CONFIG_DATA = {
