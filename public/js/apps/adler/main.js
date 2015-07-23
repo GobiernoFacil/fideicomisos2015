@@ -16,7 +16,8 @@ require.config({
     velocity      : "../../bower_components/velocity/velocity.min",
     "velocity-ui" : "../../bower_components/velocity/velocity.ui.min",
     d3            : "../../bower_components/d3/d3.min",
-    quill         : "../../bower_components/quill/dist/quill.min"
+    quill         : "../../bower_components/quill/dist/quill.min",
+    dropzone      : "../../bower_components/dropzone/dist/dropzone-amd-module"
   },
   shim : {
     backbone : {

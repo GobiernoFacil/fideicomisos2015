@@ -6,6 +6,9 @@
   <link rel="stylesheet" type="text/css"  href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/styles.css" />
   <link rel="stylesheet" type="text/css" href="/css/dev.css" />
+  <!-- img uploader -->
+  <link rel="stylesheet" type="text/css" href="/js/bower_components/dropzone/dist/basic.css">
+  <link rel="stylesheet" type="text/css" href="/js/bower_components/dropzone/dist/dropzone.css">
 </head>
 <body class="post">
 

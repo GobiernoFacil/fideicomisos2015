@@ -13,10 +13,12 @@ define(function(require){
   //
   var Backbone   = require('backbone'),
       Quill      = require('quill'),
+      Dropzone   = require('dropzone'),
       Title_form = require('text!templates/title_form.html'),
       YT_video   = require('text!templates/youtube_video.html'),
       YT_form    = require('text!templates/youtube_form.html'),
       Area_form  = require('text!templates/textarea_form.html'),
+      Img_form   = require('text!templates/img_form.html'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -52,6 +54,7 @@ define(function(require){
       'click .content'      : 'content_form',
       'click .left'         : 'content_form',
       'click .right'        : 'content_form',
+      'click img.ed'  : 'img_form',
       'submit .title' : 'save_title',
       'click .kill'   : 'remove_title'
     },
@@ -66,15 +69,17 @@ define(function(require){
     // [ DEFINE THE TEMPLATES ]
     //
     templates : {
-      h2  : _.template("<h2><%=content%></h2>"),
-      h3  : _.template("<h3><%=content%></h3>"),
-      p   : _.template("<p class='content'><%=content%></p>"),
-      lq  : _.template("<div class='columna_frase left'><p><%=content%></p></div>"),
-      rq  : _.template("<div class='columna_frase right'><p><%=content%></p></div>"),
-      af  : _.template(Area_form),
-      hxf : _.template(Title_form),
-      yt  : _.template(YT_video),
-      ytf : _.template(YT_form)
+      h2   : _.template("<h2><%=content%></h2>"),
+      h3   : _.template("<h3><%=content%></h3>"),
+      p    : _.template("<p class='content'><%=content%></p>"),
+      lq   : _.template("<div class='columna_frase left'><p><%=content%></p></div>"),
+      rq   : _.template("<div class='columna_frase right'><p><%=content%></p></div>"),
+      af   : _.template(Area_form),
+      hxf  : _.template(Title_form),
+      yt   : _.template(YT_video),
+      ytf  : _.template(YT_form),
+      img  : _.template("<p><img class='ed' width='100' height='100'></p>"),
+      imgf : _.template(Img_form)
     },
 
     //
@@ -141,8 +146,20 @@ define(function(require){
         this.el.querySelector("textarea").value = "";
       }
       this.el.querySelector("textarea").focus();
-    }
+    },
 
+    // []
+    img_form : function(e){
+      e.preventDefault();
+      this.el.innerHTML = this.templates.imgf(this.model.attributes);
+      var el = this.el.querySelector('.dropzone');
+      var myDropzone = new Dropzone(el, {
+        url     : "/articles/image/" + this.model.get('article_id'),
+        headers : {
+          'X-CSRF-TOKEN' : Token
+        }
+      });
+    }
     //
     // H E L P E R S
     // ------------------------------------------------------------------------------
