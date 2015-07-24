@@ -11,9 +11,9 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone = require('backbone'),
-      Quill    = require('quill'),
-      Content  = require('views/content_view'),
+  var Backbone    = require('backbone'),
+      Content     = require('views/content_view'),
+      Content_img = require('views/content_img_view'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -22,6 +22,7 @@ define(function(require){
   Token         = CONFIG_DATA.token,
   Article       = CONFIG_DATA.article,
   Upload_path   = CONFIG_DATA.uploads,
+  Contentents   = CONFIG_DATA.content,
   Controller_el = "body",
   Update_url    = '/articles/update/' + Article.id,
   Empty_field   = "Editar",
@@ -62,8 +63,10 @@ define(function(require){
     //
     //
     initialize : function(){
-      this.model = new Backbone.Model(Article);
-      this.Quill = Quill;
+      this.model      = new Backbone.Model(Article);
+      this.collection = new Backbone.Collection(Contentents);
+      this.render_all_content();
+      // this.Quill = Quill;
       // editor = new app.Quill("#editor", {theme: "snow", modules : {"toolbar" : { container : "#toolbar"}, 'link-tooltip': true}});
     },
 
@@ -115,43 +118,47 @@ define(function(require){
     //
     add_content : function(e){
       e.preventDefault();
-      var tagname, content, className;
-      switch(Content_type.value){
-        case "h2":
-          tagName = "h2";
-          className = "";
-          break;
-        case "h3":
-          tagName = "h3";
-          className = "";
-          break;
-        case "p":
-          tagName = "p";
-          className = "";
-          break;
-        case "l-quote":
-          tagName = "div";
-          className = "columna_frase left";
-          break;
-        default:
-          tagName = "p";
-          className = "";
-          break;
-      }
 
-      content = new Content({
-        tagName   : tagName,
-        className : className,
-        type      : Content_type.value
+      var m = new Backbone.Model({
+        article_id : this.model.id,
+        content    : Content_type.value == 'img' ? '' : Empty_field,
+        order      : 0,
+        type       : Content_type.value
       });
 
-      $(Add_content).before(content.render().el);
+      this.render_content(m);
     },
 
     //
     // H E L P E R S
     // ------------------------------------------------------------------------------
     //
+
+    //
+    //
+    //
+    render_content : function(m){
+      var content;
+      m.set({_token : Token});
+
+      if(m.get('type') === 'img'){
+        content = new Content_img({model : m, controller : this});
+      }
+      else{
+        content = new Content({model : m, controller : this});
+      }
+
+      $(Add_content).before(content.render().el);
+    },
+
+    //
+    //
+    //
+    render_all_content : function(){
+      this.collection.each(function(m){
+        this.render_content(m);
+      }, this);
+    },
 
     //
     //
@@ -181,6 +188,9 @@ define(function(require){
       }, 'json');
     },
 
+    //
+    //
+    //
     close_fields : function(inputs){
       var _fields = inputs || document.querySelectorAll('input.editable');
       if(_fields.length){
@@ -198,6 +208,9 @@ define(function(require){
       }
     },
 
+    //
+    //
+    //
     keyboard_listener : function(_input, e){
       if(e.keyCode === 13 && e.target == _input){
         this.save_field(_input);

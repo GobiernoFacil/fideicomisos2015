@@ -6,6 +6,9 @@
   <link rel="stylesheet" type="text/css"  href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/styles.css" />
   <link rel="stylesheet" type="text/css" href="/css/dev.css" />
+  <!-- img uploader -->
+  <link rel="stylesheet" type="text/css" href="/js/bower_components/dropzone/dist/basic.css">
+  <link rel="stylesheet" type="text/css" href="/js/bower_components/dropzone/dist/dropzone.css">
 </head>
 <body class="post">
 
@@ -52,16 +55,14 @@
           <option value="h2">título lv.2</option>
           <option value="h3">título lv.3</option>
           <option value="p">texto</option>
-          <option value="l-quote">cita izquierda</option>
-          <option value="r-quote">cita derecha</option>
-          <!--<option value="img">foto</option>
-          <option value="carousell">Carrusel</option>
-          <option value="graph">Gráfica</option>
-          <option value="youtube">Youtube</option>
-          -->
+          <option value="lq">cita izquierda</option>
+          <option value="rq">cita derecha</option>
+          <option value="yt">Youtube</option>
+          <option value="img">imágenes</option>
+          <!--<option value="graph">Gráfica</option>-->
         </select>
+        <input type="submit" value="agregar">
         </p>
-        <p><input type="submit" value="agregar"></p>
         </form>
 
       </div>
@@ -81,12 +82,15 @@
 </div>
  -->
 </article>
+
+
 <!-- LA APP -->
 <script>
   var CONFIG_DATA = {
     token   : "{{csrf_token()}}",
     article : <?php echo json_encode($article); ?>,
-    uploads : "/images/articles/" 
+    uploads : "/images/articles/",
+    content : <?php echo json_encode($content->toArray()); ?>
   };
 </script>
 <script data-main="/js/apps/adler/main" src="/js/bower_components/requirejs/require.js"></script>
