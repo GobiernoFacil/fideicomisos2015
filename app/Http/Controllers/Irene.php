@@ -49,7 +49,7 @@ class Irene extends Controller{
     return response()->json($content);
   }
 
-  public function saveImage(Request $request, $id){
+  public function saveImage(Request $request, $id, $cid){
     $image = $this->storeFile($request, 'file');
 
     return response()->json($image);
