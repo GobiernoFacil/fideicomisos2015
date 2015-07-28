@@ -85,7 +85,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('articles/update/{id}', 'AdminArticles@edit')->where('id', '[0-9]+');
     Route::post('articles/update/{id}', 'Irene@index');
     // [ ARTICLES CONTENT ]
-    Route::post('articles/image/{id}', 'Irene@saveImage');
+    Route::post('articles/image/{id}/{cid}', 'Irene@saveImage');
     Route::post('articles/content/{id}', 'Irene@addContent');
     Route::put('articles/content/{id}/{el_id?}', 'Irene@updateContent');
     Route::delete('articles/content/{id}/{el_id?}', 'Irene@deleteContent');

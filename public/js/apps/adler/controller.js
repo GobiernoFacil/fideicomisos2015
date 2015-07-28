@@ -11,8 +11,9 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone = require('backbone'),
-      Content  = require('views/content_view'),
+  var Backbone    = require('backbone'),
+      Content     = require('views/content_view'),
+      Content_img = require('views/content_img_view'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -120,7 +121,7 @@ define(function(require){
 
       var m = new Backbone.Model({
         article_id : this.model.id,
-        content    : Empty_field,
+        content    : Content_type.value == 'img' ? '' : Empty_field,
         order      : 0,
         type       : Content_type.value
       });
@@ -137,9 +138,16 @@ define(function(require){
     //
     //
     render_content : function(m){
+      var content;
       m.set({_token : Token});
 
-      var content = new Content({model : m, controller : this});
+      if(m.get('type') === 'img'){
+        content = new Content_img({model : m, controller : this});
+      }
+      else{
+        content = new Content({model : m, controller : this});
+      }
+
       $(Add_content).before(content.render().el);
     },
 
