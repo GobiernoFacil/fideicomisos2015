@@ -23,6 +23,9 @@ Route::get('categorias', 'Lestrade@index');
 // [ EL API DE BÚSQUEDA ]
 Route::post('sherlock/search', 'Sherlock@index');
 
+// [ EL API DE CONSUMO DE DATOS ]
+Route::get('data/registry/{collection?}', 'Datafarmer@registry');
+
 // [ EL HOME ]
 Route::get('/', function(){
   return view('home');
