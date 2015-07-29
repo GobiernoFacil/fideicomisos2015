@@ -35,7 +35,7 @@ define(function(require){
   //
   SVG = {
     width  : 600,
-    height : 600,
+    height : 300,
     margin : {
       top    : 20,
       right  : 20,
@@ -150,16 +150,24 @@ define(function(require){
           registries = _.uniq(this.collection.pluck('registry')),
           years_list = this.collection.map(function(m){ return +m.get('year')}),
           incomes    = this.collection.map(function(m){ return +m.get('income')}),
+          yields     = this.collection.map(function(m){ return +m.get('yield')}),
           x_scale    = d3.scale.linear().domain(d3.extent(years_list)).range([0, SVG.width - SVG.margin.right]),
-          y_scale    = d3.scale.linear().domain(d3.extent(incomes)).range([0, SVG.height - SVG.margin.bottom]),
-          years      = d3.range(2006, 2014);
-          // y = d3.scale.linear().domain([endAge, startAge]).range([0 + margin, h - margin]),
-          // x = d3.scale.linear().domain([1960, 2009]).range([0 + margin -5, w]),
+          y_scale    = d3.scale.linear().domain(d3.extent(yields)).range([0, SVG.height - SVG.margin.bottom]),
+          years      = d3.range(2006, 2014),
+          data       = registries.map(function(reg){return this.collection.where({registry : reg});}, this);
+
       graph.attr('width', SVG.width).attr('height', SVG.height);
 
       var line = d3.svg.line()
-                   .x(function(d, i){})
-                   .y();
+                   .x(function(d, i){return x_scale(d.get('year'))})
+                  .y(function(d){return y_scale(d.get('yield'))});
+
+      data.forEach(function(registry){
+        console.log(registry);
+        chart.append('svg:path')
+          .data([registry])
+          .attr('d', line);
+      }, this);
     },
 
     // [ click .save | submit form ]

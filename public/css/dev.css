@@ -50,3 +50,9 @@
 .editable{
   padding : 0;
 }
+
+path{
+  stroke: #e2e2e2;
+  stroke-width: 0.9;
+  fill: none;
+}
