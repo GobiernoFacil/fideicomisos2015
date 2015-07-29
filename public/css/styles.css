@@ -1075,17 +1075,24 @@ a.btn_logout {
     font: 300 23px "Roboto", Helvetica, Arial, sans-serif; }
 .home .data {
   background: #F5F6FA; }
+  .home .data h1 {
+    text-align: center;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 50px; }
   .home .data .descarga {
-    background: #444;
-    color: white;
+    background: rgba(0, 0, 0, 0.02);
+    color: #444;
     padding: 20px 15px; }
     .home .data .descarga h2 {
+      border-bottom: 1px solid #ccc;
       font: 300 24px "Roboto", Helvetica, Arial, sans-serif;
-      padding: 30px 10px 20px; }
+      padding: 20px 10px 20px; }
     .home .data .descarga p {
       font-size: 14px;
       padding: 10px;
       line-height: 1.5; }
+    .home .data .descarga a {
+      display: block; }
 
 /* =Generales
 -------------------------------------------------------------- */
