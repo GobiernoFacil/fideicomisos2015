@@ -11,9 +11,10 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone    = require('backbone'),
-      Content     = require('views/content_view'),
-      Content_img = require('views/content_img_view'),
+  var Backbone      = require('backbone'),
+      Content       = require('views/content_view'),
+      Content_img   = require('views/content_img_view'),
+      Content_graph = require('views/content_graph_view'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -138,17 +139,21 @@ define(function(require){
     //
     //
     render_content : function(m){
-      var content;
+      var content, html;
       m.set({_token : Token});
 
       if(m.get('type') === 'img'){
         content = new Content_img({model : m, controller : this});
       }
+      else if(m.get('type') === 'graph'){
+        content = new Content_graph({model : m, controller : this});
+      }
       else{
         content = new Content({model : m, controller : this});
       }
 
-      $(Add_content).before(content.render().el);
+      html = content.render().el;
+      $(Add_content).before(html);
     },
 
     //

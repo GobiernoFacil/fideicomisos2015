@@ -31,13 +31,25 @@ class Datafarmer extends Controller{
       // obtiene un registro al azar 
       $registry = Trusts::all()->lists('registry')->random();
       // obtiene todos los fideicomisos con el mismo registro
-      $response = Trusts::where('registry', $registry)->select($this->registry_fields)->get();
+      $response = Trusts::where('registry', $registry)
+                    ->select($this->registry_fields)->get();
       // los regresa en JSONxCORS
       return response()
-        ->json($response)
-        ->header('Access-Control-Allow-Origin', '*');
+               ->json($response)
+               ->header('Access-Control-Allow-Origin', '*');
     }
-
     // [ LLEGA UNA LISTA DE REGISTROS SEPARADOS POR "|" ]
+    else{
+      // separa los registros
+      $list     = explode('|', $registry);
+      // obtiene todos los fideicomisos con el mismo registro
+      $response = Trusts::whereIn('registry', $list)
+                    ->select($this->registry_fields)->get();
+
+      // los regresa en JSONxCORS
+      return response()
+               ->json($response)
+               ->header('Access-Control-Allow-Origin', '*');
+    }
   }
 }
