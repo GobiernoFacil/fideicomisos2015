@@ -79,8 +79,9 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<h1>¿Qué es un <strong>fideicomiso</strong>?</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a enim ac nisl posuere viverra. Donec et orci velit. Maecenas et malesuada massa, eget mattis ex. Donec consectetur justo eu fermentum egestas. Integer dapibus nunc ex, vitae interdum metus consequat eu. Ut sagittis magna purus, at sagittis mauris pretium sagittis. Pellentesque metus elit, ornare ut lorem a, aliquet tempor lacus</p>
-				<a href="#" class="btn_link">Información</a>
+				<p>Los <strong>Fideicomisos Públicos</strong> son contratos por medio de los cuales, el gobierno federal, los gobiernos de los Estados o los Ayuntamientos, con el carácter de fideicomitentes, a través de sus dependencias centrales o paraestatales, transmiten la titularidad de determinados bienes del dominio público, del dominio privado de la Federación, entidad federativa o municipal, o afecta fondos públicos en una institución fiduciaria para 
+realizar un fin lícito determinado, de interés público. </p>
+				<a href="{{url('/que-es-un-fideicomiso')}}" class="btn_link">+ Información</a>
 			</div>
 		</div>
 	</div>
@@ -88,7 +89,8 @@
 <section class="data">
 	<div class="container">
 		<div class="col-sm-7 col-sm-offset-1">
-			<h1>Maecenas et malesuada massa, eget mattis ex.</h1>
+			<h2><strong>$424,025 millones de pesos</strong> de disponibilidad total en Fideicomisos Públicos en 2013</h3>
+			<p class="lead">Cada rectángulo representa un ramo, el tamaño es equivalente a la cantidad en pesos mexicanos, y el color brillante indica un mayor número de fideicomisos. <img src="/images/ramos.png"></p>
 		</div>
 		<div class="col-sm-3 descarga ">
 			<h2><strong>Consulta</strong> y <strong>descarga gratis</strong> los datos que publicamos.</h2>

@@ -11,7 +11,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
-				<a href="http://www.eluniversal.com.mx/periodismo-datos/" class="eluniversal">El Universal | DATA</a>  
+				<a href="http://www.eluniversal.com.mx/periodismo-de-datos" class="eluniversal">El Universal | DATA</a>  
 			</div>
 			<div class="col-sm-6">
 				<h1><a href="<?= url();?>">Las cajas negras del Gobierno</a></h1> 

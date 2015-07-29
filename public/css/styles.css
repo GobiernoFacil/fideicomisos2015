@@ -916,6 +916,8 @@ input:focus, select:focus, textarea:focus {
     -moz-transition: all 0.3s;
     transition: all 0.3s;
     text-transform: uppercase; }
+    .top-header h1:hover, .top-header h1 a:hover {
+      color: #666; }
   .top-header .menu-icon {
     background: transparent;
     border: 0;
@@ -998,6 +1000,10 @@ a.btn_logout {
 .home section h1 {
   padding: 30px;
   font-size: 48px; }
+.home section .lead {
+  margin: 30px 0; }
+  .home section .lead img {
+    margin: 15px 0; }
 .home .news {
   padding: 368px 0 0; }
   .home .news li {
@@ -1151,6 +1157,8 @@ a.more {
   min-height: 94px;
   text-align: center;
   display: block; }
+  a.more:hover {
+    background: #FFD502; }
 
 a.category, a.category:visited {
   color: white;
