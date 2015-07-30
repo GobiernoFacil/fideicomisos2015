@@ -43,6 +43,11 @@
   cursor: pointer;
 }
 
+.axis {
+    stroke-width: 0.8;
+    stroke: #000;
+}
+
 #add-more-content{
   border: 1px solid red;
 }
@@ -52,7 +57,20 @@
 }
 
 path{
-  stroke: #e2e2e2;
-  stroke-width: 0.9;
+  stroke: pink;
+  stroke-width: 1.5;
   fill: none;
+}
+
+text {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11px;
+}
+.axis {
+    stroke-width: 0.8;
+    stroke: #000;
+}
+.xTicks, .yTicks {
+    stroke-width: 0.6;
+    stroke: #000;
 }

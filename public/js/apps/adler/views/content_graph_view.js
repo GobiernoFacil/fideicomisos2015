@@ -35,14 +35,15 @@ define(function(require){
   //
   SVG = {
     width  : 600,
-    height : 300,
+    height : 400,
     margin : {
       top    : 20,
       right  : 20,
       bottom : 50,
-      left   : 100
+      left   : 50
     } 
-  };
+  },
+  Money_scale    = 1000000;
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -143,31 +144,93 @@ define(function(require){
         console.log("no data bitches");
         return;
       }
-      // this.el.innerHTML = "";
+
+      // Cache/create the containers
       var container  = this.el.querySelector('.graph'),
           graph      = d3.select(container).append('svg:svg'),
           chart      = graph.append('svg:g'),
+      // get/format the data
           registries = _.uniq(this.collection.pluck('registry')),
-          years_list = this.collection.map(function(m){ return +m.get('year')}),
-          incomes    = this.collection.map(function(m){ return +m.get('income')}),
-          yields     = this.collection.map(function(m){ return +m.get('yield')}),
-          x_scale    = d3.scale.linear().domain(d3.extent(years_list)).range([0, SVG.width - SVG.margin.right]),
-          y_scale    = d3.scale.linear().domain(d3.extent(yields)).range([0, SVG.height - SVG.margin.bottom]),
-          years      = d3.range(2006, 2014),
           data       = registries.map(function(reg){return this.collection.where({registry : reg});}, this);
+          years_list = this.collection.map(function(m){return +m.get('year')}),
+          incomes    = this.collection.map(function(m){ return +m.get('income')}),
+          yields     = this.collection.map(function(m){ return +m.get('yield')/Money_scale}),
+          expenses   = this.collection.map(function(m){ return +m.get('expenses')/Money_scale}),
+          availability = this.collection.map(function(m){ return +m.get('availability')/Money_scale}),
+          field      = "availability",
+      // create the d3 helpers
+          x_scale    = d3.scale.linear().domain(d3.extent(years_list)).range([
+            SVG.margin.left, SVG.width - SVG.margin.right
+          ]),
+          y_scale    = d3.scale.linear().domain(d3.extent(availability)).range([
+            SVG.height - SVG.margin.bottom - SVG.margin.top, SVG.margin.top
+          ]),
+          years      = d3.range(2006, 2014),
+          format     = d3.format(","),
+          line       = d3.svg.line()
+                         .x(function(d, i){return x_scale(+d.get('year'))})
+                         .y(function(d){return y_scale(+d.get(field)/Money_scale)});
+
 
       graph.attr('width', SVG.width).attr('height', SVG.height);
 
-      var line = d3.svg.line()
-                   .x(function(d, i){return x_scale(d.get('year'))})
-                  .y(function(d){return y_scale(d.get('yield'))});
-
       data.forEach(function(registry){
-        console.log(registry);
         chart.append('svg:path')
           .data([registry])
           .attr('d', line);
       }, this);
+
+      // the axis
+      chart.append("svg:line")
+        .attr('x1', SVG.margin.left)
+        .attr('y1', SVG.height - SVG.margin.bottom - SVG.margin.top)
+        .attr('x2', SVG.width)
+        .attr('y2', SVG.height - SVG.margin.bottom - SVG.margin.top)
+        .attr('class', 'axis');
+
+      chart.append("svg:line")
+        .attr('x1', SVG.margin.left)
+        .attr('y1', SVG.margin.top)
+        .attr('x2', SVG.margin.left)
+        .attr('y2', SVG.height - SVG.margin.bottom - SVG.margin.top )
+        .attr('class', 'axis');
+
+      chart.selectAll(".xLabel")
+        .data(x_scale.ticks(8))
+        .enter().append("svg:text")
+        .attr("class", "xLabel")
+        .text(String)
+        .attr("x", function(d) { return x_scale(d) })
+        .attr("y", SVG.height - SVG.margin.top - SVG.margin.bottom + 20)
+        .attr("text-anchor", "middle");
+
+      chart.selectAll(".yLabel")
+        .data(y_scale.ticks(10))
+        .enter().append("svg:text")
+        .attr("class", "yLabel")
+        .text(format)
+        .attr("x", SVG.margin.left - 10)
+        .attr("y", function(d) { return y_scale(d) })
+        .attr("text-anchor", "end")
+        .attr("dy", 3);
+
+      chart.selectAll(".xTicks")
+    .data(x_scale.ticks(8))
+    .enter().append("svg:line")
+    .attr("class", "xTicks")
+    .attr("x1", function(d) { return x_scale(d); })
+    .attr("y1", SVG.height - SVG.margin.top - SVG.margin.bottom)
+    .attr("x2", function(d) { return x_scale(d); })
+    .attr("y2", SVG.height - SVG.margin.top - SVG.margin.bottom + 5)
+
+    chart.selectAll(".yTicks")
+    .data(y_scale.ticks(10))
+    .enter().append("svg:line")
+    .attr("class", "yTicks")
+    .attr("y1", function(d) { return y_scale(d); })
+    .attr("x1", SVG.margin.left - 5)
+    .attr("y2", function(d) { return y_scale(d); })
+    .attr("x2", SVG.margin.left)
     },
 
     // [ click .save | submit form ]
