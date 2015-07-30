@@ -88,15 +88,22 @@ realizar un fin lícito determinado, de interés público. </p>
 </section>
 <section class="data">
 	<div class="container">
-		<div class="col-sm-7 col-sm-offset-1">
-			<h2><strong>$424,025 millones de pesos</strong> de disponibilidad total en Fideicomisos Públicos en 2013</h3>
-			<p class="lead">Cada rectángulo representa un ramo, el tamaño es equivalente a la cantidad en pesos mexicanos, y el color brillante indica un mayor número de fideicomisos. <img src="/images/ramos.png"></p>
+		<div class="col-sm-10 col-sm-offset-1">
+			<h1>Explorar Datos</h1>
 		</div>
-		<div class="col-sm-3 descarga ">
-			<h2><strong>Consulta</strong> y <strong>descarga gratis</strong> los datos que publicamos.</h2>
-			<p>Integer dapibus nunc ex, vitae interdum metus consequat eu. Ut sagittis magna purus, at sagittis mauris pretium sagittis. Pellentesque metus elit, ornare ut lorem a, aliquet tempor lacus</p>
-			<p><a href="<?= url();?>/navegador-de-fideicomisos" class="btn_link">EXPLORAR DATOS</a></p>
-			<p><a href="/datos-abiertos" class="btn_link">Datos abiertos</a></p>
+		<div class="col-sm-6 col-sm-offset-1">
+			<h2>Disponibilidad total en Fideicomisos Públicos en 2013: <br>
+				<strong>$424,025 millones de pesos</strong></h2>
+			<p class="lead">
+				<img src="/images/vizdata-2.jpg"></p>
+			<p>Cada rectángulo representa un ramo, el tamaño es equivalente a la cantidad en pesos mexicanos, y el color brillante indica un mayor número de fideicomisos.</p>
+		</div>
+		<div class="col-sm-3 col-sm-offset-1 descarga">
+			<h2><strong>Consulta</strong> y <strong>descarga gratis</strong> los datos que usamos.</h2>
+			<p><a href="<?= url();?>/categorias" class="btn_link">EXPLORAR FIDEICOMISOS por Categoría</a>
+			<a href="<?= url();?>/navegador-de-fideicomisos" class="btn_link">BUSCADOR de FIDEICOMISO</a>
+			<a href="<?= url();?>/vizdata" class="btn_link">Visualizar datos</a>
+			<a href="/datos-abiertos" class="btn_link">Ver Datos abiertos</a></p>
 		</div>
 	</div>
 </section>
