@@ -1229,15 +1229,18 @@ a.category, a.category:visited {
     .trust-container p a:hover {
       color: #8ba7c0; }
       .trust-container p a:hover:after {
-        background: #FFD502; }
+        background: #FFD502;
+        color: #8ba7c0; }
     .trust-container p a:after {
       background: #FFED48;
-      content: " + ";
+      content: "+";
       color: #015383;
       display: inline-block;
       margin-left: 5px;
-      padding: 0 5px;
-      font-weight: 700; }
+      height: 17px;
+      padding: 0 3px;
+      vertical-align: top;
+      line-height: 1; }
 .trust-container .category-trusts {
   margin: 0 0 10px 50px;
   counter-reset: li_section; }
@@ -1245,7 +1248,8 @@ a.category, a.category:visited {
     color: #777;
     font-size: 14px; }
     .trust-container .category-trusts p a:after {
-      content: ""; }
+      content: "";
+      height: 0; }
   .trust-container .category-trusts li {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     list-style: none;
@@ -1278,7 +1282,9 @@ a.category, a.category:visited {
   background: rgba(0, 0, 0, 0.05);
   color: #999;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
-  padding: 5px; }
+  font-size: 12px;
+  padding: 0 5px;
+  height: 1.5em !important; }
 
 /* =Reportajes
 -------------------------------------------------------------- */
