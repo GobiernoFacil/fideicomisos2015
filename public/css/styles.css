@@ -300,6 +300,20 @@ nav.main .search input[type="search"] {
       background: #8ba7c0;
       color: white; }
 
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+  cursor: pointer; }
+
+.node {
+  font: 10px sans-serif; }
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px; }
+
 .login input {
   display: block;
   line-height: 35px;
@@ -1182,6 +1196,89 @@ a.category, a.category:visited {
 
 /* =Reportajes
 -------------------------------------------------------------- */
+
+/* =LEstrade
+-------------------------------------------------------------- */
+#category-selector {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0 0 20px; }
+  #category-selector p {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    margin: 0 0 20px;
+    padding: 0 0 5px;
+    color: #999; }
+  #category-selector a {
+    background: #FFED48;
+    color: #333;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px 0;
+    padding: 5px;
+    text-transform: capitalize; }
+    #category-selector a:hover {
+      background: #FFD502; }
+
+.trust-container p {
+  color: #015383;
+  font-size: 17px;
+  margin: 0; }
+  .trust-container p a {
+    color: #015383;
+    margin-bottom: 2px;
+    display: inline-block; }
+    .trust-container p a:hover {
+      color: #8ba7c0; }
+      .trust-container p a:hover:after {
+        background: #FFD502; }
+    .trust-container p a:after {
+      background: #FFED48;
+      content: " + ";
+      color: #015383;
+      display: inline-block;
+      margin-left: 5px;
+      padding: 0 5px;
+      font-weight: 700; }
+.trust-container .category-trusts {
+  margin: 0 0 10px 50px;
+  counter-reset: li_section; }
+  .trust-container .category-trusts p {
+    color: #777;
+    font-size: 14px; }
+    .trust-container .category-trusts p a:after {
+      content: ""; }
+  .trust-container .category-trusts li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    list-style: none;
+    position: relative;
+    padding: 10px; }
+    .trust-container .category-trusts li:before {
+      color: #ccc;
+      counter-increment: li_section;
+      content: counter(li_section);
+      position: absolute;
+      left: -38px;
+      text-align: right;
+      width: 30px; }
+    .trust-container .category-trusts li:last-child {
+      border: 0; }
+      .trust-container .category-trusts li:last-child:before {
+        content: ""; }
+    .trust-container .category-trusts li a.hide-trusts {
+      background: #FFED48;
+      color: #015383;
+      display: inline-block;
+      margin-bottom: 30px;
+      padding: 5px; }
+      .trust-container .category-trusts li a.hide-trusts:after {
+        content: " - "; }
+      .trust-container .category-trusts li a.hide-trusts:hover {
+        background: #FFD502; }
+
+.bar-container .bar {
+  background: rgba(0, 0, 0, 0.05);
+  color: #999;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  padding: 5px; }
 
 /* =Reportajes
 -------------------------------------------------------------- */
