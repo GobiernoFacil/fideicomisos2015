@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul>
-						<li><a href="/">Inicio</a>
+						<li><a href="/">Inicio</a></li>
 						<li>VizData</li>
 					</ul>
 					<h1>Explorador de Fideicomisos</h1>

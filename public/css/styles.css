@@ -300,6 +300,25 @@ nav.main .search input[type="search"] {
       background: #8ba7c0;
       color: white; }
 
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px; }
+
+.table > thead > tr > th {
+  padding: 8px;
+  line-height: 1.42857;
+  border-bottom: 2px solid #ddd;
+  font-weight: 700;
+  text-align: center; }
+
+.table > tbody > tr > td {
+  padding: 8px;
+  line-height: 1.42857;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+  text-align: center; }
+
 .node circle {
   fill: #fff;
   stroke: steelblue;
@@ -1107,6 +1126,22 @@ a.btn_logout {
       line-height: 1.5; }
     .home .data .descarga a {
       display: block; }
+
+/* =im-gregson
+-------------------------------------------------------------- */
+#im-gregson h2 {
+  border-bottom: 2px solid #015383;
+  color: #015383;
+  margin-bottom: 15px;
+  padding: 10px 0; }
+#im-gregson section {
+  padding-bottom: 60px; }
+#im-gregson .list_description li {
+  list-style: none;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 10px 0; }
+  #im-gregson .list_description li strong {
+    text-transform: uppercase; }
 
 /* =Generales
 -------------------------------------------------------------- */
