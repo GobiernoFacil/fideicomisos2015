@@ -1127,6 +1127,39 @@ a.btn_logout {
     .home .data .descarga a {
       display: block; }
 
+/* =im-fideicomiso
+-------------------------------------------------------------- */
+.que_es h2 {
+  color: #015383;
+  margin: 20px 0; }
+
+.fideicomitente {
+  margin: 40px 0 60px;
+  text-align: center; }
+  .fideicomitente h2 {
+    border-bottom: 2px solid #015383;
+    margin-bottom: 0; }
+  .fideicomitente h4 {
+    color: #015383;
+    font-size: 20px;
+    font-weight: 700;
+    position: relative;
+    padding-top: 40px; }
+    .fideicomitente h4:before {
+      content: "";
+      height: 30px;
+      border-left: 2px solid #015383;
+      width: 2px;
+      position: absolute;
+      left: 50%;
+      top: 0; }
+    .fideicomitente h4.first::before {
+      left: 57%; }
+    .fideicomitente h4.last::before {
+      left: 42.5%; }
+  .fideicomitente p {
+    font-size: 14px; }
+
 /* =im-gregson
 -------------------------------------------------------------- */
 #im-gregson h2 {
