@@ -1127,6 +1127,13 @@ a.btn_logout {
     .home .data .descarga a {
       display: block; }
 
+.reportajes.vizdata h2 {
+  font-weight: 700; }
+.reportajes.vizdata section {
+  padding: 90px 0; }
+  .reportajes.vizdata section.data {
+    background: #F5F6FA; }
+
 /* =im-fideicomiso
 -------------------------------------------------------------- */
 .que_es h2 {
@@ -1160,6 +1167,12 @@ a.btn_logout {
   .fideicomitente p {
     font-size: 14px; }
 
+/*
+.divider {
+	margin: 10px 0 0;
+	border-top: 2px solid $blue_light;
+	padding: 0 0 10px;
+}*/
 /* =im-gregson
 -------------------------------------------------------------- */
 #im-gregson h2 {
