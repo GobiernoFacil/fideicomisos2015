@@ -57,9 +57,25 @@
 }
 
 path{
-  stroke: pink;
+  stroke: green;
   stroke-width: 1.5;
   fill: none;
+}
+
+path.initial-amount{
+  stroke: blue;
+}
+
+path.yield{
+  stroke: grey;
+}
+
+path.expenses{
+  stroke: red;
+}
+
+path.income{
+  stroke: black;
 }
 
 text {
