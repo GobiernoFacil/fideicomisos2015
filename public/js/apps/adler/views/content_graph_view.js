@@ -157,12 +157,12 @@ define(function(require){
           yields     = this.collection.map(function(m){ return +m.get('yield')/Money_scale}),
           expenses   = this.collection.map(function(m){ return +m.get('expenses')/Money_scale}),
           availability = this.collection.map(function(m){ return +m.get('availability')/Money_scale}),
-          field      = "availability",
+          field      = "expenses",
       // create the d3 helpers
           x_scale    = d3.scale.linear().domain(d3.extent(years_list)).range([
             SVG.margin.left, SVG.width - SVG.margin.right
           ]),
-          y_scale    = d3.scale.linear().domain(d3.extent(availability)).range([
+          y_scale    = d3.scale.linear().domain(d3.extent(expenses)).range([
             SVG.height - SVG.margin.bottom - SVG.margin.top, SVG.margin.top
           ]),
           years      = d3.range(2006, 2014),
@@ -177,6 +177,7 @@ define(function(require){
       data.forEach(function(registry){
         chart.append('svg:path')
           .data([registry])
+          .attr('class', 'expenses')
           .attr('d', line);
       }, this);
 
@@ -203,11 +204,10 @@ define(function(require){
           .attr('d', line);
       }, this);
 
-      field = "expenses";
+      field = "availability";
       data.forEach(function(registry){
         chart.append('svg:path')
           .data([registry])
-          .attr('class', 'expenses')
           .attr('d', line);
       }, this);
 
