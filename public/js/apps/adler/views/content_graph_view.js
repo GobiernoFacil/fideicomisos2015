@@ -141,7 +141,7 @@ define(function(require){
     //
     make_graph : function(){
       if(!this.collection.length){
-        console.log("no data bitches");
+        console.log("no data");
         return;
       }
 
@@ -179,6 +179,46 @@ define(function(require){
           .data([registry])
           .attr('d', line);
       }, this);
+
+      field = "initial_amount";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
+          .attr('d', line);
+      }, this);
+
+      field = "initial_amount";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
+          .attr('class', 'initial-amount')
+          .attr('d', line);
+      }, this);
+
+      field = "yield";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
+          .attr('class', 'yield')
+          .attr('d', line);
+      }, this);
+
+      field = "expenses";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
+          .attr('class', 'expenses')
+          .attr('d', line);
+      }, this);
+
+      field = "income";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
+          .attr('class', 'income')
+          .attr('d', line);
+      }, this);
+
 
       // the axis
       chart.append("svg:line")
