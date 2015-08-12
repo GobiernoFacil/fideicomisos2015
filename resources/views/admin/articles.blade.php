@@ -1,8 +1,8 @@
 @extends('layouts.adminmaster')
 @section('body_class', 'admin')
 
-@section('title', 'Dashboard')
-@section('description', "Dashboard")
+@section('title', 'Artículos')
+@section('description', "Artículos")
 
 @section('content')
 <section>
@@ -26,8 +26,8 @@
 		 	<ul class="article_list">
 		 	  @foreach($articles as $article)
 		 	  <li>
-		 	  	<div class="box_info {{$article->title == 1 ? 'publicado' : 'borrador' }} ">
-		 	  		<h2><a href="{{url('articles/update/' . $article->id)}}">{{$article->title}}</a></h2>
+		 	  	<div class="box_info {{$article->public ? 'publicado' : 'borrador' }} ">
+		 	  		<h2><a href="{{url('articles/update/' . $article->id)}}">{{$article->title}} <span class="edit">- Editar</span></a></h2>
 		 	  		<p>{{$article->subtitle}}</p>
 		 	  		<p class="author">Escrito por {{$article->author_name}} el {{$article->created_at}} -  última actualización: {{$article->updated_at}}  </p>
 		 	  	</div>

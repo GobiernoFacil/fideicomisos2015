@@ -29,15 +29,7 @@
 * 
 */
 
-.publicar-articulo{
-  background: black;
-  color:white;
-  cursor: pointer;
-  height: 3em;
-  pading: 5em auto;
-  text-align: center;
-  width: 100%;
-}
+
 
 .input{
   cursor: pointer;
@@ -48,9 +40,6 @@
     stroke: #000;
 }
 
-#add-more-content{
-  border: 1px solid red;
-}
 
 .editable{
   padding : 0;
