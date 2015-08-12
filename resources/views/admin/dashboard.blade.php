@@ -8,14 +8,27 @@
 <section>
  <div class="container">
   <h1>Dashboard</h1>
-  <nav>
-    <ul>
-      <li><a href="{{url('admin/dashboard')}}">dashboard</a></li>
-      <li><a href="{{url('navegador-de-fideicomisos')}}">fideicomisos</a></li>
-      <li><a href="{{url('articles')}}">Artículos</a></li>
-      <li><a href="{{url('writers')}}">Escritores</a></li>
-    </ul>
-  </nav>
+    <div class="row">
+	  <div class="col-sm-4">
+		  <div class="box_info panel">
+			 <h3> <a href="{{url('articles')}}">Artículos</a></h3>
+			 <p><span>1</span> artículo</p>
+			 <a href="{{url('articles/add')}}" class="btn_link">Crear nuevo artículo</a>
+		  </div>
+	  </div>
+	  <div class="col-sm-4">
+		  <div class="box_info panel">
+			 <h3> <a href="{{url('categorias')}}">fideicomisos</a></h3>
+			  <p><span>614</span> fideicomisos</p>
+		  </div>
+	  </div>
+	  <div class="col-sm-4">
+		  <div class="box_info panel">
+			 <h3> <a href="{{url('writers')}}">Escritores</a></h3>
+			 <p><span>1</span> escritor</p>
+		  </div>
+	  </div>
+  </div>
  </div>
 </section>
 @endsection
