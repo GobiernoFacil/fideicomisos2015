@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <title>Artículos</title>
@@ -10,10 +10,20 @@
   <link rel="stylesheet" type="text/css" href="/js/bower_components/dropzone/dist/basic.css">
   <link rel="stylesheet" type="text/css" href="/js/bower_components/dropzone/dist/dropzone.css">
 </head>
-<body class="post">
-
+<body class="post edit">
+<nav class="breadcrumb admin">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<ul>
+						<li><a href="{{url('articles')}}" class="back_admin">Regresar a los Artículos</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
 <!-- EL HEADER CON LA INFO PRINCIPAL -->
-<div class="publicar-articulo">{{$article->public ? 'Ocultar' : 'Publicar'}}</div>
+<div class="publicar-articulo btn_link">{{$article->public ? 'Ocultar' : 'Publicar'}}</div>
 <article>
   <header>
     <div class="likeaboss">
@@ -49,20 +59,22 @@
         </p>
 
         <!-- ADD MORE CONTENT -->
+        
         <form id="add-more-content">
         <p>
+        Agregar Contenido:
         <select name="type">
-          <option value="h2">título lv.2</option>
-          <option value="h3">título lv.3</option>
-          <option value="p">texto</option>
-          <option value="lq">cita izquierda</option>
-          <option value="rq">cita derecha</option>
+          <option value="h2">Título Nivel 2</option>
+          <option value="h3">Título Nivel 3</option>
+          <option value="p">Texto</option>
+          <option value="lq">Cita izquierda</option>
+          <option value="rq">Cita derecha</option>
           <option value="yt">Youtube</option>
-          <option value="img">imágenes</option>
-          <option value="graph">gráfica</option>
+          <option value="img">Imágenes</option>
+          <option value="graph">Gráfica</option>
           <!--<option value="graph">Gráfica</option>-->
         </select>
-        <input type="submit" value="agregar">
+        <input type="submit" value="agregar" class="btn_link">
         </p>
         </form>
 

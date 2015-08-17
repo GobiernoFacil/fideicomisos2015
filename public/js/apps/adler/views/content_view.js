@@ -80,8 +80,8 @@ define(function(require){
       h2   : _.template("<h2><%=content%></h2>"),
       h3   : _.template("<h3><%=content%></h3>"),
       p    : _.template("<p class='content'><%=content%></p>"),
-      lq   : _.template("<div class='columna_frase left'><p><%=content%></p></div>"),
-      rq   : _.template("<div class='columna_frase right'><p><%=content%></p></div>"),
+      lq   : _.template("<div class='columna_frase left'><p class='lafrase'><%=content%></p></div>"),
+      rq   : _.template("<div class='columna_frase right'><p class='lafrase'><%=content%></p></div>"),
       inf  : _.template(Input_form),
       af   : _.template(Area_form),
       
