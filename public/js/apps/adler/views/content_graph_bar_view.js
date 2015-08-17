@@ -1,7 +1,7 @@
 // Adler - fideicomisos
 // @package  : fideicomisos
 // @location : /js/apps/adler/views
-// @file     : content_graph_view.js
+// @file     : content_graph_bar_view.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com
 
