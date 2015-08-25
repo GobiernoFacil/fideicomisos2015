@@ -121,7 +121,7 @@
     years  : {{ json_encode($years) }},
     total  : {{ json_encode($total) }},
     fields : <?php echo json_encode($definitions); ?>,
-    admin  : {{Auth::check()}}
+    admin  : {{Auth::check()? 1:0}}
   };
 </script>
 <script data-main="/js/apps/watson/main" src="/js/bower_components/requirejs/require.js"></script>
