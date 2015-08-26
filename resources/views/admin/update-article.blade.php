@@ -71,8 +71,9 @@
           <option value="rq">Cita derecha</option>
           <option value="yt">Youtube</option>
           <option value="img">Imágenes</option>
-          <option value="graph">Gráfica</option>
-          <!--<option value="graph">Gráfica</option>-->
+          <option value="graph1">Gráfica 1</option>
+          <option value="graph2">Gráfica 2</option>
+          <option value="graph3">Gráfica 3</option>
         </select>
         <input type="submit" value="agregar" class="btn_link">
         </p>

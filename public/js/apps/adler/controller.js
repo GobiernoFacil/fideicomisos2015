@@ -15,6 +15,7 @@ define(function(require){
       Content       = require('views/content_view'),
       Content_img   = require('views/content_img_view'),
       Content_graph = require('views/content_graph_view'),
+      Content_bar   = require('views/content_graph_bar_view'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -102,7 +103,8 @@ define(function(require){
       var old    = e.currentTarget,
           parent = old.parentNode,
           field  = old.getAttribute('data-field'),
-          input  = field == "lead" ? document.createElement('textarea') : document.createElement('input'),
+          input  = field == "lead" ? 
+                   document.createElement('textarea') : document.createElement('input'),
           value  = this.model.get(field) ? this.model.get(field) : Empty_field;
       parent.replaceChild(input, old);
       input.name = field;
@@ -145,9 +147,14 @@ define(function(require){
       if(m.get('type') === 'img'){
         content = new Content_img({model : m, controller : this});
       }
-      else if(m.get('type') === 'graph'){
+      else if(m.get('type') === 'graph1'){
         content = new Content_graph({model : m, controller : this});
       }
+
+      else if(m.get('type') === 'graph2'){
+        content = new Content_bar({model : m, controller : this});
+      }
+
       else{
         content = new Content({model : m, controller : this});
       }

@@ -43,7 +43,8 @@ define(function(require){
       left   : 50
     } 
   },
-  Money_scale    = 1000000;
+  Money_scale = 1000000,
+  Bar_width   = 20;
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -107,7 +108,6 @@ define(function(require){
       var m = this.model.attributes;
 
       if(this.model.isNew() && !e){
-        console.log("its a form!");
         this.render_form();
       }
       else{
@@ -161,10 +161,13 @@ define(function(require){
           field      = "expenses",
       // create the d3 helpers
           x_scale    = d3.scale.linear().domain(d3.extent(years_list)).range([
-            SVG.margin.left, SVG.width - SVG.margin.right
+            SVG.margin.left + 40, SVG.width - SVG.margin.right - 40
           ]),
           y_scale    = d3.scale.linear().domain(d3.extent(m_scale)).range([
             SVG.height - SVG.margin.bottom - SVG.margin.top, SVG.margin.top
+          ]),
+          y_scale_inverse = d3.scale.linear().domain(d3.extent(m_scale)).range([
+            SVG.margin.top, SVG.height - SVG.margin.bottom - SVG.margin.top
           ]),
           years      = d3.range(d3.extent(years_list)),
           format     = d3.format(","),
@@ -176,48 +179,41 @@ define(function(require){
       graph.attr('width', SVG.width).attr('height', SVG.height);
 
       data.forEach(function(registry){
-        chart.append('svg:path')
-          .data([registry])
-          .attr('class', 'expenses')
-          .attr('d', line);
-      }, this);
+        var bar = chart.selectAll('rect')
+          .data(registry)
+          .enter();
 
-      field = "initial_amount";
-      data.forEach(function(registry){
-        chart.append('svg:path')
-          .data([registry])
-          .attr('d', line);
-      }, this);
+          bar.append('svg:rect')
+          .attr('fill', 'red')
+          .attr('x', function(d){
+            return x_scale(+d.get('year'));
+          })
+          .attr('y', function(d){
+            return SVG.height - SVG.margin.bottom - SVG.margin.top - y_scale_inverse(+d.get(field)/Money_scale);
+          })
+          .attr('width', function(d){
+            return Bar_width;
+          })
+          .attr('height', function(d){
+            console.log(+d.get('expenses'));
+            return y_scale_inverse(+d.get('expenses')/Money_scale);
+          });
 
-      field = "initial_amount";
-      data.forEach(function(registry){
-        chart.append('svg:path')
-          .data([registry])
-          .attr('class', 'initial-amount')
-          .attr('d', line);
-      }, this);
+          bar.append('svg:rect')
+          .attr('fill', 'green')
+          .attr('x', function(d){
+            return x_scale(+d.get('year')) - Bar_width;
+          })
+          .attr('y', function(d){
+            return SVG.height - SVG.margin.bottom - SVG.margin.top - y_scale_inverse(+d.get('income')/Money_scale);
+          })
+          .attr('width', function(d){
+            return Bar_width;
+          })
+          .attr('height', function(d){
+            return y_scale_inverse(d.get('income')/Money_scale);
+          });
 
-      field = "yield";
-      data.forEach(function(registry){
-        chart.append('svg:path')
-          .data([registry])
-          .attr('class', 'yield')
-          .attr('d', line);
-      }, this);
-
-      field = "availability";
-      data.forEach(function(registry){
-        chart.append('svg:path')
-          .data([registry])
-          .attr('d', line);
-      }, this);
-
-      field = "income";
-      data.forEach(function(registry){
-        chart.append('svg:path')
-          .data([registry])
-          .attr('class', 'income')
-          .attr('d', line);
       }, this);
 
 
