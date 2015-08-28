@@ -1890,7 +1890,32 @@ footer {
   .fide-menu-right {
     right: -247px; }
   .fide-menu-push-toleft .top-header {
-    left: -247px; } }
+    left: -247px; }
+  .reporta_list li {
+    padding-bottom: 33px; }
+  .reporta_list figure {
+    height: 150px; }
+    .reporta_list figure img {
+      min-width: inherit; }
+  .reporta_list .featured .link_post {
+    height: auto; }
+  .reporta_list .featured figure {
+    position: relative;
+    height: 150px; }
+  .reporta_list .featured img {
+    min-width: 500px; }
+  .reporta_list .featured h2 {
+    position: relative;
+    bottom: inherit;
+    color: #222222;
+    font-size: 2em;
+    width: 100%;
+    left: 0; }
+  .reporta_list .featured p {
+    color: #222222;
+    position: relative;
+    top: inherit;
+    left: inherit; } }
 
 @media screen and (min-width: 481px) and (max-width: 767px) { }
 
