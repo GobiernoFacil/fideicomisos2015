@@ -1843,11 +1843,12 @@ footer {
   .home .news {
     padding: 112px 0 0; }
   .home .likeaboss {
-    margin: 0 auto;
-    min-height: 120px;
-    position: relative;
-    width: 90%;
-    top: 0; }
+    /*	margin: 0 auto;
+		min-height: 120px;
+		position: relative;
+		width: 90%;
+		top: 0;*/
+    display: none; }
     .home .likeaboss figure {
       height: 120px; }
       .home .likeaboss figure img {
@@ -1891,6 +1892,8 @@ footer {
     right: -247px; }
   .fide-menu-push-toleft .top-header {
     left: -247px; }
+  .top-header .menu-icon {
+    font-size: 30px; }
   .reporta_list li {
     padding-bottom: 33px; }
   .reporta_list figure {
