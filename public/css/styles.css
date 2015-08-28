@@ -1842,15 +1842,15 @@ footer {
       font-size: 15px; }
   .home .news {
     padding: 112px 0 0; }
-  .likeaboss {
+  .home .likeaboss {
     margin: 0 auto;
     min-height: 120px;
     position: relative;
     width: 90%;
     top: 0; }
-    .likeaboss figure {
+    .home .likeaboss figure {
       height: 120px; }
-      .likeaboss figure img {
+      .home .likeaboss figure img {
         min-width: 600px; }
   .home .news li h2, .home .news li h2 a, .home .news article.half h2, .home .news article.half h2 a, .home .news article.quarter h2, .home .news article.quarter h2 a {
     padding: 15px 0 0;
@@ -1915,7 +1915,28 @@ footer {
     color: #222222;
     position: relative;
     top: inherit;
-    left: inherit; } }
+    left: inherit; }
+  .post article header {
+    height: 563px;
+    padding-top: 40px; }
+    .post article header h1 {
+      font-size: 2.3em; }
+    .post article header h2 {
+      font-size: 1em; }
+  .post article p.lead {
+    font-size: 1.4em; }
+    .post article p.lead:first-letter {
+      font-size: 2em; }
+  .post .likeaboss {
+    height: 600px;
+    top: -125px; }
+    .post .likeaboss figure img {
+      min-width: 900px;
+      margin-left: -97px; }
+  .post .breadcrumb li {
+    font-size: 12px; }
+  .columna_frase {
+    display: none; } }
 
 @media screen and (min-width: 481px) and (max-width: 767px) { }
 
