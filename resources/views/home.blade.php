@@ -14,7 +14,7 @@
 	</div>
 	<div class="container">
 		<ul class="post_list">
-			<li class="col-sm-10 col-sm-offset-1">
+			<li class="col-xs-12 col-sm-10 col-sm-offset-1">
 				<article class="featured">
 					<div>
 						<a href="#" class="category">Bicentenario</a>
@@ -24,7 +24,7 @@
 				</article>
 			</li>
 			
-			<li class="col-sm-4 col-sm-offset-1">
+			<li class="col-xs-12 col-sm-4 col-sm-offset-1">
 				<article class="half">
 					
 					<figure>
@@ -39,7 +39,7 @@
 					</div>
 				</article>
 			</li>
-			<li class="col-sm-3">
+			<li class="col-xs-12 col-sm-3">
 				<article class="quarter">
 					<figure>
 						<img src="/images/abc.jpg">
@@ -53,7 +53,7 @@
 					</div>
 				</article>
 			</li>
-			<li class="col-sm-3">
+			<li class="col-xs-12 col-sm-3">
 				<article class="quarter">
 					<figure>
 						<img src="/images/bicentenario2.jpg">
