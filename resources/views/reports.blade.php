@@ -92,7 +92,7 @@
 
 				</ul>
 			</div> <!-- ends col-->
-			<aside class="col-sm-3">
+			<aside class="col-xs-10 col-xs-offset-1 col-sm-3">
 						<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">
 						<h2>Categorías</h2>
