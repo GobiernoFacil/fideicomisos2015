@@ -1,7 +1,7 @@
 // Adler - fideicomisos
 // @package  : fideicomisos
 // @location : /js/apps/adler/views
-// @file     : content_graph_bar_view.js
+// @file     : content_graph_stacked_bar_view.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com
 
@@ -151,12 +151,56 @@ define(function(require){
           chart      = graph.append('svg:g'),
       // get/format the data
           registries = _.uniq(this.collection.pluck('registry')),
-          data       = registries.map(function(reg){return this.collection.where({registry : reg});}, this);
-          years_list = this.collection.map(function(m){return +m.get('year')}),
-          incomes    = this.collection.map(function(m){ return +m.get('income')/Money_scale}),
-          yields     = this.collection.map(function(m){ return +m.get('yield')/Money_scale}),
-          expenses   = this.collection.map(function(m){ return +m.get('expenses')/Money_scale}),
+          years      = _.uniq(this.collection.pluck('year')),
+          layers     = [],
+          field      = 'income',
+          _x;
+
+          for(var i = 0; i < registries.length; i++){
+            var g = new Backbone.Collection(this.collection.where({registry : registries[i]}));
+            var d = {name : registries[i], values : []};
+
+            for(var j = 0; j < years.length; j++){
+              if(_x = g.findWhere({year : years[j]}) ){
+                d.values.push({
+                  x: years[j],
+                  y : +_x.get(field)
+                });
+              }
+              else{
+                d.values.push({
+                  x: years[j],
+                  y: 0
+                });
+              }
+            }
+            layers.push(d);
+          }
+
+          console.log(layers);
+          var stack = d3.layout.stack()
+          .offset("zero")
+          .values(function(d) { return d.values; });
+/*
+          chart.selectAll('g')
+            .data(stack(layers))
+            .enter()
+            .append('g')
+              .attr("class", function(d,i){
+                console.log(d,i);
+                return "meh";
+              });
+     
+          data       = registries.map(function(reg){
+            return this.collection.where({registry : reg});
+          }, this);
+          
+          years_list   = _.uniq(this.collection.map(function(m){return +m.get('year')})),
+          incomes      = this.collection.map(function(m){ return +m.get('income')/Money_scale}),
+          yields       = this.collection.map(function(m){ return +m.get('yield')/Money_scale}),
+          expenses     = this.collection.map(function(m){ return +m.get('expenses')/Money_scale}),
           availability = this.collection.map(function(m){ return +m.get('availability')/Money_scale}),
+          
           m_scale = incomes.concat(yields,expenses, availability),
           field      = "expenses",
       // create the d3 helpers
@@ -178,6 +222,24 @@ define(function(require){
 
       graph.attr('width', SVG.width).attr('height', SVG.height);
 
+      console.log(years_list, d3.extent(years_list));
+
+      // create the vector data
+     
+      var vectors = [];
+      data.forEach(function(items, index){
+        var stack = { name : registries[index], values : []};
+        items.forEach(function(m){
+          var x = x_scale(+m.get('year'));
+          var y = y_scale_inverse(+m.get('expenses')/Money_scale);
+          stack.values.push({x:x, y:y});
+        }, this);
+        vectors.push(stack);
+      }, this);
+
+      stacker = new d3.layout.stack(vectors);
+
+
       data.forEach(function(registry){
         var bar = chart.selectAll('rect')
           .data(registry)
@@ -195,7 +257,6 @@ define(function(require){
             return Bar_width;
           })
           .attr('height', function(d){
-            // console.log(+d.get('expenses'));
             return y_scale_inverse(+d.get('expenses')/Money_scale);
           });
 
@@ -233,7 +294,7 @@ define(function(require){
         .attr('class', 'axis');
 
       chart.selectAll(".xLabel")
-        .data(x_scale.ticks(years_list.length))
+        .data(x_scale.ticks(_.uniq(years_list).length))
         .enter().append("svg:text")
         .attr("class", "xLabel")
         .text(String)
@@ -252,7 +313,7 @@ define(function(require){
         .attr("dy", 3);
 
       chart.selectAll(".xTicks")
-    .data(x_scale.ticks(years_list.length))
+    .data(x_scale.ticks(_.uniq(years_list).length))
     .enter().append("svg:line")
     .attr("class", "xTicks")
     .attr("x1", function(d) { return x_scale(d); })
@@ -267,7 +328,8 @@ define(function(require){
     .attr("y1", function(d) { return y_scale(d); })
     .attr("x1", SVG.margin.left - 5)
     .attr("y2", function(d) { return y_scale(d); })
-    .attr("x2", SVG.margin.left)
+    .attr("x2", SVG.margin.left);
+*/
     },
 
     // [ click .save | submit form ]

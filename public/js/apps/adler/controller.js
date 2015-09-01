@@ -16,6 +16,7 @@ define(function(require){
       Content_img   = require('views/content_img_view'),
       Content_graph = require('views/content_graph_view'),
       Content_bar   = require('views/content_graph_bar_view'),
+      Content_stack = require('views/content_graph_stacked_bar_view'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -153,6 +154,10 @@ define(function(require){
 
       else if(m.get('type') === 'graph2'){
         content = new Content_bar({model : m, controller : this});
+      }
+
+      else if(m.get('type') === 'graph3'){
+        content = new Content_stack({model : m, controller : this});
       }
 
       else{
