@@ -44,7 +44,7 @@ define(function(require){
     } 
   },
   Money_scale = 1000000,
-  Bar_width   = 20;
+  Bar_width   = 40;
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -153,131 +153,72 @@ define(function(require){
           registries = _.uniq(this.collection.pluck('registry')),
           years      = _.uniq(this.collection.pluck('year')),
           layers     = [],
-          field      = 'income',
+          colors     = ["red", "blue", "yellow"],
+          field      = 'expenses',
+          format     = d3.format(","),
           _x;
 
-          for(var i = 0; i < registries.length; i++){
-            var g = new Backbone.Collection(this.collection.where({registry : registries[i]}));
-            var d = {name : registries[i], values : []};
+      // make the layers for the stack bars
+      for(var i = 0; i < registries.length; i++){
+        var g = new Backbone.Collection(this.collection.where({registry : registries[i]}));
+        var d = {name : registries[i], values : []};
 
-            for(var j = 0; j < years.length; j++){
-              if(_x = g.findWhere({year : years[j]}) ){
-                d.values.push({
-                  x: years[j],
-                  y : +_x.get(field)
-                });
-              }
-              else{
-                d.values.push({
-                  x: years[j],
-                  y: 0
-                });
-              }
-            }
-            layers.push(d);
+        for(var j = 0; j < years.length; j++){
+          if(_x = g.findWhere({year : years[j]}) ){
+            d.values.push({x: years[j],y : +_x.get(field)/Money_scale});
           }
+          else{
+            d.values.push({x: years[j],y: 0});
+          }
+        }
+        layers.push(d);
+      }
 
-          console.log(layers);
-          var stack = d3.layout.stack()
-          .offset("zero")
-          .values(function(d) { return d.values; });
-/*
-          chart.selectAll('g')
-            .data(stack(layers))
-            .enter()
-            .append('g')
-              .attr("class", function(d,i){
-                console.log(d,i);
-                return "meh";
-              });
-     
-          data       = registries.map(function(reg){
-            return this.collection.where({registry : reg});
-          }, this);
-          
-          years_list   = _.uniq(this.collection.map(function(m){return +m.get('year')})),
-          incomes      = this.collection.map(function(m){ return +m.get('income')/Money_scale}),
-          yields       = this.collection.map(function(m){ return +m.get('yield')/Money_scale}),
-          expenses     = this.collection.map(function(m){ return +m.get('expenses')/Money_scale}),
-          availability = this.collection.map(function(m){ return +m.get('availability')/Money_scale}),
-          
-          m_scale = incomes.concat(yields,expenses, availability),
-          field      = "expenses",
-      // create the d3 helpers
-          x_scale    = d3.scale.linear().domain(d3.extent(years_list)).range([
+      // create the layout
+      var stack = d3.layout.stack()
+        .offset("zero")
+        .values(function(d) { return d.values; });
+
+      // create the scales
+      var max = d3.max(stack(layers), function(d){
+        return d3.max(d.values, function(el){
+          return (el.y + el.y0) * 1.12
+        });
+      });
+
+      var x_scale = d3.scale.linear().domain(d3.extent(years)).range([
             SVG.margin.left + 40, SVG.width - SVG.margin.right - 40
-          ]),
-          y_scale    = d3.scale.linear().domain(d3.extent(m_scale)).range([
+          ]);
+      var h_scale = d3.scale.linear().domain([0, max]).range([
+            0, SVG.height - SVG.margin.bottom - SVG.margin.top
+          ]);
+      var y_scale = d3.scale.linear().domain([0, max]).range([
             SVG.height - SVG.margin.bottom - SVG.margin.top, SVG.margin.top
-          ]),
-          y_scale_inverse = d3.scale.linear().domain(d3.extent(m_scale)).range([
-            SVG.margin.top, SVG.height - SVG.margin.bottom - SVG.margin.top
-          ]),
-          years      = d3.range(d3.extent(years_list)),
-          format     = d3.format(","),
-          line       = d3.svg.line()
-                         .x(function(d, i){return x_scale(+d.get('year'))})
-                         .y(function(d){return y_scale(+d.get(field)/Money_scale)});
+          ]);
+      var k_scale = d3.scale.linear().domain([0,max]).range([
+            SVG.height - SVG.margin.bottom - SVG.margin.top,0
+          ]);
 
-
-      graph.attr('width', SVG.width).attr('height', SVG.height);
-
-      console.log(years_list, d3.extent(years_list));
-
-      // create the vector data
-     
-      var vectors = [];
-      data.forEach(function(items, index){
-        var stack = { name : registries[index], values : []};
-        items.forEach(function(m){
-          var x = x_scale(+m.get('year'));
-          var y = y_scale_inverse(+m.get('expenses')/Money_scale);
-          stack.values.push({x:x, y:y});
+      // render the data // 20040630001369
+      stack(layers).forEach(function(st, index){
+        var data = st.values;
+        data.forEach(function(rect){
+          chart.append('svg:rect')
+          .attr('fill', colors[index])
+          .attr('x',x_scale(rect.x) - (Bar_width/2))
+          .attr('y', k_scale(rect.y0) - h_scale(rect.y))
+          .attr('width', Bar_width)
+          .attr('height', h_scale(rect.y));
         }, this);
-        vectors.push(stack);
-      }, this);
-
-      stacker = new d3.layout.stack(vectors);
-
-
-      data.forEach(function(registry){
-        var bar = chart.selectAll('rect')
-          .data(registry)
-          .enter();
-
-          bar.append('svg:rect')
-          .attr('fill', 'red')
-          .attr('x', function(d){
-            return x_scale(+d.get('year'));
-          })
-          .attr('y', function(d){
-            return SVG.height - SVG.margin.bottom - SVG.margin.top - y_scale_inverse(+d.get(field)/Money_scale);
-          })
-          .attr('width', function(d){
-            return Bar_width;
-          })
-          .attr('height', function(d){
-            return y_scale_inverse(+d.get('expenses')/Money_scale);
-          });
-
-          bar.append('svg:rect')
-          .attr('fill', 'green')
-          .attr('x', function(d){
-            return x_scale(+d.get('year')) - Bar_width;
-          })
-          .attr('y', function(d){
-            return SVG.height - SVG.margin.bottom - SVG.margin.top - y_scale_inverse(+d.get('income')/Money_scale);
-          })
-          .attr('width', function(d){
-            return Bar_width;
-          })
-          .attr('height', function(d){
-            return y_scale_inverse(d.get('income')/Money_scale);
-          });
-
       }, this);
 
 
+
+
+
+
+   // the chart
+      graph.attr('width', SVG.width).attr('height', SVG.height);
       // the axis
       chart.append("svg:line")
         .attr('x1', SVG.margin.left)
@@ -294,7 +235,7 @@ define(function(require){
         .attr('class', 'axis');
 
       chart.selectAll(".xLabel")
-        .data(x_scale.ticks(_.uniq(years_list).length))
+        .data(x_scale.ticks(years.length))
         .enter().append("svg:text")
         .attr("class", "xLabel")
         .text(String)
@@ -313,7 +254,7 @@ define(function(require){
         .attr("dy", 3);
 
       chart.selectAll(".xTicks")
-    .data(x_scale.ticks(_.uniq(years_list).length))
+    .data(x_scale.ticks(years.length))
     .enter().append("svg:line")
     .attr("class", "xTicks")
     .attr("x1", function(d) { return x_scale(d); })
@@ -329,7 +270,7 @@ define(function(require){
     .attr("x1", SVG.margin.left - 5)
     .attr("y2", function(d) { return y_scale(d); })
     .attr("x2", SVG.margin.left);
-*/
+
     },
 
     // [ click .save | submit form ]
