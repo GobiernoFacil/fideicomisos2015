@@ -22,6 +22,7 @@ define(function(require){
       Input_form = require('text!templates/input_form.html'),
       Area_form  = require('text!templates/textarea_form.html'),
       Img_form   = require('text!templates/img_form.html'),
+      Quill_editor = require('text!templates/quill-editor.html'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -79,7 +80,7 @@ define(function(require){
     templates : {
       h2   : _.template("<h2><%=content%></h2>"),
       h3   : _.template("<h3><%=content%></h3>"),
-      p    : _.template("<p class='content'><%=content%></p>"),
+      p    : _.template("<div class='content'><%=content%></div>"),
       lq   : _.template("<div class='columna_frase left'><p class='lafrase'><%=content%></p></div>"),
       rq   : _.template("<div class='columna_frase right'><p class='lafrase'><%=content%></p></div>"),
       inf  : _.template(Input_form),
@@ -89,7 +90,8 @@ define(function(require){
       yt   : _.template(YT_video),
       ytf  : _.template(YT_form),
       img  : _.template("<p><img class='ed' width='100' height='100'></p>"),
-      imgf : _.template(Img_form)
+      imgf : _.template(Img_form),
+      quill : _.template(Quill_editor)
     },
 
     //
@@ -132,11 +134,17 @@ define(function(require){
     //
     content_form : function(e){
       e.preventDefault();
+      /*
       this.el.innerHTML = this.templates.af(this.model.attributes);
       if(this.model.get("content") === Empty_field){
         this.el.querySelector("textarea").value = "";
       }
       this.el.querySelector("textarea").focus();
+      */
+      console.log("here's go nothing!");
+      this.el.innerHTML = this.templates.quill(this.model.attributes);
+      var quill = new Quill('#editor', {theme: 'snow'});
+      quill.addModule('toolbar', { container: '#toolbar' });
     },
 
     // [ click .save | submit form ]

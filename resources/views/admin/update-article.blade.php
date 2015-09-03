@@ -5,6 +5,8 @@
   <title>Artículos</title>
   <link rel="stylesheet" type="text/css"  href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+  <link rel="stylesheet" type="text/css" href="/css/quill/quill.base.css" />
+  <link rel="stylesheet" type="text/css" href="/css/quill/quill.snow.css" />
   <link rel="stylesheet" type="text/css" href="/css/dev.css" />
   <!-- img uploader -->
   <link rel="stylesheet" type="text/css" href="/js/bower_components/dropzone/dist/basic.css">
