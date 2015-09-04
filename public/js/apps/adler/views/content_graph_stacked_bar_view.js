@@ -147,13 +147,14 @@ define(function(require){
 	  
       // Cache/create the containers
       var container  = this.el.querySelector('.graph'),
+      	  graph_title = this.el.querySelector('.graph_title'),
           graph      = d3.select(container).append('svg:svg'),
           chart      = graph.append('svg:g'),
       // get/format the data
           registries = _.uniq(this.collection.pluck('registry')),
           years      = _.uniq(this.collection.pluck('year')),
           layers     = [],
-          colors     = ["#F25252", "#F29D35", "#F2C12E"],
+          colors     = ["#183152", "#ABC8E2", "#375D81"],
           field      = 'expenses',
           format     = d3.format(","),
           _x;
@@ -173,8 +174,7 @@ define(function(require){
         }
         layers.push(d);
       }
-      
-     
+    
 
       // create the layout
       var stack = d3.layout.stack()
@@ -205,6 +205,10 @@ define(function(require){
       stack(layers).forEach(function(st, index){
         var data = st.values;
         data.forEach(function(rect){
+	      /// intentando agregar el label……
+	      var fide_name  = this.el.querySelector('.fide_name_' +index);
+	      fide_name.innerHTML =  g.at(index).attributes.designation;
+	      
           chart.append('svg:rect')
           .attr('fill', colors[index])
           .attr('x',x_scale(rect.x) - (Bar_width/2))
