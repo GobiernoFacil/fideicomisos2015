@@ -147,6 +147,7 @@ define(function(require){
 
       // Cache/create the containers
       var container  = this.el.querySelector('.graph'),
+      	  graph_title = this.el.querySelector('.graph_title'),
           graph      = d3.select(container).append('svg:svg'),
           chart      = graph.append('svg:g'),
       // get/format the data
@@ -171,10 +172,13 @@ define(function(require){
           line       = d3.svg.line()
                          .x(function(d, i){return x_scale(+d.get('year'))})
                          .y(function(d){return y_scale(+d.get(field)/Money_scale)});
-
-
-      graph.attr('width', SVG.width).attr('height', SVG.height);
-
+					
+	  
+      graph.attr('width', SVG.width).attr('height', SVG.height);	 
+      /// h4 title
+	  graph_title.innerHTML =  graph_title.innerHTML + this.collection.at(0).attributes.designation;
+      
+      
       data.forEach(function(registry){
         chart.append('svg:path')
           .data([registry])
