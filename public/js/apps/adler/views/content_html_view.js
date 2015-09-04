@@ -14,14 +14,7 @@ define(function(require){
   //  [ libraries ]
   var Backbone   = require('backbone'),
       Quill      = require('quill'),
-      Dropzone   = require('dropzone'),
   //  [ templates ]
-      Title_form = require('text!templates/title_form.html'),
-      YT_video   = require('text!templates/youtube_video.html'),
-      YT_form    = require('text!templates/youtube_form.html'),
-      Input_form = require('text!templates/input_form.html'),
-      Area_form  = require('text!templates/textarea_form.html'),
-      Img_form   = require('text!templates/img_form.html'),
       Quill_editor = require('text!templates/quill-editor.html'),
 
   //
@@ -34,6 +27,7 @@ define(function(require){
   Save_url    = '/articles/content/' + Article.id,
   ClassName   = "editable",
   TagName     = "section",
+  Editor      = null,
   Empty_field = "Editar";
 
   //
@@ -52,20 +46,11 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'click h2'            : 'input_form',
-      'click h3'            : 'input_form',
-      'click .editar-video' : 'input_form',
-
       'click .content' : 'content_form',
-      'click .left'    : 'content_form',
-      'click .right'   : 'content_form',
-
       'click .kill'   : 'delete',
       'click .cancel' : 'render',
       'click .save'   : 'save',
-      'submit form'   : 'save',
-
-      'click img.ed'  : 'img_form'
+      'submit form'   : 'save'
     },
 
     //
@@ -78,19 +63,7 @@ define(function(require){
     // [ DEFINE THE TEMPLATES ]
     //
     templates : {
-      h2   : _.template("<h2><%=content%></h2>"),
-      h3   : _.template("<h3><%=content%></h3>"),
-      p    : _.template("<div class='content'><%=content%></div>"),
-      lq   : _.template("<div class='columna_frase left'><p class='lafrase'><%=content%></p></div>"),
-      rq   : _.template("<div class='columna_frase right'><p class='lafrase'><%=content%></p></div>"),
-      inf  : _.template(Input_form),
-      af   : _.template(Area_form),
-      
-      hxf  : _.template(Title_form),
-      yt   : _.template(YT_video),
-      ytf  : _.template(YT_form),
-      img  : _.template("<p><img class='ed' width='100' height='100'></p>"),
-      imgf : _.template(Img_form),
+      html  : _.template("<div class='content'><%=content%></div>"),
       quill : _.template(Quill_editor)
     },
 
@@ -115,30 +88,29 @@ define(function(require){
     render : function(e){
       if(e !== void 0) e.preventDefault();
       var m = this.model.attributes;
-
-      this.el.innerHTML = _.unescape(this.templates[m.type](m));
+      m.cid = this.model.cid;
+      this.el.innerHTML = _.unescape(this.templates.html(m));
       return this;
     },
 
-    // [ click h2, h3 ]
-    // Genera un input para editar el contenido
-    //
-    input_form : function(e){
-      e.preventDefault();
-      this.el.innerHTML = this.templates.inf(this.model.attributes);
-      this.el.querySelector("input").focus();
-    },
-
-    // [ click .content | .left | .right ]
-    // Genera un textarea para editar el contenido
+    // [ click .content ]
+    // habilita Quill
     //
     content_form : function(e){
       e.preventDefault();
-      this.el.innerHTML = this.templates.af(this.model.attributes);
-      if(this.model.get("content") === Empty_field){
-        this.el.querySelector("textarea").value = "";
-      }
-      this.el.querySelector("textarea").focus();
+
+      var m = this.model.attributes;
+      m.cid = this.model.cid;
+
+      this.el.innerHTML = this.templates.quill(m);
+      Editor = new Quill('#' + this.model.cid + 'editor', {
+        modules: {
+          'toolbar': { container: '#' + this.model.cid + 'toolbar' },
+          'link-tooltip': true
+        },
+        theme: 'snow'
+      });
+      // Editor.addModule('toolbar', { container: '#' + this.model.cid + 'toolbar' });
     },
 
     // [ click .save | submit form ]
@@ -146,11 +118,13 @@ define(function(require){
     //
     save : function(e){
       e.preventDefault();
+      var m = Editor.getHTML();
+      console.log(m);
       // [1] obtiene el valor del campo. Si este está vacío, deja el que 
       //     tenía el modelo.
-      var input   = this.el.querySelector('input[type="text"]') || this.el.querySelector('textarea'),
-          content = _.unescape(input.value);
-      content = content ? content : this.model.get('content');
+      var input   = Editor.getHTML(),
+          content = _.unescape(input);
+          content = content ? content : this.model.get('content');
       // [2] actualiza el modelo y lo salva. Al salvarlo, genera el HTML del contenido
       this.model.set({content: content});
       this.model.save(null, {success : this.render.bind(this, void 0)});
@@ -160,7 +134,6 @@ define(function(require){
     // Elimina el contenido
     //
     delete : function(e){
-      console.log(e);
       e.preventDefault();
       // [1] elimina el modelo. Al ser eliminado, el view también desaparece
       this.model.destroy({data : "_token=" + Token, wait : true});

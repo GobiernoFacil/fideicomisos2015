@@ -1,12 +1,34 @@
 <!-- Create the toolbar container -->
-<div id="toolbar">
-  <button class="ql-bold">Bold</button>
-  <button class="ql-italic">Italic</button>
+<div id="<%= cid %>toolbar" class="toolbar">
+
+<span class="ql-format-group">
+  <span title="Bold" class="ql-format-button ql-bold"></span>
+  <span class="ql-format-separator"></span>
+  <span title="Italic" class="ql-format-button ql-italic"></span>
+  <span class="ql-format-separator"></span>
+  <span title="Underline" class="ql-format-button ql-underline"></span>
+  <span class="ql-format-separator"></span>
+  <span title="Strikethrough" class="ql-format-button ql-strike"></span>
+</span>
+
+<span class="ql-format-group">
+  <span title="List" class="ql-format-button ql-list"></span>
+  <span class="ql-format-separator"></span>
+  <span title="Bullet" class="ql-format-button ql-bullet"></span>
+</span>
+<span class="ql-format-group">
+  <span title="Link" class="ql-format-button ql-link"></span>
+</span>
 </div>
 
 <!-- Create the editor container -->
-<div id="editor">
-  <div>Hello World!</div>
-  <div>Some initial <b>bold</b> text</div>
-  <div><br></div>
+<div id="<%= cid %>editor">
+  <%= content %>
 </div>
+
+<!-- CRUD control-->
+<p>
+  <a class="kill" href="#">eliminar</a> | 
+  <a class="cancel" href="#">cancelar</a> | 
+  <a class="save" href="#">guardar</a>
+</p>

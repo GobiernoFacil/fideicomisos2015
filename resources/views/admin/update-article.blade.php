@@ -37,11 +37,11 @@
       <div class="row main-fields">
         <div class="col-sm-10 col-sm-offset-1">
           <a href="#" class="category">Bicentenario</a>
-          <h1><span data-field="title" class="input">{{$article->title}}</span></h1>
-          <h2><span data-field="subtitle" class="input">{{$article->subtitle}}</span></h2>
+          <h1><span data-field="title" class="binput">{{$article->title}}</span></h1>
+          <h2><span data-field="subtitle" class="binput">{{$article->subtitle}}</span></h2>
           <p> 
             <span>17/abril/2015</span> | 
-            <span data-field="author_name" class="input">{{$article->author_name}}</span>
+            <span data-field="author_name" class="binput">{{$article->author_name}}</span>
           </p>
           <div><a href="#" class="category">Cambiar imagen</a></div>
         </div>
@@ -55,7 +55,7 @@
       <div class="col-sm-8 col-sm-offset-2" id="content-container">
         <!-- LEAD -->
         <p class="lead">
-        <span data-field="lead" class="input">
+        <span data-field="lead" class="binput">
           {{empty($article->lead)? "Editar" : $article->lead}}
         </span>
         </p>
@@ -68,7 +68,7 @@
         <select name="type">
           <option value="h2">Título Nivel 2</option>
           <option value="h3">Título Nivel 3</option>
-          <option value="p">Texto</option>
+          <option value="html">Texto</option>
           <option value="lq">Cita izquierda</option>
           <option value="rq">Cita derecha</option>
           <option value="yt">Youtube</option>
