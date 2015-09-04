@@ -46,36 +46,42 @@
 }
 
 path{
-  stroke: green;
-  stroke-width: 1.5;
+  stroke: #F8CA4D;
+  stroke-width: 2;
   fill: none;
 }
 
 path.initial-amount{
-  stroke: blue;
+  stroke: #ccc;
 }
 
 path.yield{
-  stroke: grey;
+  stroke: #45B29D;
 }
 
 path.expenses{
-  stroke: red;
+  stroke: #EA6045;
 }
 
 path.income{
-  stroke: black;
+  stroke: #2F3440;
 }
 
 text {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 11px;
 }
+
+text.yLabel,
+text.xLabel {
+	fill: grey;
+}
+
 .axis {
     stroke-width: 0.8;
-    stroke: #000;
+    stroke: #ccc;
 }
 .xTicks, .yTicks {
     stroke-width: 0.6;
-    stroke: #000;
+    stroke: #ccc;
 }
