@@ -16,7 +16,7 @@ define(function(require){
       d3       = require('d3'),
   //  [ templates ]
       Area_form = require('text!templates/textarea_form.html'),
-      Graph     = require('text!templates/graph.html'),
+      Graph     = require('text!templates/graph_stacked_bar.html'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -144,7 +144,7 @@ define(function(require){
         console.log("no data");
         return;
       }
-
+	  
       // Cache/create the containers
       var container  = this.el.querySelector('.graph'),
           graph      = d3.select(container).append('svg:svg'),
@@ -153,7 +153,7 @@ define(function(require){
           registries = _.uniq(this.collection.pluck('registry')),
           years      = _.uniq(this.collection.pluck('year')),
           layers     = [],
-          colors     = ["red", "blue", "yellow"],
+          colors     = ["#F25252", "#F29D35", "#F2C12E"],
           field      = 'expenses',
           format     = d3.format(","),
           _x;
@@ -173,6 +173,8 @@ define(function(require){
         }
         layers.push(d);
       }
+      
+     
 
       // create the layout
       var stack = d3.layout.stack()
@@ -211,10 +213,6 @@ define(function(require){
           .attr('height', h_scale(rect.y));
         }, this);
       }, this);
-
-
-
-
 
 
    // the chart
