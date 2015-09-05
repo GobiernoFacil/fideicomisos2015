@@ -1803,9 +1803,12 @@ footer {
 b.yield, b.income, b.expense, b.availability, b.fide_0, b.fide_1, b.fide_2 {
   background: #45B29D;
   display: inline-block;
-  height: 12px;
+  height: 15px;
   margin-right: 3px;
   width: 15px; }
+  b.yield.line, b.income.line, b.expense.line, b.availability.line, b.fide_0.line, b.fide_1.line, b.fide_2.line {
+    height: 6px;
+    width: 20px; }
 
 b.income {
   background: #2F3440; }
