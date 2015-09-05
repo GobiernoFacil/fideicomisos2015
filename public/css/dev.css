@@ -29,7 +29,9 @@
 * 
 */
 
-
+.graph { margin: 0 auto;
+	width: 600px;
+}
 
 .input{
   cursor: pointer;
@@ -47,7 +49,7 @@
 
 path{
   stroke: #F8CA4D;
-  stroke-width: 2;
+  stroke-width: 2.5;
   fill: none;
 }
 

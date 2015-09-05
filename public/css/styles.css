@@ -1797,10 +1797,10 @@ footer {
     font-size: 12px !important; }
     .labels_graphs p.label_amount {
       color: #999;
-      margin-bottom: 0 !important;
-      margin-top: 15px; }
+      margin: 15px auto 0 !important;
+      width: 600px; }
 
-b.yield, b.income, b.expense, b.availability {
+b.yield, b.income, b.expense, b.availability, b.fide_0, b.fide_1, b.fide_2 {
   background: #45B29D;
   display: inline-block;
   height: 12px;
@@ -1816,10 +1816,26 @@ b.expense {
 b.availability {
   background: #F8CA4D; }
 
+b.fide_0 {
+  background: #183152; }
+
+b.fide_1 {
+  background: #ABC8E2; }
+
+b.fide_2 {
+  background: #375D81; }
+
 rect.expense {
   fill: #EA6045; }
 rect.income {
   fill: #2F3440; }
+
+div.note_graph {
+  background: rgba(0, 0, 0, 0.02);
+  margin-bottom: 25px;
+  padding-top: 20px; }
+  div.note_graph p {
+    font-size: 12px; }
 
 /* Push classes applied to the body */
 .fide-menu-push {

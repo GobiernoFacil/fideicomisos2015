@@ -148,6 +148,9 @@ define(function(require){
       // Cache/create the containers
       var container  = this.el.querySelector('.graph'),
       	  graph_title = this.el.querySelector('.graph_title'),
+      	  ramo 		 = this.el.querySelector('.ramo'),
+      	  unidad 	 = this.el.querySelector('.unidad'),
+      	  link_to 	 = this.el.querySelector('.fide_link'),
           graph      = d3.select(container).append('svg:svg'),
           chart      = graph.append('svg:g'),
       // get/format the data
@@ -177,7 +180,12 @@ define(function(require){
       graph.attr('width', SVG.width).attr('height', SVG.height);	 
       /// h4 title
 	  graph_title.innerHTML =  graph_title.innerHTML + this.collection.at(0).attributes.designation;
-      
+      /// agrega Ramo a notas
+      ramo.innerHTML = this.collection.at(0).attributes.branch;
+      /// agrega Unidad a notas
+      unidad.innerHTML = this.collection.at(0).attributes.unit;
+      /// agrega enlace a notas
+      link_to.href= "/fideicomiso/" + this.collection.at(0).attributes.registry;
       
       data.forEach(function(registry){
         chart.append('svg:path')
