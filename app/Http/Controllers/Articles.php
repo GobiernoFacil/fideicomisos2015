@@ -27,7 +27,7 @@ class Articles extends Controller
       $content = ArticlesContent::where('article_id', $article->id)->get();
       return view('report')->with([
         'article'   => $article, 
-        'content'   => $content,
+        'contents'   => $content,
         'file_url'  => '/images/articles/',
         'months'    => $this->months
       ]);
