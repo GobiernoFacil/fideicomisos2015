@@ -31,6 +31,9 @@ Route::get('/', function(){
   return view('home');
 });
 
+// [ REPORTAJE ]
+Route::get('reportaje/{id}', 'Articles@index')->where('id', '[0-9]+');
+
 // [ LOS REPORTAJES ]
 Route::get('reportajes', function(){
   return view('reports');
