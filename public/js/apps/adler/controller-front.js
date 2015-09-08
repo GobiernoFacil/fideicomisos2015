@@ -114,11 +114,12 @@ define(function(require){
           data       = new Backbone.Collection(collection.where({registry : registry})),
           data_json  = data.toJSON(),
           years        = data.pluck('year'),
-          incomes      = data.pluck('income'),
-          yields       = data.pluck('yield'),
-          expenses     = data.pluck('expenses'),
-          availability = data.pluck('availability'),
-          fields = ['expenses', 'yield'],
+          incomes      = data.pluck('income').map(function(x){return x/Money_scale}),
+          yields       = data.pluck('yield').map(function(x){return x/Money_scale}),
+          expenses     = data.pluck('expenses').map(function(x){return x/Money_scale}),
+          availability = data.pluck('availability').map(function(x){return x/Money_scale}),
+          initial_amount = data.pluck('initial_amount')[0],
+          fields = ['expenses', 'yield', 'income', 'availability'],
           m_scale      = incomes.concat(yields,expenses, availability),
 
       // HELPERS
@@ -130,15 +131,8 @@ define(function(require){
           ]),
           //years   = d3.range(d3.extent(years)),
           format  = d3.format(","),
-          line    = d3.svg.line()
-                      .x(function(d, i){
-                        console.log(x_scale(+d.get('year')));
-                        return x_scale(+d.get('year'))
-                      })
-                      .y(function(d){
-                        console.log(field, y_scale(+d.get(field)), +d.get(field)/Money_scale);
-                        return y_scale(+d.get(field)/Money_scale);
-                      });
+          line    = d3.svg.line().x(function(d, i){return x_scale(+d.get('year'))})
+                      .y(function(d){return y_scale(+d.get(field)/Money_scale);});
 
       // SET THE GRAPH
       // SVG
@@ -156,56 +150,13 @@ define(function(require){
       this.draw_labels(chart, years, x_scale, y_scale, format);
       this.draw_ticks(chart, years, x_scale, y_scale, format);
 
-      field = "expenses";
-      //data.forEach(function(r){
-        //console.log(r);
+      fields.forEach(function(fld){
+        field = fld;
         chart.append('svg:path')
           .data([data.models])
-          .attr('class', 'expenses')
+          .attr('class', fld)
           .attr('d', line);
-     // }, this);
-
-      /*
-      fields.forEach(function(fld){
-        data.models.forEach(function(r){
-          
-          field = fld;
-          console.log(r);
-          chart.append('svg:path')
-            .data([r])
-            .attr('class', fld)
-            .attr('d', line);
-        }, this);
-      }, this);
-*/
-    /*
-      chart.selectAll(".xLabel")
-        .data(x_scale.ticks(years.length))
-        .enter().append("svg:text")
-        .attr("class", "xLabel")
-        .text(String)
-        .attr("x", function(d) { return x_scale(d) })
-        .attr("y", SVG.height - SVG.margin.top - SVG.margin.bottom + 20)
-        .attr("text-anchor", "middle");
-
-      chart.selectAll(".yLabel")
-        .data(y_scale.ticks(10))
-        .enter().append("svg:text")
-        .attr("class", "yLabel")
-        .text(format)
-        .attr("x", SVG.margin.left - 10)
-        .attr("y", function(d) { return y_scale(d) })
-        .attr("text-anchor", "end")
-        .attr("dy", 3);
-  */
-          /*
-          incomes    = collection.map(function(m){ return +m.get('income')/Money_scale}),
-          yields     = collection.map(function(m){ return +m.get('yield')/Money_scale}),
-          expenses   = collection.map(function(m){ return +m.get('expenses')/Money_scale}),
-          availability = collection.map(function(m){ return +m.get('availability')/Money_scale}),
-          m_scale = incomes.concat(yields,expenses, availability),
-          field      = "expenses";
-          */
+      });
     },
 
     draw_axis : function(chart){
