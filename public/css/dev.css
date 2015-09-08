@@ -53,7 +53,7 @@ path{
   fill: none;
 }
 
-path.initial-amount{
+path.initial-amount, path.initial_amount{
   stroke: #ccc;
 }
 

@@ -2,6 +2,7 @@
 <html>
 <head>
   <title></title>
+  <link rel="stylesheet" type="text/css" href="/css/dev.css">
 </head>
 <body>
 <figure>
@@ -21,8 +22,8 @@
 
 @foreach($contents as $content)
   
-  @if(in_array($content->type, ['grahp1','graph2','graph3']))
-    <section class="{{$content->type}}" data-content="{{$content->content}}">
+  @if(in_array($content->type, ['graph1','graph2','graph3']))
+    <section class="{{$content->type}} enable-d3" data-content="{{$content->content}}">
     </section>
   @elseif($content->type == "img")
     <section class="{{$content->type}}">
@@ -40,5 +41,7 @@
   @endif
   
 @endforeach
+
+<script data-main="/js/apps/adler/main-front" src="/js/bower_components/requirejs/require.js"></script>
 </body>
 </html>
