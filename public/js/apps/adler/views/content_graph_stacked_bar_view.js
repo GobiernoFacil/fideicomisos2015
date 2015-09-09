@@ -16,7 +16,7 @@ define(function(require){
       d3       = require('d3'),
   //  [ templates ]
       Area_form = require('text!templates/textarea_form.html'),
-      Graph     = require('text!templates/graph.html'),
+      Graph     = require('text!templates/graph_stacked_bar.html'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -144,16 +144,17 @@ define(function(require){
         console.log("no data");
         return;
       }
-
+	  
       // Cache/create the containers
       var container  = this.el.querySelector('.graph'),
+      	  graph_title = this.el.querySelector('.graph_title'),
           graph      = d3.select(container).append('svg:svg'),
           chart      = graph.append('svg:g'),
       // get/format the data
           registries = _.uniq(this.collection.pluck('registry')),
           years      = _.uniq(this.collection.pluck('year')),
           layers     = [],
-          colors     = ["red", "blue", "yellow"],
+          colors     = ["#183152", "#ABC8E2", "#375D81"],
           field      = 'expenses',
           format     = d3.format(","),
           _x;
@@ -173,6 +174,7 @@ define(function(require){
         }
         layers.push(d);
       }
+    
 
       // create the layout
       var stack = d3.layout.stack()
@@ -203,6 +205,10 @@ define(function(require){
       stack(layers).forEach(function(st, index){
         var data = st.values;
         data.forEach(function(rect){
+	      /// intentando agregar el label……
+	      var fide_name  = this.el.querySelector('.fide_name_' +index);
+	      fide_name.innerHTML =  g.at(index).attributes.designation;
+	      
           chart.append('svg:rect')
           .attr('fill', colors[index])
           .attr('x',x_scale(rect.x) - (Bar_width/2))
@@ -211,10 +217,6 @@ define(function(require){
           .attr('height', h_scale(rect.y));
         }, this);
       }, this);
-
-
-
-
 
 
    // the chart

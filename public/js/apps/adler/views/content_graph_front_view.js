@@ -1,7 +1,7 @@
 // Adler - fideicomisos
 // @package  : fideicomisos
 // @location : /js/apps/adler/views
-// @file     : content_graph_bar_view.js
+// @file     : content_graph_view.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com
 
@@ -15,19 +15,13 @@ define(function(require){
   var Backbone = require('backbone'),
       d3       = require('d3'),
   //  [ templates ]
-      Area_form = require('text!templates/textarea_form.html'),
-      Graph     = require('text!templates/graph_bar.html'),
+      Graph     = require('text!templates/graph.html'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
   // --------------------------------------------------------------------------------
   //
-  Token       = CONFIG_DATA.token,
-  Article     = CONFIG_DATA.article,
-  Save_url    = '/articles/content/' + Article.id,
-  Data_url    = '/data/registry/',
-  ClassName   = "editable",
-  TagName     = "section",
+  Data_url    = '/data/registry/';
 
   //
   // D E F I N E   T H E   D 3   V A R I A B L E S
@@ -43,8 +37,7 @@ define(function(require){
       left   : 50
     } 
   },
-  Money_scale = 1000000,
-  Bar_width   = 20;
+  Money_scale    = 1000000;
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -62,17 +55,11 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'click .cancel' : 'render',
-      'click .update' : 'render_form',
-      'click .save'   : 'save',
-      'click .kill'   : 'delete',
     },
 
     //
     // [ DEFINE THE ELEMENT ]
     //
-    tagName   : TagName,
-    className : ClassName,
 
     //
     // [ DEFINE THE TEMPLATES ]
@@ -108,6 +95,7 @@ define(function(require){
       var m = this.model.attributes;
 
       if(this.model.isNew() && !e){
+        console.log("its a form!");
         this.render_form();
       }
       else{
@@ -147,10 +135,10 @@ define(function(require){
 
       // Cache/create the containers
       var container  = this.el.querySelector('.graph'),
-      	  graph_title = this.el.querySelector('.graph_title'),
-      	  ramo 		 = this.el.querySelector('.ramo'),
-      	  unidad 	 = this.el.querySelector('.unidad'),
-      	  link_to 	 = this.el.querySelector('.fide_link'),
+          graph_title = this.el.querySelector('.graph_title'),
+          ramo     = this.el.querySelector('.ramo'),
+          unidad   = this.el.querySelector('.unidad'),
+          link_to    = this.el.querySelector('.fide_link'),
           graph      = d3.select(container).append('svg:svg'),
           chart      = graph.append('svg:g'),
       // get/format the data
@@ -165,67 +153,71 @@ define(function(require){
           field      = "expenses",
       // create the d3 helpers
           x_scale    = d3.scale.linear().domain(d3.extent(years_list)).range([
-            SVG.margin.left + 40, SVG.width - SVG.margin.right - 40
+            SVG.margin.left, SVG.width - SVG.margin.right
           ]),
           y_scale    = d3.scale.linear().domain(d3.extent(m_scale)).range([
             SVG.height - SVG.margin.bottom - SVG.margin.top, SVG.margin.top
-          ]),
-          y_scale_inverse = d3.scale.linear().domain(d3.extent(m_scale)).range([
-            SVG.margin.top, SVG.height - SVG.margin.bottom - SVG.margin.top
           ]),
           years      = d3.range(d3.extent(years_list)),
           format     = d3.format(","),
           line       = d3.svg.line()
                          .x(function(d, i){return x_scale(+d.get('year'))})
                          .y(function(d){return y_scale(+d.get(field)/Money_scale)});
-
-	
-      graph.attr('width', SVG.width).attr('height', SVG.height);
-	  /// h4 title
-	  graph_title.innerHTML =  graph_title.innerHTML + this.collection.at(0).attributes.designation;
-	  /// agrega Ramo a notas
+          
+    
+      graph.attr('width', SVG.width).attr('height', SVG.height);   
+      /// h4 title
+    graph_title.innerHTML =  graph_title.innerHTML + this.collection.at(0).attributes.designation;
+      /// agrega Ramo a notas
       ramo.innerHTML = this.collection.at(0).attributes.branch;
       /// agrega Unidad a notas
       unidad.innerHTML = this.collection.at(0).attributes.unit;
       /// agrega enlace a notas
       link_to.href= "/fideicomiso/" + this.collection.at(0).attributes.registry;
-	  
+      
       data.forEach(function(registry){
-        var bar = chart.selectAll('rect')
-          .data(registry)
-          .enter();
+        chart.append('svg:path')
+          .data([registry])
+          .attr('class', 'expenses')
+          .attr('d', line);
+      }, this);
 
-          bar.append('svg:rect')
-          .attr('class', 'expense')
-          .attr('x', function(d){
-            return x_scale(+d.get('year'));
-          })
-          .attr('y', function(d){
-            return SVG.height - SVG.margin.bottom - SVG.margin.top - y_scale_inverse(+d.get(field)/Money_scale);
-          })
-          .attr('width', function(d){
-            return Bar_width;
-          })
-          .attr('height', function(d){
-            // console.log(+d.get('expenses'));
-            return y_scale_inverse(+d.get('expenses')/Money_scale);
-          });
+      field = "initial_amount";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
+          .attr('d', line);
+      }, this);
 
-          bar.append('svg:rect')
+      field = "initial_amount";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
+          .attr('class', 'initial-amount')
+          .attr('d', line);
+      }, this);
+
+      field = "yield";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
+          .attr('class', 'yield')
+          .attr('d', line);
+      }, this);
+
+      field = "availability";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
+          .attr('d', line);
+      }, this);
+
+      field = "income";
+      data.forEach(function(registry){
+        chart.append('svg:path')
+          .data([registry])
           .attr('class', 'income')
-          .attr('x', function(d){
-            return x_scale(+d.get('year')) - Bar_width;
-          })
-          .attr('y', function(d){
-            return SVG.height - SVG.margin.bottom - SVG.margin.top - y_scale_inverse(+d.get('income')/Money_scale);
-          })
-          .attr('width', function(d){
-            return Bar_width;
-          })
-          .attr('height', function(d){
-            return y_scale_inverse(d.get('income')/Money_scale);
-          });
-
+          .attr('d', line);
       }, this);
 
 

@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Trusts;
+use App\User;
+use Hash;
 
 class Admin extends Controller{
 
@@ -18,9 +20,40 @@ class Admin extends Controller{
     return view('admin/dashboard');
   }
 
-  // [ USERS ]
+
+  // [ ADMINS ]
   public function users(){
-    
+    $users = User::all();
+    return view('admin.users')->with('users', $users);
+  }
+
+  public function createUser(Request $request){
+    return view('admin.add-user');
+  }
+
+  public function storeUser(Request $request){
+    $email = trim($request->input('email'));
+
+    $request->merge(['email' => $email]);
+    $this->validate($request, [
+      'email'    => 'required|email|unique:users|max:255',
+      'password' => 'required|min:8',
+      'confirm'  => 'same:password'
+    ]);
+
+    $user           = new User();
+    $pass           = $request->password;
+    $user->name     = $request->name;
+    $user->email    = $request->email;
+    $user->password = Hash::make($request->password);
+    $user->save();
+
+    return redirect('users');
+  }
+
+  public function editUser($id){
+    $user = User::find($id);
+    return view('admin.update-user')->with('user', $user);
   }
 
   // [ ADD TRUST FORM ]
