@@ -18,6 +18,11 @@ class Admin extends Controller{
     return view('admin/dashboard');
   }
 
+  // [ USERS ]
+  public function users(){
+    
+  }
+
   // [ ADD TRUST FORM ]
   public function saveTrustForm(){
     return view('admin/add-trust');
@@ -52,6 +57,7 @@ class Admin extends Controller{
       'initial_date' => $fields['initial_date']
     ];
   }
+
 
   // [ ARTICLES ]
 
