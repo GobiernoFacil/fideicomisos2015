@@ -34,7 +34,8 @@ define(function(require){
       left   : 50
     } 
   },
-  Money_scale    = 1000000;
+  Money_scale = 1000000,
+  Bar_width   = 20;
 
 
   //
@@ -73,10 +74,11 @@ define(function(require){
       for(var i=0; i< graphs.length; i++){
         if(this.$(graphs[i]).hasClass('graph1')){
           var d = graphs[i].getAttribute("data-content");
-          this.get_data(d, graphs[i]);
+          this.get_data(d, graphs[i], 1);
         }
         else if(this.$(graphs[i]).hasClass('graph2')){
-          console.log("yei!2");
+          var d = graphs[i].getAttribute("data-content");
+          this.get_data(d, graphs[i], 2);
         }
         else if(this.$(graphs[i]).hasClass('graph3')){
           console.log("yei!3");
@@ -86,11 +88,20 @@ define(function(require){
 
     //
     //
-    //
-    get_data : function(data, el){
+    get_data : function(data, el ,type){
       var that = this;
       $.get(Data_url + data, null,function(d){
-        that.make_graph(d, el);
+        if(type == 1){
+          that.make_graph(d, el);
+        }
+        else if(type == 2){
+          that.make_graph2(d, el);
+        }
+        else if(type == 3){
+        }
+        else{
+          //
+        }
       }, 'json');
     },
 
@@ -161,13 +172,105 @@ define(function(require){
     },
 
     //
-    // H E L P E R S
-    // ------------------------------------------------------------------------------
-    //
 
     //
     //
-    //
+    make_graph2 : function(d, el){
+      this.$(el).append(Graph);
+      // CACHE
+      var collection  = new Backbone.Collection(d),
+          container   = el.querySelector('.graph'),
+          graph_title = el.querySelector('.graph_title'),
+          ramo        = el.querySelector('.ramo'),
+          unidad      = el.querySelector('.unidad'),
+          link_to     = el.querySelector('.fide_link'),
+          graph       = d3.select(container).append('svg:svg'),
+          chart       = graph.append('svg:g'),
+          field       = null, 
+
+      // DATA
+          registry   = _.uniq(collection.pluck('registry'))[0],
+          data       = new Backbone.Collection(collection.where({registry : registry})),
+          data_json  = data.toJSON(),
+          years        = data.pluck('year'),
+          incomes      = data.pluck('income').map(function(x){return x/Money_scale}),
+          yields       = data.pluck('yield').map(function(x){return x/Money_scale}),
+          expenses     = data.pluck('expenses').map(function(x){return x/Money_scale}),
+          availability = data.pluck('availability').map(function(x){return x/Money_scale}),
+          initial_amount = data.pluck('initial_amount')[0],
+          fields = ['expenses', 'income'],
+          m_scale      = incomes.concat(yields,expenses, availability),
+
+      // HELPERS
+          x_scale = d3.scale.linear().domain(d3.extent(years)).range([
+            SVG.margin.left + 40, SVG.width - SVG.margin.right -40
+          ]),
+          y_scale = d3.scale.linear().domain(d3.extent(m_scale)).range([
+            SVG.height - SVG.margin.bottom - SVG.margin.top, SVG.margin.top
+          ]),
+          y_scale_inverse = d3.scale.linear().domain(d3.extent(m_scale)).range([
+            SVG.margin.top, SVG.height - SVG.margin.bottom - SVG.margin.top
+          ]),
+          //years   = d3.range(d3.extent(years)),
+          format  = d3.format(","),
+          line    = d3.svg.line().x(function(d, i){return x_scale(+d.get('year'))})
+                      .y(function(d){return y_scale(+d.get(field)/Money_scale);});
+
+      // SET THE GRAPH
+      // SVG
+      graph.attr('width', SVG.width).attr('height', SVG.height);   
+      /// h4
+      graph_title.innerHTML =  graph_title.innerHTML + data.at(0).attributes.designation;
+      /// agrega Ramo a notas
+      ramo.innerHTML = data.at(0).attributes.branch;
+      /// agrega Unidad a notas
+      unidad.innerHTML = data.at(0).attributes.unit;
+      /// agrega enlace a notas
+      link_to.href= "/fideicomiso/" + data.at(0).attributes.registry;
+
+      this.draw_axis(chart);
+      this.draw_labels(chart, years, x_scale, y_scale, format);
+      this.draw_ticks(chart, years, x_scale, y_scale, format);
+
+      fields.forEach(function(fld){
+        field = fld;
+        var bar = chart.selectAll('rect')
+          .data(data.models)
+          .enter();
+
+          bar.append('svg:rect')
+          .attr('class', 'expense')
+          .attr('x', function(d){
+            return x_scale(+d.get('year'));
+          })
+          .attr('y', function(d){
+            return SVG.height - SVG.margin.bottom - SVG.margin.top - y_scale_inverse(+d.get(field)/Money_scale);
+          })
+          .attr('width', function(d){
+            return Bar_width;
+          })
+          .attr('height', function(d){
+            // console.log(+d.get('expenses'));
+            return y_scale_inverse(+d.get('expenses')/Money_scale);
+          });
+
+          bar.append('svg:rect')
+          .attr('class', 'income')
+          .attr('x', function(d){
+            return x_scale(+d.get('year')) - Bar_width;
+          })
+          .attr('y', function(d){
+            return SVG.height - SVG.margin.bottom - SVG.margin.top - y_scale_inverse(+d.get('income')/Money_scale);
+          })
+          .attr('width', function(d){
+            return Bar_width;
+          })
+          .attr('height', function(d){
+            return y_scale_inverse(d.get('income')/Money_scale);
+          });
+      });
+    },
+
     draw_axis : function(chart){
        // the axis
       chart.append("svg:line")
