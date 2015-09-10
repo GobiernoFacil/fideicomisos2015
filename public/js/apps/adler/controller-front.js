@@ -15,9 +15,6 @@ define(function(require){
       d3        = require('d3'),
   //  [ templates ]
       Graph     = require('text!templates/graph.html'),
-      // Content_graph = require('views/content_graph_front_view'),
-      //Content_bar   = require('views/content_graph_bar_view'),
-      //Content_stack = require('views/content_graph_stacked_bar_view');
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -81,7 +78,7 @@ define(function(require){
           this.get_data(d, graphs[i], 2);
         }
         else if(this.$(graphs[i]).hasClass('graph3')){
-          console.log("yei!3");
+          this.get_data(d, graphs[i], 3);
         }
       }
     },
@@ -98,6 +95,7 @@ define(function(require){
           that.make_graph2(d, el);
         }
         else if(type == 3){
+          that.make_graph3(d, el);
         }
         else{
           //
@@ -269,6 +267,96 @@ define(function(require){
             return y_scale_inverse(d.get('income')/Money_scale);
           });
       });
+    },
+
+    make_graph3 : function(d, el){
+      this.$(el).append(Graph);
+      // CACHE
+      var collection  = new Backbone.Collection(d),
+          container   = el.querySelector('.graph'),
+          graph_title = el.querySelector('.graph_title'),
+          ramo        = el.querySelector('.ramo'),
+          unidad      = el.querySelector('.unidad'),
+          link_to     = el.querySelector('.fide_link'),
+          graph       = d3.select(container).append('svg:svg'),
+          chart       = graph.append('svg:g'),
+          field       = null, 
+
+      // DATA
+          registries = _.uniq(collection.pluck('registry')),
+          names      = _.uniq(collection.pluck('designation')),
+          years      = _.uniq(collection.pluck('year')),
+          layers     = [],
+          colors     = ["#183152", "#ABC8E2", "#375D81"],
+          field      = 'expenses',
+          format     = d3.format(","),
+          _x;
+
+      // make the layers for the stack bars
+      for(var i = 0; i < registries.length; i++){
+        var g = new Backbone.Collection(collection.where({registry : registries[i]}));
+        var d = {name : registries[i], values : []};
+
+        for(var j = 0; j < years.length; j++){
+          if(_x = g.findWhere({year : years[j]}) ){
+            d.values.push({x: years[j],y : +_x.get(field)/Money_scale});
+          }
+          else{
+            d.values.push({x: years[j],y: 0});
+          }
+        }
+        layers.push(d);
+      }
+    
+
+      // create the layout
+      var stack = d3.layout.stack()
+        .offset("zero")
+        .values(function(d) { return d.values; });
+
+      // create the scales
+      var max = d3.max(stack(layers), function(d){
+        return d3.max(d.values, function(el){
+          return (el.y + el.y0) * 1.12
+        });
+      });
+
+      var x_scale = d3.scale.linear().domain(d3.extent(years)).range([
+            SVG.margin.left + 40, SVG.width - SVG.margin.right - 40
+          ]);
+      var h_scale = d3.scale.linear().domain([0, max]).range([
+            0, SVG.height - SVG.margin.bottom - SVG.margin.top
+          ]);
+      var y_scale = d3.scale.linear().domain([0, max]).range([
+            SVG.height - SVG.margin.bottom - SVG.margin.top, SVG.margin.top
+          ]);
+      var k_scale = d3.scale.linear().domain([0,max]).range([
+            SVG.height - SVG.margin.bottom - SVG.margin.top,0
+          ]);
+
+      // SET THE GRAPH
+      // SVG
+      graph.attr('width', SVG.width).attr('height', SVG.height);  
+
+      // render the data // 20040630001369
+      stack(layers).forEach(function(st, index){
+        var data = st.values;
+        data.forEach(function(rect){
+        /// intentando agregar el label……
+        //var fide_name  = this.el.querySelector('.fide_name_' +index);
+        //fide_name.innerHTML =  g.at(index).attributes.designation;
+        
+          chart.append('svg:rect')
+          .attr('fill', colors[index])
+          .attr('x',x_scale(rect.x) - (Bar_width/2))
+          .attr('y', k_scale(rect.y0) - h_scale(rect.y))
+          .attr('width', Bar_width)
+          .attr('height', h_scale(rect.y));
+        }, this);
+      }, this);
+      this.draw_axis(chart);
+      this.draw_labels(chart, years, x_scale, y_scale, format);
+      this.draw_ticks(chart, years, x_scale, y_scale, format);
     },
 
     draw_axis : function(chart){

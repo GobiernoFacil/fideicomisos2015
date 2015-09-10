@@ -152,6 +152,7 @@ define(function(require){
           chart      = graph.append('svg:g'),
       // get/format the data
           registries = _.uniq(this.collection.pluck('registry')),
+          names      = _.uniq(this.collection.pluck('designation')),
           years      = _.uniq(this.collection.pluck('year')),
           layers     = [],
           colors     = ["#183152", "#ABC8E2", "#375D81"],

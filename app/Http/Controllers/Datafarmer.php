@@ -12,7 +12,9 @@ use App\Models\Trusts;
 class Datafarmer extends Controller{
 
   // los campos que regresan en registro
-  private $registry_fields = ['id', 'registry', 'year', 'income', 'yield', 'expenses', 'designation','unit','branch',
+  private $registry_fields = ['id', 'registry', 'year', 'income', 
+                              'yield', 'expenses', 'designation',
+                              'unit','branch',
                              'availability','initial_amount'];
   public function index(){
 
