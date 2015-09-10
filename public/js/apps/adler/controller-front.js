@@ -85,10 +85,8 @@ define(function(require){
     },
 
     //
-    // D I R E C T   I N T E R A C T I O N
-    // ------------------------------------------------------------------------------
     //
-
+    //
     get_data : function(data, el){
       var that = this;
       $.get(Data_url + data, null,function(d){
@@ -96,6 +94,9 @@ define(function(require){
       }, 'json');
     },
 
+    //
+    //
+    //
     make_graph : function(d, el){
       this.$(el).append(Graph);
       // CACHE
@@ -159,6 +160,14 @@ define(function(require){
       });
     },
 
+    //
+    // H E L P E R S
+    // ------------------------------------------------------------------------------
+    //
+
+    //
+    //
+    //
     draw_axis : function(chart){
        // the axis
       chart.append("svg:line")
@@ -176,6 +185,9 @@ define(function(require){
         .attr('class', 'axis');
     },
 
+    //
+    //
+    //
     draw_labels : function(chart, years, x_scale, y_scale, format){
       chart.selectAll(".xLabel")
         .data(x_scale.ticks(years.length))
@@ -197,6 +209,9 @@ define(function(require){
         .attr("dy", 3);
     },
 
+    //
+    //
+    //
     draw_ticks : function(chart, years, x_scale, y_scale, format){
       chart.selectAll(".xTicks")
         .data(x_scale.ticks(years.length))
@@ -217,12 +232,10 @@ define(function(require){
         .attr("x2", SVG.margin.left)
     }
 
-   
-
     //
-    // H E L P E R S
-    // ------------------------------------------------------------------------------
     //
+    //
+    
 
   });
 
