@@ -20,7 +20,7 @@ class Watson extends Controller {
 		$total_trusts = Trusts::count();
 		$definitions = Definitions::all();
 		$years = Trusts::select('year')->groupBy('year')->lists('year');
-		return view('watson', [
+		return view('watsonv2', [
 			'total'       => $total_trusts, 
 			'years'       => $years,
 			'definitions' => $definitions

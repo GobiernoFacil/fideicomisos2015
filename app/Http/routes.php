@@ -21,7 +21,8 @@ Route::get('fideicomiso/{registry}', 'Gregson@index');
 Route::get('categorias', 'Lestrade@index');
 
 // [ EL API DE BÚSQUEDA ]
-Route::post('sherlock/search', 'Sherlock@index');
+Route::get('sherlock/search/{query}/{page?}/{total?}', 'Sherlock@index');
+Route::post('sherlock/search/advanced', 'Sherlock@advanced');
 
 // [ EL API DE CONSUMO DE DATOS ]
 Route::get('data/registry/{collection?}', 'Datafarmer@registry');
