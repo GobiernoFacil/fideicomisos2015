@@ -15,6 +15,8 @@ define(function(require){
       d3        = require('d3'),
   //  [ templates ]
       Graph     = require('text!templates/graph.html'),
+      Graph2    = require('text!templates/graph_bar.html'),
+      Graph3    = require('text!templates/graph_stacked_bar.html'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -78,6 +80,7 @@ define(function(require){
           this.get_data(d, graphs[i], 2);
         }
         else if(this.$(graphs[i]).hasClass('graph3')){
+          var d = graphs[i].getAttribute("data-content");
           this.get_data(d, graphs[i], 3);
         }
       }
@@ -174,7 +177,7 @@ define(function(require){
     //
     //
     make_graph2 : function(d, el){
-      this.$(el).append(Graph);
+      this.$(el).append(Graph2);
       // CACHE
       var collection  = new Backbone.Collection(d),
           container   = el.querySelector('.graph'),
@@ -248,7 +251,6 @@ define(function(require){
             return Bar_width;
           })
           .attr('height', function(d){
-            // console.log(+d.get('expenses'));
             return y_scale_inverse(+d.get('expenses')/Money_scale);
           });
 
@@ -270,7 +272,7 @@ define(function(require){
     },
 
     make_graph3 : function(d, el){
-      this.$(el).append(Graph);
+      this.$(el).append(Graph3);
       // CACHE
       var collection  = new Backbone.Collection(d),
           container   = el.querySelector('.graph'),
@@ -343,8 +345,8 @@ define(function(require){
         var data = st.values;
         data.forEach(function(rect){
         /// intentando agregar el label……
-        //var fide_name  = this.el.querySelector('.fide_name_' +index);
-        //fide_name.innerHTML =  g.at(index).attributes.designation;
+        var fide_name  = this.el.querySelector('.fide_name_' +index);
+        fide_name.innerHTML =  g.at(index).attributes.designation;
         
           chart.append('svg:rect')
           .attr('fill', colors[index])
