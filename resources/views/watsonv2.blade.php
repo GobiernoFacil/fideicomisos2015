@@ -19,8 +19,17 @@
     <a href="#" class="results-control-next">siguiente</a>
   </p>
   <table id="results">
-    <thead></thead>
-    <tbody></tbody>
+    <thead>
+      <tr>
+        <th>Fecha inicial</th>
+        <th>Descripción</th>
+        <th>Objetivo</th>
+        <th>Ramo</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
   </table>
 
 <script>
@@ -31,6 +40,7 @@
     admin  : {{Auth::check()? 1:0}}
   };
 </script>
+<script data-main="/js/apps/watson/main" src="/js/bower_components/requirejs/require.js"></script>
 
 </body>
 </html>

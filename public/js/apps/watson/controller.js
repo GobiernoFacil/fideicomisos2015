@@ -12,13 +12,14 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   var Backbone = require('backbone'),
-      DOM_manager = require('dom_manager'),
+      // DOM_manager = require('dom_manager'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
   // --------------------------------------------------------------------------------
   //
 
+  /*
   fields    = TRUSTS_DATA.fields,
   years     = TRUSTS_DATA.years,
   total     = TRUSTS_DATA.total,
@@ -39,21 +40,25 @@ define(function(require){
     years        : years.slice(0),
     _token       : token
   },
-
-  endpoint  = "/sherlock/search",
-  Model     = Backbone.Model.extend({urlRoot  : endpoint}),
+*/
+  Endpoint  = "/sherlock/search/",
+  Endpoint2 = "/sherlock/search/advanced",
+  Model     = Backbone.Model.extend({urlRoot  : Endpoint2}),
+  Page      = 0,
+  Page_size = 10,
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
-  year_inputs        = document.querySelectorAll("#search-by-year input"),
-  field_inputs       = document.querySelectorAll("#select-visible-fields input"),
-  order_field_select = document.querySelector("select[name='order-field']"),
-  order_sort_select  = document.querySelector("select[name='order-sort']"),
-  order_list         = document.querySelector("#order-by-field ul"),
-  search_field_input = document.querySelector("input[name='search-string']"),
-  trusts_table       = document.getElementById("results");
+  //year_inputs        = document.querySelectorAll("#search-by-year input"),
+  //field_inputs       = document.querySelectorAll("#select-visible-fields input"),
+  //order_field_select = document.querySelector("select[name='order-field']"),
+  //order_sort_select  = document.querySelector("select[name='order-sort']"),
+  //order_list         = document.querySelector("#order-by-field ul"),
+  search_field_input = document.querySelector("#search-string"),
+  trusts_table       = document.getElementById("results"),
+  trust_table_body   = trusts_table.querySelector("tbody");
 
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
@@ -65,14 +70,14 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      'change #search-by-year input'  : 'update_years_array',
-      'change #select-visible-fields input' : 'update_fields_array',
-      'click #all-years'              : 'select_all_years',
-      'click #all-fields'             : 'select_all_fields',
-      'click #add-sort-field'         : 'add_sort_field',
-      'click #order-by-field .delete' : 'remove_sort_field',
-      'click .results-control-prev'   : 'call_sherlock_prev',
-      'click .results-control-next'   : 'call_sherlock_next',
+      //'change #search-by-year input'  : 'update_years_array',
+      //'change #select-visible-fields input' : 'update_fields_array',
+      //'click #all-years'              : 'select_all_years',
+      //'click #all-fields'             : 'select_all_fields',
+      //'click #add-sort-field'         : 'add_sort_field',
+      //'click #order-by-field .delete' : 'remove_sort_field',
+      //'click .results-control-prev'   : 'call_sherlock_prev',
+      //'click .results-control-next'   : 'call_sherlock_next',
       'submit #the-search-app'        : 'call_sherlock'
     },
 
@@ -80,22 +85,36 @@ define(function(require){
     // [ SET THE CONTAINER ]
     //
     //
-    el : controller_el,
+    el : "body",
 
     //
     // [ THE INITIALIZE FUNCTION ]
     //
     //
     initialize : function(){
-      model_obj.current_fields = model_obj.fields.pluck('name');
-      this.model      = new Model(model_obj);
+      //model_obj.current_fields = model_obj.fields.pluck('name');
+      //this.model      = new Model(model_obj);
       this.collection = new Backbone.Collection;
-      DOM_manager.render_fields_list(order_field_select, fields);
+      this.listenTo(this.collection, 'reset', this.update_results);
+      // DOM_manager.render_fields_list(order_field_select, fields);
 
-      this.listenTo(this.model, 'sync', this.on_model_update);
+      //this.listenTo(this.model, 'sync', this.on_model_update);
 
       // just for testing
-      this.dom_manager = DOM_manager;
+      //this.dom_manager = DOM_manager;
+    },
+
+    update_results : function(collection, options){
+      trust_table_body.innerHTML = "";
+      collection.each(function(trust){
+        var row = "<tr>" +
+                  "<td>" + trust.get("initial_date") + "</td>" +
+                  "<td>" + trust.get("designation") + "</td>" +
+                  "<td>" + trust.get("objective") + "</td>" +
+                  "<td>" + trust.get("branch") + "</td>" +
+                  "</tr>";
+        $(trust_table_body).append(row);
+      });
     },
 
     //
@@ -220,9 +239,17 @@ define(function(require){
     //
     //
     call_sherlock : function(e){
+      console.log("yaa");
       e.preventDefault();
-      this.model.set({query : search_field_input.value.trim()});
-      this.model.save();
+      console.log("me");
+      //this.model.set({query : search_field_input.value.trim()});
+      //this.model.save();
+      var that = this,
+          q    = encodeURIComponent(search_field_input.value),
+          url  = Endpoint + q + "/" + Page + "/" + Page_size;
+      $.get(url, {}, function(d){
+        that.collection.reset(d.trusts);
+      });
     },
 
     //
@@ -287,6 +314,7 @@ define(function(require){
     },
 
     render_response : function(){
+      /*
       fields_to_render = this._get_current_fields();
       DOM_manager.render_trusts(trusts_table, this.collection, fields_to_render);
 
@@ -297,6 +325,7 @@ define(function(require){
         results  : this.model.get('query_total')
       };
       DOM_manager.render_page_num(_pagination, _page_num_el);
+      */
     },
 
     //
