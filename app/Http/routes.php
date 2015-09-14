@@ -55,6 +55,9 @@ Route::get('vizdata', function(){
   return view('vizdata');
 });
 
+// [ DATAVIZ BIIIIIIIG ]
+Route::get('elgrafico', 'Data@index');
+
 // [ LOS WHO ]
 Route::get('quienes-somos', function(){
   return view('who');
