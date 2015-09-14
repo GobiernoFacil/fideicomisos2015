@@ -22,8 +22,9 @@ define(function(require){
         width : 700,
         height : 700
       },
-      Trusts = TRUSTS_DATA.trust_array;
-      Colors = d3.scale.category20();
+      Trusts     = TRUSTS_DATA.trust_array,
+      Categories = TRUSTS_DATA.categories;
+      Colors     = d3.scale.category20();
  
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -102,9 +103,28 @@ define(function(require){
     //
     // [ RENDER THE TREE MAP ]
     //
-    generate_tree : function(nodes){
+    generate_tree : function(parent, deep){
+      var category  = Categories[deep],
+          list      = collection.pluck(category),
+          search    = {},
+          childrens = list.map(function(cat){
+            search[category] = cat;
+            var child = {
+              title      : cat, 
+              collection : new Backbone.Collection(this.collection.where(search))
+            };
+            child.value = child.collection.length;
+            child.children = child.collection.map(function(ch){
+              return {title : ch.get("designation")};
+            });
+            return child;
+          }, this);
 
-    
+      if(deep + 1 < Categories.length){
+        childrens.forEach(function(ch){
+          ch.children = this.generate_tree(ch, deep+1);
+        }, this);
+      }
     },
 
     branch_nodes : function(){
