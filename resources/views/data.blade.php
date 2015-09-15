@@ -9,6 +9,9 @@
   <section id="branch-treemap">
   </section>
 
+  <section id="circle-pack">
+  </section>
+
 
   <script>
     var TRUSTS_DATA = {

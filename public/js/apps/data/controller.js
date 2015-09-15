@@ -23,7 +23,8 @@ define(function(require){
         height : 700
       },
       Trusts     = TRUSTS_DATA.trust_array,
-      Categories = TRUSTS_DATA.categories;
+      Categories = ["type", "scope", "theme", "branch"], //"unit", "settlor", "fiduciary"],//TRUSTS_DATA.categories,
+      Tree       = [Categories[0], Categories[1], Categories[2]],
       Colors     = d3.scale.category20();
  
   //
@@ -57,14 +58,15 @@ define(function(require){
     //
     initialize : function(){
       this.collection = new Backbone.Collection(Trusts);
+      // treemap
       var treemap = d3.layout.treemap()
                       .round(false)
                       .size([SVG.width, SVG.height])
                       //.sticky(true),
           _nodes  = this.branch_nodes(),
           nodes   = treemap(_nodes);
-
       this.render_treemap(nodes);
+      this.render_pack();
     },
 
     //
@@ -96,26 +98,74 @@ define(function(require){
     },
 
     //
+    //
+    //
+    render_pack : function(){
+      var root = {collection : this.collection, name : "trusts"},
+          pack = d3.layout.pack()
+                 .sort(null)
+                 .size([SVG.width, SVG.height])
+                 .value(function(d){
+                  return d.collection ? d.collection.length : 1;
+                 });
+
+      root.children = this.generate_tree(root, 0);
+
+      var svg   = d3.select("#circle-pack"),
+          chart = svg.append("svg:svg")
+                  .attr("width", SVG.width)
+                  .attr("height", SVG.height),
+
+          enter = chart.selectAll("g").data(pack(root)).enter()
+          .append("svg:g");
+
+      enter.append("svg:circle")
+          .attr("r", function(d){ return d.r})
+          .attr("cx", function(d){ return d.x})
+          .attr("cy", function(d){ return d.y})
+          .attr("stroke", "black")
+          .attr("fill", "none")
+          .attr("stroke-width", 1);
+          /*
+          .attr("y", function(d){ return d.y})
+          .attr("width", function(d){ return d.dx})
+          .attr("height", function(d){ return d.dy})
+          .attr("fill", function(d,i){ return Colors(i)});
+          */
+      /*
+      enter.append("svg:text")
+          .text(function(d){ return d.value})
+          .attr("x", function (d) {return d.x+5;})
+          .attr("y", function (d) {return d.y+20;})
+          .attr("dy", ".35em")
+          .attr("text-anchor", "middle");
+      */
+    },
+
+    //
     // D I R E C T   I N T E R A C T I O N   ( D A T A )
     // ------------------------------------------------------------------------------
     //
 
     //
-    // [ RENDER THE TREE MAP ]
+    // nodes for any level
     //
     generate_tree : function(parent, deep){
       var category  = Categories[deep],
-          list      = collection.pluck(category),
+          list      = _.uniq(parent.collection.pluck(category)),
           search    = {},
           childrens = list.map(function(cat){
             search[category] = cat;
             var child = {
-              title      : cat, 
-              collection : new Backbone.Collection(this.collection.where(search))
+              name      : cat, 
+              collection : new Backbone.Collection(parent.collection.where(search))
             };
             child.value = child.collection.length;
             child.children = child.collection.map(function(ch){
-              return {title : ch.get("designation")};
+              return {
+                name : ch.get("designation"),
+                trust : ch
+              };
             });
             return child;
           }, this);
@@ -125,8 +175,13 @@ define(function(require){
           ch.children = this.generate_tree(ch, deep+1);
         }, this);
       }
+
+      return childrens;
     },
 
+    //
+    // nodes for one level
+    //
     branch_nodes : function(){
       var branches = _.uniq(this.collection.pluck("fiduciary")),
           root     = {name : "branches", children : []};
