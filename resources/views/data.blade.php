@@ -12,6 +12,9 @@
   <section id="circle-pack">
   </section>
 
+  <section id="barcode-chart">
+  </section>
+
 
   <script>
     var TRUSTS_DATA = {
