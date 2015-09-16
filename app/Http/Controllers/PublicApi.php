@@ -19,6 +19,7 @@ class PublicApi extends Controller{
                             'initial_date'];
   private $num_fields    = ['income', 'yield', 'expenses', 'availability',
                             'initial_amount'];
+  private $categories    = ["branch", "type", "scope", "theme", "unit", "settlor", "fiduciary"];
 
   public function index(){
 
@@ -112,8 +113,36 @@ class PublicApi extends Controller{
     $response['query_total'] = $count;
     $response['trusts']      = $trusts;
     
-    return response()->json($response);
+    return response()->json($response)->header('Access-Control-Allow-Origin', '*');
   }
 
+  //
+  // O B T I E N E   F I D E I C O M I S O S   P O R   C A T E G O R Í A
+  //
+  //
+  public function Categories($name, $page = 0, $category = "branch", $year = 0, $textfields = 0, $full = 0){
+    $trusts = $year ? Trusts::where("year", $year) : Trusts::where("year", ">", "2000");
+
+    if(in_array($category, $this->categories)){
+      $trusts->where($category, $name);
+    }
+    else{
+      $trusts->where("branch", $name);
+    }
+
+    $fields = ["id"];
+    $fields = array_merge($fields, $this->num_fields, $this->string_fields);
+    if($textfields){
+      $fields = array_merge($fields, $this->text_fields);
+    }
+    $trusts->select($fields);
+
+    if(!$full){
+      $trusts->groupBy('registry');
+    }
+    $trusts = $trusts->orderBy("id")->skip($page*self::MAX_PAGE_SIZE)->take(self::MAX_PAGE_SIZE)->get();
+
+    return response()->json($trusts)->header('Access-Control-Allow-Origin', '*');
+  }
 
 }

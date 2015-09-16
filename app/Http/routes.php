@@ -15,6 +15,7 @@ Route::get('api/fideicomisos/{orderBy?}/{year?}/{order?}/{textfields?}', 'Public
 Route::get('api/fideicomiso/{key}', 'PublicApi@Trust');
 Route::get('api/registros/{keys}', 'PublicApi@Registry');
 Route::get('api/busqueda/{query}/{page?}/{total?}', 'PublicApi@Search');
+Route::get('api/categoria/{name}/{category?}/{page?}/{year?}/{textfields?}/{agregated?}', 'PublicApi@Categories');
 
 // [ EL NAVEGADOR DE FIDEICOMISOS ]
 Route::get('navegador-de-fideicomisos', 'Watson@index');
