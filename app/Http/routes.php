@@ -10,6 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+// [ EL API DE TODAS LAS APIIIIIIS!!!!!!!!!!!]
+Route::get('api/fideicomisos/{orderBy?}/{year?}/{order?}/{textfields?}', 'PublicApi@Trusts');
+Route::get('api/fideicomiso/{key}', 'PublicApi@Trust');
+Route::get('api/registros/{keys}', 'PublicApi@Registry');
+Route::get('api/busqueda/{query}/{page?}/{total?}', 'PublicApi@Search');
 
 // [ EL NAVEGADOR DE FIDEICOMISOS ]
 Route::get('navegador-de-fideicomisos', 'Watson@index');
