@@ -11,8 +11,9 @@ define(function(require){
   // L O A D   T H E   A S S E T S   A N D   L I B R A R I E S
   // --------------------------------------------------------------------------------
   //
-  var Backbone    = require('backbone'),
-      d3          = require('d3'),
+  var Backbone = require('backbone'),
+      d3       = require('d3'),
+      Barcode  = require("views/barcode"),  
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -23,6 +24,7 @@ define(function(require){
         height : 700
       },
       Trusts     = TRUSTS_DATA.trust_array,
+      Definitions= TRUSTS_DATA.definitions,
       Categories = ["type", "scope", "theme", "branch"], //"unit", "settlor", "fiduciary"],//TRUSTS_DATA.categories,
       Tree       = [Categories[0], Categories[1], Categories[2]],
       Colors     = d3.scale.category20();
@@ -58,6 +60,7 @@ define(function(require){
     //
     initialize : function(){
       this.collection = new Backbone.Collection(Trusts);
+      this.barcode = new Barcode;
       // treemap
       var treemap = d3.layout.treemap()
                       .round(false)

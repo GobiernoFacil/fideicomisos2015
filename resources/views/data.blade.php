@@ -13,6 +13,18 @@
   </section>
 
   <section id="barcode-chart">
+    <table>
+      <thead>
+        <tr>
+          <th class="category"></th>
+          <th class="money"></th>
+          <th>número de fideicomisos</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
   </section>
 
 
