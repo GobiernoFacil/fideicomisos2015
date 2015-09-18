@@ -17,6 +17,13 @@ Route::get('api/registros/{keys}', 'PublicApi@Registry');
 Route::get('api/busqueda/{query}/{page?}/{total?}', 'PublicApi@Search');
 Route::get('api/categoria/{name}/{category?}/{page?}/{year?}/{textfields?}/{agregated?}', 'PublicApi@Categories');
 
+// [ RECUPERAR PASSWORD ]
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+// Password reset routes...
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
+
 // [ EL NAVEGADOR DE FIDEICOMISOS ]
 Route::get('navegador-de-fideicomisos', 'Watson@index');
 
