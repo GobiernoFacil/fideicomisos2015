@@ -15,7 +15,7 @@
   </ul>
   @endif
 
-  <form method="POST" action="/users/add">
+  <form method="POST" action="/users/update/{{$user->id}}">
     <!-- STATUS MESSAGE -->
 
     {!! csrf_field() !!}

@@ -27,10 +27,12 @@ class Admin extends Controller{
     return view('admin.users')->with('users', $users);
   }
 
+  // [ AGREGAR USUARIO : VIEW ] 
   public function createUser(Request $request){
     return view('admin.add-user');
   }
 
+  // [ AGREGAR USUARIO ]
   public function storeUser(Request $request){
     $email = trim($request->input('email'));
 
@@ -51,9 +53,35 @@ class Admin extends Controller{
     return redirect('users');
   }
 
+  // [ EDITAR USUARIO : VIEW ] 
   public function editUser($id){
     $user = User::find($id);
     return view('admin.update-user')->with('user', $user);
+  }
+
+  // [ EDITAR USUARIO ]
+  public function updateUser(Request $request, $id){
+    $user  = User::find($id);
+    
+    $email = trim($request->input('email'));
+    $request->merge(['email' => $email]);
+
+    $unique = $user->email == $email ? "" : "|unique:users";
+    $this->validate($request, [
+      'email'    => 'required|email|max:255' . $unique,
+      'password' => 'required_with:change_pass|min:8',
+      'confirm'  => 'same:password'
+    ]);
+
+    if($request->input("change_pass")){
+      $pass           = $request->password;
+      $user->password = Hash::make($request->password);
+    }
+    $user->name     = $request->name;
+    $user->email    = $request->email;
+    $user->update();
+
+    return redirect('users');
   }
 
   // [ ADD TRUST FORM ]
