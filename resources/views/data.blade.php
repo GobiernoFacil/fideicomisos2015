@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <meta charset="utf-8">
+  <title>El gráfico</title>
+  <style>
+    .barcode{
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <h1>El gráfico</h1>

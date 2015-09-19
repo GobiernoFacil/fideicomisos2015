@@ -18,7 +18,7 @@ class PublicApi extends Controller{
                             'registry', 'fiduciary', 'theme', 'availability_type', 
                             'initial_date'];
   private $num_fields    = ['income', 'yield', 'expenses', 'availability',
-                            'initial_amount'];
+                            'initial_amount', 'year'];
   private $categories    = ["branch", "type", "scope", "theme", "unit", "settlor", "fiduciary"];
 
   public function index(){

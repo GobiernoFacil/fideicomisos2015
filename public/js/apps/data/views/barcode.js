@@ -41,7 +41,7 @@ define(function(require){
     },
   },
   Money_scale = 1000000,
-  Bar_width   = 2;
+  Bar_width   = 4;
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -89,12 +89,16 @@ define(function(require){
     //
     set_category : function(e){
       var category = e.currentTarget.value;
-      Category     = Categories[category];
-      this.render_table_head();
-      this.render_rows();
+          Category     = Categories[category];
+          this.render_table_head();
+          this.render_rows();
     },
     set_numfield : function(e){
-      console.log(e.currentTarget);
+      var num_field = e.currentTarget.value;
+          Num_field = Num_fields[num_field];
+          this.update_data();
+          //this.render_table_head();
+          //this.update_rows();
     },
 
     //
@@ -112,9 +116,10 @@ define(function(require){
     render_table_head : function(){
       var num_field = this.definitions.findWhere({name : Num_field}),
           money     = d3.extent(this.collection.pluck(Num_field)),
+          format    =  d3.format("$,"),
           category  = this.definitions.findWhere({name : Category});
       this.$(".money").html(num_field.get("short_name") + ": " + 
-        +money[0] + "-" + +money[1]/Money_scale + " millones de pesos");
+        +money[0] + "/" + format(money[1]));
       this.$(".category").html(category.get("short_name"));
     },
 
@@ -127,7 +132,10 @@ define(function(require){
           tbody      = document.querySelector("tbody"),
           x_scale    = d3.scale.linear()
                        .domain(money)
-                       .range([SVG.margin.left, SVG.width - SVG.margin.left - SVG.margin.right]);
+                       .range([SVG.margin.left, SVG.width - SVG.margin.left - SVG.margin.right]),
+          color      = d3.scale.linear()
+                       .domain(d3.extent(this.collection.pluck("year")))
+                       .range(["grey", "green"]);
 
       tbody.innerHTML = "";
 
@@ -140,7 +148,7 @@ define(function(require){
             td3  = document.createElement("td"),
             txt1 = document.createTextNode(categories[i]),
             txt3 = document.createTextNode(data.length),
-            svg  = this.render_barcode(x_scale, data, td2);
+            svg  = this.render_barcode(x_scale, data, td2, color);
 
         td1.appendChild(txt1);
         td3.appendChild(txt3);
@@ -151,7 +159,31 @@ define(function(require){
       }
     },
 
-    render_barcode : function(x_scale, data, td){
+    update_rows : function(){
+      var tbody      = document.querySelector("#barcode-chart tbody"),
+          svgs       = d3.selectAll("tbody svg")[0],
+          categories = _.uniq(this.collection.pluck(Category)),
+          search     = {},
+          html_array = [],
+          svg_array  = [],
+          money      = d3.extent(this.collection.pluck(Num_field)),
+          x_scale    = d3.scale.linear()
+                       .domain(money)
+                       .range([SVG.margin.left, SVG.width - SVG.margin.left - SVG.margin.right]);
+
+      for(var i = 0; i < categories.length; i++){
+        search[Category] = categories[i];
+        var data = this.collection.where(search);
+        var bars = d3.select(svgs[i]).selectAll(".barcode")
+                     .data(data)
+                     .transition()
+                     .attr("x", function(d){
+                       return x_scale(+d.get(Num_field))
+                     });
+      }
+    },
+
+    render_barcode : function(x_scale, data, td, color_scale){
       var svg  = d3.select(td).append("svg:svg")
                  .attr("width", SVG.width)
                  .attr("height", SVG.height),
@@ -160,10 +192,17 @@ define(function(require){
           rect = g.selectAll("rect").data(data).enter()
                  .append("svg:rect")
                  .attr("width", Bar_width)
+                 .attr("class", "barcode")
                  .attr("height", SVG.height)
-                 .attr("fill", "black")
+                 //.attr("fill", "black")
+                 .attr("fill", function(d){
+                   return color_scale(+d.get("year"))
+                 })
                  .attr("x", function(d){
                    return x_scale(+d.get(Num_field))
+                 })
+                 .on("click", function(d, e){
+                  console.log(d,e, d3.mouse(this), window.event.pageX, window.event.pageY);
                  });
       return svg;
     },
@@ -173,12 +212,21 @@ define(function(require){
     //
     get_data : function(){
       var that = this;
-      $.get(Url, {}, function(d){
+      $.get(Url + "/" + Num_field, {}, function(d){
         that.collection.reset(d);
         that.render_table_head();
         that.render_rows();
         document.querySelector("#barcode-category").disabled = false;
         document.querySelector("#barcode-numfield").disabled = false;
+      }, "json");
+    },
+
+    update_data : function(){
+      var that = this;
+      $.get(Url + "/" + Num_field, {}, function(d){
+        that.collection.reset(d);
+        that.render_table_head();
+        that.update_rows();
       }, "json");
     }
 
