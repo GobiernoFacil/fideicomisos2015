@@ -22,7 +22,7 @@ define(function(require){
      Url         = "/api/fideicomisos", 
      Definitions = TRUSTS_DATA.definitions,
      Num_fields  = ['income', 'yield', 'expenses', 'availability', 'initial_amount'],
-     Num_field   = Num_fields[2],
+     Num_field   = Num_fields[3],
      Categories  = ["branch", "type", "scope", "theme", "unit", "settlor", "fiduciary"],
      Category    = Categories[3];
 
@@ -59,7 +59,8 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-
+      "change #barcode-category" : "set_category",
+      "change #barcode-numfield" : "set_numfield"
     },
 
     //
@@ -79,6 +80,21 @@ define(function(require){
     initialize : function(){
       this.collection  = new Backbone.Collection();
       this.definitions = new Backbone.Collection(Definitions);
+      this.get_data();
+    },
+
+    //
+    // C O  N T R O L   F U N C T I O N S
+    // ------------------------------------------------------------------------------
+    //
+    set_category : function(e){
+      var category = e.currentTarget.value;
+      Category     = Categories[category];
+      this.render_table_head();
+      this.render_rows();
+    },
+    set_numfield : function(e){
+      console.log(e.currentTarget);
     },
 
     //
@@ -95,8 +111,10 @@ define(function(require){
 
     render_table_head : function(){
       var num_field = this.definitions.findWhere({name : Num_field}),
+          money     = d3.extent(this.collection.pluck(Num_field)),
           category  = this.definitions.findWhere({name : Category});
-      this.$(".money").html(num_field.get("short_name"));
+      this.$(".money").html(num_field.get("short_name") + ": " + 
+        +money[0] + "-" + +money[1]/Money_scale + " millones de pesos");
       this.$(".category").html(category.get("short_name"));
     },
 
@@ -106,24 +124,25 @@ define(function(require){
           html_array = [],
           svg_array  = [],
           money      = d3.extent(this.collection.pluck(Num_field)),
+          tbody      = document.querySelector("tbody"),
           x_scale    = d3.scale.linear()
                        .domain(money)
                        .range([SVG.margin.left, SVG.width - SVG.margin.left - SVG.margin.right]);
 
+      tbody.innerHTML = "";
+
       for(var i = 0; i < categories.length; i++){
         search[Category] = categories[i];
-        var data  = this.collection.where(search),
-            tbody = document.querySelector("tbody"),
-            tr    = document.createElement("tr"),
-            td1   = document.createElement("td"),
-            td2   = document.createElement("td"),
-            td3   = document.createElement("td"),
-            txt1  = document.createTextNode(categories[i]),
-            txt3  = document.createTextNode(data.length),
-            svg   = this.render_barcode(x_scale, data, td2);
+        var data = this.collection.where(search),
+            tr   = document.createElement("tr"),
+            td1  = document.createElement("td"),
+            td2  = document.createElement("td"),
+            td3  = document.createElement("td"),
+            txt1 = document.createTextNode(categories[i]),
+            txt3 = document.createTextNode(data.length),
+            svg  = this.render_barcode(x_scale, data, td2);
 
         td1.appendChild(txt1);
-        // td2.appendChild(svg);
         td3.appendChild(txt3);
         tr.appendChild(td1);
         tr.appendChild(td2);
@@ -156,7 +175,10 @@ define(function(require){
       var that = this;
       $.get(Url, {}, function(d){
         that.collection.reset(d);
-        console.log("done");
+        that.render_table_head();
+        that.render_rows();
+        document.querySelector("#barcode-category").disabled = false;
+        document.querySelector("#barcode-numfield").disabled = false;
       }, "json");
     }
 

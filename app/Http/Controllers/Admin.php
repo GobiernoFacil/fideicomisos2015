@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Trusts;
 use App\User;
 use Hash;
+use Auth;
 
 class Admin extends Controller{
 
@@ -82,6 +83,22 @@ class Admin extends Controller{
     $user->update();
 
     return redirect('users');
+  }
+
+  // [ ELIMINAR USUARIO ]
+  public function deleteUser(Request $request, $id){
+    $user  = Auth::user();
+    $users = User::count();
+    
+    if($user->id != $id && $users>1){
+      $zombie = User::find($id);
+      $d = $zombie->delete();
+      
+      return redirect('users')->with("delete", $d);
+    }
+    else{
+      return redirect('users')->with("delete", 0);
+    }
   }
 
   // [ ADD TRUST FORM ]

@@ -110,6 +110,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('users/add', 'Admin@storeUser');
     Route::get('users/update/{id}', 'Admin@editUser')->where('id', '[0-9]+');
     Route::post('users/update/{id}', 'Admin@updateUser')->where('id', '[0-9]+');
+    Route::get('users/delete/{id}', 'Admin@deleteUser')->where('id', '[0-9]+');
     // [ ARTICLES CONTENT ]
     Route::post('articles/image/{id}/{cid}', 'Irene@saveImage');
     Route::post('articles/content/{id}', 'Irene@addContent');
