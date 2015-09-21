@@ -10,6 +10,19 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+// [ EL API DE TODAS LAS APIIIIIIS!!!!!!!!!!!]
+Route::get('api/fideicomisos/{orderBy?}/{year?}/{order?}/{textfields?}', 'PublicApi@Trusts');
+Route::get('api/fideicomiso/{key}', 'PublicApi@Trust');
+Route::get('api/registros/{keys}', 'PublicApi@Registry');
+Route::get('api/busqueda/{query}/{page?}/{total?}', 'PublicApi@Search');
+Route::get('api/categoria/{name}/{category?}/{page?}/{year?}/{textfields?}/{agregated?}', 'PublicApi@Categories');
+
+// [ RECUPERAR PASSWORD ]
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+// Password reset routes...
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 // [ EL NAVEGADOR DE FIDEICOMISOS ]
 Route::get('navegador-de-fideicomisos', 'Watson@index');
@@ -21,7 +34,8 @@ Route::get('fideicomiso/{registry}', 'Gregson@index');
 Route::get('categorias', 'Lestrade@index');
 
 // [ EL API DE BÚSQUEDA ]
-Route::post('sherlock/search', 'Sherlock@index');
+Route::get('sherlock/search/{query}/{page?}/{total?}', 'Sherlock@index');
+Route::post('sherlock/search/advanced', 'Sherlock@advanced');
 
 // [ EL API DE CONSUMO DE DATOS ]
 Route::get('data/registry/{collection?}', 'Datafarmer@registry');
@@ -30,6 +44,9 @@ Route::get('data/registry/{collection?}', 'Datafarmer@registry');
 Route::get('/', function(){
   return view('home');
 });
+
+// [ REPORTAJE ]
+Route::get('reportaje/{id}', 'Articles@index')->where('id', '[0-9]+');
 
 // [ LOS REPORTAJES ]
 Route::get('reportajes', function(){
@@ -50,6 +67,9 @@ Route::get('que-es-un-fideicomiso', function(){
 Route::get('vizdata', function(){
   return view('vizdata');
 });
+
+// [ DATAVIZ BIIIIIIIG ]
+Route::get('elgrafico', 'Data@index');
 
 // [ LOS WHO ]
 Route::get('quienes-somos', function(){
@@ -84,6 +104,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('articles/add', 'AdminArticles@store');
     Route::get('articles/update/{id}', 'AdminArticles@edit')->where('id', '[0-9]+');
     Route::post('articles/update/{id}', 'Irene@index');
+    // [ USERS ]
+    Route::get('users', 'Admin@users');
+    Route::get('users/add', 'Admin@createUser');
+    Route::post('users/add', 'Admin@storeUser');
+    Route::get('users/update/{id}', 'Admin@editUser')->where('id', '[0-9]+');
+    Route::post('users/update/{id}', 'Admin@updateUser')->where('id', '[0-9]+');
+    Route::get('users/delete/{id}', 'Admin@deleteUser')->where('id', '[0-9]+');
     // [ ARTICLES CONTENT ]
     Route::post('articles/image/{id}/{cid}', 'Irene@saveImage');
     Route::post('articles/content/{id}', 'Irene@addContent');

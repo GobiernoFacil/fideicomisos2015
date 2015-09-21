@@ -1785,6 +1785,61 @@ footer {
       color: #777;
       font-size: 14px; }
 
+.graph_title {
+  border-top: 1px solid #8ba7c0;
+  padding: 15px 0 0; }
+  .graph_title strong {
+    color: #015383; }
+
+.labels_graphs {
+  margin-top: 15px; }
+  .labels_graphs p {
+    font-size: 12px !important; }
+    .labels_graphs p.label_amount {
+      color: #999;
+      margin: 15px auto 0 !important;
+      width: 600px; }
+
+b.yield, b.income, b.expense, b.availability, b.fide_0, b.fide_1, b.fide_2 {
+  background: #45B29D;
+  display: inline-block;
+  height: 15px;
+  margin-right: 3px;
+  width: 15px; }
+  b.yield.line, b.income.line, b.expense.line, b.availability.line, b.fide_0.line, b.fide_1.line, b.fide_2.line {
+    height: 6px;
+    width: 20px; }
+
+b.income {
+  background: #2F3440; }
+
+b.expense {
+  background: #EA6045; }
+
+b.availability {
+  background: #F8CA4D; }
+
+b.fide_0 {
+  background: #183152; }
+
+b.fide_1 {
+  background: #ABC8E2; }
+
+b.fide_2 {
+  background: #375D81; }
+
+rect.expense {
+  fill: #EA6045; }
+rect.income {
+  fill: #2F3440; }
+
+div.note_graph {
+  background: rgba(0, 0, 0, 0.02);
+  margin-bottom: 25px;
+  padding-top: 20px; }
+  div.note_graph p {
+    font-size: 12px; }
+
 /* Push classes applied to the body */
 .fide-menu-push {
   overflow-x: hidden;

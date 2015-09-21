@@ -13,9 +13,11 @@ define(function(require){
   //
   var Backbone      = require('backbone'),
       Content       = require('views/content_view'),
+      Content_html  = require('views/content_html_view'),
       Content_img   = require('views/content_img_view'),
       Content_graph = require('views/content_graph_view'),
       Content_bar   = require('views/content_graph_bar_view'),
+      Content_stack = require('views/content_graph_stacked_bar_view'),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -50,7 +52,7 @@ define(function(require){
     //
     events :{
       'click .publicar-articulo' : 'publish',
-      'click .input'             : 'make_input',
+      'click .binput'            : 'make_input',
       'submit #add-more-content' : 'add_content'
     },
 
@@ -143,8 +145,11 @@ define(function(require){
     render_content : function(m){
       var content, html;
       m.set({_token : Token});
+      if(m.get('type') === 'html'){
+        content = new Content_html({model : m, controller : this});
+      }
 
-      if(m.get('type') === 'img'){
+      else if(m.get('type') === 'img'){
         content = new Content_img({model : m, controller : this});
       }
       else if(m.get('type') === 'graph1'){
@@ -153,6 +158,10 @@ define(function(require){
 
       else if(m.get('type') === 'graph2'){
         content = new Content_bar({model : m, controller : this});
+      }
+
+      else if(m.get('type') === 'graph3'){
+        content = new Content_stack({model : m, controller : this});
       }
 
       else{

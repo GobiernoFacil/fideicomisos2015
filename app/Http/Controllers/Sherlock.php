@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class Sherlock extends Controller {
 
 	const PAGE_SIZE        = 50;
-	const MAX_PAGE_SIZE    = 500;
+	const MAX_PAGE_SIZE    = 100;
 	private $text_fields   = ['designation', 'objective', 'report', 'comments',
 	                          'initial_amount_comments'];
 	private $string_fields = ['branch', 'type', 'scope', 'unit', 'settlor', 
@@ -23,7 +23,42 @@ class Sherlock extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index(Request $request)
+	public function index($query, $page = 0, $size = null){
+		$query  = filter_var($query, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+		$total  = $size ? $size : self::PAGE_SIZE;
+		
+		// get the results
+		$fields = array_merge($this->string_fields, $this->text_fields);
+		$trusts = Trusts::where(array_shift($fields), 'like', '%'.$query.'%');
+		foreach($fields as $field){
+			$trusts = $trusts->orWhere($field, 'like', '%'.$query.'%');
+		}
+		$trusts = $trusts->orderBy("id")->groupBy('registry')->skip($page*$total)->take($total)->get();
+
+		// get the total
+		$fields = array_merge($this->string_fields, $this->text_fields);
+		$count = Trusts::where(array_shift($fields), 'like', '%'.$query.'%');
+		foreach($fields as $field){
+			$count = $count->orWhere($field, 'like', '%'.$query.'%');
+		}
+		$count = $count->groupBy('registry')->select("registry")->get()->count();
+
+
+		$response = [];
+		$response['page']        = $page;
+		$response['pages']       = ceil($count/$total);
+		$response['query_total'] = $count;
+		$response['trusts']      = $trusts;
+		
+		return response()->json($response);
+	}
+
+	/**
+	 * Regresa una lista de fideicomisos en JSON
+	 *
+	 * @return Response
+	 */
+	public function advanced(Request $request)
 	{
 		$years  = $request->input("years", NULL);
 		$years  = filter_var_array($years, FILTER_VALIDATE_INT);

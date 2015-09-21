@@ -29,7 +29,9 @@
 * 
 */
 
-
+.graph { margin: 0 auto;
+	width: 600px;
+}
 
 .input{
   cursor: pointer;
@@ -46,36 +48,42 @@
 }
 
 path{
-  stroke: green;
-  stroke-width: 1.5;
+  stroke: #F8CA4D;
+  stroke-width: 2.5;
   fill: none;
 }
 
-path.initial-amount{
-  stroke: blue;
+path.initial-amount, path.initial_amount{
+  stroke: #ccc;
 }
 
 path.yield{
-  stroke: grey;
+  stroke: #45B29D;
 }
 
 path.expenses{
-  stroke: red;
+  stroke: #EA6045;
 }
 
 path.income{
-  stroke: black;
+  stroke: #2F3440;
 }
 
 text {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 11px;
 }
+
+text.yLabel,
+text.xLabel {
+	fill: grey;
+}
+
 .axis {
     stroke-width: 0.8;
-    stroke: #000;
+    stroke: #ccc;
 }
 .xTicks, .yTicks {
     stroke-width: 0.6;
-    stroke: #000;
+    stroke: #ccc;
 }

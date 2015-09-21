@@ -24,7 +24,7 @@
 	  </div>
 	  <div class="col-sm-4">
 		  <div class="box_info panel">
-			 <h3> <a href="{{url('writers')}}">Escritores</a></h3>
+			 <h3> <a href="{{url('users')}}">Escritores</a></h3>
 			 <p><span>1</span> escritor</p>
 		  </div>
 	  </div>

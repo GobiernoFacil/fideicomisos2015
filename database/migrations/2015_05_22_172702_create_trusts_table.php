@@ -32,6 +32,8 @@ class CreateTrustsTable extends Migration {
 			$table->text('objective')->nullable();
 			$table->string('fiduciary')->nullable();
 			$table->string('theme')->nullable();
+			$table->string('balance')->nullable();
+			$table->double('balance_num')->nullable();
 			$table->string('income')->nullable();
 
 			$table->double('income_num')->nullable();
