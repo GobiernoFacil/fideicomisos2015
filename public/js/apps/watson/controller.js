@@ -112,7 +112,9 @@ define(function(require){
       collection.each(function(trust){
         var row = "<tr>" +
                   "<td>" + trust.get("initial_date") + "</td>" +
-                  "<td>" + trust.get("designation") + "</td>" +
+                  "<td>" + 
+                  "<a href='/fideicomiso/" + trust.get("registry") + "'>" + trust.get("designation") + "</a>"
+                  + "</td>" +
                   "<td>" + trust.get("objective") + "</td>" +
                   "<td>" + trust.get("branch") + "</td>" +
                   "</tr>";
