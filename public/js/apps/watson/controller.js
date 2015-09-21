@@ -46,6 +46,8 @@ define(function(require){
   Model     = Backbone.Model.extend({urlRoot  : Endpoint2}),
   Page      = 0,
   Page_size = 10,
+  Pages     = 0,
+  Total     = 0,
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -56,7 +58,8 @@ define(function(require){
   //order_field_select = document.querySelector("select[name='order-field']"),
   //order_sort_select  = document.querySelector("select[name='order-sort']"),
   //order_list         = document.querySelector("#order-by-field ul"),
-  search_field_input = document.querySelector("#search-string"),
+  Current_page       = document.getElementById("results-control-page"),
+  search_field_input = document.getElementById("search-string"),
   trusts_table       = document.getElementById("results"),
   trust_table_body   = trusts_table.querySelector("tbody");
 
@@ -76,9 +79,9 @@ define(function(require){
       //'click #all-fields'             : 'select_all_fields',
       //'click #add-sort-field'         : 'add_sort_field',
       //'click #order-by-field .delete' : 'remove_sort_field',
-      //'click .results-control-prev'   : 'call_sherlock_prev',
-      //'click .results-control-next'   : 'call_sherlock_next',
-      'submit #the-search-app'        : 'call_sherlock'
+      'click .results-control-prev'   : 'call_sherlock_prev',
+      'click .results-control-next'   : 'call_sherlock_next',
+      'submit #the-search-app'        : 'reset_search'
     },
 
     // 
@@ -115,6 +118,7 @@ define(function(require){
                   "</tr>";
         $(trust_table_body).append(row);
       });
+      Current_page.innerHTML = Page+1 + "/" + Pages;
     },
 
     //
@@ -234,20 +238,26 @@ define(function(require){
       DOM_manager.remove_sort_item(_el);
     },
 
+    reset_search : function(e){
+      e.preventDefault();
+      Page  = 0;
+      Pages = 0;
+      Total = 0;
+      this.call_sherlock();
+    },
+
     //
     // [ MAKE A QUERY TO SHERLOCK ]
     //
     //
-    call_sherlock : function(e){
-      console.log("yaa");
-      e.preventDefault();
-      console.log("me");
-      //this.model.set({query : search_field_input.value.trim()});
-      //this.model.save();
+    call_sherlock : function(){
       var that = this,
           q    = encodeURIComponent(search_field_input.value),
           url  = Endpoint + q + "/" + Page + "/" + Page_size;
       $.get(url, {}, function(d){
+        Page  = +d.page;
+        Pages = d.pages;
+        Total = d.query_total;
         that.collection.reset(d.trusts);
       });
     },
@@ -258,16 +268,10 @@ define(function(require){
     //
     call_sherlock_prev : function(e){
       e.preventDefault();
-      var _current_page = this.model.get('current_page'),
-          _page_size    = this.model.get('page_size'),
-          _query_total  = this.model.get('query_total'),
-          _total_pages  = _query_total ? Math.ceil(_query_total/_page_size): 1;
-
-      if(!_current_page || !_query_total) return;
-
-      this.model.set({current_page : _current_page - 1});
-      this.model.set({query : search_field_input.value.trim()});
-      this.model.save();
+      if(Pages && +Page){
+        Page = Page-1;
+        this.call_sherlock();
+      }
     },
 
     //
@@ -276,16 +280,10 @@ define(function(require){
     //
     call_sherlock_next : function(e){
       e.preventDefault();
-      var _current_page = this.model.get('current_page'),
-          _page_size    = this.model.get('page_size'),
-          _query_total  = this.model.get('query_total'),
-          _total_pages  = _query_total ? Math.ceil(_query_total/_page_size): 1;
-
-      if(_current_page == _total_pages - 1 || !_query_total) return;
-
-      this.model.set({current_page : 1 + _current_page});
-      this.model.set({query : search_field_input.value.trim()});
-      this.model.save();
+      if(Pages && Page+1 < Pages){
+        Page = Page+1;
+        this.call_sherlock();
+      }
     },
 
     //
