@@ -1,7 +1,7 @@
 // Adler - fideicomisos
 // @package  : fideicomisos
 // @location : /js/apps/data/views
-// @file     : barcode_view.js
+// @file     : barcode.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com
 
@@ -24,7 +24,7 @@ define(function(require){
      Num_fields  = ['income', 'yield', 'expenses', 'availability', 'initial_amount'],
      Num_field   = Num_fields[3],
      Categories  = ["branch", "type", "scope", "theme", "unit", "settlor", "fiduciary"],
-     Category    = Categories[3];
+     Category    = Categories[3],
 
   //
   // D E F I N E   T H E   D 3   V A R I A B L E S
@@ -189,7 +189,7 @@ define(function(require){
                  .attr("height", SVG.height),
           g    = svg.append("svg:g")
                  .attr("transform", "translate(" + SVG.margin.left + " " + SVG.margin.right + ")"),
-          rect = g.selectAll("rect").data(data).enter()
+          rect = g.selectAll("#barcode-chart rect").data(data).enter()
                  .append("svg:rect")
                  .attr("width", Bar_width)
                  .attr("class", "barcode")

@@ -13,7 +13,9 @@ define(function(require){
   //
   var Backbone = require('backbone'),
       d3       = require('d3'),
-      Barcode  = require("views/barcode"),  
+      Barcode  = require("views/barcode"), 
+      Treemap  = require("views/treemap"), 
+      Pack     = require("views/pack"),
 
   //
   // D E F I N E   T H E   S E T U P   V A R I A B L E S
@@ -61,15 +63,9 @@ define(function(require){
     initialize : function(){
       this.collection = new Backbone.Collection(Trusts);
       this.barcode = new Barcode;
-      // treemap
-      var treemap = d3.layout.treemap()
-                      .round(false)
-                      .size([SVG.width, SVG.height])
-                      //.sticky(true),
-          _nodes  = this.branch_nodes(),
-          nodes   = treemap(_nodes);
-      this.render_treemap(nodes);
-      this.render_pack();
+      this.treemap = new Treemap;
+      //this.render_pack();
+      this.pack = new Pack;
     },
 
     //
