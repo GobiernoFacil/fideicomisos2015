@@ -299,6 +299,15 @@ nav.main .search input[type="search"] {
     #im-watson input[type="checkbox"]:checked + label:hover {
       background: #8ba7c0;
       color: white; }
+#im-watson input[type="text"] {
+  padding: 0 5px;
+  width: 100%;
+  line-height: 35px; }
+#im-watson input[type="submit"].btn_link {
+  padding: 0 5px;
+  width: 100%;
+  line-height: 35px;
+  height: 39px; }
 
 #add-more-content {
   background: #f2f2f2;
@@ -366,6 +375,22 @@ input[type="submit"].btn_link {
   vertical-align: top;
   border-top: 1px solid #ddd;
   text-align: center; }
+
+.watson .table > thead > tr > th, .watson .table > tbody > tr > td {
+  text-align: left; }
+.watson .table tr td {
+  font-size: 15px; }
+  .watson .table tr td:nth-child(1), .watson .table tr td:nth-child(3) {
+    font-size: 14px;
+    font-weight: 300; }
+  .watson .table tr td:last-child {
+    font-weight: 700; }
+  .watson .table tr td a:link {
+    color: #015383; }
+  .watson .table tr td a:visited {
+    color: #8ba7c0; }
+  .watson .table tr td a:hover {
+    text-decoration: underline; }
 
 .node circle {
   fill: #fff;
@@ -975,6 +1000,12 @@ input:focus, select:focus, textarea:focus {
   	}
 }
 */
+.hide {
+  display: none; }
+
+.show {
+  display: block; }
+
 .top-header {
   background: white;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
