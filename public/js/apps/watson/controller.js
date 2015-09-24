@@ -61,6 +61,8 @@ define(function(require){
   Current_page       = document.getElementById("results-control-page"),
   search_field_input = document.getElementById("search-string"),
   trusts_table       = document.getElementById("results"),
+  table_content      = document.getElementById("table_content"),
+  nav       		 = document.getElementById("nav"),
   trust_table_body   = trusts_table.querySelector("tbody");
 
   //
@@ -108,6 +110,11 @@ define(function(require){
     },
 
     update_results : function(collection, options){
+	  /// muestra nevegación
+	  nav.className = "show";
+	  // muestra tabla
+	  table_content.className ="show";
+	  
       trust_table_body.innerHTML = "";
       collection.each(function(trust){
         var row = "<tr>" +
