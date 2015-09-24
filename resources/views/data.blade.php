@@ -54,7 +54,7 @@
 			<div class="col-sm-8 col-sm-offset-2">
 				<h2>Encuentra un Fideicomiso Público</h2>
 				<p>Encuentra fideicomiso buscando por palabra clave.</p>
-				<a href="/buscar-fideicomiso" class="col-sm-12 btn_link">Buscar un fideicomiso ></a>
+				<a href="/buscador-de-fideicomisos" class="col-sm-12 btn_link">Buscar un fideicomiso ></a>
 			</div>
 		</div>
 	</div>
