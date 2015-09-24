@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Models\Trusts;
 use App\User;
+use App\Models\Trusts;
+use App\Models\Article;
 use Hash;
 use Auth;
 
@@ -18,7 +19,14 @@ class Admin extends Controller{
 
   // [ DASHBARD ]
   public function index(){
-    return view('admin/dashboard');
+    $users    = User::all()->count();
+    $trusts   = Trusts::groupBy("registry")->get()->count();
+    $articles = Article::all()->count();
+    return view('admin/dashboard')->with([
+      'users'    => $users,
+      'trusts'   => $trusts,
+      'articles' => $articles
+    ]);
   }
 
 

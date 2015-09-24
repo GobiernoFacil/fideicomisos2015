@@ -73,7 +73,8 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
+    initialize : function(settings){
+      this.controller = settings.controller;
       this.collection  = new Backbone.Collection();
       this.definitions = new Backbone.Collection(Definitions);
       this.treemap     = d3.layout.treemap()
@@ -106,7 +107,8 @@ define(function(require){
     },
 
     render_treemap : function(){
-      var data  = this.branch_nodes(),
+      var that  = this,
+          data  = this.branch_nodes(),
           tree  = this.treemap(data),
           chart = d3.select("#branch-treemap").append("svg:svg")
                   .attr("width", SVG.width)
@@ -128,12 +130,22 @@ define(function(require){
           .attr("y", function (d) {return d.y+20;})
           .attr("dy", ".35em")
           .attr("text-anchor", "middle");
+
+        var rects = enter.selectAll("rect")
+        .on("click", function(e){
+            var settings = {x:50, y:50};
+            that.controller.append_popup(settings);
+          })
+          .on("mouseover", function(e){
+            console.log(e);
+          });
     },
 
     update_treemap : function(){
       d3.selectAll("#branch-treemap svg g").remove();
 
-      var data  = this.branch_nodes(Category),
+      var that  = this,
+          data  = this.branch_nodes(Category),
           tree  = this.treemap(data),
           chart = d3.select("#branch-treemap svg"),
           items = chart.selectAll("#branch-treemap g").data(tree);
@@ -145,13 +157,14 @@ define(function(require){
           .attr("width", function(d){ return d.dx})
           .attr("height", function(d){ return d.dy})
           .attr("fill", function(d,i){ return Colors(i)});
-
+         
       enter.append("svg:text")
           .text(function(d){ return d.value})
           .attr("x", function (d) {return d.x+5;})
           .attr("y", function (d) {return d.y+20;})
           .attr("dy", ".35em")
           .attr("text-anchor", "middle");
+          
     },
 
     branch_nodes : function(){
@@ -178,7 +191,9 @@ define(function(require){
          that.render_treemap();
         document.querySelector("#treemap-category").disabled = false;
       }, "json");
-    }
+    },
+
+
 
   });
     
