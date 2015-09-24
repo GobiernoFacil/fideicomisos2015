@@ -1,49 +1,71 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>El gráfico</title>
-  <style>
-    .barcode{
-      cursor: pointer;
-    }
-    #circle-pack .root{
-      stroke: black;
-      fill : white;
-    }
-    #circle-pack .category{
-      stroke: blue;
-      fill : none;
-    }
-    #circle-pack .trust{
-      stroke: white;
-      fill : red;
-    }
+@extends('layouts.master')
+@section('body_class', 'elgrafico')
 
-  </style>
-</head>
-<body>
-  <h1>El gráfico</h1>
+@section('title', 'El Gráfico de los Fideicomisos')
+@section('description', "Visualización de los Fideicomisos Públicos en México")
 
-  <!-- TREEMAP CHART -->
-  <section id="branch-treemap">
-    <form id="treemap-chart-controls">
-      <p>
-        <label>Categoría</label>
-        <select id="treemap-category" disabled>
-          <option value="0">ramo</option>
-          <option value="1">tipo</option>
-          <option value="2">ámbito</option>
-          <option value="3" selected>tema</option>
-          <option value="4">unidad responsable</option>
-          <option value="5">mandante</option>
-          <option value="6">fiduciario</option>
-        </select>
-      </p>
-    </form>
-  </section>
+@section('content')
+<div class="main">
+	<nav class="breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<ul>
+						<li><a href="/">Inicio</a>
+						<li>El gráfico</li>
+					</ul>
+					<h1>El gráfico</h1>
+				</div>
+			</div>
+		</div>
+	</nav>
+</div>
 
-  <section id="circle-pack">
+<section class="list_news">
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<h2>Distribución del dinero por Fideicomiso Público</h2>
+			<!-- TREEMAP CHART -->
+			<div id="branch-treemap">
+			    <form id="treemap-chart-controls">
+			      <p>
+			        <label>Categoría</label>
+			        <select id="treemap-category" disabled>
+			          <option value="0">ramo</option>
+			          <option value="1">tipo</option>
+			          <option value="2">ámbito</option>
+			          <option value="3" selected>tema</option>
+			          <option value="4">unidad responsable</option>
+			          <option value="5">mandante</option>
+			          <option value="6">fiduciario</option>
+			        </select>
+			      </p>
+			    </form>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+
+<section class="data">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h2>Encuentra un Fideicomiso Público</h2>
+				<p>Encuentra fideicomiso buscando por palabra clave.</p>
+				<a href="/buscar-fideicomiso" class="col-sm-12 btn_link">Buscar un fideicomiso ></a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="list_news">
+	<div class="container">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+  <div id="circle-pack">
+				<h2>Distribución de Fideicomiso Público</h2>
     <form id="pack-chart-controls">
     <ul>
       <li><input type="checkbox" name="pack_category[]" value="0" checked>ramo</li>
@@ -55,11 +77,23 @@
       <li><input type="checkbox" name="pack_category[]" value="6">fiduciario</li>
     </ul>
     </form>
-  </section>
+  </div>
+		</div>
+	</div>
+	</div>
+</section>
 
+<section class="data">
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
   <!-- BARCODE CHART -->
-  <section id="barcode-chart">
+  <div id="barcode-chart">
     <form id="barcode-chart-controls">
+	 <h2>Código de Barras de los Fideicomisos Público</h2>
+	 <p>Filtra la información:</p>
+      <div class="row">
+      	<div class="col-sm-6">
       <p>
         <label>Categoría</label>
         <select id="barcode-category" disabled>
@@ -72,6 +106,9 @@
           <option value="6">fiduciario</option>
         </select>
       </p>
+      	</div>
+      	
+      	<div class="col-sm-6">
 
       <p>
         <label>variable</label>
@@ -83,8 +120,10 @@
           <option value="4">aportación inicial</option>
         </select>
       </p>
+      	</div>
+      </div>
     </form>
-    <table>
+    <table class="table"> 
       <thead>
         <tr>
           <th class="category"></th>
@@ -94,8 +133,11 @@
       </thead>
       <tbody></tbody>
     </table>
-  </section>
-
+  </div>
+		</div>
+	</div>
+</div>
+</section>
 
   <script>
     var TRUSTS_DATA = {
@@ -106,5 +148,4 @@
   </script>
 
   <script data-main="/js/apps/data/main" src="/js/bower_components/requirejs/require.js"></script>
-</body>
-</html>
+@endsection

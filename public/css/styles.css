@@ -1206,12 +1206,15 @@ a.btn_logout {
     .home .data .descarga a {
       display: block; }
 
-.reportajes.vizdata h2 {
+.reportajes.vizdata h2, .elgrafico h2 {
   font-weight: 700; }
-.reportajes.vizdata section {
+.reportajes.vizdata section, .reportajes.vizdata div.list_news, .elgrafico section, .elgrafico div.list_news {
   padding: 90px 0; }
-  .reportajes.vizdata section.data {
+  .reportajes.vizdata section.data, .reportajes.vizdata div.list_news.data, .elgrafico section.data, .elgrafico div.list_news.data {
     background: #F5F6FA; }
+.reportajes.vizdata div.data, .elgrafico div.data {
+  background: #F5F6FA;
+  padding: 90px 0; }
 
 /* =im-fideicomiso
 -------------------------------------------------------------- */
@@ -1353,9 +1356,6 @@ a.category, a.category:visited {
   a.category:hover, a.category:visited:hover {
     background: #FFED48;
     color: #015383; }
-
-/* =Reportajes
--------------------------------------------------------------- */
 
 /* =LEstrade
 -------------------------------------------------------------- */
@@ -1537,6 +1537,31 @@ a.category, a.category:visited {
         -webkit-opacity: 0.3;
         -moz-opacity: 0.3;
         opacity: 0.3; }
+
+/* =El Gráfico
+-------------------------------------------------------------- */
+.barcode {
+  cursor: pointer; }
+
+#circle-pack .root {
+  stroke: black;
+  fill: white; }
+
+#circle-pack .category {
+  stroke: blue;
+  fill: none; }
+
+#circle-pack .trust {
+  stroke: white;
+  fill: red; }
+
+#pack-chart-controls li {
+  display: inline-block;
+  list-style: none;
+  margin: 10px 10px 10px 0; }
+
+#barcode-chart .table > tbody > tr > td:first-child {
+  text-align: right; }
 
 /* =Post
 -------------------------------------------------------------- */
