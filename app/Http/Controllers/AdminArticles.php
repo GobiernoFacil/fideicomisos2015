@@ -33,10 +33,12 @@ class AdminArticles extends Controller{
     $data['image']  = $image ? $image : '';
     $data['author'] = $user->id;
 
+
+
     $article = new Article($data);
     $article->save();
 
-    return redirect('articles');
+    return redirect('articles/update/' . $article->id);
   }
 
   public function edit($id){
@@ -59,7 +61,7 @@ class AdminArticles extends Controller{
 
     // [2] si el archivo es válido, le genera un nombre, lo guarda
     //     en el folder de uploads y regresa el nombre del archivo
-    if($request->file($file)->isValid()){
+    if($request->hasFile($file) && $request->file($file)->isValid()){
       $name = str_random(40) . '.' 
         . $request->file($file)->getClientOriginalExtension();
 

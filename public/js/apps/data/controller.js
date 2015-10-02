@@ -16,27 +16,12 @@ define(function(require){
       Barcode  = require("views/barcode"), 
       Treemap  = require("views/treemap"), 
       Pack     = require("views/pack"),
-
-  //
-  // D E F I N E   T H E   S E T U P   V A R I A B L E S
-  // --------------------------------------------------------------------------------
-  //
-      SVG = {
-        width : 700,
-        height : 700
-      },
-      Trusts     = TRUSTS_DATA.trust_array,
-      Definitions= TRUSTS_DATA.definitions,
-      Categories = ["type", "scope", "theme", "branch"], //"unit", "settlor", "fiduciary"],//TRUSTS_DATA.categories,
-      Tree       = [Categories[0], Categories[1], Categories[2]],
-      Colors     = d3.scale.category20();
- 
-  //
-  // C A C H E   T H E   C O M M O N   E L E M E N T S
-  // --------------------------------------------------------------------------------
-  //
-
-
+      Trusts   = TRUSTS_DATA.trust_array,
+      Popup    = {
+        width   : 300,
+        height  : 300,
+        z_index : 10000
+      }
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
   // --------------------------------------------------------------------------------
@@ -62,139 +47,20 @@ define(function(require){
     //
     initialize : function(){
       this.collection = new Backbone.Collection(Trusts);
-      this.barcode = new Barcode;
-      this.treemap = new Treemap;
-      //this.render_pack();
-      this.pack = new Pack;
+      this.barcode    = new Barcode;
+      this.treemap    = new Treemap({controller : this});
+      this.pack       = new Pack;
+      this.popups     = [];
     },
 
-    //
-    // I N I T I A L I Z E   R E N D E R
-    // ------------------------------------------------------------------------------
-    //
-    render_treemap : function(nodes){
-      var svg   = d3.select("#branch-treemap"),
-          chart = svg.append("svg:svg")
-                  .attr("width", SVG.width)
-                  .attr("height", SVG.height),
-
-          enter = chart.selectAll("g").data(nodes).enter()
-        .append("svg:g");
-
-        enter.append("svg:rect")
-          .attr("x", function(d){ return d.x})
-          .attr("y", function(d){ return d.y})
-          .attr("width", function(d){ return d.dx})
-          .attr("height", function(d){ return d.dy})
-          .attr("fill", function(d,i){ return Colors(i)});
-
-        enter.append("svg:text")
-          .text(function(d){ return d.value})
-          .attr("x", function (d) {return d.x+5;})
-          .attr("y", function (d) {return d.y+20;})
-          .attr("dy", ".35em")
-          .attr("text-anchor", "middle");
-    },
-
-    //
-    //
-    //
-    render_pack : function(){
-      var root = {collection : this.collection, name : "trusts"},
-          pack = d3.layout.pack()
-                 .sort(null)
-                 .size([SVG.width, SVG.height])
-                 .value(function(d){
-                  return d.collection ? d.collection.length : 1;
-                 });
-
-      root.children = this.generate_tree(root, 0);
-
-      var svg   = d3.select("#circle-pack"),
-          chart = svg.append("svg:svg")
-                  .attr("width", SVG.width)
-                  .attr("height", SVG.height),
-
-          enter = chart.selectAll("g").data(pack(root)).enter()
-          .append("svg:g");
-
-      enter.append("svg:circle")
-          .attr("r", function(d){ return d.r})
-          .attr("cx", function(d){ return d.x})
-          .attr("cy", function(d){ return d.y})
-          .attr("stroke", "black")
-          .attr("fill", "none")
-          .attr("stroke-width", 1);
-          /*
-          .attr("y", function(d){ return d.y})
-          .attr("width", function(d){ return d.dx})
-          .attr("height", function(d){ return d.dy})
-          .attr("fill", function(d,i){ return Colors(i)});
-          */
-      /*
-      enter.append("svg:text")
-          .text(function(d){ return d.value})
-          .attr("x", function (d) {return d.x+5;})
-          .attr("y", function (d) {return d.y+20;})
-          .attr("dy", ".35em")
-          .attr("text-anchor", "middle");
-      */
-    },
-
-    //
-    // D I R E C T   I N T E R A C T I O N   ( D A T A )
-    // ------------------------------------------------------------------------------
-    //
-
-    //
-    // nodes for any level
-    //
-    generate_tree : function(parent, deep){
-      var category  = Categories[deep],
-          list      = _.uniq(parent.collection.pluck(category)),
-          search    = {},
-          childrens = list.map(function(cat){
-            search[category] = cat;
-            var child = {
-              name      : cat, 
-              collection : new Backbone.Collection(parent.collection.where(search))
-            };
-            child.value = child.collection.length;
-            child.children = child.collection.map(function(ch){
-              return {
-                name : ch.get("designation"),
-                trust : ch
-              };
-            });
-            return child;
-          }, this);
-
-      if(deep + 1 < Categories.length){
-        childrens.forEach(function(ch){
-          ch.children = this.generate_tree(ch, deep+1);
-        }, this);
-      }
-
-      return childrens;
-    },
-
-    //
-    // nodes for one level
-    //
-    branch_nodes : function(){
-      var branches = _.uniq(this.collection.pluck("fiduciary")),
-          root     = {name : "branches", children : []};
-
-      branches.forEach(function(branch){
-        var el = {name : branch, value : this.collection.where({fiduciary : branch}).length};
-        root.children.push(el);
-      }, this);
-
-      return root;
+    append_popup : function(settings){
+      var popup = document.createElement("div");
+      popup.className = "popup";
+      popup.style.left = settings.x;
+      popup.style.top = settings.y;
+      document.body.appendChild(popup);
+      console.log("yay!");
     }
-
-
-   
   });
 
   //

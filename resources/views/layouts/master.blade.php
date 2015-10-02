@@ -23,6 +23,7 @@
         <link rel="shortcut icon" href="/icon_universal.png">
 		<link rel="stylesheet" type="text/css"  href="/css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" />
+        <link rel="stylesheet" type="text/css" href="/css/dev_data.css" />
     </head>
     <body class="@yield('body_class') fide-menu-push">
 	     <!--nav-->

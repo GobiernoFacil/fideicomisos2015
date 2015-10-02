@@ -25,13 +25,13 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 // [ EL NAVEGADOR DE FIDEICOMISOS ]
-Route::get('navegador-de-fideicomisos', 'Watson@index');
+Route::get('buscador-de-fideicomisos', 'Watson@index');
 
 // [ EXPLORA UN FIDEICOMISO ]
 Route::get('fideicomiso/{registry}', 'Gregson@index');
 
 // [ EXPLORA UNA CATEGORÍA ]
-Route::get('categorias', 'Lestrade@index');
+Route::get('explorador-de-fideicomisos', 'Lestrade@index');
 
 // [ EL API DE BÚSQUEDA ]
 Route::get('sherlock/search/{query}/{page?}/{total?}', 'Sherlock@index');
@@ -69,7 +69,7 @@ Route::get('vizdata', function(){
 });
 
 // [ DATAVIZ BIIIIIIIG ]
-Route::get('elgrafico', 'Data@index');
+Route::get('el-grafico', 'Data@index');
 
 // [ LOS WHO ]
 Route::get('quienes-somos', function(){
