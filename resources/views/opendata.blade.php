@@ -15,6 +15,8 @@
 						<li>Datos Abiertos</li>
 					</ul>
 					<h1>Datos Abiertos</h1>
+					<p><a href="/csv/trusts.csv">Fideicomisos 2006 - 2014 (csv)</p>
+					<p><a href="/csv/trusts_2015.csv">Fideicomisos 2015 primer y segundo trimestre (csv)</p>
 				</div>
 			</div>
 		</div>
