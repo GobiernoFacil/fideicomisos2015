@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col-sm-4">
 				<p>© 2015 EL UNIVERSAL Online S.A. de C.V</p>
-				<p><a href="">Créditos</a></p>
+				<p><a href="{{url('quienes-somos')}}">Créditos</a></p>
 			</div>
 			<div class="col-sm-4">
 				<span class="eluniversal_footer">El Universal</span>
