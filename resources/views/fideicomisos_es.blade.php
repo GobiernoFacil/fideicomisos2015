@@ -53,7 +53,7 @@ realizar un fin lícito determinado, de interés público. </p>
 					<p><img src="/images/normatividad.png"></p>
 					<p>Los <strong>Fideicomisos Públicos no paraestatales</strong>, no sólo no cuentan con una estructura orgánica propia, sino que también carecen de un órgano interno de control. La Auditoría Superior de la Federación, ha venido señalando que los fideicomisos no paraestatales  constituyen una de las áreas de mayor opacidad y riesgo, sobre las cuales es necesario profundizar en su existencia, regulación, control, transparencia y rendición de cuentas, ya que prácticamente se encuentran regulados por el contrato de constitución particular de cada uno de ellos y las reglas de operación que sus propios comités técnicos emiten. </p>
 					
-							<a href="/categorias" class="btn_link">Explora los Fideicomisos >></a>
+							<a href="/explorador-de-fideicomisos" class="btn_link">Explora los Fideicomisos &gt;&gt;</a>
 
 				</div>
 			</div>

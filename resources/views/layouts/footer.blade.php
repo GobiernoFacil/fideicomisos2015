@@ -1,12 +1,13 @@
 <!-- partners-->
 <section class="partners">
 	<div class="container">
-			<div class="col-sm-8 col-sm-offset-2">
-				<h2><strong>Las cajas negras del Gobierno</strong> es posible gracias al apoyo de</h2>
+			<div class="col-sm-10 col-sm-offset-1">
+				<h2><strong>Las cajas negras del Gobierno</strong> es posible gracias a</h2>
 				<ul>
-					<li><span class="hivos">Hivos</span></li>
-					<li><span class="hacks">HacksLabs</span></li>
-					<li><span class="icfj">ICFJ</span></li>
+					<li><a class="hacks" href="http://hackslabs.org/">HacksLabs</a></li>
+					<li><a class="icfj" href="http://www.icfj.org/">ICFJ</a></li>
+					<li><a class="hivos" href="http://www.hivos.org">Hivos</a></li>
+					<li><a class="avina" href="http://www.avinaamericas.org/">Avina Americas</a></li>
 				</ul>
 			</div>
 	</div>
