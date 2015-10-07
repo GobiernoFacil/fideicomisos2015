@@ -23,7 +23,9 @@ define(function(require){
      Definitions = TRUSTS_DATA.definitions,
      Categories  = ["branch", "type", "scope", "theme", "unit", "settlor", "fiduciary"],
      Category    = Categories[3],
-     Colors     = d3.scale.category20();
+     Blues		 = ["#f7fbff","#deebf7","#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#08519c","#08306b"],
+     Colors      = d3.scale.ordinal()
+     				.range(Blues);
 
   //
   // D E F I N E   T H E   D 3   V A R I A B L E S
@@ -122,6 +124,8 @@ define(function(require){
           .attr("y", function(d){ return d.y})
           .attr("width", function(d){ return d.dx})
           .attr("height", function(d){ return d.dy})
+          .attr("stroke", "white")
+          .attr("stroke-width","2")
           .attr("fill", function(d,i){ return Colors(i)});
 
         enter.append("svg:text")
@@ -156,6 +160,8 @@ define(function(require){
           .attr("y", function(d){ return d.y})
           .attr("width", function(d){ return d.dx})
           .attr("height", function(d){ return d.dy})
+          .attr("stroke", "white")
+          .attr("stroke-width","2")
           .attr("fill", function(d,i){ return Colors(i)});
          
       enter.append("svg:text")
