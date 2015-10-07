@@ -1249,12 +1249,11 @@ a.btn_logout {
   .fideicomitente p {
     font-size: 14px; }
 
-/*
 .divider {
-	margin: 10px 0 0;
-	border-top: 2px solid $blue_light;
-	padding: 0 0 10px;
-}*/
+  margin: 10px 0 0;
+  border-top: 2px solid #8ba7c0;
+  padding: 0 0 10px; }
+
 /* =im-gregson
 -------------------------------------------------------------- */
 #im-gregson h2 {
