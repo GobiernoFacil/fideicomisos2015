@@ -1543,16 +1543,17 @@ a.category, a.category:visited {
   cursor: pointer; }
 
 #circle-pack .root {
-  stroke: black;
+  stroke: white;
   fill: white; }
 
 #circle-pack .category {
-  stroke: blue;
-  fill: none; }
+  stroke: #f4a582;
+  fill: rgba(253, 219, 199, 0.05);
+  stroke-width: 1; }
 
 #circle-pack .trust {
   stroke: white;
-  fill: red; }
+  fill: #2166ac; }
 
 #pack-chart-controls li {
   display: inline-block;
