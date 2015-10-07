@@ -1552,8 +1552,8 @@ a.category, a.category:visited {
   stroke-width: 1; }
 
 #circle-pack .trust {
-  stroke: white;
-  fill: #2166ac; }
+  stroke: #2166ac;
+  fill: #d1e5f0; }
 
 #pack-chart-controls li {
   display: inline-block;
