@@ -1611,6 +1611,16 @@ a.category, a.category:visited {
 .post .likeaboss {
   height: 700px;
   top: -60px; }
+.post .liste_des_images {
+  list-style: none; }
+  .post .liste_des_images img {
+    width: auto;
+    margin: 30px auto;
+    display: block; }
+.post iframe {
+  width: 100%;
+  min-height: 450px;
+  margin: 30px 0; }
 
 .columna_frase {
   width: 300px;
