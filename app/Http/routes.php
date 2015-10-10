@@ -48,9 +48,7 @@ Route::get('/', 'Home@index');
 Route::get('reportaje/{id}', 'Articles@index')->where('id', '[0-9]+');
 
 // [ LOS REPORTAJES ]
-Route::get('reportajes', function(){
-  return view('reports');
-});
+Route::get('reportajes', 'Articles@all');
 
 // [ El POST --- TEST ]
 Route::get('reportajes/post', function(){
