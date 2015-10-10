@@ -63,7 +63,7 @@
 					  </div>
 					@else
 					  <div class="{{$content->type}}">
-					    <p><?php echo $content->content; ?></p>
+					    <?php echo $content->content; ?>
 					  </div>
 					@endif
 				@endforeach
