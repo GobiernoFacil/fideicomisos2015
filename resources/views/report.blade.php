@@ -62,9 +62,16 @@
 					    </ul>
 					  </div>
 					@else
-					  <div class="{{$content->type}}">
-					    <?php echo $content->content; ?>
-					  </div>
+						@if($content->type=="lq" || $content->type=="rq")
+						<div class="columna_frase {{$content->type}}">
+						  <p class="lafrase"><?php echo $content->content; ?></p>
+						</div>
+						
+						@else
+						<div class="{{$content->type}}">
+						  <?php echo $content->content; ?>
+						</div>
+					  	@endif
 					@endif
 				@endforeach
 			</div>

@@ -1622,7 +1622,7 @@ a.category, a.category:visited {
         padding: 0 10px 0 0; }
     .post article .html div a {
       color: #015383; }
-  .post article h2 {
+  .post article div.h3, .post article h2 {
     color: black;
     font: 700 21px "Roboto", Helvetica, Arial, sans-serif;
     padding: 33px 0 35px; }
