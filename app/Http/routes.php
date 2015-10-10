@@ -41,9 +41,8 @@ Route::post('sherlock/search/advanced', 'Sherlock@advanced');
 Route::get('data/registry/{collection?}', 'Datafarmer@registry');
 
 // [ EL HOME ]
-Route::get('/', function(){
-  return view('home');
-});
+Route::get('/', 'Home@index');
+
 
 // [ REPORTAJE ]
 Route::get('reportaje/{id}', 'Articles@index')->where('id', '[0-9]+');
