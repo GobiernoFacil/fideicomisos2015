@@ -58,7 +58,6 @@
 								?> </p>
 						@if($total_articles < 2)
 							<p class="lead">{{$article->subtitle}}</p>
-							<a href="{{url('/reportaje/'.$article->id)}}" class="col-sm-10 col-sm-offset-1 more">Ver Reportaje >></a>
 						@endif
 						</div>
 					</div>
