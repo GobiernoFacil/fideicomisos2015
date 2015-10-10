@@ -32,4 +32,13 @@ class Articles extends Controller
         'months'    => $this->months
       ]);
     }
+    
+    public function all() {
+    	$articles = Article::all();
+    	return view('reports')->with([
+        'articles'   => $articles, 
+        'file_url'  => '/images/articles/',
+        'months'    => $this->months
+      ]);
+    }
 }
