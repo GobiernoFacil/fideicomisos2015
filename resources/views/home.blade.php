@@ -7,69 +7,72 @@
 @section('content')
 <!-- news-->
 <section class="news">
+	@if($main_article)	
 	<div class="likeaboss">
 		<figure>
+			@if ($main_article->image)
+			<img src="{{url($file_url . $main_article->image)}}" alt="{{$main_article->title}}">
+			@else
 			<img src="/images/mexico-bicentenario.jpg">
+			@endif
 		</figure>
 	</div>
+	@endif
+	
 	<div class="container">
+		@if($articles)	
+		<?php $total_articles = 0;?>
 		<ul class="post_list">
+			@foreach($articles as $article)
+			<?php $total_articles ++;?>
+			@if($total_articles == 1)
 			<li class="col-xs-12 col-sm-10 col-sm-offset-1">
 				<article class="featured">
-					<div>
-						<a href="#" class="category">Bicentenario</a>
-						<h2><a href="/reportajes/post">Festejos del Bicentenario</a></h2>
-							<p class="author"><span >Lilia Saúl</span> • 17/abril/2015</p>
+			@endif
+			@if($total_articles == 2)
+			<li class="col-xs-12 col-sm-4 col-sm-offset-1">
+				<article class="half">
+			@endif
+			@if($total_articles > 2)
+			<li class="col-xs-12 col-sm-3">
+				<article class="quarter">
+			@endif
+			
+			@if($total_articles > 1)
+				<figure>
+					@if($article->image)
+					<img src="{{url($file_url . $article->image)}}" alt="{{$article->title}}">
+					@else
+					<img src="/images/1280px-bruxelles.jpg">
+					@endif
+				</figure>
+			@endif
+					<div {{ $total_articles > 1 ? 'class="front"' : ''}}>
+						<a class="category">Bicentenario</a>
+						<div>
+						<h2><a href="{{url('/reportaje/'.$article->id)}}">{{$article->title}}</a></h2>
+							<p class="author"><span>{{$article->author_name}} </span> • <?php 
+								$date = strtotime($article->created_at);
+								$str  =  date('d x Y', $date); 
+								echo str_replace('x', $months[date('n', $date)], $str);
+								?> </p>
+						@if($total_articles < 2)
+							<p class="lead">{{$article->subtitle}}</p>
+							<a href="{{url('/reportaje/'.$article->id)}}" class="col-sm-10 col-sm-offset-1 more">Ver Reportaje >></a>
+						@endif
+						</div>
 					</div>
 				</article>
 			</li>
 			
-			<li class="col-xs-12 col-sm-4 col-sm-offset-1">
-				<article class="half">
-					
-					<figure>
-						<img src="/images/1280px-bruxelles.jpg">
-					</figure>
-					<div class="front">
-						<a href="#" class="category">Bicentenario</a>
-						<div>
-							<h2><a href="/reportajes/post">El Presidente del Bicentenario</a></h2>
-							<p class="author"><span >Lilia Saúl</span> • 17/abril/2015</p>
-						</div>
-					</div>
-				</article>
-			</li>
-			<li class="col-xs-12 col-sm-3">
-				<article class="quarter">
-					<figure>
-						<img src="/images/abc.jpg">
-					</figure>
-					<div class="front">
-						<a href="" class="category">ABC</a>
-						<div>
-							<h2><a href="/reportajes/post">Guardería ABC</a></h2>
-							<p class="author"><span >Lilia Saúl</span> • 17/abril/2015</p>
-						</div>
-					</div>
-				</article>
-			</li>
-			<li class="col-xs-12 col-sm-3">
-				<article class="quarter">
-					<figure>
-						<img src="/images/bicentenario2.jpg">
-					</figure>
-					<div class="front">
-					<a href="#" class="category">Bicentenario</a>
-						<div>
-							<h2><a href="/reportajes/post">Festejos del Bicentenario</a></h2>
-							<p class="author"><span >Lilia Saúl</span> • 17/abril/2015</p>
-						</div>
-					</div>
-				</article>
-			</li>
+	
+			@endforeach
 		</ul>
+		@endif
 		<div class="clearfix"></div>
+		@if($total_articles > 4)
 		<a href="/reportajes" class="col-sm-10 col-sm-offset-1 more">Más reportajes sobre Fideicomisos en México >></a>
+		@endif
 	</div>
 </section>  
 
