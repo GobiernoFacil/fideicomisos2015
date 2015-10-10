@@ -1644,12 +1644,12 @@ a.category, a.category:visited {
   width: 300px;
   display: inline;
   clear: both; }
-  .columna_frase.left {
+  .columna_frase.left, .columna_frase .rl {
     float: left;
     margin: 0 0 30px -100px;
     padding: 0 15px 0 0;
     text-align: right; }
-  .columna_frase.right {
+  .columna_frase.right, .columna_frase.rq {
     float: right;
     margin: 0 -100px 30px 0;
     padding: 0 0 0 15px;
