@@ -1116,6 +1116,11 @@ a.btn_logout {
   margin: 30px 0; }
   .home section .lead img {
     margin: 15px 0; }
+.home p.lead {
+  color: white;
+  font-size: 25px;
+  font-weight: 300;
+  margin-bottom: 190px; }
 .home .news {
   padding: 368px 0 0; }
   .home .news li {
@@ -1605,7 +1610,19 @@ a.category, a.category:visited {
       color: #015383; }
       .post article p a:hover {
         color: #8ba7c0; }
-  .post article h2 {
+  .post article .html div {
+    color: rgba(0, 0, 0, 0.6);
+    font: 500 17px/1.5 "Roboto", Helvetica, Arial, sans-serif; }
+    .post article .html div.lead {
+      font: 300 1.5em "Roboto", Helvetica, Arial, sans-serif; }
+      .post article .html div.lead:first-letter {
+        color: #015383;
+        font: 700 4em/0.5 "Roboto", Helvetica, Arial, sans-serif;
+        float: left;
+        padding: 0 10px 0 0; }
+    .post article .html div a {
+      color: #015383; }
+  .post article div.h3, .post article h2 {
     color: black;
     font: 700 21px "Roboto", Helvetica, Arial, sans-serif;
     padding: 33px 0 35px; }
@@ -1627,12 +1644,12 @@ a.category, a.category:visited {
   width: 300px;
   display: inline;
   clear: both; }
-  .columna_frase.left {
+  .columna_frase.left, .columna_frase.lq {
     float: left;
     margin: 0 0 30px -100px;
     padding: 0 15px 0 0;
     text-align: right; }
-  .columna_frase.right {
+  .columna_frase.right, .columna_frase.rq {
     float: right;
     margin: 0 -100px 30px 0;
     padding: 0 0 0 15px;

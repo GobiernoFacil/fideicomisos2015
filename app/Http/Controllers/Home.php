@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticlesContent;
 
-class Articles extends Controller
+class Home extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,21 +22,12 @@ class Articles extends Controller
                '6' => 'junio','7' => 'julio', '8' => 'agosto','9' => 'septiembre',
                '10' => 'octubre','11' => 'noviembre','12' => 'diciembre'];
 
-    public function index($id){
-      $article = Article::find($id);
-      $content = ArticlesContent::where('article_id', $article->id)->get();
-      return view('report')->with([
-        'article'   => $article, 
-        'contents'   => $content,
-        'file_url'  => '/images/articles/',
-        'months'    => $this->months
-      ]);
-    }
-    
-    public function all() {
-    	$articles = Article::all();
-    	return view('reports')->with([
-        'articles'   => $articles, 
+    public function index(){
+      $main_article = Article::all()->first();
+      $articles 	= Article::all();
+      return view('home')->with([
+        'main_article'   => $main_article, 
+        'articles'		 => $articles,
         'file_url'  => '/images/articles/',
         'months'    => $this->months
       ]);
