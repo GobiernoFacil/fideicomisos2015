@@ -138,6 +138,7 @@
 	</div>
 </div>
 </section>
+<div id="barcode-label"></div>
 
   <script>
     var TRUSTS_DATA = {

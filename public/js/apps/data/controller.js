@@ -47,7 +47,7 @@ define(function(require){
     //
     initialize : function(){
       this.collection = new Backbone.Collection(Trusts);
-      this.barcode    = new Barcode;
+      this.barcode    = new Barcode({controller : this});
       this.treemap    = new Treemap({controller : this});
       this.pack       = new Pack;
       this.popups     = [];
@@ -56,10 +56,14 @@ define(function(require){
     append_popup : function(settings){
       var popup = document.createElement("div");
       popup.className = "popup";
-      popup.style.left = settings.x;
-      popup.style.top = settings.y;
       document.body.appendChild(popup);
-      console.log("yay!");
+      popup.style.left    = settings.x + "px";
+      popup.style.top     = settings.y + "px";
+      popup.style.width   = "100px";
+      popup.style.height  = "100px";
+      popup.style.border  = "1px solid red";
+      popup.style.display = "block";
+      popup.style.position = "absolute";
     }
   });
 

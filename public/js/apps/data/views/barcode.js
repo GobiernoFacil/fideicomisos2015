@@ -77,9 +77,10 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
+    initialize : function(settings){
       this.collection  = new Backbone.Collection();
       this.definitions = new Backbone.Collection(Definitions);
+      this.controller  = settings.controller;
       this.get_data();
     },
 
@@ -184,7 +185,8 @@ define(function(require){
     },
 
     render_barcode : function(x_scale, data, td, color_scale){
-      var svg  = d3.select(td).append("svg:svg")
+      var that = this, 
+          svg  = d3.select(td).append("svg:svg")
                  .attr("width", SVG.width)
                  .attr("height", SVG.height),
           g    = svg.append("svg:g")
@@ -203,6 +205,7 @@ define(function(require){
                  })
                  .on("click", function(d, e){
                   console.log(d,e, d3.mouse(this), window.event.pageX, window.event.pageY);
+                  that.controller.append_popup({x: window.event.pageX, y:window.event.pageY});
                  });
       return svg;
     },
