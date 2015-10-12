@@ -1,8 +1,12 @@
 div.popup{
   background : white;
   border : 1px solid grey;
+  bottom:0;
   color : grey;
-  position : fixed;
-  height : 200px;
-  width : 200px;
+  display: none;
+  height : 100px;
+  margin:0;
+  position:absolute;
+  width : 100px;
+  z-index: 100000;
 }

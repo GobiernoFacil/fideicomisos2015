@@ -90,7 +90,10 @@
   <!-- BARCODE CHART -->
   <div id="barcode-chart">
     <form id="barcode-chart-controls">
-	 <h2>Código de Barras de los Fideicomisos Público</h2>
+	 <h2>Máximos históricos</h2>
+   <p>Selecciona una categoría y un valor numérico para ordenar de 
+   menor a mayor los fideicomisos con respecto al valor seleccionado. El valor que se
+   muestra en el fideicomiso es el máximo histórico, que puede ser de 2006 en adelante.</p>
 	 <p>Filtra la información:</p>
       <div class="row">
       	<div class="col-sm-6">
@@ -138,7 +141,15 @@
 	</div>
 </div>
 </section>
-<div id="barcode-label"></div>
+<div id="barcode-label" class="popup">
+  <h4></h4>
+  <p>año: <span class="year"></span></p>
+  <p>ingresos: <span class="income"></span></p>
+  <p>rendimientos: <span class="yield"></span></p>
+  <p>egresos: <span class="expenses"></span></p>
+  <p>disponibilidad: <span class="availability"></span></p>
+  <p>aportación inicial: <span class="initial_amount"></span></p>
+</div>
 
   <script>
     var TRUSTS_DATA = {

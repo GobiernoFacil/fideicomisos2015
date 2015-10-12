@@ -116,11 +116,11 @@ define(function(require){
 
     render_table_head : function(){
       var num_field = this.definitions.findWhere({name : Num_field}),
-          money     = d3.extent(this.collection.pluck(Num_field)),
+          money     = d3.extent(this.collection.pluck(Num_field).map(function(st){return +st})),
           format    =  d3.format("$,"),
           category  = this.definitions.findWhere({name : Category});
       this.$(".money").html(num_field.get("short_name") + ": " + 
-        +money[0] + "/" + format(money[1]));
+        "de $0 a " + format(money[1]));/*money[0]*/
       this.$(".category").html(category.get("short_name"));
     },
 
@@ -129,7 +129,7 @@ define(function(require){
           search     = {},
           html_array = [],
           svg_array  = [],
-          money      = d3.extent(this.collection.pluck(Num_field)),
+          money      = d3.extent(this.collection.pluck(Num_field).map(function(st){return +st})),
           tbody      = document.querySelector("tbody"),
           x_scale    = d3.scale.linear()
                        .domain(money)
@@ -167,10 +167,13 @@ define(function(require){
           search     = {},
           html_array = [],
           svg_array  = [],
-          money      = d3.extent(this.collection.pluck(Num_field)),
+          money      = d3.extent(this.collection.pluck(Num_field).map(function(st){return +st})),
           x_scale    = d3.scale.linear()
                        .domain(money)
                        .range([SVG.margin.left, SVG.width - SVG.margin.left - SVG.margin.right]);
+
+      XSCALE   = x_scale;
+      NUMFIELD = Num_field;
 
       for(var i = 0; i < categories.length; i++){
         search[Category] = categories[i];
@@ -203,9 +206,15 @@ define(function(require){
                  .attr("x", function(d){
                    return x_scale(+d.get(Num_field))
                  })
+                 .on("mouseover", function(d, e){
+                  //console.log(d,e, d3.mouse(this), window.event.pageX, window.event.pageY);
+                  that.controller.append_popup({x: window.event.pageX, y:window.event.pageY, trust : d});
+                 })
+                 .on("mouseout", function(d, e){
+                   that.controller.hide_popup();
+                 })
                  .on("click", function(d, e){
-                  console.log(d,e, d3.mouse(this), window.event.pageX, window.event.pageY);
-                  that.controller.append_popup({x: window.event.pageX, y:window.event.pageY});
+                   window.open("/fideicomiso/" + (d.get("registry") ? d.get("registry") : d.id),'_blank');
                  });
       return svg;
     },
