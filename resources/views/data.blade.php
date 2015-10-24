@@ -25,7 +25,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2">
-			<h2>Distribución del dinero por Fideicomiso Público</h2>
+			<h2>Número de fideicomisos por categoría</h2>
 			<!-- TREEMAP CHART -->
 			<div id="branch-treemap">
 			    <form id="treemap-chart-controls">
