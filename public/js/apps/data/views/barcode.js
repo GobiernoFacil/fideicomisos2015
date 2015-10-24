@@ -130,7 +130,7 @@ define(function(require){
           html_array = [],
           svg_array  = [],
           money      = d3.extent(this.collection.pluck(Num_field).map(function(st){return +st})),
-          tbody      = document.querySelector("tbody"),
+          tbody      = document.querySelector("#barcode-chart tbody"),
           x_scale    = d3.scale.linear()
                        .domain(money)
                        .range([SVG.margin.left, SVG.width - SVG.margin.left - SVG.margin.right]),

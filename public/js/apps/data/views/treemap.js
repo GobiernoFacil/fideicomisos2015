@@ -40,12 +40,14 @@ define(function(require){
       bottom : 10,
       left   : 10
     },
-  };
+  },
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
+  TABLE_TITLE = document.querySelector("#branch-treemap caption"), 
+  TABLE_BODY  = document.querySelector("#branch-treemap tbody");
  
 
   //
@@ -92,9 +94,12 @@ define(function(require){
     // ------------------------------------------------------------------------------
     //
     set_category : function(e){
-      var category = e.currentTarget.value;
+      var category = e.currentTarget.value,
+          title    = this.$("option[value='" + category + "']").html();
           Category = Categories[category];
           this.update_treemap();
+          this.render_table(title);
+
     },
    
 
@@ -110,11 +115,22 @@ define(function(require){
       return this;
     },
 
+    render_table : function(title, data){
+      TABLE_TITLE.innerHTML = title;
+      var content = "",
+          list = _.sortBy(this.root.children, "name");
+      list.forEach(function(cat){
+        var row = "<tr>" + "<td>" + cat.name + "</td><td>" + cat.value + "</td></tr>";
+        content += row;
+      }, this);
+      TABLE_BODY.innerHTML = content;
+    },
+
     render_treemap : function(){
       var that  = this,
           data  = this.branch_nodes(),
           tree  = this.treemap(data),
-          chart = d3.select("#branch-treemap").append("svg:svg")
+          chart = d3.select("#branch-treemap .g-container").append("svg:svg")
                   .attr("width", SVG.width)
                   .attr("height", SVG.height),
 
@@ -156,6 +172,7 @@ define(function(require){
           .on("mouseover", function(e){
             console.log(e);
           });
+      this.render_table("tema");
     },
 
     update_treemap : function(){
