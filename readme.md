@@ -17,10 +17,10 @@ Un objetivo específico del proyecto es que el usuario entienda el tema. Se most
 2. En el directorio raíz del proyecto, crear el archivo de configuración *.env* (se puede copiar el archivo *.env.example* que está en el directorio
 3. agregar la información necesaria para hacer la conexión a la DB en el archivo *.env*; Aquí un ejemplo:
 
-> DB_HOST=localhost
-> DB_DATABASE=fideicomisos
-> DB_USERNAME=batman
-> DB_PASSWORD=secret
+DB_HOST=localhost
+DB_DATABASE=fideicomisos
+DB_USERNAME=batman
+DB_PASSWORD=secret
 
 4. obtener las librerías del sitio mediante: composer install
 5. generar una llave para el sitio: php artisan key:generate
@@ -28,3 +28,25 @@ Un objetivo específico del proyecto es que el usuario entienda el tema. Se most
 7. generar las tablas en la DB con: php artisan migrate
 8. cargar la información en la db con: php artisan db:seed
 9. enjoy :D
+
+ 
+## Descripción
+
+Este proyecto cuenta con 4 secciones:
+1. un editor de contenido
+2. un navegador de fideicomisos
+3. un API de consulta
+4. un fornt end con información básica de qué es un fideicomiso y datos de contacto
+
+### Editor de contenido
+El sitio cuenta con un pequeño administrador en el que se puede escribir artículos y generar gráficas con datos de fideicomisos. Se puede acceder al admin en /auth/login (el usuario y el password inicial se pueden ver al cargar los datos en la DB mediante Artisan)
+
+### El navegador de fideicomisos
+Este cuenta con tres herramientas: 
+* el buscador
+* una sección de visualizaciones
+* la lista de fideicomisos ordenada por distintas categorías
+
+### El api de consulta
+El API de consulta da acceso a la DB con los fideicomisos desde fuera del sistema. 
+
