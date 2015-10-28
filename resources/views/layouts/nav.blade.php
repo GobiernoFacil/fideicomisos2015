@@ -3,6 +3,7 @@
 	<a href="{{url('/')}}">Inicio</a>
 	<a href="{{url('reportajes')}}">Reportajes</a>
 	<a href="{{url('que-es-un-fideicomiso')}}">¿Qué es un fideicomiso?</a>
+	<a href="{{url('buscador-de-fideicomisos')}}">Buscar Fideicomiso</a>
 	<a href="{{url('el-grafico')}}">El Gráfico</a>
 	<a href="{{url('quienes-somos')}}">Quienes somos</a>
 	<a href="{{url('datos-abiertos')}}">Datos Abiertos</a>
