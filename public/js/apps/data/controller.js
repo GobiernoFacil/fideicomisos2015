@@ -72,9 +72,27 @@ define(function(require){
       $(".availability", Barcode_label).html(Style(settings.trust.get("availability")));
       $(".initial_amount", Barcode_label).html(Style(settings.trust.get("initial_amount")));
     },
+
     hide_popup : function(){
       Barcode_label.style.display = "none";
-    }
+    },
+
+    create_tooltip : function(html){
+      var container = d3.select("body").append("div").attr("class", "tooltip-container")
+                        .style({
+                          "backgroud"  : "white",
+                          "border"     : "1px solid grey",
+                          "font-size"  : ".6em",
+                          "width"      : "160px",
+                          "position"   : "absolute",
+                          "background" : "grey",
+                          "color"      : "white"
+                        });
+      container.style("left", (d3.event.pageX + 5) + "px").style("top", (d3.event.pageY - 20) + "px");
+      container.html(html);
+            //.attr('class', 'tooltip-title')
+            //.text(Style(text));
+    },
 
   });
 
