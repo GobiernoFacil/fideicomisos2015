@@ -94,8 +94,8 @@ realizar un fin lícito determinado, de interés público. </p>
 			<h1>Explorar Datos</h1>
 		</div>
 		<div class="col-sm-6 col-sm-offset-1">
-			<h2>Disponibilidad total en Fideicomisos Públicos en 2013: <br>
-				<strong>$424,025 millones de pesos</strong></h2>
+			<h2>Disponibilidad total en Fideicomisos Públicos en 2014:
+				<strong>$482,692,566,861</strong></h2>
 			<p class="lead">
 				<img src="/images/vizdata-2.jpg"></p>
 			<p>Cada rectángulo representa un ramo, el tamaño es equivalente a la cantidad en pesos mexicanos, y el color brillante indica un mayor número de fideicomisos.</p>
@@ -106,7 +106,10 @@ realizar un fin lícito determinado, de interés público. </p>
 			<a href="{{url('buscador-de-fideicomisos')}}" class="btn_link">BUSCADOR de FIDEICOMISO</a>
 			<a href="{{url('explorador-de-fideicomisos')}}" class="btn_link">EXPLORAR FIDEICOMISOS por Categoría</a>
 			<a href="{{url('el-grafico')}}" class="btn_link">Visualizar datos</a>
-			<a href="/datos-abiertos" class="btn_link">Ver Datos abiertos</a></p>
+			<a href="/datos-abiertos" class="btn_link">Ver Datos abiertos</a>
+			<a href="https://github.com/GobiernoFacil/fideicomisos2015" class="btn_link">
+Colabora (github)</a>
+			</p>
 		</div>
 	</div>
 </section>
