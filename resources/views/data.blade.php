@@ -146,15 +146,6 @@
 	</div>
 </div>
 </section>
-<div id="barcode-label" class="popup">
-  <h4></h4>
-  <p>año: <span class="year"></span></p>
-  <p>ingresos: <span class="income"></span></p>
-  <p>rendimientos: <span class="yield"></span></p>
-  <p>egresos: <span class="expenses"></span></p>
-  <p>disponibilidad: <span class="availability"></span></p>
-  <p>aportación inicial: <span class="initial_amount"></span></p>
-</div>
 
   <script>
     var TRUSTS_DATA = {

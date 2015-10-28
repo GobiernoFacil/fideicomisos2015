@@ -41,7 +41,8 @@ define(function(require){
     },
   },
   Money_scale = 1000000,
-  Bar_width   = 4;
+  Bar_width   = 5,
+  Style = d3.format("$,");
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -208,10 +209,14 @@ define(function(require){
                  })
                  .on("mouseover", function(d, e){
                   //console.log(d,e, d3.mouse(this), window.event.pageX, window.event.pageY);
-                  that.controller.append_popup({x: window.event.pageX, y:window.event.pageY, trust : d});
+                  console.log(d.attributes);
+                  var template = '<p>' + Style(d.get(Num_field)) + '</p>';
+                      template+= '<p>' + d.get("designation") + '</p>';
+                  that.controller.create_tooltip(template);
                  })
                  .on("mouseout", function(d, e){
-                   that.controller.hide_popup();
+                   //that.controller.hide_popup();
+                   d3.select('div.tooltip-container').remove();
                  })
                  .on("click", function(d, e){
                    window.open("/fideicomiso/" + (d.get("registry") ? d.get("registry") : d.id),'_blank');
