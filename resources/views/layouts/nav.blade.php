@@ -6,6 +6,7 @@
 	<a href="{{url('el-grafico')}}">El Gráfico</a>
 	<a href="{{url('quienes-somos')}}">Quienes somos</a>
 	<a href="{{url('datos-abiertos')}}">Datos Abiertos</a>
+	<a href="https://github.com/GobiernoFacil/fideicomisos2015">Colabora (github)</a>
 </nav>
 <header class="top-header">
 	<div class="container">
