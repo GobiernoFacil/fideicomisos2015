@@ -25,7 +25,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2">
-			<h2>Distribución del dinero por Fideicomiso Público</h2>
+			<h2>Número de fideicomisos por categoría</h2>
 			<!-- TREEMAP CHART -->
 			<div id="branch-treemap">
 			    <form id="treemap-chart-controls">
@@ -42,6 +42,11 @@
 			        </select>
 			      </p>
 			    </form>
+          <div class="g-container"></div>
+          <table>
+            <caption></caption>
+            <tbody></tbody>
+          </table>
 			</div>
 		</div>
 	</div>
@@ -90,7 +95,9 @@
   <!-- BARCODE CHART -->
   <div id="barcode-chart">
     <form id="barcode-chart-controls">
-	 <h2>Código de Barras de los Fideicomisos Público</h2>
+	 <h2>Máximos históricos</h2>
+   <p>Selecciona una categoría y un valor numérico para ordenar los fideicomisos. El valor que se
+   muestra en el fideicomiso es el máximo histórico de la categoría, que puede ser de 2006 en adelante.</p>
 	 <p>Filtra la información:</p>
       <div class="row">
       	<div class="col-sm-6">

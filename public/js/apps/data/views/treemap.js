@@ -40,12 +40,14 @@ define(function(require){
       bottom : 10,
       left   : 10
     },
-  };
+  },
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
+  TABLE_TITLE = document.querySelector("#branch-treemap caption"), 
+  TABLE_BODY  = document.querySelector("#branch-treemap tbody");
  
 
   //
@@ -83,6 +85,8 @@ define(function(require){
                            .round(false)
                            .size([SVG.width, SVG.height])
       this.get_data();
+      this.colors = Colors;
+      this.root = null;
     },
 
     //
@@ -90,9 +94,12 @@ define(function(require){
     // ------------------------------------------------------------------------------
     //
     set_category : function(e){
-      var category = e.currentTarget.value;
+      var category = e.currentTarget.value,
+          title    = this.$("option[value='" + category + "']").html();
           Category = Categories[category];
           this.update_treemap();
+          this.render_table(title);
+
     },
    
 
@@ -108,11 +115,22 @@ define(function(require){
       return this;
     },
 
+    render_table : function(title, data){
+      TABLE_TITLE.innerHTML = title;
+      var content = "",
+          list = _.sortBy(this.root.children, "name");
+      list.forEach(function(cat){
+        var row = "<tr>" + "<td>" + cat.name + "</td><td>" + cat.value + "</td></tr>";
+        content += row;
+      }, this);
+      TABLE_BODY.innerHTML = content;
+    },
+
     render_treemap : function(){
       var that  = this,
           data  = this.branch_nodes(),
           tree  = this.treemap(data),
-          chart = d3.select("#branch-treemap").append("svg:svg")
+          chart = d3.select("#branch-treemap .g-container").append("svg:svg")
                   .attr("width", SVG.width)
                   .attr("height", SVG.height),
 
@@ -129,11 +147,22 @@ define(function(require){
           .attr("fill", function(d,i){ return Colors(i)});
 
         enter.append("svg:text")
-          .text(function(d){ return d.value})
+          .text(function(d){ return d.name})
           .attr("x", function (d) {return d.x+5;})
           .attr("y", function (d) {return d.y+20;})
           .attr("dy", ".35em")
-          .attr("text-anchor", "middle");
+          .attr("text-anchor", "start");
+
+        enter.append("svg:clipPath")
+          .attr("id", function(d){ return d.id})
+          .append("svg:rect")
+            .attr("x", function(d){ return d.x})
+            .attr("y", function(d){ return d.y})
+            .attr("width", function(d){ return d.dx})
+            .attr("height", function(d){ return d.dy});
+
+      d3.selectAll("#branch-treemap text")
+          .attr("clip-path", function(d){ return "url(#" + d.id + ")"});
 
         var rects = enter.selectAll("rect")
         .on("click", function(e){
@@ -143,6 +172,7 @@ define(function(require){
           .on("mouseover", function(e){
             console.log(e);
           });
+      this.render_table("tema");
     },
 
     update_treemap : function(){
@@ -165,11 +195,22 @@ define(function(require){
           .attr("fill", function(d,i){ return Colors(i)});
          
       enter.append("svg:text")
-          .text(function(d){ return d.value})
+          .text(function(d){ return d.name})
           .attr("x", function (d) {return d.x+5;})
           .attr("y", function (d) {return d.y+20;})
           .attr("dy", ".35em")
-          .attr("text-anchor", "middle");
+          .attr("text-anchor", "start");
+
+      enter.append("svg:clipPath")
+          .attr("id", function(d){ return d.id})
+          .append("svg:rect")
+            .attr("x", function(d){ return d.x})
+            .attr("y", function(d){ return d.y})
+            .attr("width", function(d){ return d.dx})
+            .attr("height", function(d){ return d.dy});
+
+      d3.selectAll("#branch-treemap text")
+          .attr("clip-path", function(d){ return "url(#" + d.id + ")"});
           
     },
 
@@ -178,11 +219,13 @@ define(function(require){
           root     = {name : "branches", children : []},
           where    = {};
 
-      branches.forEach(function(branch){
+      branches.forEach(function(branch, id){
         where[Category] = branch;
-        var el = {name : branch, value : this.collection.where(where).length};
+        var el = {name : branch, value : this.collection.where(where).length, id : id};
         root.children.push(el);
       }, this);
+
+      this.root = root;
 
       return root;
     },

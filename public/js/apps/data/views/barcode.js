@@ -41,7 +41,8 @@ define(function(require){
     },
   },
   Money_scale = 1000000,
-  Bar_width   = 4;
+  Bar_width   = 5,
+  Style = d3.format("$,");
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
@@ -77,9 +78,10 @@ define(function(require){
     // [ THE INITIALIZE FUNCTION ]
     //
     //
-    initialize : function(){
+    initialize : function(settings){
       this.collection  = new Backbone.Collection();
       this.definitions = new Backbone.Collection(Definitions);
+      this.controller  = settings.controller;
       this.get_data();
     },
 
@@ -115,11 +117,11 @@ define(function(require){
 
     render_table_head : function(){
       var num_field = this.definitions.findWhere({name : Num_field}),
-          money     = d3.extent(this.collection.pluck(Num_field)),
+          money     = d3.extent(this.collection.pluck(Num_field).map(function(st){return +st})),
           format    =  d3.format("$,"),
           category  = this.definitions.findWhere({name : Category});
       this.$(".money").html(num_field.get("short_name") + ": " + 
-        +money[0] + "/" + format(money[1]));
+        "de $0 a " + format(money[1]));/*money[0]*/
       this.$(".category").html(category.get("short_name"));
     },
 
@@ -128,8 +130,8 @@ define(function(require){
           search     = {},
           html_array = [],
           svg_array  = [],
-          money      = d3.extent(this.collection.pluck(Num_field)),
-          tbody      = document.querySelector("tbody"),
+          money      = d3.extent(this.collection.pluck(Num_field).map(function(st){return +st})),
+          tbody      = document.querySelector("#barcode-chart tbody"),
           x_scale    = d3.scale.linear()
                        .domain(money)
                        .range([SVG.margin.left, SVG.width - SVG.margin.left - SVG.margin.right]),
@@ -166,10 +168,13 @@ define(function(require){
           search     = {},
           html_array = [],
           svg_array  = [],
-          money      = d3.extent(this.collection.pluck(Num_field)),
+          money      = d3.extent(this.collection.pluck(Num_field).map(function(st){return +st})),
           x_scale    = d3.scale.linear()
                        .domain(money)
                        .range([SVG.margin.left, SVG.width - SVG.margin.left - SVG.margin.right]);
+
+      XSCALE   = x_scale;
+      NUMFIELD = Num_field;
 
       for(var i = 0; i < categories.length; i++){
         search[Category] = categories[i];
@@ -184,7 +189,8 @@ define(function(require){
     },
 
     render_barcode : function(x_scale, data, td, color_scale){
-      var svg  = d3.select(td).append("svg:svg")
+      var that = this, 
+          svg  = d3.select(td).append("svg:svg")
                  .attr("width", SVG.width)
                  .attr("height", SVG.height),
           g    = svg.append("svg:g")
@@ -201,8 +207,19 @@ define(function(require){
                  .attr("x", function(d){
                    return x_scale(+d.get(Num_field))
                  })
+                 .on("mouseover", function(d, e){
+                  //console.log(d,e, d3.mouse(this), window.event.pageX, window.event.pageY);
+                  console.log(d.attributes);
+                  var template = '<p>' + Style(d.get(Num_field)) + '</p>';
+                      template+= '<p>' + d.get("designation") + '</p>';
+                  that.controller.create_tooltip(template);
+                 })
+                 .on("mouseout", function(d, e){
+                   //that.controller.hide_popup();
+                   d3.select('div.tooltip-container').remove();
+                 })
                  .on("click", function(d, e){
-                  console.log(d,e, d3.mouse(this), window.event.pageX, window.event.pageY);
+                   window.open("/fideicomiso/" + (d.get("registry") ? d.get("registry") : d.id),'_blank');
                  });
       return svg;
     },

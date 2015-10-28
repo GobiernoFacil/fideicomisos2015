@@ -21,7 +21,14 @@ define(function(require){
         width   : 300,
         height  : 300,
         z_index : 10000
-      }
+      },
+      Style = d3.format("$,"),
+
+  //
+  // C A C H E   T H E   L A B E L S
+  // --------------------------------------------------------------------------------
+  //
+      Barcode_label = document.getElementById("barcode-label");
   //
   // I N I T I A L I Z E   T H E   B A C K B O N E   " C O N T R O L L E R "
   // --------------------------------------------------------------------------------
@@ -47,20 +54,46 @@ define(function(require){
     //
     initialize : function(){
       this.collection = new Backbone.Collection(Trusts);
-      this.barcode    = new Barcode;
+      this.barcode    = new Barcode({controller : this});
       this.treemap    = new Treemap({controller : this});
       this.pack       = new Pack;
       this.popups     = [];
     },
 
     append_popup : function(settings){
-      var popup = document.createElement("div");
-      popup.className = "popup";
-      popup.style.left = settings.x;
-      popup.style.top = settings.y;
-      document.body.appendChild(popup);
-      console.log("yay!");
-    }
+      Barcode_label.style.left    = settings.x + "px";
+      Barcode_label.style.top     = settings.y + "px";
+      Barcode_label.style.display = "block";
+      $("h4", Barcode_label).html(settings.trust.get("designation"));
+      $(".year", Barcode_label).html(settings.trust.get("year"));
+      $(".income", Barcode_label).html(Style(settings.trust.get("income")));
+      $(".yield", Barcode_label).html(Style(settings.trust.get("yield")));
+      $(".expenses", Barcode_label).html(Style(settings.trust.get("expenses")));
+      $(".availability", Barcode_label).html(Style(settings.trust.get("availability")));
+      $(".initial_amount", Barcode_label).html(Style(settings.trust.get("initial_amount")));
+    },
+
+    hide_popup : function(){
+      Barcode_label.style.display = "none";
+    },
+
+    create_tooltip : function(html){
+      var container = d3.select("body").append("div").attr("class", "tooltip-container")
+                        .style({
+                          "backgroud"  : "white",
+                          "border"     : "1px solid grey",
+                          "font-size"  : ".6em",
+                          "width"      : "160px",
+                          "position"   : "absolute",
+                          "background" : "grey",
+                          "color"      : "white"
+                        });
+      container.style("left", (d3.event.pageX + 5) + "px").style("top", (d3.event.pageY - 20) + "px");
+      container.html(html);
+            //.attr('class', 'tooltip-title')
+            //.text(Style(text));
+    },
+
   });
 
   //

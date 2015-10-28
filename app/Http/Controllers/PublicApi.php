@@ -43,6 +43,7 @@ class PublicApi extends Controller{
 
     $fields = ["id"];
     $fields = array_merge($fields, $this->num_fields, $this->string_fields);
+    $fields[] = "designation";
     if($textfields){
       $fields = array_merge($fields, $this->text_fields);
     }
