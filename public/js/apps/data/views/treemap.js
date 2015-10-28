@@ -23,8 +23,9 @@ define(function(require){
      Definitions = TRUSTS_DATA.definitions,
      Categories  = ["branch", "type", "scope", "theme", "unit", "settlor", "fiduciary"],
      Category    = Categories[3],
-     Blues		 = ["#f7fbff","#deebf7","#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#08519c","#08306b"],
-     Colors      = d3.scale.ordinal()
+     Blues		 = ["#08306b", "#08519c","#2171b5","#4292c6","#6baed6","#9ecae1",],
+     Colors      = d3.scale.linear()
+     				.domain([300,200,100,50,10,0])
      				.range(Blues);
 
   //
@@ -144,7 +145,7 @@ define(function(require){
           .attr("height", function(d){ return d.dy})
           .attr("stroke", "white")
           .attr("stroke-width","2")
-          .attr("fill", function(d,i){ return Colors(i)});
+          .attr("fill", function(d,i){ return Colors(d.value)});
 
         enter.append("svg:text")
           .text(function(d){ return d.name})
@@ -192,7 +193,7 @@ define(function(require){
           .attr("height", function(d){ return d.dy})
           .attr("stroke", "white")
           .attr("stroke-width","2")
-          .attr("fill", function(d,i){ return Colors(i)});
+          .attr("fill", function(d,i){ return Colors(d.value)});
          
       enter.append("svg:text")
           .text(function(d){ return d.name})

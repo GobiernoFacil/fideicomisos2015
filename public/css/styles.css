@@ -1568,6 +1568,10 @@ a.category, a.category:visited {
 #barcode-chart .table > tbody > tr > td:first-child {
   text-align: right; }
 
+.g-container text {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  fill: white; }
+
 /* =Post
 -------------------------------------------------------------- */
 .post .breadcrumb a {
