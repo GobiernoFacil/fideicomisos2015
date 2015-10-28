@@ -36,7 +36,7 @@ Este proyecto cuenta con 4 secciones:
 1. un editor de contenido
 2. un navegador de fideicomisos
 3. un API de consulta
-4. un fornt end con información básica de qué es un fideicomiso y datos de contacto
+4. un front end con información básica de qué es un fideicomiso y datos de contacto
 
 ### Editor de contenido
 El sitio cuenta con un pequeño administrador en el que se puede escribir artículos y generar gráficas con datos de fideicomisos. Se puede acceder al admin en /auth/login (el usuario y el password inicial se pueden ver al cargar los datos en la DB mediante Artisan)
@@ -49,4 +49,7 @@ Este cuenta con tres herramientas:
 
 ### El api de consulta
 El API de consulta da acceso a la DB con los fideicomisos desde fuera del sistema. 
+la documentación se puede leer aquí: https://github.com/GobiernoFacil/fideicomisos2015/blob/master/API-fideicomisos.md
 
+### El front end
+La información de contacto, la descripción de un fideicomiso, el acceso a los artículos.
