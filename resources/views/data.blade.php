@@ -43,7 +43,7 @@
 			      </p>
 			    </form>
           <div class="g-container"></div>
-          <table>
+          <table class="table">
             <caption></caption>
             <tbody></tbody>
           </table>
