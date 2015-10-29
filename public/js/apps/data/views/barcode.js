@@ -137,7 +137,7 @@ define(function(require){
                        .range([SVG.margin.left, SVG.width - SVG.margin.left - SVG.margin.right]),
           color      = d3.scale.linear()
                        .domain(d3.extent(this.collection.pluck("year")))
-                       .range(["grey", "green"]);
+                       .range(["#08306b", "#4292c6"]);
 
       tbody.innerHTML = "";
 
@@ -211,7 +211,7 @@ define(function(require){
                   //console.log(d,e, d3.mouse(this), window.event.pageX, window.event.pageY);
                   console.log(d.attributes);
                   var template = '<p>' + Style(d.get(Num_field)) + '</p>';
-                      template+= '<p>' + d.get("designation") + '</p>';
+                      template+= '<p class="designation">' + d.get("designation") + '</p>';
                   that.controller.create_tooltip(template);
                  })
                  .on("mouseout", function(d, e){
