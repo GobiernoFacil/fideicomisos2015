@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('body_class', 'elgrafico')
 
-@section('title', 'El Gráfico de los Fideicomisos')
-@section('description', "Visualización de los Fideicomisos Públicos en México")
+@section('title', 'El Gráfico de los Fideicomisos | Las Cajas Negras')
+@section('description', "El Gráfico es una sección que permite comprender a través de tres visualizaciones cómo el Gobierno está gastando el dinero de tus impuestos a través de 614 Fideicomisos públicos.")
 
 @section('content')
 <div class="main">
@@ -15,12 +15,13 @@
 						<li>El gráfico</li>
 					</ul>
 					<h1>El gráfico</h1>
+					<p class="lead">El Gráfico es una sección que permite comprender a través de tres herramientas de visualización de datos cómo el Gobierno ha gastado (desde 2006 hasta 2014) el dinero de tus impuestos en <strong>614 Fideicomisos públicos</strong> en México.</p>
 				</div>
 			</div>
 		</div>
 	</nav>
 </div>
-
+<div class="divider"></div>
 <section class="list_news">
 <div class="container">
 	<div class="row">
@@ -78,28 +79,6 @@
 	</div>
 </section>
 
-<section class="list_news">
-	<div class="container">
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2">
-  <div id="circle-pack">
-				<h2>Distribución de Fideicomiso Público</h2>
-    <form id="pack-chart-controls">
-    <ul>
-      <li><input type="checkbox" name="pack_category[]" value="0" checked>ramo</li>
-      <li><input type="checkbox" name="pack_category[]" value="1" checked>tipo</li>
-      <li><input type="checkbox" name="pack_category[]" value="2" checked>ámbito</li>
-      <li><input type="checkbox" name="pack_category[]" value="3">tema</li>
-      <li><input type="checkbox" name="pack_category[]" value="4">unidad responsable</li>
-      <li><input type="checkbox" name="pack_category[]" value="5">mandante</li>
-      <li><input type="checkbox" name="pack_category[]" value="6">fiduciario</li>
-    </ul>
-    </form>
-  </div>
-		</div>
-	</div>
-	</div>
-</section>
 
 <section class="data">
 <div class="container">

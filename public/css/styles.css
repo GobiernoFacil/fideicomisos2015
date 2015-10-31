@@ -1246,6 +1246,11 @@ a.btn_logout {
 
 .reportajes.vizdata h2, .elgrafico h2 {
   font-weight: 700; }
+.reportajes.vizdata .lead, .elgrafico .lead {
+  font: 500 1.2em "Roboto", Helvetica, Arial, sans-serif;
+  margin-top: 20px; }
+  .reportajes.vizdata .lead strong, .elgrafico .lead strong {
+    color: #015383; }
 .reportajes.vizdata section, .reportajes.vizdata div.list_news, .elgrafico section, .elgrafico div.list_news {
   padding: 90px 0; }
   .reportajes.vizdata section.data, .reportajes.vizdata div.list_news.data, .elgrafico section.data, .elgrafico div.list_news.data {

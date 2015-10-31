@@ -171,7 +171,7 @@ define(function(require){
          .attr("transform", "translate(" + layout.margin.left+", 0)")
          .call(y_axis);
 
-      svg.selectAll("path.domain").style("fill", "none").style("stroke", "#999");
+      svg.selectAll("path.domain").style("fill", "none").style("stroke", "#ddd");
       svg.selectAll("line").style("stroke", "#999");
       
     },
