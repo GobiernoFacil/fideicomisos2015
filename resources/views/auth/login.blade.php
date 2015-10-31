@@ -25,6 +25,7 @@
     {!! csrf_field() !!}
     <p>Correo <input type="email" name="email" value="{{old('email')}}"></p>
     <p>Contraseña <input type="password" name="password" id="password"></p>
+    <p><a href="{{url('password/email')}}" class="recover">Recuperar Contraseña</a>
     <p><button type="submit">Iniciar sesión</button></p>
   </form>
 			</div>

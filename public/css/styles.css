@@ -266,6 +266,25 @@ input[type="search"]::-webkit-search-decoration {
   font-weight: 700;
   font-style: normal; }
 
+.form-edit {
+  padding: 15px; }
+  .form-edit p.label {
+    line-height: 30px;
+    text-align: right; }
+  .form-edit input[type=text], .form-edit input[type=email], .form-edit input[type=password], .form-edit textarea {
+    border: 1px solid #f2f2f2;
+    padding: 0 5px;
+    line-height: 30px;
+    width: 100%; }
+  .form-edit input[type=submit] {
+    background: #FFED48;
+    border: 0;
+    font-weight: 700;
+    padding: 5px 15px; }
+  .form-edit textarea {
+    min-height: 80px;
+    margin-bottom: 20px; }
+
 nav.main .search input[type="search"] {
   text-align: center;
   width: 100%;
@@ -1289,6 +1308,15 @@ a.btn_logout {
   #im-gregson .list_description li strong {
     text-transform: uppercase; }
 
+/*** admin**/
+.users_list {
+  padding: 10px 20px; }
+  .users_list li {
+    list-style: none;
+    padding: 10px 0; }
+    .users_list li.titles {
+      border-bottom: 1px solid #ccc; }
+
 /* =Generales
 -------------------------------------------------------------- */
 .main {
@@ -1682,6 +1710,12 @@ a.category, a.category:visited {
   background: #015383; }
   .box_login p {
     color: white; }
+  .box_login .recover {
+    color: #8ba7c0;
+    font-size: 12px;
+    border-bottom: 1px solid #8ba7c0; }
+    .box_login .recover:hover {
+      color: white; }
 
 /* =BTN
 -------------------------------------------------------------- */
@@ -1694,6 +1728,15 @@ a.btn_link {
   text-transform: uppercase; }
   a.btn_link:hover {
     background: #FFD502; }
+  a.btn_link.edit, a.btn_link.alert {
+    font-size: 12px;
+    margin: 0 10px 0 0;
+    padding: 7px; }
+  a.btn_link.alert {
+    background: black;
+    color: white; }
+    a.btn_link.alert:hover {
+      background: #555; }
 
 .publicar-articulo {
   background: #FFED48;
@@ -1708,6 +1751,9 @@ a.btn_link {
 
 .right {
   text-align: right; }
+
+.admin section.partners {
+  background: white; }
 
 section.partners {
   border-top: 2px solid #015383;

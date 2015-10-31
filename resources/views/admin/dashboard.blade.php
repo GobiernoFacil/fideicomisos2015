@@ -18,8 +18,9 @@
 	  </div>
 	  <div class="col-sm-4">
 		  <div class="box_info panel">
-			 <h3> <a href="{{url('categorias')}}">Fideicomisos</a></h3>
+			 <h3> <a href="{{url('buscador-de-fideicomisos')}}">Fideicomisos</a></h3>
 			  <p><span>{{$trusts}}</span>Fideicomisos</p>
+			 <a href="{{url('explorador-de-fideicomisos')}}" class="btn_link">Explorar los fideicomisos</a>
 		  </div>
 	  </div>
 	  <div class="col-sm-4">
