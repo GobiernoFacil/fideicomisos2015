@@ -35,8 +35,8 @@
   <!-- Si es admin, aparece el navegador de admin, porque #Yodo -->
   <nav>
     <ul>
-      <li><a href="{{url('admin/dashboard')}}">dashboard</a></li>
-      <li><a href="{{url('navegador-de-fideicomisos')}}">fideicomisos</a></li>
+      <li><a href="{{url('home')}}" class="btn_link">&lt; Volver al Dashboard</a></li>
+      <li><a href="{{url('explorador-de-fideicomisos')}}" class="btn_link">Explorar Fideicomisos</a></li>
     </ul>
   </nav>
   @endif
@@ -44,7 +44,11 @@
   <section id="trust-description">
     <h2>Descripción</h2>
     @if(Auth::check())
-    <a href="{{url('trusts/update/' . $selected['id'])}}">editar</a>
+    <div class="row">
+	    <div class="col-sm-3 col-sm-offset-9">
+    <a href="{{url('trusts/update/' . $selected['id'])}}" class="btn_link right">editar fideicomiso</a>
+	    </div>
+    </div>
     @endif
     <ul class="list_description">
       <li>
