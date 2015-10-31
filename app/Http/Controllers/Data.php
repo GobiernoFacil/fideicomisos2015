@@ -16,11 +16,15 @@ class Data extends Controller{
                    'unit', 'settlor', 'fiduciary'];
 
     $definitions = Definitions::all();
+    /*
     $trusts = Trusts::select('id', 'year','registry', 'branch', 'branch_id', 
                 'type', 'scope', 'theme', 'unit', 'settlor', 
                 'fiduciary', 'designation', 'initial_amount', 'initial_date')
                 ->groupBy('registry')->orderBy('year', 'ASC')
                 ->orderBy('designation', 'ASC')->get();
+    */
+    $trusts = Trusts::select('id','registry', 'income', 'yield', 'expenses', 'availability', 
+                                 'year', 'initial_date')->get();
     return view('data', [
       'trusts'      => $trusts,
       'categories'  => $categories,

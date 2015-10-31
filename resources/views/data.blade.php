@@ -65,6 +65,13 @@
 	</div>
 </section>
 
+<section>
+  <div id="line-chart">
+    <h2>Todos los fideicomisos</h2>
+    <div class="g-container"></div>
+  </div>
+</section>
+
 <section class="list_news">
 	<div class="container">
 	<div class="row">

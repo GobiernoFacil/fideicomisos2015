@@ -16,6 +16,7 @@ define(function(require){
       Barcode  = require("views/barcode"), 
       Treemap  = require("views/treemap"), 
       Pack     = require("views/pack"),
+      Linemap  = require("views/linemap"),
       Trusts   = TRUSTS_DATA.trust_array,
       Popup    = {
         width   : 300,
@@ -56,6 +57,7 @@ define(function(require){
       this.collection = new Backbone.Collection(Trusts);
       this.barcode    = new Barcode({controller : this});
       this.treemap    = new Treemap({controller : this});
+      this.linemap    = new Linemap({controller : this});
       this.pack       = new Pack;
       this.popups     = [];
     },
