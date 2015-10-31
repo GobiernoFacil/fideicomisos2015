@@ -1305,6 +1305,15 @@ a.btn_logout {
   #im-gregson .list_description li strong {
     text-transform: uppercase; }
 
+/*** admin**/
+.users_list {
+  padding: 10px 20px; }
+  .users_list li {
+    list-style: none;
+    padding: 10px 0; }
+    .users_list li.titles {
+      border-bottom: 1px solid #ccc; }
+
 /* =Generales
 -------------------------------------------------------------- */
 .main {
@@ -1710,6 +1719,15 @@ a.btn_link {
   text-transform: uppercase; }
   a.btn_link:hover {
     background: #FFD502; }
+  a.btn_link.edit, a.btn_link.alert {
+    font-size: 12px;
+    margin: 0 10px 0 0;
+    padding: 7px; }
+  a.btn_link.alert {
+    background: black;
+    color: white; }
+    a.btn_link.alert:hover {
+      background: #555; }
 
 .publicar-articulo {
   background: #FFED48;
