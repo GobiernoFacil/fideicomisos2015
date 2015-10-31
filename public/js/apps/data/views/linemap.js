@@ -138,8 +138,8 @@ define(function(require){
       this.lines = container.selectAll("path");
       this.lines.data(data).enter().append("path").attr("d", this.line)
               .attr("fill", "none")
-              .attr("stroke", "rgba(139,167,192,0.25)")
-              .attr("stroke-width", 1.5)
+              .attr("stroke", "rgba(139,167,192,0.4)")
+              .attr("stroke-width", 1)
               .attr("cursor", "pointer")
               .on("mouseover", function(d){
                  d3.select(this)
@@ -151,8 +151,8 @@ define(function(require){
               })
               .on("mouseout", function(d){
                d3.select(this)
-              .attr("stroke", "rgba(139,167,192,0.25)")
-                 .attr("stroke-width", 1.5)
+              .attr("stroke", "rgba(139,167,192,0.4)")
+                 .attr("stroke-width", 1)
                  //.attr("fill", "black");
                //d3.select('div.tooltip-container').remove();
               });

@@ -33,17 +33,18 @@
 			      <p>
 			        <label>Categoría</label>
 			        <select id="treemap-category" disabled>
-			          <option value="0">ramo</option>
-			          <option value="1">tipo</option>
-			          <option value="2">ámbito</option>
-			          <option value="3" selected>tema</option>
-			          <option value="4">unidad responsable</option>
-			          <option value="5">mandante</option>
-			          <option value="6">fiduciario</option>
+			          <option value="0">Ramo</option>
+			          <option value="1">Tipo</option>
+			          <option value="2">Ámbito</option>
+			          <option value="3" selected>Tema</option>
+			          <option value="4">Unidad responsable</option>
+			          <option value="5">Mandante</option>
+			          <option value="6">Fiduciario</option>
 			        </select>
 			      </p>
 			    </form>
           <div class="g-container"></div>
+  		 @include('layouts.source')
           <table class="table">
             <caption></caption>
             <tbody></tbody>
@@ -72,18 +73,23 @@
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
   				<div id="line-chart">
-  				  <h2>Todos los fideicomisos</h2>
-            <form id="line-chart-controls">
-      <p>
-        <select name="line-category" id="line-category">
-          <option value="0" selected>Disponibilidad</option>
-          <option value="1">Gastos</option>
-          <option value="2">Ingresos</option>
-          <option value="3">Rendimientos</option>
-        </select>
-      </p>
-    </form>
+				<h2>El dinero de tus impuestos en los Fideicomisos Públicos</h2>
+				<p>Algunos fideicomisos gastaron más de lo que ingresaron entre 2006 y 2014. Selecciona disponibilidad, gastos, ingresos o rendimientos para observar 
+					la variación. Puedes seleccionar una línea para obtener información sobre el fideicomiso.</p> 
+  				  <form id="line-chart-controls">
+    			    <p class="center">
+    			      <select name="line-category" id="line-category">
+    			        <option value="0" selected>Disponibilidad</option>
+    			        <option value="1">Gastos</option>
+    			        <option value="2">Ingresos</option>
+    			        <option value="3">Rendimientos</option>
+    			      </select>
+    			    </p>
+    			  </form>
+  				
+		  		  <p class="label">Millones de pesos</p>
   				  <div class="g-container"></div>
+  				  @include('layouts.source')
   				</div>
 			</div>
 		</div>
@@ -107,13 +113,13 @@
       <p>
         <label>Categoría</label>
         <select id="barcode-category" disabled>
-          <option value="0">ramo</option>
-          <option value="1">tipo</option>
-          <option value="2">ámbito</option>
-          <option value="3" selected>tema</option>
-          <option value="4">unidad responsable</option>
-          <option value="5">mandante</option>
-          <option value="6">fiduciario</option>
+          <option value="0">Ramo</option>
+          <option value="1">Tipo</option>
+          <option value="2">Ámbito</option>
+          <option value="3" selected>Tema</option>
+          <option value="4">Unidad responsable</option>
+          <option value="5">Mandante</option>
+          <option value="6">Fiduciario</option>
         </select>
       </p>
       	</div>
@@ -121,13 +127,13 @@
       	<div class="col-sm-6">
 
       <p>
-        <label>variable</label>
+        <label>Variable</label>
         <select id="barcode-numfield" disabled>
-          <option value="0">ingresos</option>
-          <option value="1">rendimientos</option>
-          <option value="2">egresos</option>
-          <option value="3" selected>disponibilidad</option>
-          <option value="4">aportación inicial</option>
+          <option value="0">Ingresos</option>
+          <option value="1">Rendimientos</option>
+          <option value="2">Egresos</option>
+          <option value="3" selected>Disponibilidad</option>
+          <option value="4">Aportación inicial</option>
         </select>
       </p>
       	</div>
@@ -138,11 +144,12 @@
         <tr>
           <th class="category"></th>
           <th class="money"></th>
-          <th>número de fideicomisos</th>
+          <th>Número de fideicomisos</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
+  		 @include('layouts.source')
   </div>
 		</div>
 	</div>
