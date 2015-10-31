@@ -125,19 +125,21 @@ define(function(require){
         this.svg.select(".main_container")
             .append("path").attr("d", this.line(data))
               .attr("fill", "none")
-              .attr("stroke", "grey")
-              .attr("stroke-width", 1)
+              .attr("stroke", "rgba(139,167,192,0.25)")
+              .attr("stroke-width", 1.5)
+              .attr("cursor", "pointer")
               .on("mouseover", function(d){
                  d3.select(this)
-                 .attr("stroke-width", 2)
-                 .attr("stroke", "black")
+                 .attr("stroke-width", 3)
+                 .attr("stroke", "#015383")
+                  
                  //.attr("fill", "blue");
                  //That.create_tooltip(d);
               })
               .on("mouseout", function(d){
                d3.select(this)
-               .attr("stroke", "grey")
-                 .attr("stroke-width", 1)
+              .attr("stroke", "rgba(139,167,192,0.25)")
+                 .attr("stroke-width", 1.5)
                  //.attr("fill", "black");
                //d3.select('div.tooltip-container').remove();
               })
@@ -169,8 +171,8 @@ define(function(require){
          .attr("transform", "translate(" + layout.margin.left+", 0)")
          .call(y_axis);
 
-      svg.selectAll("path.domain").style("fill", "none").style("stroke", "black");
-      svg.selectAll("line").style("stroke", "black");
+      svg.selectAll("path.domain").style("fill", "none").style("stroke", "#999");
+      svg.selectAll("line").style("stroke", "#999");
       
     },
 
