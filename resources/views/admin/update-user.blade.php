@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-</head>
-<body>
+@extends('layouts.adminmaster')
+@section('body_class', 'admin user edit')
 
+@section('title', 'Editar Usuario')
+@section('description', "Editar Usuario")
+
+@section('content')
+<section>
+ <div class="container">
+  <h1>Editar Usuario: <strong>{{$user->name}}</strong> </h1>
+    <div class="row">
+	  <div class="col-sm-8 col-sm-offset-2">
+		  <div class="box_info">
   
   <!-- VALIDATION -->
   @if(count($errors) > 0)
@@ -15,19 +21,63 @@
   </ul>
   @endif
 
-  <form method="POST" action="/users/update/{{$user->id}}">
+  <form method="POST" action="/users/update/{{$user->id}}" class="form-edit">
     <!-- STATUS MESSAGE -->
 
     {!! csrf_field() !!}
-    <p>Nombre<input type="text" name="name" id="name" value="{{$user->name}}"></p>
-    <p>Correo <input type="email" name="email" id="email" value="{{$user->email}}"></p>
-    <p><input type="checkbox" value="1" name="change_pass" id="change_pass" {{old('change_pass')? 'checked' : ''}}> Cambiar contraseña</p>
-    <p>Contraseña:* <input type="password" name="password" id="password" disabled></p>
-    <p>Confirmar Contraseña: <input type="password" name="confirm" id="confirm" disabled></p>
-    <p>* ocho caracteres como mínimo para la contraseña</p>
-    <p><input type="submit" value="Editar usuario"></p>
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Nombre</label></p>
+	    </div>
+	    <div class="col-sm-9">
+			<input type="text" name="name" id="name" value="{{$user->name}}">
+	    </div>
+    </div>
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Correo </p>
+	    </div>
+    	<div class="col-sm-9">
+			<input type="email" name="email" id="email" value="{{$user->email}}">
+	    </div>
+    </div>
+     <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Cambiar contraseña:</p>
+	    </div>
+    	<div class="col-sm-9">
+	    	<p>
+			<input type="checkbox" value="1" name="change_pass" id="change_pass" {{old('change_pass')? 'checked' : ''}}></p>
+	    </div>
+    </div>
+     <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Contraseña* </p>
+	    </div>
+    	<div class="col-sm-9">
+			<input type="password" name="password" id="password" disabled>
+	    </div>
+    </div>
+     <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Confirmar Contraseña* </p>
+	    </div>
+    	<div class="col-sm-9">
+			<input type="password" name="confirm" id="confirm" disabled>
+			<p>* ocho caracteres como mínimo para la contraseña</p>
+	    </div>
+    </div>
+     <div class="row">
+	 	<div class="col-sm-9 col-sm-offset-3">
+	 	<p><input type="submit" value="Editar usuario"></p>
+	 	</div>
+     </div>
   </form>
-
+		  </div>
+	  </div>
+    </div>
+ </div>
+</section>
 <script>
   var change_pass = document.querySelector('#change_pass'),
       password    = document.querySelector('#password'),
@@ -50,5 +100,4 @@
   }
 </script>
 
-</body>
-</html>
+@endsection
