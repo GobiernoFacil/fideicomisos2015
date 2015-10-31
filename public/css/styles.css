@@ -1628,7 +1628,8 @@ a.category, a.category:visited {
 
 .g-container text {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
-  fill: white; }
+  fill: white;
+  font-size: 12px; }
 
 #line-chart .g-container text {
   fill: #999;
