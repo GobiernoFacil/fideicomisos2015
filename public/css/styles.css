@@ -266,6 +266,22 @@ input[type="search"]::-webkit-search-decoration {
   font-weight: 700;
   font-style: normal; }
 
+.form-edit {
+  padding: 15px; }
+  .form-edit p.label {
+    line-height: 30px;
+    text-align: right; }
+  .form-edit input[type=text], .form-edit input[type=email], .form-edit input[type=password] {
+    border: 1px solid #f2f2f2;
+    padding: 0 5px;
+    line-height: 30px;
+    width: 100%; }
+  .form-edit input[type=submit] {
+    background: #FFED48;
+    border: 0;
+    font-weight: 700;
+    padding: 5px 15px; }
+
 nav.main .search input[type="search"] {
   text-align: center;
   width: 100%;
@@ -1708,6 +1724,9 @@ a.btn_link {
 
 .right {
   text-align: right; }
+
+.admin section.partners {
+  background: white; }
 
 section.partners {
   border-top: 2px solid #015383;
