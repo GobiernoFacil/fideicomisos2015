@@ -23,9 +23,9 @@ define(function(require){
      Definitions = TRUSTS_DATA.definitions,
      Categories  = ["branch", "type", "scope", "theme", "unit", "settlor", "fiduciary"],
      Category    = Categories[3],
-     Blues		 = ["#08306b", "#08519c","#2171b5","#4292c6","#6baed6","#9ecae1",],
+     Blues		 = ["#031B33", "#0E2C4A", "#2171b5"],
      Colors      = d3.scale.linear()
-     				.domain([300,200,100,50,10,0])
+     				.domain([600,300,0])
      				.range(Blues);
 
   //
@@ -148,7 +148,11 @@ define(function(require){
           .attr("fill", function(d,i){ return Colors(d.value)});
 
         enter.append("svg:text")
-          .text(function(d){ return d.name})
+          .text(function(d){ 
+	       	if((d.dx * d.dy) > 1500) {
+		       return d.name;
+	       	}
+	       })
           .attr("x", function (d) {return d.x+5;})
           .attr("y", function (d) {return d.y+20;})
           .attr("dy", ".35em")
@@ -196,7 +200,11 @@ define(function(require){
           .attr("fill", function(d,i){ return Colors(d.value)});
          
       enter.append("svg:text")
-          .text(function(d){ return d.name})
+          .text(function(d){ 
+	          if((d.dx * d.dy) > 1500) {
+		       return d.name;
+	       	  }
+	       })
           .attr("x", function (d) {return d.x+5;})
           .attr("y", function (d) {return d.y+20;})
           .attr("dy", ".35em")

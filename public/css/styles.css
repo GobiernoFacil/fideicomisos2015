@@ -1246,6 +1246,11 @@ a.btn_logout {
 
 .reportajes.vizdata h2, .elgrafico h2 {
   font-weight: 700; }
+.reportajes.vizdata .lead, .elgrafico .lead {
+  font: 500 1.2em "Roboto", Helvetica, Arial, sans-serif;
+  margin-top: 20px; }
+  .reportajes.vizdata .lead strong, .elgrafico .lead strong {
+    color: #015383; }
 .reportajes.vizdata section, .reportajes.vizdata div.list_news, .elgrafico section, .elgrafico div.list_news {
   padding: 90px 0; }
   .reportajes.vizdata section.data, .reportajes.vizdata div.list_news.data, .elgrafico section.data, .elgrafico div.list_news.data {
@@ -1253,6 +1258,17 @@ a.btn_logout {
 .reportajes.vizdata div.data, .elgrafico div.data {
   background: #F5F6FA;
   padding: 90px 0; }
+.reportajes.vizdata .label, .elgrafico .label {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 0; }
+  .reportajes.vizdata .label.source, .elgrafico .label.source {
+    color: #333;
+    margin: 30px 0; }
+    .reportajes.vizdata .label.source a, .elgrafico .label.source a {
+      color: #ee407c; }
+      .reportajes.vizdata .label.source a:hover, .elgrafico .label.source a:hover {
+        border-bottom: 1px dotted #ee407c; }
 
 /* =im-fideicomiso
 -------------------------------------------------------------- */
@@ -1612,7 +1628,8 @@ a.category, a.category:visited {
 
 .g-container text {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
-  fill: white; }
+  fill: white;
+  font-size: 12px; }
 
 #line-chart .g-container text {
   fill: #999;
