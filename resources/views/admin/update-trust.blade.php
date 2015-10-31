@@ -1,87 +1,232 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-</head>
-<body>
-  <h1>Actualizar fideicomiso</h1>
-  <form method="POST" action="/trusts/update/{{$trust->id}}">
+@extends('layouts.adminmaster')
+@section('body_class', 'admin trust edit')
+
+@section('title', 'Actualizar Fideicomiso')
+@section('description', "Actualizar Usuario")
+
+@section('content')
+<section>
+	<nav class="breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<ul>
+						<li><a href="{{url('home')}}">Ir al Dashboard</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+ <div class="container">
+  <h1>Actualizar fideicomiso:  <strong>{{$trust->designation}}</strong></h1>
+  <div class="row">
+	  <div class="col-sm-8 col-sm-offset-2">
+		  <div class="box_info">
+  <form method="POST" action="/trusts/update/{{$trust->id}}" class="form-edit">
     {!! csrf_field() !!}
     <p>id: {{$trust->id}}</p>
 
     <p><label><input type="checkbox" name="all" value="1" checked="checked">Actualizar todos los campos similares en todos los años de este fideicomiso</label></p>
-
-    <p><label>año:</label>
-      <input type="text" name="year" value="{{$trust->year}}">
-    </p>
-    <p><label>ramo:</label>
-      <input type="text" name="branch" value="{{$trust->branch}}">
-    </p>
-    <p><label>tipo:</label>
+	<div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Año</label></p>
+	    </div>
+	    <div class="col-sm-9">
+			 <input type="text" name="year" value="{{$trust->year}}">
+	    </div>
+    </div>
+    
+	<div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Ramo</label></p>
+	    </div>
+	    <div class="col-sm-9">
+			<input type="text" name="branch" value="{{$trust->branch}}">
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Tipo</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="type" value="{{$trust->type}}">
-    </p>
-
-    <p><label>ámbito:</label>
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Ámbito</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="scope" value="{{$trust->scope}}">
-    </p>
-    <p><label>unidad responsable coordinadora:</label>
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Unidad responsable coordinadora</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="unit" value="{{$trust->unit}}">
-    </p>
-    <p><label>fideicomitente o mandante:</label>
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Fideicomitente o mandante</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="settlor" value="{{$trust->settlor}}">
-    </p>
-
-    <p><label>clave de registro:</label>
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Clave de registro</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="registry" value="{{$trust->registry}}">
-    </p>
-    <p><label>denominación:</label>
+	    </div>
+    </div>
+   
+   <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Denominación</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <textarea name="designation">{{$trust->designation}}</textarea>
-    </p>
-    <p><label>objeto:</label>
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Objeto</label></p>
+	    </div>
+	    <div class="col-sm-9">
     <textarea name="objective">{{$trust->objective}}</textarea>
-    </p>
-
-    <p><label>fiduciario o mandatario:</label>
+	    </div>
+    </div>
+    
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Fiduciario o mandatario</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="fiduciary" value="{{$trust->fiduciary}}">
-    </p>
-    <p><label>grupo temático:</label>
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Grupo temático</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="theme" value="{{$trust->theme}}">
-    </p>
-    <p><label>ingresos (pesos):</label>
+	    </div>
+    </div>
+   
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Ingresos (pesos)</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="income" value="{{$trust->income}}">
-    </p>
+	    </div>
+    </div>
 
-    <p><label>rendimientos (pesos):</label>
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Rendimientos (pesos)</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="yield" value="{{$trust->yield}}">
-    </p>
-    <p><label>egresos (pesos):</label>
+	    </div>
+    </div>
+    
+	<div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Egresos (pesos)</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="expenses" value="{{$trust->expenses}}">
-    </p>
-    <p><label>reporte del cumplimiento de la misión y fines:</label>
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Reporte del cumplimiento de la misión y fines</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <textarea name="report">{{$trust->report}}</textarea>
-    </p>
+	    </div>
+    </div>
 
-    <p><label>disponibilidad (pesos):</label>
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Disponibilidad (pesos)</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="availability" value="{{$trust->availability}}">
-    </p>
-    <p><label>tipo de disponibilidad:</label>
+	    </div>
+    </div>
+   
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Tipo de Disponibilidad</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="availability_type" value="{{$trust->availability_type}}">
-    </p>
-    <p><label>monto aportación inicial:</label>
+	    </div>
+    </div>
+    
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Monto aportación inicial</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <input type="text" name="initial_amount" value="{{$trust->initial_amount}}">
-    </p>
+	    </div>
+    </div>
 
-    <p><label>fecha de aportación inicial:</label>
-      <input placeholder="dd/mm/yyyy" type="text" name="initial_date" value="{{$trust->initial_date}}">
-    </p>
-    <p><label>observaciones:</label>
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Fecha de aportación inicial</label></p>
+	    </div>
+	    <div class="col-sm-9">
+      <input type="text" name="initial_amount" value="{{$trust->initial_amount}}">
+	    </div>
+    </div>
+    
+    <div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Observaciones</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <textarea name="comments">{{$trust->comments}}</textarea>
-    </p>
-    <p><label>aportación inicial / observaciones:</label>
+	    </div>
+    </div>
+   
+	<div class="row">
+	    <div class="col-sm-3">
+			<p class="label">Aportación inicial / observaciones</label></p>
+	    </div>
+	    <div class="col-sm-9">
       <textarea name="initial_amount_comments">{{$trust->initial_amount_comments}}</textarea>
-    </p>
-
-    <p><input type="submit" value="Actualizar"> </p>
+	    </div>
+    </div>
+   
+    <div class="row">
+	 	<div class="col-sm-9 col-sm-offset-3">
+	 	<p><input type="submit" value="Actualizar"></p>
+	 	</div>
+     </div>
   </form>
-</body>
-</html>
+		  </div>
+	  </div>
+  </div>
+ </div>
+</section>
+@endsection

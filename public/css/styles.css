@@ -271,7 +271,7 @@ input[type="search"]::-webkit-search-decoration {
   .form-edit p.label {
     line-height: 30px;
     text-align: right; }
-  .form-edit input[type=text], .form-edit input[type=email], .form-edit input[type=password] {
+  .form-edit input[type=text], .form-edit input[type=email], .form-edit input[type=password], .form-edit textarea {
     border: 1px solid #f2f2f2;
     padding: 0 5px;
     line-height: 30px;
@@ -281,6 +281,9 @@ input[type="search"]::-webkit-search-decoration {
     border: 0;
     font-weight: 700;
     padding: 5px 15px; }
+  .form-edit textarea {
+    min-height: 80px;
+    margin-bottom: 20px; }
 
 nav.main .search input[type="search"] {
   text-align: center;
