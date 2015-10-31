@@ -1614,6 +1614,10 @@ a.category, a.category:visited {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   fill: white; }
 
+#line-chart .g-container text {
+  fill: #999;
+  font-size: 12px; }
+
 /* =Post
 -------------------------------------------------------------- */
 .post .breadcrumb a {
