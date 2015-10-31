@@ -46,12 +46,14 @@ define(function(require){
         left   : 100
       },
     },
-    SCALE = 1000000;
+    SCALE = 1000000,
 
   //
   // C A C H E   T H E   C O M M O N   E L E M E N T S
   // --------------------------------------------------------------------------------
   //
+  Max_select = document.getElementById("line-max-amount"),
+  Cat_select = document.getElementById("line-category");
  
 
   //
@@ -64,7 +66,8 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
-      "change #line-category" : "update_render"
+      "change #line-category" : "r_update_render",
+      "change #line-max-amount" : "update_render"
     },
 
     //
@@ -85,28 +88,14 @@ define(function(require){
       this.controller  = settings.controller;
       this.collection  = new Backbone.Collection(Trusts);
       this.definitions = new Backbone.Collection(Definitions);
-      this.colors = Colors;
+      this.registries  = _.uniq(this.collection.pluck("registry"));
+      this.colors      = Colors;
 
       this.svg    = null;
       this.scales = null;
       this.lines  = null;
       this.render();
     },
-
-    //
-    // C O  N T R O L   F U N C T I O N S
-    // ------------------------------------------------------------------------------
-    //
-    set_category : function(e){
-      /*
-      var category = e.currentTarget.value,
-          title    = this.$("option[value='" + category + "']").html();
-          Category = Categories[category];
-          this.update_treemap();
-          this.render_table(title);
-      */
-    },
-   
 
     //
     // R E N D E R   F U N C T I O N S
@@ -117,26 +106,59 @@ define(function(require){
     //
     //
     render : function(){
-      var div    = this.$(".g-container")[0],
-          trusts = _.uniq(this.collection.pluck("registry")),
-          data   = [],
+      var div  = this.$(".g-container")[0],
+          data = this.select_registries(),
           container;
 
       this.svg    = this.render_svg(div, SVG);
-      this.scales = this.create_scales( this.collection.models, SVG);
+      this.scales = this.create_scales( _.flatten(data), SVG);
       this.line   = this.make_line_generator(Category, this.scales[0], this.scales[1]);
 
       this.render_axis(this.svg, this.scales, SVG);
       container = this.svg.select(".main_container");
-
-      // prepare data
-
-      trusts.forEach(function(trust){
-        data.push(this.collection.where({registry : trust}));
-      }, this);
       
       this.lines = container.selectAll("path");
       this.lines.data(data).enter().append("path").attr("d", this.line)
+              .attr("fill", "none")
+              .attr("stroke", "rgba(139,167,192,0.25)")
+              .attr("stroke-width", 1.5)
+              .attr("cursor", "pointer")
+              .on("mouseover", function(d){
+                 d3.select(this)
+                 .attr("stroke-width", 3)
+                 .attr("stroke", "#015383")
+                 //.attr("fill", "blue");
+                 //That.create_tooltip(d);
+              })
+              .on("mouseout", function(d){
+               d3.select(this)
+              .attr("stroke", "rgba(139,167,192,0.25)")
+                 .attr("stroke-width", 1.5)
+                 //.attr("fill", "black");
+               //d3.select('div.tooltip-container').remove();
+              });
+
+
+      return this;
+    },
+
+    r_update_render : function(){
+      Max_select.value = 0;
+      this.update_render();
+    },
+
+    update_render : function(e){
+      var data   = this.select_registries();
+
+      Category    = Categories[Cat_select.value];
+      this.scales = this.create_scales(_.flatten(data), SVG);
+      this.line   = this.make_line_generator(Category, this.scales[0], this.scales[1]);
+      this.update_axis(this.svg, this.scales, SVG);
+
+      this.lines = this.svg.select(".main_container").selectAll("path").data(data);
+      this.lines.transition().duration(1500).ease("sin-in-out").attr("d", this.line);
+
+      this.lines.enter().append("path").attr("d", this.line)
               .attr("fill", "none")
               .attr("stroke", "rgba(139,167,192,0.25)")
               .attr("stroke-width", 1.5)
@@ -156,26 +178,7 @@ define(function(require){
                  //.attr("fill", "black");
                //d3.select('div.tooltip-container').remove();
               });
-
-
-      return this;
-    },
-
-    update_render : function(e){
-      var trusts = _.uniq(this.collection.pluck("registry")),
-          data   = [];
-
-      Category = Categories[e.target.value];
-      this.scales = this.create_scales(this.collection.models, SVG);
-      this.line   = this.make_line_generator(Category, this.scales[0], this.scales[1]);
-      this.update_axis(this.svg, this.scales, SVG);
-
-      trusts.forEach(function(trust){
-        data.push(this.collection.where({registry : trust}));
-      }, this);
-
-      this.lines = this.svg.select(".main_container").selectAll("path");
-      this.lines.data(data).transition().duration(1500).ease("sin-in-out").attr("d", this.line);
+      this.lines.exit().remove();
     },
 
     render_svg : function(div, layout){
@@ -206,7 +209,7 @@ define(function(require){
       svg.selectAll("line").style("stroke", "#999");
     },
 
-    update_axis : function(svg, scales, layout){
+    update_axis : function(svg, scales){
       var x_axis = d3.svg.axis().scale(scales[0]).orient("bottom"),
           y_axis = d3.svg.axis().scale(scales[1]).orient("left");
 
@@ -276,6 +279,23 @@ define(function(require){
     money_accesor : function(model){
       var m = +model.get(Category);
       return m != NaN && m >= 0 ? m/SCALE : 0;
+    },
+
+    select_registries : function(){
+      var data   = [],
+          trusts = this.registries;
+      trusts.forEach(function(trust){
+        var models = this.collection.where({registry : trust}),
+            max    = +Max_select.value;
+        if(!max || ! _.find(models, function(m){
+            return max < this.money_accesor(m);
+          }, this)){
+          data.push(models);
+        }
+      }, this);
+
+      console.log(data.length);
+      return data;
     }
   });
     

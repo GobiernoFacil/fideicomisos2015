@@ -81,6 +81,21 @@
           <option value="3">Rendimientos</option>
         </select>
       </p>
+
+      <p>
+        <select name="line-max-amount" id="line-max-amount">
+          <option value="0" selected>60,000+</option>
+          <option value="40000">&lt; 40,000</option>
+          <option value="20000">&lt; 20,000</option>
+          <option value="10000">&lt; 10,000</option>
+          <option value="2000">&lt; 2,000</option>
+          <option value="1000">&lt; 1,000</option>
+          <option value="200">&lt; 200</option>
+          <option value="20">&lt; 20</option>
+          <option value="2">&lt; 2</option>
+          <option value=".5">&lt; .5</option>
+        </select>
+      </p>
     </form>
   				  <div class="g-container"></div>
   				</div>
