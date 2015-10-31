@@ -6,6 +6,17 @@
 
 @section('content')
 <section>
+	<nav class="breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<ul>
+						<li><a href="{{url('users')}}">Regresar a usuarios</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
  <div class="container">
   <h1>Editar Usuario: <strong>{{$user->name}}</strong> </h1>
     <div class="row">
