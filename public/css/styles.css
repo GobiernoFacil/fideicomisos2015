@@ -1707,6 +1707,12 @@ a.category, a.category:visited {
   background: #015383; }
   .box_login p {
     color: white; }
+  .box_login .recover {
+    color: #8ba7c0;
+    font-size: 12px;
+    border-bottom: 1px solid #8ba7c0; }
+    .box_login .recover:hover {
+      color: white; }
 
 /* =BTN
 -------------------------------------------------------------- */
