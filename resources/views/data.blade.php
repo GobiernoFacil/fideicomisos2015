@@ -68,6 +68,16 @@
 <section>
   <div id="line-chart">
     <h2>Todos los fideicomisos</h2>
+    <form id="line-chart-controls">
+      <p>
+        <select name="line-category" id="line-category">
+          <option value="0" selected>Disponibilidad</option>
+          <option value="1">Gastos</option>
+          <option value="2">Ingresos</option>
+          <option value="3">Rendimientos</option>
+        </select>
+      </p>
+    </form>
     <div class="g-container"></div>
   </div>
 </section>

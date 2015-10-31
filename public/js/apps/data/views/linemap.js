@@ -24,7 +24,10 @@ define(function(require){
      Trusts      = TRUSTS_DATA.trust_array,
      Categories  = ["availability", "expenses", "income", "yield"],
      Category    = Categories[0],
-     Blues     = ["#08306b", "#08519c","#2171b5","#4292c6","#6baed6","#9ecae1",],
+     MAX         = d3.max(Trusts, function(trust){
+                     return +trust[Category];
+                   }),
+     Blues       = ["#08306b", "#08519c","#2171b5","#4292c6","#6baed6","#9ecae1",],
      Colors      = d3.scale.linear()
             .domain([300,200,100,50,10,0])
             .range(Blues),
@@ -61,6 +64,7 @@ define(function(require){
     // [ DEFINE THE EVENTS ]
     //
     events :{
+      "change #line-category" : "update_render"
     },
 
     //
@@ -83,8 +87,9 @@ define(function(require){
       this.definitions = new Backbone.Collection(Definitions);
       this.colors = Colors;
 
-      this.svg = null;
+      this.svg    = null;
       this.scales = null;
+      this.lines  = null;
       this.render();
     },
 
@@ -113,17 +118,25 @@ define(function(require){
     //
     render : function(){
       var div    = this.$(".g-container")[0],
-          trusts = _.uniq(this.collection.pluck("registry"));
+          trusts = _.uniq(this.collection.pluck("registry")),
+          data   = [],
+          container;
 
       this.svg    = this.render_svg(div, SVG);
       this.scales = this.create_scales( this.collection.models, SVG);
       this.line   = this.make_line_generator(Category, this.scales[0], this.scales[1]);
 
       this.render_axis(this.svg, this.scales, SVG);
+      container = this.svg.select(".main_container");
+
+      // prepare data
+
       trusts.forEach(function(trust){
-        var data = this.collection.where({registry : trust});
-        this.svg.select(".main_container")
-            .append("path").attr("d", this.line(data))
+        data.push(this.collection.where({registry : trust}));
+      }, this);
+      
+      this.lines = container.selectAll("path");
+      this.lines.data(data).enter().append("path").attr("d", this.line)
               .attr("fill", "none")
               .attr("stroke", "grey")
               .attr("stroke-width", 1)
@@ -140,9 +153,27 @@ define(function(require){
                  .attr("stroke-width", 1)
                  //.attr("fill", "black");
                //d3.select('div.tooltip-container').remove();
-              })
-      }, this);
+              });
+
+
       return this;
+    },
+
+    update_render : function(e){
+      var trusts = _.uniq(this.collection.pluck("registry")),
+          data   = [];
+
+      Category = Categories[e.target.value];
+      this.scales = this.create_scales(this.collection.models, SVG);
+      this.line   = this.make_line_generator(Category, this.scales[0], this.scales[1]);
+      this.update_axis(this.svg, this.scales, SVG);
+
+      trusts.forEach(function(trust){
+        data.push(this.collection.where({registry : trust}));
+      }, this);
+
+      this.lines = this.svg.select(".main_container").selectAll("path");
+      this.lines.data(data).transition().duration(1500).ease("sin-in-out").attr("d", this.line);
     },
 
     render_svg : function(div, layout){
@@ -171,7 +202,18 @@ define(function(require){
 
       svg.selectAll("path.domain").style("fill", "none").style("stroke", "black");
       svg.selectAll("line").style("stroke", "black");
-      
+    },
+
+    update_axis : function(svg, scales, layout){
+      var x_axis = d3.svg.axis().scale(scales[0]).orient("bottom"),
+          y_axis = d3.svg.axis().scale(scales[1]).orient("left");
+
+      svg.select(".x_axis")
+        .transition().duration(1500).ease("sin-in-out")
+        .call(x_axis); 
+      svg.select(".y_axis")
+        .transition().duration(1500).ease("sin-in-out")
+        .call(y_axis); 
     },
 
     render_dots : function(svg, data, xscale, yscale){
@@ -203,29 +245,36 @@ define(function(require){
     // ------------------------------------------------------------------------------
     //
     create_scales : function(data, layout){
-      var x_extent = d3.extent(data, function(model){
-        return model.get("year");
-      }),
-         y_extent = d3.extent(data, function(model){
-        return +model.get(Category) / SCALE;
-      }),
-        x_scale = d3.scale.linear().domain(x_extent).range([layout.margin.left, layout.width - layout.margin.left - layout.margin.right]).nice(),
-        y_scale = d3.scale.linear().domain(y_extent).range([layout.height - layout.margin.bottom, layout.margin.top ]).nice(12);
+      var that     = this,
+          x_extent = d3.extent(data, function(model){
+            return model.get("year");
+          }),
+          y_extent = d3.extent(data, function(model){
+            return that.money_accesor(model);
+          }),
+          x_scale = d3.scale.linear().domain(x_extent).range([layout.margin.left, layout.width - layout.margin.left - layout.margin.right]).nice(),
+          y_scale = d3.scale.linear().domain(y_extent).range([layout.height - layout.margin.bottom, layout.margin.top ]).nice(12);
 
-      console.log(x_extent, y_extent);
       return [x_scale, y_scale];
     },
 
     make_line_generator : function(field, xscale, yscale){
-      var line = d3.svg.line()
+      var that = this,
+          line = d3.svg.line()
                    .x(function(d){
                      return xscale(d.get("year"));
                    })
                    .y(function(d){
-                     return yscale(+d.get(field)/SCALE);
-                   });
+                     return yscale(that.money_accesor(d));
+                   })
+                   .interpolate("basis");
       return line;
     },
+
+    money_accesor : function(model){
+      var m = +model.get(Category);
+      return m != NaN && m >= 0 ? m/SCALE : 0;
+    }
   });
     
 
