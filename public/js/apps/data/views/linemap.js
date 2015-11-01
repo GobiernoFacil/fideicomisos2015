@@ -23,6 +23,7 @@ define(function(require){
      Definitions = TRUSTS_DATA.definitions,
      Trusts      = TRUSTS_DATA.trust_array,
      Categories  = ["availability", "expenses", "income", "yield"],
+     Registries  = TRUSTS_DATA.registries,
      Category    = Categories[0],
      MAX         = d3.max(Trusts, function(trust){
                      return +trust[Category];
@@ -53,7 +54,8 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
   Max_select = document.getElementById("line-max-amount"),
-  Cat_select = document.getElementById("line-category");
+  Cat_select = document.getElementById("line-category"),
+  Title      = document.getElementById("line-trust-name");
  
 
   //
@@ -89,6 +91,7 @@ define(function(require){
       this.collection  = new Backbone.Collection(Trusts);
       this.definitions = new Backbone.Collection(Definitions);
       this.registries  = _.uniq(this.collection.pluck("registry"));
+      this.titles      = new Backbone.Collection(Registries);
       this.colors      = Colors;
 
       this.svg    = null;
@@ -106,7 +109,8 @@ define(function(require){
     //
     //
     render : function(){
-      var div  = this.$(".g-container")[0],
+      var that = this,
+          div  = this.$(".g-container")[0],
           data = this.select_registries(),
           container;
 
@@ -126,19 +130,19 @@ define(function(require){
               .on("mouseover", function(d){
                  d3.select(this)
                  .attr("stroke-width", 3)
-                 .attr("stroke", "#015383")
+                 .attr("stroke", "#015383");
+                 that.create_tooltips(d);
+                 Title.innerHTML = that.titles.findWhere({registry : d[0].get("registry")}).get("designation");
                  //.attr("fill", "blue");
                  //That.create_tooltip(d);
               })
               .on("mouseout", function(d){
-               d3.select(this)
-              .attr("stroke", "rgba(139,167,192,0.4)")
-                 .attr("stroke-width", 1)
-                 //.attr("fill", "black");
-               //d3.select('div.tooltip-container').remove();
+                d3.select(this)
+                  .attr("stroke", "rgba(139,167,192,0.4)")
+                  .attr("stroke-width", 1);
+                that.svg.selectAll(".amount").remove();
+                Title.innerHTML = "";
               });
-
-
       return this;
     },
 
@@ -148,7 +152,8 @@ define(function(require){
     },
 
     update_render : function(e){
-      var data   = this.select_registries();
+      var that = this,
+          data = this.select_registries();
 
       Category    = Categories[Cat_select.value];
       this.scales = this.create_scales(_.flatten(data), SVG);
@@ -162,19 +167,19 @@ define(function(require){
               .attr("fill", "none")
               .attr("stroke", "rgba(139,167,192,0.25)")
               .attr("stroke-width", 1.5)
+              .attr("stroke-linejoin", "round")
               .attr("cursor", "pointer")
               .on("mouseover", function(d){
                  d3.select(this)
                  .attr("stroke-width", 3)
                  .attr("stroke", "#015383")
-                  
-                 //.attr("fill", "blue");
-                 //That.create_tooltip(d);
+                 that.create_tooltips(d);
               })
               .on("mouseout", function(d){
                d3.select(this)
               .attr("stroke", "rgba(139,167,192,0.25)")
-                 .attr("stroke-width", 1.5)
+                 .attr("stroke-width", 1.5);
+                 that.svg.selectAll(".amount").remove();
                  //.attr("fill", "black");
                //d3.select('div.tooltip-container').remove();
               });
@@ -219,6 +224,30 @@ define(function(require){
       svg.select(".y_axis")
         .transition().duration(1500).ease("sin-in-out")
         .call(y_axis); 
+    },
+
+    create_tooltips : function(data){
+      var that   = this,
+          format = d3.format("$,"),
+          labels =this.svg.selectAll(".amount").data(data).enter()
+        .append("g")
+          .attr("class", "amount")
+          .attr("transform", function(d){
+            var x   = that.scales[0](d.get("year")),
+                y   = that.scales[1](that.money_accesor(d)),
+                res = "translate(" + x + ", " + y + ")";
+            return res;
+          });
+          
+          labels.append("rect")
+            .attr("width", 5)
+            .attr("height", 5)
+            .attr("fill", "red");
+          
+
+          labels.append('text').text(function(d){
+            return format(that.money_accesor(d).toFixed(2));
+          });
     },
 
     render_dots : function(svg, data, xscale, yscale){
@@ -272,7 +301,7 @@ define(function(require){
                    .y(function(d){
                      return yscale(that.money_accesor(d));
                    })
-                   .interpolate("basis");
+                   .interpolate("monotone");
       return line;
     },
 

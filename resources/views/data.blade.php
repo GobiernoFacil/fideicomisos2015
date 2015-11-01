@@ -103,6 +103,7 @@
     			  </form>
   				
 		  		  <p class="label">Millones de pesos</p>
+            <h4 id="line-trust-name"></h4>
   				  <div class="g-container"></div>
   				  @include('layouts.source')
   				</div>
@@ -175,7 +176,8 @@
     var TRUSTS_DATA = {
       trust_array : <?php echo json_encode($trusts); ?>,
       categories  : <?php echo json_encode($categories); ?>,
-      definitions : <?php echo json_encode($definitions); ?>
+      definitions : <?php echo json_encode($definitions); ?>,
+      registries  : <?php echo json_encode($registries); ?>
     };
   </script>
 
