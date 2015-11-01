@@ -133,8 +133,6 @@ define(function(require){
                  .attr("stroke", "#015383");
                  that.create_tooltips(d);
                  Title.innerHTML = that.titles.findWhere({registry : d[0].get("registry")}).get("designation");
-                 //.attr("fill", "blue");
-                 //That.create_tooltip(d);
               })
               .on("mouseout", function(d){
                 d3.select(this)
@@ -197,7 +195,7 @@ define(function(require){
     },
 
     render_axis : function(svg, scales, layout){
-      var x_axis = d3.svg.axis().scale(scales[0]).orient("bottom"),
+      var x_axis = d3.svg.axis().scale(scales[0]).orient("bottom").tickFormat(d3.format("")),
           y_axis = d3.svg.axis().scale(scales[1]).orient("left");
 
       
@@ -215,7 +213,7 @@ define(function(require){
     },
 
     update_axis : function(svg, scales){
-      var x_axis = d3.svg.axis().scale(scales[0]).orient("bottom"),
+      var x_axis = d3.svg.axis().scale(scales[0]).orient("bottom").tickFormat(d3.format("")),
           y_axis = d3.svg.axis().scale(scales[1]).orient("left");
 
       svg.select(".x_axis")
@@ -249,30 +247,6 @@ define(function(require){
             return format(that.money_accesor(d).toFixed(2));
           });
     },
-
-    render_dots : function(svg, data, xscale, yscale){
-      svg.selectAll(".dot").data(data).enter()
-         .append("circle")
-           .attr("class", "dot")
-           .attr("r", 3)
-           .attr("cx", function(d){ return xscale(new Date(d.time)); })
-           .attr("cy", function(d){ return yscale(d.users); })
-           .attr("fill", "black")
-           .on("mouseover", function(d){
-             d3.select(this)
-               .attr("stroke-width", 3)
-               .attr("stroke", "black")
-               .attr("fill", "blue");
-             That.create_tooltip(d);
-           })
-           .on("mouseout", function(d){
-             d3.select(this)
-               .attr("stroke-width", 0)
-               .attr("fill", "black");
-             d3.select('div.tooltip-container').remove();
-           })
-    },
-
 
     //
     // C R E A T E   H E L P E R S
@@ -322,8 +296,6 @@ define(function(require){
           data.push(models);
         }
       }, this);
-
-      console.log(data.length);
       return data;
     }
   });
