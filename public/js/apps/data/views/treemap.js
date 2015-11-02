@@ -23,7 +23,9 @@ define(function(require){
      Definitions = TRUSTS_DATA.definitions,
      Categories  = ["branch", "type", "scope", "theme", "unit", "settlor", "fiduciary"],
      Category    = Categories[3],
-     Blues		 = ["#031B33", "#0E2C4A", "#2171b5"],
+     Style       = d3.format("$,"),
+     SCALE       = 1000000,
+     Blues		   = ["#031B33", "#0E2C4A", "#2171b5"],
      Colors      = d3.scale.linear()
      				.domain([600,300,0])
      				.range(Blues);
@@ -120,7 +122,10 @@ define(function(require){
       var content = "",
           list = _.sortBy(this.root.children, "name");
       list.forEach(function(cat){
-        var row = "<tr>" + "<td>" + cat.name + "</td><td>" + cat.value + "</td></tr>";
+        var row = "<tr>" + "<td>" + cat.name +
+         "</td><td>" + Style((cat.value/SCALE).toFixed(2)) +
+         "</td><td>" + cat.trusts +
+        "</td></tr>";
         content += row;
       }, this);
       TABLE_BODY.innerHTML = content;
@@ -144,18 +149,32 @@ define(function(require){
           .attr("height", function(d){ return d.dy})
           .attr("stroke", "white")
           .attr("stroke-width","2")
-          .attr("fill", function(d,i){ return Colors(d.value)});
+          .attr("fill", function(d,i){ return Colors(d.trusts)});
 
-        enter.append("svg:text")
-          .text(function(d){ 
-	       	if((d.dx * d.dy) > 1500) {
-		       return d.name;
-	       	}
-	       })
+        var text = enter.append("svg:text")
           .attr("x", function (d) {return d.x+5;})
           .attr("y", function (d) {return d.y+20;})
           .attr("dy", ".35em")
           .attr("text-anchor", "start");
+
+          text.append("tspan")
+                   .text(function(d){ 
+                     if((d.dx * d.dy) > 1500) {
+                       return d.name;
+                     }
+                   });
+
+          text.append("tspan")
+                   .attr("dy", "1.2em")
+                   .attr("x", function(d){
+                    return d.x + 5;
+                   })
+                   .text(function(d){ 
+                     if((d.dx * d.dy) > 1500) {
+                       return d.availability;
+                     }
+                   });
+
 
         enter.append("svg:clipPath")
           .attr("id", function(d){ return d.id})
@@ -196,18 +215,31 @@ define(function(require){
           .attr("height", function(d){ return d.dy})
           .attr("stroke", "white")
           .attr("stroke-width","2")
-          .attr("fill", function(d,i){ return Colors(d.value)});
+          .attr("fill", function(d,i){ return Colors(d.trusts)});
          
-      enter.append("svg:text")
-          .text(function(d){ 
-	          if((d.dx * d.dy) > 1500) {
-		       return d.name;
-	       	  }
-	       })
+      var text = enter.append("svg:text")
           .attr("x", function (d) {return d.x+5;})
           .attr("y", function (d) {return d.y+20;})
           .attr("dy", ".35em")
           .attr("text-anchor", "start");
+
+          text.append("tspan")
+                   .text(function(d){ 
+                     if((d.dx * d.dy) > 1500) {
+                       return d.name;
+                     }
+                   });
+
+          text.append("tspan")
+                   .attr("dy", "1.2em")
+                   .attr("x", function(d){
+                    return d.x + 5;
+                   })
+                   .text(function(d){ 
+                     if((d.dx * d.dy) > 1500) {
+                       return d.availability;
+                     }
+                   });
 
       enter.append("svg:clipPath")
           .attr("id", function(d){ return d.id})
@@ -229,7 +261,20 @@ define(function(require){
 
       branches.forEach(function(branch, id){
         where[Category] = branch;
-        var el = {name : branch, value : this.collection.where(where).length, id : id};
+
+        var list  = this.collection.where(where),
+            total = list.reduce(function(memo, model){
+              var val = +model.get("availability");
+              val = val != NaN && val >= 0 ? val : 0;
+              return memo + val;
+            }, 0),
+            el    = {
+              name   : branch, 
+              value  : total, //list.length, 
+              trusts : list.length,
+              id     : id, 
+              availability : Style((total/SCALE).toFixed(2))
+            };
         root.children.push(el);
       }, this);
 
