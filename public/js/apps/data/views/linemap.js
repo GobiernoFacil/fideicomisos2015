@@ -139,7 +139,7 @@ define(function(require){
                   .attr("stroke", "rgba(139,167,192,0.4)")
                   .attr("stroke-width", 1);
                 that.svg.selectAll(".amount").remove();
-                Title.innerHTML = "";
+                Title.innerHTML = "Mueve el mouse sobre una línea";
               });
       return this;
     },

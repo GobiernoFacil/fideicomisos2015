@@ -101,10 +101,15 @@
         </select>
       </p>
     			  </form>
-  				
-		  		  <p class="label">Millones de pesos</p>
-            <h4 id="line-trust-name"></h4>
-  				  <div class="g-container"></div>
+  		<div class="row">	
+		  	<div class="col-sm-4">
+		  	<p class="label">Millones de pesos</p>
+		  	</div>
+		  	<div class="col-sm-8">
+            <h4 id="line-trust-name">Mueve el mouse sobre una línea</h4>
+		  	</div>
+  		</div> 
+  				 <div class="g-container"></div>
   				  @include('layouts.source')
   				</div>
 			</div>
