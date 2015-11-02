@@ -39,13 +39,13 @@ define(function(require){
   // --------------------------------------------------------------------------------
   //
     SVG = {
-      width  : 900,
+      width  : 700,
       height : 500,
       margin : {
         top    : 30,
         right  : 30,
         bottom : 30,
-        left   : 80
+        left   : 70
       },
     },
     SCALE = 1000000,
