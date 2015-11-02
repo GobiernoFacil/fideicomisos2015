@@ -21,9 +21,13 @@ class SingleGraph extends Controller
         //
     }
 
-    public function treemap(){
+    public function treemap($cat = "branch"){
       $year_max = max(Trusts::select("year")->groupBy("year")->get()->toArray());
       $year = $year_max["year"];
+      $definitions = Definitions::all();
+
+      $category = $definitions->where("name", $cat)->first();
+      $category = $category ? $category : $definitions->where("name", "branch")->first();
 
       $trusts = Trusts::groupBy("registry")
         ->select("id","branch", "type", "scope", "theme", "unit", "settlor", 
@@ -31,9 +35,11 @@ class SingleGraph extends Controller
           'initial_amount', 'year')
         ->where("year", $year)->get();
 
+
       return view("single-graph")->with([
-        "year"   => $year,
-        "trusts" => $trusts
+        "year"        => $year,
+        "trusts"      => $trusts,
+        "category"    => $category    
       ]);
     }
 
@@ -54,6 +60,6 @@ class SingleGraph extends Controller
     }
 
     public function barchart(){
-      
+      echo "n______n";
     }
 }

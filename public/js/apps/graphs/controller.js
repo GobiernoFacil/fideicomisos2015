@@ -15,7 +15,7 @@ define(function(require){
       d3       = require('d3'),
       Trusts   = TRUSTS_DATA.trusts,
       Year     = TRUSTS_DATA.year,
-      Category = "type",
+      Category = TRUSTS_DATA.category.name,
       SVG = {
       width  : 500,
       height : 500,
@@ -26,6 +26,7 @@ define(function(require){
           left   : 10
         },
       },
+      SCALE    = 1000000,
       Popup    = {
         width   : 300,
         height  : 300,
@@ -99,12 +100,24 @@ define(function(require){
                  .attr("x", function (d) {return d.x+5;})
                  .attr("y", function (d) {return d.y+20;})
                  .attr("dy", ".35em")
-                 .attr("text-anchor", "start")
-                 .text(function(d){ 
-                   if((d.dx * d.dy) > 1500) {
-                     return d.name;
-                   }
-                 }),
+                 .attr("text-anchor", "start");
+
+          text.append("tspan")
+                   .text(function(d){ 
+                     if((d.dx * d.dy) > 1500) {
+                       return d.name;
+                     }
+                   });
+          text.append("tspan")
+                   .attr("dy", "1.2em")
+                   .attr("x", function(d){
+                    return d.x + 5;
+                   })
+                   .text(function(d){ 
+                     if((d.dx * d.dy) > 1500) {
+                       return d.availability;
+                     }
+                   });
 
           paths = nodes.append("svg:clipPath")
           .attr("id", function(d){ return d.id})
@@ -114,7 +127,7 @@ define(function(require){
             .attr("width", function(d){ return d.dx})
             .attr("height", function(d){ return d.dy});
 
-      d3.selectAll("#branch-treemap text")
+      d3.selectAll("text")
           .attr("clip-path", function(d){ return "url(#" + d.id + ")"});
 
       rects.on("click", function(e){
@@ -148,7 +161,19 @@ define(function(require){
 
       branches.forEach(function(branch, id){
         where[Category] = branch;
-        var el = {name : branch, value : this.collection.where(where).length, id : id};
+
+        var list  = this.collection.where(where),
+            total = list.reduce(function(memo, model){
+              var val = +model.get("availability");
+              val = val != NaN && val >= 0 ? val : 0;
+              return memo + val;
+            }, 0),
+            el    = {
+              name : branch, 
+              value : list.length, 
+              id : id, 
+              availability : Style((total/SCALE).toFixed(2))
+            };
         root.children.push(el);
       }, this);
 
