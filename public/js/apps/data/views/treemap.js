@@ -100,7 +100,6 @@ define(function(require){
           Category = Categories[category];
           this.update_treemap();
           this.render_table(title);
-
     },
    
 
