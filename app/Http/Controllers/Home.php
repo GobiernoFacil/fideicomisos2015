@@ -31,17 +31,29 @@ class Home extends Controller
       $categories = ['branch', 'type', 'scope', 'theme', 
                    'unit', 'settlor', 'fiduciary'];
 
-	  $definitions = Definitions::all();
-	  $trusts = Trusts::select('id','registry', 'income', 'yield', 'expenses', 'availability', 
-                                 'year', 'initial_date')->get();
+
+      $year_max = max(Trusts::select("year")->groupBy("year")->get()->toArray());
+      $year = $year_max["year"];
+      $definitions = Definitions::all();
+
+      $category = $definitions->where("name", "branch")->first();
+
+      $trusts = Trusts::groupBy("registry")
+        ->select("id","branch", "type", "scope", "theme", "unit", "settlor", 
+          "fiduciary", 'income', 'yield', 'expenses', 'availability',
+          'initial_amount', 'year')
+        ->where("year", $year)->get();
+
       return view('home')->with([
-        'main_article'  => $main_article, 
-        'articles'		=> $articles,
-        'file_url'  	=> '/images/articles/',
-        'months'    	=> $this->months,
-        'trusts'      	=> $trusts,
-		'categories'  	=> $categories,
-		'definitions' 	=> $definitions
+        'main_article' => $main_article, 
+        'articles'		 => $articles,
+        'file_url'  	 => '/images/articles/',
+        'months'    	 => $this->months,
+        'trusts'       => $trusts,
+		    'categories'   => $categories,
+        'category'     => $category,
+		    'definitions'  => $definitions,
+        'year'         => $year
       ]);
     }
 }

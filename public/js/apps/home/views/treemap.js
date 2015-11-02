@@ -1,6 +1,6 @@
 // GRAPHS - fideicomisos
 // @package  : fideicomisos
-// @location : /js/apps/graphs
+// @location : /js/apps/home/views
 // @file     : controller.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com
@@ -81,7 +81,7 @@ define(function(require){
       var that  = this,
           data  = this.branch_nodes(),
           tree  = this.treemap(data),
-          chart = this.render_svg("#graph-main .g-container", SVG),
+          chart = this.render_svg("#treemap-section .g-container", SVG),
           nodes = chart.selectAll("g.node")
             .data(tree).enter()
             .append("svg:g")

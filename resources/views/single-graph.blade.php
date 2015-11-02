@@ -4,15 +4,17 @@
   <title></title>
 </head>
 <body>
-  <h2 id="title">Número de fideicomisos por <span></span></h2>
+  <h2 id="title">Número de fideicomisos por {{$category->full_name}} ({{$year}})</h2>
   <!-- TREEMAP CHART -->
   <div id="graph-main">
     <div class="g-container"></div>
   </div>
   <script>
     var TRUSTS_DATA = {
-      trusts : <?php echo json_encode($trusts); ?>,
-      year   : {{$year}}
+      trusts   : <?php echo json_encode($trusts); ?>,
+      year     : {{$year}},
+      file     : "controller",
+      category : <?php echo json_encode($category); ?>
     };
 
   </script>

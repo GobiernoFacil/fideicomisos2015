@@ -93,14 +93,11 @@ realizar un fin lícito determinado, de interés público. </p>
 		<div class="col-sm-10 col-sm-offset-1">
 			<h1>Explorar Datos</h1>
 		</div>
-		<div class="col-sm-6 col-sm-offset-1">
-			<h2>Disponibilidad total en Fideicomisos Públicos en 2014:
-				<strong>$482,692,566,861</strong></h2>
-			<p class="lead">
-				<img src="/images/vizdata-2.jpg"></p>
-			<p>Cada rectángulo representa un ramo, el tamaño es equivalente a la cantidad en pesos mexicanos, y el color brillante indica un mayor número de fideicomisos.</p>
+		<div class="col-sm-9">
+			<iframe src="{{url('el-grafico/linemap')}}" width="100%" height="700">
+			</iframe>
 		</div>
-		<div class="col-sm-3 col-sm-offset-1 descarga">
+		<div class="col-sm-3 descarga">
 			<h2><strong>Consulta</strong> y <strong>descarga gratis</strong> los datos que usamos.</h2>
 			<p>
 			<a href="{{url('buscador-de-fideicomisos')}}" class="btn_link">BUSCADOR de FIDEICOMISO</a>
@@ -114,4 +111,15 @@ Colabora (github)</a>
 	</div>
 </section>
 
+<script>
+    var TRUSTS_DATA = {
+      trusts   : <?php echo json_encode($trusts); ?>,
+      year     : {{$year}},
+      category : <?php echo json_encode($category); ?>
+    };
+
+  </script>
+
+
+<script data-main="/js/apps/home/main" src="/js/bower_components/requirejs/require.js"></script>
 @endsection
