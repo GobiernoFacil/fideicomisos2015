@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Trusts;
+use App\Models\Definitions;
 
 class SingleGraph extends Controller
 {
@@ -37,7 +38,19 @@ class SingleGraph extends Controller
     }
 
     public function linemap(){
-      
+      $categories = ['branch', 'type', 'scope', 'theme', 
+                   'unit', 'settlor', 'fiduciary'];
+
+      $definitions = Definitions::all();
+      $trusts = Trusts::select('id','registry', 'income', 'yield', 'expenses', 'availability', 
+                                 'year', 'initial_date')->get();
+      $registries = Trusts::select("id", "registry", "designation")->groupBy("registry")->get();
+      return view('single-graph-b', [
+        'trusts'      => $trusts,
+        'categories'  => $categories,
+        'definitions' => $definitions,
+        'registries'  => $registries
+      ]);
     }
 
     public function barchart(){

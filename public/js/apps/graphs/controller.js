@@ -1,6 +1,6 @@
-// Data - fideicomisos
+// GRAPHS - fideicomisos
 // @package  : fideicomisos
-// @location : /js/apps/data
+// @location : /js/apps/graphs
 // @file     : controller.js
 // @author   : Gobierno fácil <howdy@gobiernofacil.com>
 // @url      : http://gobiernofacil.com

@@ -30,6 +30,6 @@ require.config({
 
  var app;
 
-require(['controller'], function(controller){ 
+require([TRUSTS_DATA.file], function(controller){ 
   app = new controller();
 });

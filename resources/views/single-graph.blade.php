@@ -12,7 +12,8 @@
   <script>
     var TRUSTS_DATA = {
       trusts : <?php echo json_encode($trusts); ?>,
-      year   : {{$year}}
+      year   : {{$year}},
+      file   : "controller"
     };
 
   </script>
