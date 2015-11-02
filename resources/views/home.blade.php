@@ -96,6 +96,14 @@ realizar un fin lícito determinado, de interés público. </p>
 		<div class="col-sm-6 col-sm-offset-1">
 			<h2>Disponibilidad total en Fideicomisos Públicos en 2014:
 				<strong>$482,692,566,861</strong></h2>
+
+				<!-- AQUÍ MERO DEBE IR LA IMAGEN -->
+				<div id="treemap-section">
+					<div class="g-container"></div>
+				</div>
+
+				<iframe width="900" height="800" src="http://fideicomisos:8888/el-grafico/linemap"></iframe>
+
 			<p class="lead">
 				<img src="/images/vizdata-2.jpg"></p>
 			<p>Cada rectángulo representa un ramo, el tamaño es equivalente a la cantidad en pesos mexicanos, y el color brillante indica un mayor número de fideicomisos.</p>
@@ -114,4 +122,15 @@ Colabora (github)</a>
 	</div>
 </section>
 
+<script>
+    var TRUSTS_DATA = {
+      trusts   : <?php echo json_encode($trusts); ?>,
+      year     : {{$year}},
+      category : <?php echo json_encode($category); ?>
+    };
+
+  </script>
+
+
+<script data-main="/js/apps/home/main" src="/js/bower_components/requirejs/require.js"></script>
 @endsection

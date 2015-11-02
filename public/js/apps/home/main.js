@@ -7,7 +7,7 @@
 // @url     : http://gobiernofacil.com
 
 require.config({
-  baseUrl : "/js/apps/graphs",
+  baseUrl : "/js/apps/home",
   paths : {
     jquery        : "../../bower_components/jquery/dist/jquery.min",
     backbone      : "../../bower_components/backbone/backbone",
@@ -30,6 +30,6 @@ require.config({
 
  var app;
 
-require([TRUSTS_DATA.file], function(controller){ 
+require(["controller"], function(controller){ 
   app = new controller();
 });
