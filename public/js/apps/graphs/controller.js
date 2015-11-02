@@ -94,7 +94,7 @@ define(function(require){
                   .attr("height", function(d){ return d.dy})
                   .attr("stroke", "white")
                   .attr("stroke-width","2")
-                  .attr("fill", function(d,i){ return Colors(d.value)}),
+                  .attr("fill", function(d,i){ return Colors(d.trusts)}),
 
           text = nodes.append("svg:text")
                  .attr("x", function (d) {return d.x+5;})
@@ -169,9 +169,10 @@ define(function(require){
               return memo + val;
             }, 0),
             el    = {
-              name : branch, 
-              value : list.length, 
-              id : id, 
+              name   : branch, 
+              value  : total, //list.length, 
+              trusts : list.length,
+              id     : id, 
               availability : Style((total/SCALE).toFixed(2))
             };
         root.children.push(el);
