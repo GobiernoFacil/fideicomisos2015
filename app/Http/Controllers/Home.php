@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticlesContent;
 
+use App\Models\Trusts;
+use App\Models\Definitions;
 class Home extends Controller
 {
     /**
@@ -25,11 +27,21 @@ class Home extends Controller
     public function index(){
       $main_article = Article::all()->first();
       $articles 	= Article::all();
+      
+      $categories = ['branch', 'type', 'scope', 'theme', 
+                   'unit', 'settlor', 'fiduciary'];
+
+	  $definitions = Definitions::all();
+	  $trusts = Trusts::select('id','registry', 'income', 'yield', 'expenses', 'availability', 
+                                 'year', 'initial_date')->get();
       return view('home')->with([
-        'main_article'   => $main_article, 
-        'articles'		 => $articles,
-        'file_url'  => '/images/articles/',
-        'months'    => $this->months
+        'main_article'  => $main_article, 
+        'articles'		=> $articles,
+        'file_url'  	=> '/images/articles/',
+        'months'    	=> $this->months,
+        'trusts'      	=> $trusts,
+		'categories'  	=> $categories,
+		'definitions' 	=> $definitions
       ]);
     }
 }

@@ -67,6 +67,9 @@ Route::get('vizdata', function(){
 
 // [ DATAVIZ BIIIIIIIG ]
 Route::get('el-grafico', 'Data@index');
+Route::get('el-grafico/treemap', 'SingleGraph@treemap');
+Route::get('el-grafico/linemap', 'SingleGraph@linemap');
+Route::get('el-grafico/barchart', 'SingleGraph@barchart');
 
 // [ LOS WHO ]
 Route::get('quienes-somos', function(){

@@ -25,10 +25,12 @@ class Data extends Controller{
     */
     $trusts = Trusts::select('id','registry', 'income', 'yield', 'expenses', 'availability', 
                                  'year', 'initial_date')->get();
+    $registries = Trusts::select("id", "registry", "designation")->groupBy("registry")->get();
     return view('data', [
       'trusts'      => $trusts,
       'categories'  => $categories,
-      'definitions' => $definitions
+      'definitions' => $definitions,
+      'registries'  => $registries
     ]);
   }
 }
