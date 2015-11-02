@@ -93,9 +93,10 @@ realizar un fin lícito determinado, de interés público. </p>
 		<div class="col-sm-10 col-sm-offset-1">
 			<h1>Explorar Datos</h1>
 		</div>
-		<div class="col-sm-9 col-sm-offset-1">
+		<div class="col-sm-8 col-sm-offset-1">
 			<iframe src="{{url('el-grafico/linemap')}}" width="100%" height="700">
 			</iframe>
+			<p class="center"><a href="{{url('el-grafico')}}" class="btn_link">Explorar más visualizaciones de datos &gt;</a></p>
 		</div>
 		<div class="col-sm-2 descarga">
 			<h2><strong>Consulta</strong> y <strong>descarga gratis</strong> los datos que usamos.</h2>
