@@ -76,37 +76,45 @@
 
 				<h2>El dinero de tus impuestos en los Fideicomisos Públicos</h2>
 				<p>Algunos fideicomisos gastaron más de lo que ingresaron entre 2006 y 2014. Selecciona disponibilidad, gastos, ingresos o rendimientos para observar 
-					la variación. Puedes seleccionar una línea para obtener información sobre el fideicomiso.</p> 
+					la variación. Puedes filtrar por cantidad para observar a detalle todos los fideicomisos.</p> 
   				  <form id="line-chart-controls">
-    			    <p class="center">
-    			      <select name="line-category" id="line-category">
-    			        <option value="0" selected>Disponibilidad</option>
-    			        <option value="1">Gastos</option>
-    			        <option value="2">Ingresos</option>
-    			        <option value="3">Rendimientos</option>
-    			      </select>
-    			    </p>
-              <p>
-        <select name="line-max-amount" id="line-max-amount">
-          <option value="0" selected>60,000+</option>
-          <option value="40000">&lt; 40,000</option>
-          <option value="20000">&lt; 20,000</option>
-          <option value="10000">&lt; 10,000</option>
-          <option value="2000">&lt; 2,000</option>
-          <option value="1000">&lt; 1,000</option>
-          <option value="200">&lt; 200</option>
-          <option value="20">&lt; 20</option>
-          <option value="2">&lt; 2</option>
-          <option value=".5">&lt; .5</option>
-        </select>
-      </p>
+    			    <div class="row">
+	    			    <div class="col-sm-6">
+    			    	<p class="center">
+    			    	  Selecciona
+    			    	  <select name="line-category" id="line-category">
+    			    	    <option value="0" selected>Disponibilidad</option>
+    			    	    <option value="1">Gastos</option>
+    			    	    <option value="2">Ingresos</option>
+    			    	    <option value="3">Rendimientos</option>
+    			    	  </select>
+    			    	</p>
+	    			    </div>
+	    			    <div class="col-sm-6">
+						<p>
+						  Filtrar 
+						  <select name="line-max-amount" id="line-max-amount">
+						    <option value="0" selected>$60,000+</option>
+						    <option value="40000">&lt; $40,000</option>
+						    <option value="20000">&lt; $20,000</option>
+						    <option value="10000">&lt; $10,000</option>
+						    <option value="2000">&lt; $2,000</option>
+						    <option value="1000">&lt; $1,000</option>
+						    <option value="200">&lt; $200</option>
+						    <option value="20">&lt; $20</option>
+						    <option value="2">&lt; $2</option>
+						    <option value=".5">&lt; $.5</option>
+						  </select>
+						</p>
+	    			    </div>
+    			    </div>
     			  </form>
   		<div class="row">	
 		  	<div class="col-sm-4">
 		  	<p class="label">Millones de pesos</p>
 		  	</div>
 		  	<div class="col-sm-8">
-            <h4 id="line-trust-name">Mueve el mouse sobre una línea</h4>
+            	<h4 id="line-trust-name">Mueve el mouse sobre una línea</h4>
 		  	</div>
   		</div> 
   				 <div class="g-container"></div>

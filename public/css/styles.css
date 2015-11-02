@@ -1631,6 +1631,8 @@ a.category, a.category:visited {
   fill: white;
   font-size: 12px; }
 
+#line-chart h4 {
+  position: absolute; }
 #line-chart .g-container text {
   fill: #999;
   font-size: 12px; }
