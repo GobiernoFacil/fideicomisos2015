@@ -1,12 +1,13 @@
 * { font-family: 'Roboto', Helvetica, sans-serif;
-	color: rgb(64, 64, 64);
+	
 }
 
 #line-trust-name { 
+	color: rgb(64, 64, 64);
 	margin-bottom: 0;
 	min-height: 60px;
 }
-.g-container text { 
+#graph-main .g-container text { 
 		fill: #999;
 		font-size: 12px;
 }
