@@ -1,3 +1,10 @@
+* { font-family: 'Roboto', Helvetica, sans-serif;
+	color: rgb(64, 64, 64);
+}
+.g-container text { 
+		fill: #999;
+		font-size: 12px;
+}
 div.popup{
   background : white;
   border : 1px solid grey;

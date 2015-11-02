@@ -2,6 +2,7 @@
 <html>
 <head>
   <title></title>
+        <link rel="stylesheet" type="text/css" href="/css/dev_data.css" />
 </head>
 <body>
   <h2 id="title">Fideicomisos por disponibilidad</h2>
