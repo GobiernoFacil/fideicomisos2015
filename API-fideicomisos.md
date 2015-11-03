@@ -2,7 +2,9 @@
 
 ## obtener fideicomisos
 endpoint:
+```
 /api/fideicomisos/{orderBy?}/{year?}/{order?}/{textfields?}
+```
 
 **orderBy:** El campo numérico para ordenar cada fideicomiso. Solo regresa un registro por fideicomiso, es decir, si hay 10 o más registros para un fideicomiso (uno por año), el que regrese será el que tenga el campo numérico más alto o más bajo (dependiendo del campo “order”).
 * default: ‘availability’;
