@@ -32,15 +32,15 @@ endpoint:
 ```json
 [
 	{
-		“id”:227,
-		”income”:”0.00”,
-		”yield”:”-40343.34”,
-		”expenses”:”1568300.31”,
-		”availability”:”4483228.61”,
-		”initial_amount”:”6147634.46”,
-		”year”:2006,
-		”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,
-		”type”:”FIDEICOMISO”, 
+		"id":227,
+		"income":"0.00",
+		"yield":"-40343.34",
+		"expenses":”1568300.31",
+		"availability":”4483228.61",
+		"initial_amount":”6147634.46",
+		"year":2006,
+		"branch":"TRABAJO Y PREVISI\u00d3N SOCIAL",
+		"type":"FIDEICOMISO", 
 	…}, 
 	{…}, 
 …]
@@ -64,15 +64,15 @@ endpoint:
 ```json
 [
 	{
-		“id”:227,
-		”income”:”0.00”,
-		”yield”:”-40343.34”,
-		”expenses”:”1568300.31”,
-		”availability”:”4483228.61”,
-		”initial_amount”:”6147634.46”,
-		”year”:2006,
-		”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,
-		”type”:”FIDEICOMISO”, 
+		"id":227,
+		"income":"0.00",
+		"yield":"-40343.34",
+		"expenses":"1568300.31",
+		"availability":"4483228.61",
+		"initial_amount":"6147634.46",
+		"year":2006,
+		"branch":"TRABAJO Y PREVISI\u00d3N SOCIAL",
+		"type":"FIDEICOMISO", 
 	…}, 
 	{…}, 
 …]
@@ -103,7 +103,7 @@ endpoint:
 		"initial_amount":"6147634.46",
 		"year":2006,
 		"branch":"TRABAJO Y PREVISI\u00d3N SOCIAL",
-		"type”:"FIDEICOMISO", 
+		"type":"FIDEICOMISO", 
 	…}, 
 	{…}, 
 …]
