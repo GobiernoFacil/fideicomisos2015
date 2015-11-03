@@ -29,8 +29,22 @@ endpoint:
 * campos numéricos: ‘id’, ’income’, ‘yield’, ‘expenses’, ‘availability’, ’initial_amount’, ‘year’.
 * campos extra: ‘designation’, ‘objective’, ‘report’, ‘comments’, ’initial_amount_comments’.
 * json: 
-[{“id”:227,”income”:”0.00”,”yield”:”-40343.34”,”expenses”:”1568300.31”,”availability”:”4483228.61”,”initial_amount”:”6147634.46”,”year”:2006,”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,”type”:”FIDEICOMISO”, …}, {…}, …]
-
+```json
+[
+	{
+		“id”:227,
+		”income”:”0.00”,
+		”yield”:”-40343.34”,
+		”expenses”:”1568300.31”,
+		”availability”:”4483228.61”,
+		”initial_amount”:”6147634.46”,
+		”year”:2006,
+		”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,
+		”type”:”FIDEICOMISO”, 
+	…}, 
+	{…}, 
+…]
+```
 ## obtener fideicomiso
 endpoint:
 /api/fideicomiso/{key}
@@ -47,8 +61,22 @@ endpoint:
 * campos numéricos: ‘id’, ’income’, ‘yield’, ‘expenses’, ‘availability’, ’initial_amount’, ‘year’.
 * campos extra: ‘designation’, ‘objective’, ‘report’, ‘comments’, ’initial_amount_comments’.
 * json: 
-[{“id”:227,”income”:”0.00”,”yield”:”-40343.34”,”expenses”:”1568300.31”,”availability”:”4483228.61”,”initial_amount”:”6147634.46”,”year”:2006,”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,”type”:”FIDEICOMISO”, …}, {…}, …]
-
+```json
+[
+	{
+		“id”:227,
+		”income”:”0.00”,
+		”yield”:”-40343.34”,
+		”expenses”:”1568300.31”,
+		”availability”:”4483228.61”,
+		”initial_amount”:”6147634.46”,
+		”year”:2006,
+		”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,
+		”type”:”FIDEICOMISO”, 
+	…}, 
+	{…}, 
+…]
+```
 ## obtener algunos fideicomisos
 endpoint:
 /api/registros/{registries}
@@ -64,7 +92,22 @@ endpoint:
 * campos numéricos: ‘id’, ’income’, ‘yield’, ‘expenses’, ‘availability’, ’initial_amount’, ‘year’.
 * campos extra: ‘designation’, ‘objective’, ‘report’, ‘comments’, ’initial_amount_comments’.
 * json: 
-[{“id”:227,”income”:”0.00”,”yield”:”-40343.34”,”expenses”:”1568300.31”,”availability”:”4483228.61”,”initial_amount”:”6147634.46”,”year”:2006,”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,”type”:”FIDEICOMISO”, …}, {…}, …]
+```json
+[
+	{
+		"id":227,
+		"income":"0.00",
+		"yield":"-40343.34",
+		"expenses":"1568300.31",
+		"availability":"4483228.61",
+		"initial_amount":"6147634.46",
+		"year":2006,
+		"branch":"TRABAJO Y PREVISI\u00d3N SOCIAL",
+		"type”:"FIDEICOMISO", 
+	…}, 
+	{…}, 
+…]
+```
 
 ## buscar fideicomiso
 endpoint:
