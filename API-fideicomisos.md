@@ -2,7 +2,9 @@
 
 ## obtener fideicomisos
 endpoint:
+```
 /api/fideicomisos/{orderBy?}/{year?}/{order?}/{textfields?}
+```
 
 **orderBy:** El campo numérico para ordenar cada fideicomiso. Solo regresa un registro por fideicomiso, es decir, si hay 10 o más registros para un fideicomiso (uno por año), el que regrese será el que tenga el campo numérico más alto o más bajo (dependiendo del campo “order”).
 * default: ‘availability’;
@@ -29,8 +31,22 @@ endpoint:
 * campos numéricos: ‘id’, ’income’, ‘yield’, ‘expenses’, ‘availability’, ’initial_amount’, ‘year’.
 * campos extra: ‘designation’, ‘objective’, ‘report’, ‘comments’, ’initial_amount_comments’.
 * json: 
-[{“id”:227,”income”:”0.00”,”yield”:”-40343.34”,”expenses”:”1568300.31”,”availability”:”4483228.61”,”initial_amount”:”6147634.46”,”year”:2006,”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,”type”:”FIDEICOMISO”, …}, {…}, …]
-
+```json
+[
+	{
+		"id":227,
+		"income":"0.00",
+		"yield":"-40343.34",
+		"expenses":"1568300.31",
+		"availability":"4483228.61",
+		"initial_amount":"6147634.46",
+		"year":2006,
+		"branch":"TRABAJO Y PREVISI\u00d3N SOCIAL",
+		"type":"FIDEICOMISO", 
+	…}, 
+	{…}, 
+…]
+```
 ## obtener fideicomiso
 endpoint:
 /api/fideicomiso/{key}
@@ -47,8 +63,22 @@ endpoint:
 * campos numéricos: ‘id’, ’income’, ‘yield’, ‘expenses’, ‘availability’, ’initial_amount’, ‘year’.
 * campos extra: ‘designation’, ‘objective’, ‘report’, ‘comments’, ’initial_amount_comments’.
 * json: 
-[{“id”:227,”income”:”0.00”,”yield”:”-40343.34”,”expenses”:”1568300.31”,”availability”:”4483228.61”,”initial_amount”:”6147634.46”,”year”:2006,”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,”type”:”FIDEICOMISO”, …}, {…}, …]
-
+```json
+[
+	{
+		"id":227,
+		"income":"0.00",
+		"yield":"-40343.34",
+		"expenses":"1568300.31",
+		"availability":"4483228.61",
+		"initial_amount":"6147634.46",
+		"year":2006,
+		"branch":"TRABAJO Y PREVISI\u00d3N SOCIAL",
+		"type":"FIDEICOMISO", 
+	…}, 
+	{…}, 
+…]
+```
 ## obtener algunos fideicomisos
 endpoint:
 /api/registros/{registries}
@@ -64,11 +94,26 @@ endpoint:
 * campos numéricos: ‘id’, ’income’, ‘yield’, ‘expenses’, ‘availability’, ’initial_amount’, ‘year’.
 * campos extra: ‘designation’, ‘objective’, ‘report’, ‘comments’, ’initial_amount_comments’.
 * json: 
-[{“id”:227,”income”:”0.00”,”yield”:”-40343.34”,”expenses”:”1568300.31”,”availability”:”4483228.61”,”initial_amount”:”6147634.46”,”year”:2006,”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,”type”:”FIDEICOMISO”, …}, {…}, …]
+```json
+[
+	{
+		"id":227,
+		"income":"0.00",
+		"yield":"-40343.34",
+		"expenses":"1568300.31",
+		"availability":"4483228.61",
+		"initial_amount":"6147634.46",
+		"year":2006,
+		"branch":"TRABAJO Y PREVISI\u00d3N SOCIAL",
+		"type":"FIDEICOMISO", 
+	…}, 
+	{…}, 
+…]
+```
 
 ## buscar fideicomiso
 endpoint:
-/api/busqueda/{query}/{page?}/{total?}
+`/api/busqueda/{query}/{page?}/{total?}`
 
 **query:** la búsqueda a realizar.
 * default: none;
@@ -91,4 +136,23 @@ endpoint:
 ** ”query_total”: el total de registros encontrados
 ** ”trusts”: los resultados
 * json: 
-{“page”:”2”,”pages”:24,”query_total”:236,”trusts”:[{“id”:227,”income”:”0.00”,”yield”:”-40343.34”,”expenses”:”1568300.31”,”availability”:”4483228.61”,”initial_amount”:”6147634.46”,”year”:2006,”branch”:”TRABAJO Y PREVISI\u00d3N SOCIAL”,”type”:”FIDEICOMISO”, …}, {…}, …]}
+```json
+{
+  "page": "2",
+  "pages": 24,
+  "query_total": 236,
+  "trusts": [
+    {
+      "id": 227,
+      "income": "0.00",
+      "yield": "-40343.34",
+      "expenses": "1568300.31",
+      "availability": "4483228.61",
+      "initial_amount": "6147634.46",
+      "year": 2006,
+      "branch": "TRABAJO Y PREVISIÓN SOCIAL",
+      "type": "FIDEICOMISO"
+    },
+    { ... }
+  ]
+}
