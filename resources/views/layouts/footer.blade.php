@@ -29,7 +29,7 @@
 		</div>
 	</div>
 </footer>
-<script src="/js/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- <script src="/js/bower_components/jquery/dist/jquery.min.js"></script> -->
 <script src="/js/main.js"></script>
 
 <script>

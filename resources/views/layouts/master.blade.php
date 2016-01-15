@@ -24,6 +24,16 @@
 		<link rel="stylesheet" type="text/css"  href="/css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" />
         <link rel="stylesheet" type="text/css" href="/css/dev_data.css" />
+
+        <!-- the hugo stuff -->
+        <script src="/js/bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- <script src="/js/main.js"></script> -->
+
+        <!-- extra Morlan stuff -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/js/bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="/css/estilo.css" media="screen"/>
+
     </head>
     <body class="@yield('body_class') fide-menu-push">
 	     <!--nav-->
