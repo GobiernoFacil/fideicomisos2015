@@ -10,6 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+// [ THE MORLAN TEAM ]
+Route::get('morlan1', 'SingleGraph@morlan1');
+Route::get('asi-se-reparten-los-recursos', 'SingleGraph@morlan1');
+Route::get('a-donde-va-el-dinero', 'SingleGraph@morlan2');
+Route::get('morlan2', 'SingleGraph@morlan2');
+
 // [ EL API DE TODAS LAS APIIIIIIS!!!!!!!!!!!]
 Route::get('api/fideicomisos/{orderBy?}/{year?}/{order?}/{textfields?}', 'PublicApi@Trusts');
 Route::get('api/fideicomiso/{key}', 'PublicApi@Trust');

@@ -12,9 +12,9 @@
 				<div class="col-sm-10 col-sm-offset-1">
 					<ul>
 						<li><a href="{{url('/')}}">Inicio</a>
-						<li>Buscador de Fideicomisos</li>
+						<li>A dónde se va el dinero</li>
 					</ul>
-					<h1>Buscador de fideicomisos</h1>
+					<h1>A dónde se va el dinero</h1>
 				</div>
 			</div>
 		</div>
@@ -22,22 +22,14 @@
 </div>
 <!-- ends breadcrumb-->
 <div class="container">
-			<div id="bloodhound" class="col-sm-12">
-  				<input id="buscador" type="text" class="form-control input-lg typeahead" placeholder="Escribe palabras clave como Guadería ABC o Bicentenario">
-  			</div>
-		</div>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12" id="desi">
+				<div class="row">
+					<div class="col-sm-12" id="tit">
+					</div>
+					<div class="col-sm-12" id="vis">
+					</div>
+					<div class="col-sm-12" id="def">
+					</div>
 				</div>
-				<div class="col-sm-12" id="vis1">
-				</div>
-				<div class="col-sm-12" id="desf">
-				</div>
-				<div class="col-sm-12" id="desu">
-				</div>
-			</div>
 		</div>
 
 
@@ -46,5 +38,5 @@
 		<script src="./bootstrap/js/bootstrap.min.js"></script>
 		<script src="./js/typeahead/typeahead.bundle.min.js"></script>
 		<script src="./js/d3/d3.min.js"></script>
-		<script src="./js/scripta.js"></script>
+		<script src="./js/scripta3.js"></script>
 @endsection

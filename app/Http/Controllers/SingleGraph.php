@@ -62,4 +62,12 @@ class SingleGraph extends Controller
     public function barchart(){
       echo "n______n";
     }
+
+    public function morlan1(){
+      return view('morlan1');
+    }
+
+    public function morlan2(){
+      return view('morlan2');
+    }
 }

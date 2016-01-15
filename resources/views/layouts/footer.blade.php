@@ -25,6 +25,7 @@
 			<div class="col-sm-4 right">
 				<p>Forjado artesanalmente por</p>
 				<a href="http://gobiernofacil.com/" class="gobiernofacil">Gobierno Fácil</a>
+				<a href="http://www.morlan.mx" class="morlan" style="display:inline-block; width:199px;"><img src="/logo-morlan.svg" alt="morlan"></a>
 			</div>
 		</div>
 	</div>
