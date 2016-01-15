@@ -1,3 +1,4 @@
+$(document).ready(function(){
 var 
 		menuRight = $('#fide-menu-s2'),
 		showRightPush = $( '#showRightPush' ),
@@ -43,3 +44,4 @@ var cbpAnimatedHeader=(function(){
 		return window.pageYOffset||b.scrollTop}
 	
 	f()})();
+});
