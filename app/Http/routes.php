@@ -38,6 +38,7 @@ Route::get('fideicomiso/{registry}', 'Gregson@index');
 
 // [ EXPLORA UNA CATEGORÍA ]
 Route::get('explorador-de-fideicomisos', 'Lestrade@index');
+Route::get('fideicomisos-por-categoria', 'Lestrade@index');
 
 // [ EL API DE BÚSQUEDA ]
 Route::get('sherlock/search/{query}/{page?}/{total?}', 'Sherlock@index');

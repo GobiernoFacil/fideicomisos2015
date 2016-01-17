@@ -26,6 +26,7 @@
 				<p>Forjado artesanalmente por</p>
 				<a href="http://gobiernofacil.com/" class="gobiernofacil">Gobierno Fácil</a>
 				<a href="http://www.morlan.mx" class="morlan" style="display:inline-block; width:199px;"><img src="/logo-morlan.svg" alt="morlan"></a>
+				<a href="http://fundar.org.mx/" class="fundar" style="display:inline-block; width:199px; margin-top:1.6em;"><img src="/logo-fundar.jpg" alt="Fundar"></a>
 			</div>
 		</div>
 	</div>

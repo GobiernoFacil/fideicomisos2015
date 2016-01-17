@@ -4,6 +4,7 @@
 .DS_Store
 /public/js/bower_components
 /public/css/src_sass
+/public/videos
 trusts_key.pem
 public/images/articles
 assets

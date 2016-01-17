@@ -223,7 +223,7 @@ define(function(require){
               value  = this.model.get(field) ? this.model.get(field) : Empty_field;
           parent.replaceChild(span, old);
           span.setAttribute("data-field", field);
-          span.classList.add("input");
+          span.classList.add("binput");
           span.innerHTML = value;
         }, this);
       }
