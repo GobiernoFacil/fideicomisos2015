@@ -14,7 +14,7 @@
 						<li><a href="{{url('/')}}">Inicio</a>
 						<li>A dónde se va el dinero</li>
 					</ul>
-					<h1>A dónde se va el dinero</h1>
+					<!--<h1>A dónde se va el dinero</h1>-->
 				</div>
 			</div>
 		</div>

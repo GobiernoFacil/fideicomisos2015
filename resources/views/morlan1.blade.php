@@ -14,7 +14,7 @@
 						<li><a href="{{url('/')}}">Inicio</a>
 						<li>Así se reparten los recursos</li>
 					</ul>
-					<h1>Así se reparten los recursos</h1>
+					<!-- <h1>Así se reparten los recursos</h1> -->
 				</div>
 			</div>
 		</div>
