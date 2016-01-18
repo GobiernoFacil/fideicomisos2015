@@ -25,8 +25,8 @@ class Home extends Controller
                '10' => 'octubre','11' => 'noviembre','12' => 'diciembre'];
 
     public function index(){
-      $main_article = Article::all()->first();
-      $articles 	= Article::all();
+      $main_article = Article::all()->last();
+      $articles 	= Article::orderBy("id", "desc")->get();
       
       $categories = ['branch', 'type', 'scope', 'theme', 
                    'unit', 'settlor', 'fiduciary'];

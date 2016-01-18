@@ -23,7 +23,8 @@ class Watson extends Controller {
 		return view('watsonv2', [
 			'total'       => $total_trusts, 
 			'years'       => $years,
-			'definitions' => $definitions
+			'definitions' => $definitions,
+			"morlan"      => true
 			]);
 	}
 }
