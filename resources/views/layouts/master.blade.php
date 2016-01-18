@@ -29,10 +29,23 @@
         <script src="/js/bower_components/jquery/dist/jquery.min.js"></script>
         <!-- <script src="/js/main.js"></script> -->
 
+        @if(isset($morlan))
         <!-- extra Morlan stuff -->
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-        <!--<link rel="stylesheet" href="/js/bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="/css/estilo.css" media="screen"/>-->
+        <link rel="stylesheet" href="/js/bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="/css/estilo.css" media="screen"/>
+        @endif
+
+        <style type="text/css">
+        @media screen and (max-width: 480px){
+          .home .likeaboss {
+            display: block;
+          }
+          .home .likeaboss figure{
+            height: 480px;
+          }
+        }
+        </style>
 
     </head>
     <body class="@yield('body_class') fide-menu-push">

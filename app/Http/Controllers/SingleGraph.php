@@ -64,10 +64,10 @@ class SingleGraph extends Controller
     }
 
     public function morlan1(){
-      return view('morlan1');
+      return view('morlan1', ["morlan" => true]);
     }
 
     public function morlan2(){
-      return view('morlan2');
+      return view('morlan2', ["morlan" => true]);
     }
 }
