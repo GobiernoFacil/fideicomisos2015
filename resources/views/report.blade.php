@@ -31,7 +31,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1">
-					<a class="category">Bicentenario</a>
+					<a class="category">Fideicomiso</a>
 				<h1>{{$article->title}}</h1>
 				<h2>{{$article->subtitle}}</h2>
 				<p> <span><?php 
