@@ -37,6 +37,10 @@
         @endif
 
         <style type="text/css">
+        /* fix for the link on the left nav */
+        .reportajes aside h2 a{
+            color: #8ba7c0;
+        }
         @media screen and (max-width: 480px){
           .home .likeaboss {
             display: block;

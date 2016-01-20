@@ -68,12 +68,14 @@ Route::get('que-es-un-fideicomiso', function(){
 });
 
 // [ DATAVIZ ]
+/* OLD STUFF 
 Route::get('vizdata', function(){
   return view('vizdata');
 });
+*/
 
 // [ DATAVIZ BIIIIIIIG ]
-Route::get('el-grafico', 'Data@index');
+// Route::get('el-grafico', 'Data@index');
 Route::get('el-grafico/treemap/{category?}', 'SingleGraph@treemap');
 Route::get('el-grafico/linemap', 'SingleGraph@linemap');
 Route::get('el-grafico/barchart', 'SingleGraph@barchart');
