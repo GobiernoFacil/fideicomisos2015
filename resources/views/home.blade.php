@@ -76,7 +76,7 @@
 </section>  
 
 <section class="fideicomiso">
-  <video width="1280" height="720" controls>
+  <video width="1280" height="auto" controls="true">
     <source src="/videos/fideicomisos_largo.mp4" type="video/mp4">
     <source src="/videos/fideicomisos_largo.ogv" type="video/ogg">
     <source src="/videos/fideicomisos_largo.webm" type="video/webm">
