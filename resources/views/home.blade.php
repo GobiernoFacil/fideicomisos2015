@@ -48,7 +48,7 @@
 				</figure>
 			@endif
 					<div {{ $total_articles > 1 ? 'class="front"' : ''}}>
-						<a class="category">Bicentenario</a>
+						<a class="category">Fideicomiso</a>
 						<div>
 						<h2><a href="{{url('/reportaje/'.$article->id)}}">{{$article->title}}</a></h2>
 							<p class="author"><span>{{$article->author_name}} </span> • <?php 
@@ -74,6 +74,15 @@
 		@endif
 	</div>
 </section>  
+
+<section class="fideicomiso">
+  <video width="1280" height="720" controls>
+    <source src="/videos/fideicomisos_largo.mp4" type="video/mp4">
+    <source src="/videos/fideicomisos_largo.ogv" type="video/ogg">
+    <source src="/videos/fideicomisos_largo.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+</section>
 
 <!-- fideicomiso-->
 <section class="fideicomiso">
