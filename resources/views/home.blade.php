@@ -97,6 +97,7 @@ realizar un fin lícito determinado, de interés público. </p>
 		</div>
 	</div>
 </section>
+<!--
 <section class="data">
 	<div class="container">
 		<div class="col-sm-10 col-sm-offset-1">
@@ -120,6 +121,7 @@ Colabora (github)</a>
 		</div>
 	</div>
 </section>
+-->
 
 <script>
     var TRUSTS_DATA = {
