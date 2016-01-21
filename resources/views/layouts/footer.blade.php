@@ -32,6 +32,7 @@
 	</div>
 </footer>
 <!-- <script src="/js/bower_components/jquery/dist/jquery.min.js"></script> -->
+<script src="//api.html5media.info/1.1.8/html5media.min.js"></script>
 <script src="/js/main.js"></script>
 
 <script>

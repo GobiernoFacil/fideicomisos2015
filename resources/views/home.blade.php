@@ -76,12 +76,13 @@
 </section>  
 
 <section class="fideicomiso">
-  <video width="1280" height="auto" controls="true">
+  <!--video width="1280" height="auto" controls="true">
     <source src="/videos/fideicomisos_largo.mp4" type="video/mp4">
     <source src="/videos/fideicomisos_largo.ogv" type="video/ogg">
     <source src="/videos/fideicomisos_largo.webm" type="video/webm">
     Your browser does not support the video tag.
-  </video>
+  </video-->
+  <video src="/videos/fideicomisos_largo.mp4" width="1280" height="auto" controls preload></video>
 </section>
 
 <!-- fideicomiso-->
