@@ -41,6 +41,10 @@
         .reportajes aside h2 a{
             color: #8ba7c0;
         }
+        /* fix the yellow bars */
+        p .btn_link{
+            width:100%;
+        }
         @media screen and (max-width: 480px){
           .home .likeaboss {
             display: block;
