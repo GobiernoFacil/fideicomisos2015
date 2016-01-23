@@ -30,11 +30,11 @@
 				<article class="featured">
 			@endif
 			@if($total_articles == 2)
-			<li class="col-xs-12 col-sm-4 col-sm-offset-1">
+			<li class="col-xs-12 col-sm-12 col-md-4">
 				<article class="half">
 			@endif
 			@if($total_articles > 2)
-			<li class="col-xs-12 col-sm-3">
+			<li class="col-xs-12 col-sm-12 col-md-4">
 				<article class="quarter">
 			@endif
 			
@@ -76,13 +76,13 @@
 </section>  
 
 <section class="fideicomiso">
-  <!--video width="1280" height="auto" controls="true">
-    <source src="/videos/fideicomisos_largo.mp4" type="video/mp4">
-    <source src="/videos/fideicomisos_largo.ogv" type="video/ogg">
-    <source src="/videos/fideicomisos_largo.webm" type="video/webm">
+  <video width="1280" height="auto" controls="true">
+    <source src="{{ URL::asset('/videos/fideicomisos_largo.mp4') }}" type="video/mp4">
+    <source src="{{ URL::asset('/videos/fideicomisos_largo.ogv') }}" type="video/ogg">
+    <source src="{{ URL::asset('/videos/fideicomisos_largo.webm') }}" type="video/webm">
     Your browser does not support the video tag.
-  </video-->
-  <video src="/videos/fideicomisos_largo.mp4" width="1280" height="auto" controls preload></video>
+  </video>
+    <!-- kevin<video src="{{ URL::asset('/videos/fideicomisos_largo.mp4') }}" width="1280" height="auto" controls preload></video>-->
 </section>
 
 <!-- fideicomiso-->

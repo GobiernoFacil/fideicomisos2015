@@ -1200,7 +1200,8 @@ a.btn_logout {
     .home .news article.quarter img {
       min-width: 700px; }
     .home .news article.quarter .author {
-      font-size: 13px; }
+      font-size: 13px;
+      text-transform: uppercase}
     .home .news article figure {
       background: #000;
       position: absolute;
@@ -2183,3 +2184,12 @@ div.note_graph {
 /* =Print
 ----------------------------------------------- */
 @media print { }
+
+/* home cambios fundar*/
+img.lgoFundar {
+    display: block;
+    height: auto;
+    margin: -17px auto 0;
+    min-width: 83px !important;
+    width: 127px;
+}
