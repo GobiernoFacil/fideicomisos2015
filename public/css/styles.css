@@ -2193,3 +2193,33 @@ img.lgoFundar {
     min-width: 83px !important;
     width: 127px;
 }
+----------------------------------------------- */
+@media print { }
+
+/* Estilo cambios FUNDAR*/
+li {
+    color: rgba(0, 0, 0, 0.6);
+    font-family: "Roboto",Helvetica,Arial,sans-serif;
+    line-height: 1.5em;
+    padding: 0 14px 0 0;
+}
+img.lgoFundarInt {
+    display: block;
+    height: auto;
+    margin: -17px auto 0;
+    min-width: 95px !important;
+    width: 170px;
+}
+a.verPDF {
+    background: #015383 none repeat scroll 0 0;
+    border: 1px solid #015383;
+    color: #fff !important;
+    display: block;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    padding: 4px 0;
+    text-align: center !important;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+    width: 100%;
+}
+
