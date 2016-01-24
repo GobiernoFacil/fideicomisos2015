@@ -22,7 +22,7 @@
 	
 	<div class="col-sm-8 col-sm-offset-2">
 		<h1>Editar Artículo</h1>
-  <form enctype="multipart/form-data" method="POST" action="{{url('articles/secretupdate')}}">
+  <form enctype="multipart/form-data" method="POST" action="{{url('articles/secretupdate/' . $article->id)}}">
     {!! csrf_field() !!}
     <p>Título    : <input name="title" value="{{$article->title}}"></p>
     <p>Subtítulo : <input name="subtitle" value="{{$article->suvtitle}}"></p>
