@@ -1,4 +1,4 @@
-* { font-family: 'Roboto', Helvetica, sans-serif;
+* { font-family: 'Roboto', Helvetica, sans-serif !important;
 	
 }
 
@@ -27,4 +27,11 @@ div.popup{
 .que_es p{
   text-align: justify;
     text-justify: inter-word;
+}
+
+
+div.h2, div.h3{
+  font: 700 27px "Roboto", Helvetica, Arial, sans-serif;
+  color: black;
+  padding: 20px 0 20px;
 }
