@@ -33,7 +33,23 @@ class AdminArticles extends Controller{
     $data['image']  = $image ? $image : '';
     $data['author'] = $user->id;
 
+    $article = new Article($data);
+    $article->save();
 
+    return redirect('articles/update/' . $article->id);
+  }
+
+  public function secretUpdateView($id){
+    $article = Article::find($id);
+    return view('admin.secret-update-article')->with(["article" => $article]);
+  }
+
+  public function secretUpdate(Request $request){
+    $user = Auth::user();
+    $image = $this->storeFile($request, 'image');
+    $data = $request->all();
+    $data['image']  = $image ? $image : '';
+    $data['author'] = $user->id;
 
     $article = new Article($data);
     $article->save();
