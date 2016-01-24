@@ -44,15 +44,15 @@ class AdminArticles extends Controller{
     return view('admin.secret-update-article')->with(["article" => $article]);
   }
 
-  public function secretUpdate(Request $request){
+  public function secretUpdate(Request $request, $id){
     $user = Auth::user();
     $image = $this->storeFile($request, 'image');
     $data = $request->all();
     $data['image']  = $image ? $image : '';
     $data['author'] = $user->id;
 
-    $article = new Article($data);
-    $article->save();
+    $article = Article::find($id);
+    $article->update($data);
 
     return redirect('articles/update/' . $article->id);
   }

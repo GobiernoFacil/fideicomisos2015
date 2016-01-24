@@ -112,7 +112,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('articles/add', 'AdminArticles@create');
     Route::post('articles/add', 'AdminArticles@store');
     Route::get('articles/secretupdate/{id}', 'AdminArticles@secretUpdateView');
-    Route::post('articles/secretupdate', 'AdminArticles@secretUpdate');
+    Route::post('articles/secretupdate/{id}', 'AdminArticles@secretUpdate');
     Route::get('articles/update/{id}', 'AdminArticles@edit')->where('id', '[0-9]+');
     Route::post('articles/update/{id}', 'Irene@index');
     // [ USERS ]
