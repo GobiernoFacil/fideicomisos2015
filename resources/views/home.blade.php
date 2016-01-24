@@ -57,7 +57,7 @@
 								echo str_replace('x', $months[date('n', $date)], $str);
 								?> </p>
 								@if( $article->id =="4") 
-																 <img class="lgoFundar" src="Fideicomisos/LogoFundar.png" alt="Fundar">
+																 <img class="lgoFundar" src="{{ URL::asset('/images/LogoFundar.png') }}" alt="Fundar">
 								@endif			
 						@if($total_articles < 2)
 							<p class="lead">{{$article->subtitle}}</p>
