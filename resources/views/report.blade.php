@@ -39,6 +39,10 @@
   $str  =  date('d x Y', $date); 
   echo str_replace('x', $months[date('n', $date)], $str);
   ?></span> | {{$article->author_name}} </p>
+  @if( $article->id =="4") 
+																 <img class="lgoFundar" src="{{ URL::asset('/images/LogoFundar.png') }}" alt="Fundar">
+								@endif
+
 				</div>
 			</div>
 		</div>

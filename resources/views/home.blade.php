@@ -40,13 +40,35 @@
 			
 			@if($total_articles > 1)
 				<figure>
-					@if($article->image)
+				@if ($article->id =="3")
+					<img src="/images/a-donde-bg.png">
+					@elseif($article->image)
 					<img src="{{url($file_url . $article->image)}}" alt="{{$article->title}}">
 					@else
 					<img src="/images/1280px-bruxelles.jpg">
 					@endif
 				</figure>
-			@endif
+			        
+                                @endif
+					
+                             @if($article->id =="3")
+					<div {{ $total_articles > 1 ? 'class="front"' : ''}}>
+						<a class="category">Fideicomiso</a>
+				<div>
+						<h2><a href="http://fideicomisos.eluniversal.com.mx/a-donde-va-el-dinero">A dondé va el dinero</a></h2>
+							<p class="author"><span>Morlan • 17 de Enero  2016 </span> <?php 
+								$date = strtotime($article->created_at);
+								$str  =  date('d x Y', $date); 
+								//echo str_replace('x', $months[date('n', $date)], $str);
+								?> </p>
+								@if($total_articles < 2)
+							<p class="lead">Morlan 2017</p>
+						@endif
+						</div>
+					</div>
+					
+					@else
+					
 					<div {{ $total_articles > 1 ? 'class="front"' : ''}}>
 						<a class="category">Fideicomiso</a>
 						<div>
@@ -56,12 +78,18 @@
 								$str  =  date('d x Y', $date); 
 								echo str_replace('x', $months[date('n', $date)], $str);
 								?> </p>
+								@if( $article->id =="4") 
+				 <img class="lgoFundar" src="{{ URL::asset('/images/LogoFundar.png') }}" alt="Fundar">
+
+								@endif			
 						@if($total_articles < 2)
 							<p class="lead">{{$article->subtitle}}</p>
 						@endif
 						</div>
 					</div>
-				</article>
+
+			@endif
+			</article>
 			</li>
 			
 	
