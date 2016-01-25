@@ -54,8 +54,8 @@
 					<div {{ $total_articles > 1 ? 'class="front"' : ''}}>
 						<a class="category">Fideicomiso</a>
 						<div>
-						<h2><a href="http://fideicomisos.eluniversal.com.mx/a-donde-va-el-dinero">A dondé va el dinero</a></h2>
-							<p class="author"><span>Morlan • 17 de Enero  2016 </span> <?php 
+						<h2><a href="http://fideicomisos.eluniversal.com.mx/a-donde-va-el-dinero">Conoce las cajas chicas</a></h2>
+							<p class="author"><span>Morlan • 25 de Enero  2016 </span> <?php 
 								$date = strtotime($article->created_at);
 								$str  =  date('d x Y', $date); 
 								//echo str_replace('x', $months[date('n', $date)], $str);
