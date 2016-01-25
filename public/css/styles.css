@@ -1054,7 +1054,7 @@ input:focus, select:focus, textarea:focus {
   z-index: 5; }
   .top-header h1, .top-header h1 a {
     color: #333;
-    font: 700 37px "roboto_condensedbold", Helvetica, Arial, sans-serif;
+    font: 700 37px "roboto_condensedbold", Helvetica, Arial, sans-serif !important;
     text-align: center;
     padding: 19px 0 0;
     -webkit-transition: all 0.3s;
@@ -1062,6 +1062,7 @@ input:focus, select:focus, textarea:focus {
     transition: all 0.3s;
     text-transform: uppercase; }
     .top-header h1:hover, .top-header h1 a:hover {
+      text-decoration: none;
       color: #666; }
   .top-header .menu-icon {
     background: transparent;
