@@ -2066,9 +2066,13 @@ div.note_graph {
     .top-header .eluniversal {
       background-size: auto 41px;
       width: 63px; }
-    .top-header h1, .top-header h1 a {
-      font-size: 17px; }
-    .top-header.header-shrink .eluniversal {
+
+    .top-header h1, .top-header h1 a { font-size: 17px !important;}
+
+}
+
+
+	  .top-header.header-shrink .eluniversal {
       background-size: auto 31px;
       width: 44px; }
     .top-header.header-shrink h1, .top-header.header-shrink h1 a {
@@ -2187,13 +2191,19 @@ div.note_graph {
 @media print { }
 
 /* home cambios fundar*/
+
 img.lgoFundar {
     display: block;
     height: auto;
-    margin: -17px auto 0;
+    margin: -17px 0;
     min-width: 83px !important;
-    width: 127px;
+    width: 107px;
+
 }
+@media screen and (max-width: 480px) {
+    img.lgoFundar {display: none;}
+
+
 
 ----------------------------------------------- */
 @media print { }
