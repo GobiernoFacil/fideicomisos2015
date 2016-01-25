@@ -42,7 +42,6 @@
   @if( $article->id =="4") 
 																 <img class="lgoFundar" src="{{ URL::asset('/images/LogoFundar.png') }}" alt="Fundar">
 								@endif
-
 				</div>
 			</div>
 		</div>
