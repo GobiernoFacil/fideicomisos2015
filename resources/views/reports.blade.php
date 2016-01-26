@@ -32,7 +32,7 @@
 					<?php $total_articles++;?>
 					<li {!! $total_articles == 1 ? 'class="featured"' : '' !!}>
 						<article>
-							<a class="category">Bicentenario</a>
+							<a class="category">Fideicomiso</a>
 							<a href="{{url('reportaje/'.$article->id)}}" class="link_post">
 								<figure>
 									@if ($article->image)
