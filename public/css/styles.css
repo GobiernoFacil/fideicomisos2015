@@ -1,5 +1,5 @@
 /* Theme Name: Fideicomisos 
-Author: Gobierno Fácil
+aAuthor: Gobierno Fácil
 Author URI: http://gobiernofacil.com/
 Version: 1.0
 */
@@ -2061,13 +2061,15 @@ div.note_graph {
 /* =Media queries
 -------------------------------------------------------------- */
 @media screen and (max-width: 480px) {
-  .top-header {
+ 
+    img.lgoFundar {display: none!important;}
+ .top-header {
     height: 98px; }
     .top-header .eluniversal {
       background-size: auto 41px;
       width: 63px; }
-    .top-header h1, .top-header h1 a {
-      font-size: 17px; }
+      .top-header h1, .top-header h1 a {
+ font-size: 17px !important;}
     .top-header.header-shrink .eluniversal {
       background-size: auto 31px;
       width: 44px; }
@@ -2190,9 +2192,9 @@ div.note_graph {
 img.lgoFundar {
     display: block;
     height: auto;
-    margin: -17px auto 0;
+    margin: -17px  0;
     min-width: 83px !important;
-    width: 127px;
+    width: 107px;
 }
 ----------------------------------------------- */
 @media print { }
