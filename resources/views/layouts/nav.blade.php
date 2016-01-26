@@ -7,6 +7,7 @@
 	<!-- <a href="{{url('el-grafico')}}">El Gráfico</a> -->
 	<a href="{{url('asi-se-reparten-los-recursos')}}">Así se reparten los recursos</a>
 	<a href="{{url('a-donde-va-el-dinero')}}">A dónde se va el dinero</a>
+	<a href="{{url('metodologia')}}">Metodología</a>
 	<a href="{{url('quienes-somos')}}">Quienes somos</a>
 	<a href="{{url('datos-abiertos')}}">Datos Abiertos</a>
 	<a href="https://github.com/GobiernoFacil/fideicomisos2015">Colabora (github)</a>

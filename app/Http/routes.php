@@ -67,6 +67,11 @@ Route::get('que-es-un-fideicomiso', function(){
   return view('fideicomisos_es');
 });
 
+// [ METODOLOGÍA ]
+Route::get('metodologia', function(){
+  return view('metodologia');
+});
+
 // [ DATAVIZ ]
 /* OLD STUFF 
 Route::get('vizdata', function(){
