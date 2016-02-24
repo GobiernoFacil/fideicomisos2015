@@ -38,14 +38,17 @@
 
 	<div class="container">
 		<div class="row" style="margin:3.5em 0"> 
-		  <div class="col-sm-4" style="text-align:center">
+		  <div class="col-sm-3" style="text-align:center">
 		    <p>Forjado artesanalmente por</p>
 				<a href="http://gobiernofacil.com/" class="gobiernofacil">Gobierno Fácil</a>
 			</div>
-			<div class="col-sm-4" style="text-align:center">
+			<div class="col-sm-3" style="text-align:center">
 				<a href="http://www.morlan.mx" class="morlan" style="display:inline-block; width:199px;"><img src="/logo-morlan.svg" alt="morlan"></a>
 			</div>
-			<div class="col-sm-4 right" style="text-align:center">
+      <div class="col-sm-3" style="text-align:center">
+        <a href="http://www.mexicoinformate.mx" class="mexico-informate" style="display:inline-block; width:199px;"><img src="/logo-mexico-informa.png" alt="México Infórmate"></a>
+      </div>
+			<div class="col-sm-3 right" style="text-align:center">
 				<a href="http://fundar.org.mx/" class="fundar" style="display:inline-block; width:199px; margin-top:1.6em;"><img src="/logo-fundar.jpg" alt="Fundar"></a>
 			</div>
 		</div>
